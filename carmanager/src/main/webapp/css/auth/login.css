@@ -172,7 +172,7 @@ body {
     outline: 1px solid white;
 }
 
-.form-4 input[type=submit] {
+.form-4 input[type=button] {
     width: 100%;
     padding: 8px 5px;
     
