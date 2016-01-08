@@ -1,14 +1,13 @@
 {
-  "name": "project03",
+  "name": "carmanager",
+  "homepage": "https://github.com/JaeHan-Kim/carmanager",
   "authors": [
-    "sinji_yjy <hgal8877@gmail.com>"
+    "JaeHan-Kim <hgal8877@gmail.com>"
   ],
   "description": "",
   "main": "",
   "moduleType": [],
   "license": "MIT",
-  "homepage": "",
-  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
@@ -18,7 +17,8 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.6",
-    "jquery": "1.11.3"
+    "jquery": "1.11.3",
+    "Chart.js": "~1.0.2"
   },
     "install" : {
      "path" : "src/main/webapp/lib",
