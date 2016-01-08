@@ -8,6 +8,9 @@ values('ho4319@naver.com', 'hoho', '1111');
 insert into members(email, nick, pwd)
 values('dain@test.com', 'dain', '1111');
 
+-- 회원 패스워드 암호화
+update members set pwd=sha1(1111);
+
 -- 제조사 등록
 insert into makers(maker) values('현대');
 insert into makers(maker) values('기아');
