@@ -249,7 +249,9 @@ A:hover {
 /* 로그인 영역 설정 끝 */
 
 /* 회원가입 영역 모달 처리 시작 */
-#loginmodal{border:3px solid #705c3b;background:#fff;}
+#loginmodal{
+	border:3px solid white;
+}
 
 #lean_overlay {
     position: fixed;
@@ -268,7 +270,8 @@ A:hover {
   height:400px;  /*팝업창의 크기조절*/
   margin-top:100px;           /*팝업창 위아래 간격조절*/
   padding: 18px;
-  background: black;
+  background-color: RGB(10, 10, 10);
+  opacity: 0.9;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -397,6 +400,7 @@ A:hover {
 .input #textInput input[type=button]:hover, 
 #button input[type=button]:hover, #imgInput label:hover {
     background: red;
+    border: 1px solid white;
     
     /*box-shadow: 
         inset 0 1px rgba(255,255,255,0.5), 
@@ -483,6 +487,7 @@ A:hover {
   /* Size and position */
     width: 80px;
     padding: 8px 5px;
+    margin-left: 5px;
     
     /* Styles */
     background: #634056;
