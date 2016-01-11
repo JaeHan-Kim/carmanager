@@ -33,31 +33,34 @@ insert into garage(mdno, mno, c_nick, mile) values(4, 4, '영호차', 1000);
 insert into garage(mdno, mno, c_nick, mile) values(3, 1, '재한차', 1000);
 
 -- 주유등록 (엄마차)
-insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2015-11-10', 1200, 30000, 20.13);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2015-11-15', 1400, 30000, 21.11);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2015-11-25', 1600, 30000, 21.23);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2015-11-01', 1200, 30000, 20.13);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2015-11-04', 1400, 30000, 21.11);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2015-11-26', 1600, 30000, 21.23);
 insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2015-12-05', 1900, 30000, 22.20);
 insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2015-12-25', 2100, 30000, 23.03);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2016-01-10', 2200, 30000, 21.01);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2016-01-13', 2400, 30000, 20);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2016-01-26', 2800, 30000, 19.50);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2016-01-07', 2200, 30000, 21.01);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2016-01-09', 2400, 30000, 20);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2016-01-14', 2800, 30000, 19.50);
 
 -- 주유등록 (태웅차)
 insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-11-10', 1200, 30000, 20.13);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-11-15', 1400, 30000, 21.11);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-11-25', 1600, 30000, 21.23);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-12-05', 1900, 30000, 22.20);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-12-25', 2100, 30000, 23.03);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-10', 2200, 30000, 21.01);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-13', 2400, 30000, 20);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-26', 2800, 30000, 19.50);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-11-12', 1400, 30000, 21.11);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-11-23', 1600, 30000, 21.23);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-12-01', 1900, 30000, 22.20);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-12-22', 2100, 30000, 23.03);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-02', 2200, 30000, 21.01);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-07', 2400, 30000, 20);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-10', 2800, 30000, 19.50);
 
 -- 주유등록 (재한차)
-insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-11-10', 1200, 20000, 18.13);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-11-15', 1400, 30000, 17.11);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-11-25', 1600, 10000, 14.23);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-11-5', 1200, 20000, 18.13);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-11-13', 1400, 30000, 17.11);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-11-27', 1600, 10000, 14.23);
 insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-12-05', 1900, 40000, 25.20);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-12-25', 2100, 30000, 23.03);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2016-01-10', 2200, 20000, 15.01);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2016-01-13', 2400, 30000, 19.99);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2016-01-26', 2800, 60000, 19.50);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-12-12', 2100, 30000, 23.03);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2016-01-01', 2200, 20000, 15.01);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2016-01-06', 2400, 30000, 19.99);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2016-01-13', 2800, 60000, 19.50);
+
+
+

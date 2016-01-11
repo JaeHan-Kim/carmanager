@@ -28,6 +28,9 @@ DROP TABLE IF EXISTS comments RESTRICT;
 -- 차종
 DROP TABLE IF EXISTS model RESTRICT;
 
+-- 모델연비
+DROP TABLE IF EXISTS official RESTRICT;
+
 -- 회원
 CREATE TABLE members (
 	mno   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
@@ -163,8 +166,10 @@ CREATE TABLE garage (
 	grno   INTEGER     NOT NULL COMMENT '내차번호', -- 내차번호
 	mdno   INTEGER     NOT NULL COMMENT '모델번호', -- 모델번호
 	mno    INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
+	trim   VARCHAR(50) NULL     COMMENT '세부모델', -- 세부모델
 	c_nick VARCHAR(50) NOT NULL COMMENT '별명', -- 별명
-	mile   INTEGER     NOT NULL COMMENT '주행거리' -- 주행거리
+	mile   INTEGER     NOT NULL COMMENT '주행거리', -- 주행거리
+	effi   FLOAT       NOT NULL COMMENT '연비' -- 연비
 )
 COMMENT '내차';
 
@@ -252,9 +257,6 @@ ALTER TABLE comments
 CREATE TABLE model (
 	mdno  INTEGER     NOT NULL COMMENT '모델번호', -- 모델번호
 	model VARCHAR(50) NOT NULL COMMENT '모델명', -- 모델명
-	trim  VARCHAR(50) NULL     COMMENT '세부모델', -- 세부모델
-	fuel  VARCHAR(10) NOT NULL COMMENT '연료종류', -- 연료종류
-	effi  FLOAT       NOT NULL COMMENT '공인연비', -- 공인연비
 	mkno  INTEGER     NOT NULL COMMENT '제조사번호' -- 제조사번호
 )
 COMMENT '차종';
@@ -274,6 +276,22 @@ CREATE UNIQUE INDEX UIX_model
 
 ALTER TABLE model
 	MODIFY COLUMN mdno INTEGER NOT NULL AUTO_INCREMENT COMMENT '모델번호';
+
+-- 모델연비
+CREATE TABLE official (
+	meno INTEGER     NOT NULL COMMENT '모델연비번호', -- 모델연비번호
+	mdno INTEGER     NOT NULL COMMENT '모델번호', -- 모델번호
+	fuel VARCHAR(10) NOT NULL COMMENT '연료종류', -- 연료종류
+	effi FLOAT       NOT NULL COMMENT '공인연비' -- 공인연비
+)
+COMMENT '모델연비';
+
+-- 모델연비
+ALTER TABLE official
+	ADD CONSTRAINT PK_official -- 모델연비 기본키
+		PRIMARY KEY (
+			meno -- 모델연비번호
+		);
 
 -- 주유기록
 ALTER TABLE refuel
@@ -373,4 +391,14 @@ ALTER TABLE model
 		)
 		REFERENCES makers ( -- 차량
 			mkno -- 제조사번호
+		);
+
+-- 모델연비
+ALTER TABLE official
+	ADD CONSTRAINT FK_model_TO_official -- 차종 -> 모델연비
+		FOREIGN KEY (
+			mdno -- 모델번호
+		)
+		REFERENCES model ( -- 차종
+			mdno -- 모델번호
 		);
