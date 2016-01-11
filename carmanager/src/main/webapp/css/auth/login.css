@@ -200,12 +200,14 @@ body {
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
 }
 
-.form-4 input[type=submit]:hover {
+.form-4 input[type=button]:hover {
     background: red;
+    border: 1px solid white;
 }
 
-.no-boxshadow .form-4 input[type=submit]:hover {
+.no-boxshadow .form-4 input[type=button]:hover {
     background: #594642;
+    border: 1px solid white;
 }
 
 .form-4 label {
