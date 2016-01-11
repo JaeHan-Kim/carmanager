@@ -18,19 +18,18 @@ import cms.service.GarageService;
 import cms.service.RefuelService;
 
 @Controller
-//@RequestMapping("/main/*")
-public class GarageController {
+@RequestMapping("/main/*")
+public class MainController {
   public static final Logger log = Logger.getLogger(GarageController.class);
-  
+
   @Autowired GarageService garageService;
   @Autowired RefuelService refuelService;
   @Autowired ServletContext servletContext;
   
-//  @RequestMapping("list")
+  @RequestMapping("list")
   public Object carList(
-  		HttpSession session) throws Exception {
-
-		int no = 1;
+      HttpSession session, int no) throws Exception {
+    
     List<Garage> garages = garageService.listAll(no);
     List<Refuel> refuels = refuelService.listAll(no);
     List<Refuel> costAvg = refuelService.costAvg();
@@ -46,12 +45,12 @@ public class GarageController {
 
   }
   
-//  @RequestMapping(value="select", method=RequestMethod.GET)
+  @RequestMapping(value="select", method=RequestMethod.GET)
   public Object selList(int no,
-  		HttpSession session) throws Exception {
-  	//log.debug("현재 차량은 " + no + "입니다.");
-  	
-  	List<Garage> garages = garageService.listAll(no);
+      HttpSession session) throws Exception {
+    //log.debug("현재 차량은 " + no + "입니다.");
+    
+    List<Garage> garages = garageService.listAll(no);
     List<Refuel> refuels = refuelService.listAll(no);
     List<Refuel> costAvg = refuelService.costAvg();
     List<Refuel> myCostAvg = refuelService.myCostAvg(no);
