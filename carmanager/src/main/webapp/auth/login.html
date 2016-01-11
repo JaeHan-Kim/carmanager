@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>내 차를 부탁해</title>
-  <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/auth/login.css">
   
   <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
@@ -11,9 +11,7 @@
   <script type="text/javascript" src="../js/auth/jquery.placeholder.min.js"></script>
   <script type="text/javascript" src="../js/auth/cycle2.js"></script>
   <script type="text/javascript" src="../js/auth/modernizr.custom.63321.js"></script>
-  <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.min.js"></script>
-  <script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
-  <script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
+  <script type="text/javascript" src="../js/auth/jquery.leanModal.min.js"></script>
   
   <script>
 	  $(document).ready(function(){ 
@@ -41,7 +39,7 @@
   </div>
  
   <!-- 텍스트 슬라이드 부분 --> 
-  <div id="mainText" class="cycle-slideshow" 
+ <div id="mainText" class="cycle-slideshow" 
     data-cycle-fx="fade" 
     data-cycle-timeout="2000"
     data-cycle-slides="> div">
@@ -72,10 +70,14 @@
       <label for="password">Password</label>
       <input type="password" name='password' placeholder="비밀번호" id="fpassword" required> 
     </p>
-    <div>       
-      <input type="checkbox" id="saveEmail">이메일 저장
-        <span id="goJoin"><a href="join.html">회원가입</a></span>
+    <div>
+      <input type="checkbox" id="saveEmail">
+      <label id="saveLabel" for="saveEmail">이메일 저장</label>
+        <span id="goJoin">
+          <a href="#loginmodal" class="flatbtn" id="modaltrigger">회원가입</a>
+        </span>
     </div>  
+    
     <p></p>
 <!--     <p hidden="">입력한 이메일과 비밀번호가 일치하지 않습니다. 다시 입력해주세요.</p>
  -->
@@ -83,6 +85,7 @@
       <input id="loginBtn" type="button" value="시작하기">
     </p>       
 
+	  <!-- 모달로 띄우는 부분 --> 
 		<script>
 			$('#loginBtn').click(function(event) {
 				var checkStatus = $("#saveEmail").is(":checked"); 
@@ -106,12 +109,31 @@
 					}
 				}, 'json');
 			});
+			
+			$(function(){
+				$('#modaltrigger').leanModal({
+					top: 110, overlay: 0.8, closeButton: ".hidemodal" 
+				});
+			});
+			
 		</script>
 
   </form>
-  
+ 
 </div>
-  
+
+<div id="loginmodal" style="display:none;">
+  <h2>LOGIN</h2>
+  <div class=>회원이 되시면 여러가시 혜택을 누리실 수 있습니다.</div>
+  <div class=>
+    <div class=>
+      <input type="text" name="id" size="23">
+      <input type="text" name="pw" size="23">
+    </div>
+    <span class=><a href="">LOGIN</a></span>
+  </div>
+  <div class=><a href="">아이디 / 비밀번호 찾기</a> | <a href="">회원가입</a></div>
+</div>
 
 </body>
 </html>
