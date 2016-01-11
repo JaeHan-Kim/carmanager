@@ -16,15 +16,15 @@ import cms.service.GarageService;
 import cms.service.RefuelService;
 
 @Controller
-//@RequestMapping("/main/*")
+// @RequestMapping("/main/*")
 public class GarageController {
-  public static final Logger log = Logger.getLogger(GarageController.class);
+  /*public static final Logger log = Logger.getLogger(GarageController.class);
   
   @Autowired GarageService garageService;
   @Autowired RefuelService refuelService;
   @Autowired ServletContext servletContext;
   
-//  @RequestMapping("list")
+  @RequestMapping("list")
   public Object carList(
   		HttpSession session) throws Exception {
 
@@ -44,7 +44,7 @@ public class GarageController {
 
   }
   
-//  @RequestMapping(value="select", method=RequestMethod.GET)
+  @RequestMapping(value="select", method=RequestMethod.GET)
   public Object selList(int no,
   		HttpSession session) throws Exception {
   	//log.debug("현재 차량은 " + no + "입니다.");
@@ -61,6 +61,6 @@ public class GarageController {
     resultMap.put("memCostAvg", costAvg);
     resultMap.put("myCostAvg", myCostAvg);
     return resultMap; 
-  }
+  }*/
   
 }

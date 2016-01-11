@@ -69,7 +69,7 @@ window.scrollTo(0,1); }
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
           id="cbp-spmenu-s1">
           <ul class="nav" id="side-menu">
-            <li><a href="main.html" class=""><i
+            <li><a href="../main/main.html" class=""><i
                 class="fa fa-home nav_icon"></i>Dashboard</a></li>
             <li><a href="../mypage/mypage.html" class=""><i
                 class="fa fa-home nav_icon"></i>My page</a></li>
@@ -151,89 +151,94 @@ window.scrollTo(0,1); }
     <div id="page-wrapper">
       <div class="main-page">
 
-    <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
-  			<div class="col-md-4 compose-left">
-					<div class="folder widget-shadow">
-						<ul>
-							<li class="head">등록 차량</li>
-							<li><a href="inbox.html"><i class="fa fa-inbox"></i>Inbox</a></li>
-							<li><a href="#"><i class="fa fa fa-envelope-o"></i>Sent </a></li>
-							<li><a href="#"><i class="fa fa-file-text-o"></i>Drafts</a> </li>
-						</ul>
-					</div>
-					<div class="chat-grid widget-shadow">
-						<ul>
-							<li>
-									<div class="chat-right">
-										<p>Andrew Josifn</p>
-										<h6>Nullam quis risus eget </h6>
-									</div>
-									<div class="clearfix"> </div>	
-							</li>
-							<li>
-									<div class="chat-right">
-										<p>Justen Ferry</p>
-										<h6>Urna mollis ornare vel</h6>
-									</div>
-									<div class="clearfix"> </div>	
-							</li>
-							<li>
-									<div class="chat-right">
-										<p>Brown Andy </p>
-										<h6>Quis risus ullam neget </h6>
-									</div>
-									<div class="clearfix"> </div>
-							</li>
-							<li>
-									<div class="chat-right">
-										<p>Deos Jhon</p>
-										<h6>Mollis ornare Urna vel</h6>
-									</div>
-									<div class="clearfix"> </div>	
-							</li>
-						</ul>
-					</div>
-					<div class="chat-grid widget-shadow">
-						 <button  type="button" class="btn btn-primary">Primary</button>
-					</div>
-				</div>
-			<div class="col-md-8 compose-right widget-shadow">
-					<div class="panel-default">
-						<div class="panel-heading">
-							차량 등록
-						</div>
-						<div class="panel-body">
-							<form class="com-mail">
-								<div class="col-md-12">
-								<label>애칭</label>
-									<input type="text" class="form-control1 control3" placeholder=".col-md-12">
-									<label>제조사</label>
-									<input type="text" class="form-control1 control3" placeholder=".col-md-12">
-								</div>
-								<label>&nbsp;&nbsp;&nbsp;&nbsp;공인연비</label>
-								<div class="col-md-13">
-									<div class="col-md-6 grid_box1">
-										<input type="text" class="form-control1 control3" placeholder=".col-md-3">
-									</div>
-									<div class="col-md-6 grid_box1">
-									 	<input type="text" class="form-control1 control3" placeholder=".col-md-9">
-									</div>
-								</div>
-								<div class="col-md-12">
-								<label>공인연비</label>
-									<input type="text" class="form-control1 control3" placeholder=".col-md-12">
-								<label>연료종류</label>
-									<input type="text" class="form-control1 control3" placeholder=".col-md-12">
-						 		</div>
-						  <input type="submit" value="등록"> 
-							<input type="submit" value="리셋"> 
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>	
-			</div>
-		</div>
+        <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
+        <div class="col-md-4 compose-left">
+          <div class="folder widget-shadow">
+            <ul>
+              <li class="head">등록 차량</li>
+              <li><a href="#"><i class="fa fa-inbox"></i>Inbox</a></li>
+              <li><a href="#"><i class="fa fa fa-envelope-o"></i>Sent
+              </a></li>
+              <li><a href="#"><i class="fa fa-file-text-o"></i>Drafts</a>
+              </li>
+            </ul>
+          </div>
+          <div class="chat-grid widget-shadow">
+            <ul>
+              <li>
+                <div class="chat-right">
+                  <p><i class="fa fa-inbox"></i>차량 애칭</p>
+                  <h6>팥죽팥죽</h6>
+                </div>
+                <div class="clearfix"></div>
+              </li>
+              <li>
+                <div class="chat-right">
+                  <p><i class="fa fa-inbox"></i>제조사</p>
+                  <h6>키아키아</h6>
+                </div>
+                <div class="clearfix"></div>
+              </li>
+              <li>
+                <div class="chat-right">
+                  <p><i class="fa fa-inbox"></i>모델명</p>
+                  <h6>k3333333</h6>
+                </div>
+                <div class="clearfix"></div>
+              </li>
+              <li>
+                <div class="chat-right">
+                  <p><i class="fa fa-inbox"></i>주행거리</p>
+                  <h6>10000<span>km</span></h6>
+                </div>
+                <div class="clearfix"></div>
+              </li>
+            </ul>
+          </div>
+          <div class="chat-grid widget-shadow">
+            <button type="button" class="btn btn-primary">Primary</button>
+          </div>
+        </div>
+        <div class="col-md-8 compose-right widget-shadow">
+          <div class="panel-default">
+            <div class="panel-heading">차량 등록</div>
+            <div class="panel-body">
+              <form class="com-mail">
+                <div class="col-md-12">
+                  <label>애칭</label> <input type="text"
+                    class="form-control1 control3"
+                    placeholder=".col-md-12"> <label>제조사</label>
+                  <input type="text" class="form-control1 control3"
+                    placeholder=".col-md-12">
+                </div>
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;공인연비</label>
+                <div class="col-md-13">
+                  <div class="col-md-6 grid_box1">
+                    <input type="text" class="form-control1 control3"
+                      placeholder=".col-md-3">
+                  </div>
+                  <div class="col-md-6 grid_box1">
+                    <input type="text" class="form-control1 control3"
+                      placeholder=".col-md-9">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <label>공인연비</label> <input type="text"
+                    class="form-control1 control3"
+                    placeholder=".col-md-12"> <label>연료종류</label>
+                  <input type="text" class="form-control1 control3"
+                    placeholder=".col-md-12">
+                </div>
+                <input type="submit" value="등록"> <input
+                  type="submit" value="리셋">
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        
+      </div>
+    </div>
     <!--footer-->
     <div class="footer">
       <p>
