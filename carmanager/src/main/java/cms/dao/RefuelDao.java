@@ -8,4 +8,6 @@ public interface RefuelDao {
 	public List<Refuel> selectRefuelList(int no);
 	
 	public List<Refuel> selectCostAvg();
+	
+	public List<Refuel> selectMemberCostAvg(int no);
 }

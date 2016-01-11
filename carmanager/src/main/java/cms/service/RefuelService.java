@@ -8,4 +8,6 @@ public interface RefuelService {
   List<Refuel> listAll(int no);
   
   List<Refuel> costAvg();
+  
+  List<Refuel> myCostAvg(int no);
 }

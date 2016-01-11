@@ -22,7 +22,7 @@
   },
     "install" : {
      "path" : "src/main/webapp/lib",
- 			 	 "sources" : {
+ 			     "sources" : {
   	 		"bootstrap": "bower_components/bootstrap/dist/**",
   	 		"jquery": "bower_components/jquery/dist/**"
     }

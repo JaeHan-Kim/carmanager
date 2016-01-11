@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cms.domain.Garage;
-import cms.domain.Member;
 import cms.domain.Refuel;
 import cms.service.GarageService;
 import cms.service.RefuelService;
@@ -32,27 +31,19 @@ public class GarageController {
   		HttpSession session) throws Exception {
 
   	System.out.println("들어간다 ");
-  	//Member member = (Member)session.getAttribute("loginUser");
-  	//log.debug(member.toString());
+  	
 		int no = 1;
     List<Garage> garages = garageService.listAll(no);
     List<Refuel> refuels = refuelService.listAll(no);
-    List<Refuel> costavg = refuelService.costAvg();
-    //for (Garage g : garages) {
-    //  log.debug(g.toString());
-    //}
-    //for (Refuel r : refuels) {
-    //  log.debug(r.toString());
-    //}
-    //for (Refuel r : costavg) {
-    // log.debug(r.toString());
-    //}
+    List<Refuel> costAvg = refuelService.costAvg();
+    List<Refuel> myCostAvg = refuelService.myCostAvg(no);
     
     HashMap<String, Object> resultMap = new HashMap<>();
     resultMap.put("status", "success");
     resultMap.put("data", garages);
     resultMap.put("refuelList", refuels);
-    resultMap.put("memCostAvg", costavg);
+    resultMap.put("memCostAvg", costAvg);
+    resultMap.put("myCostAvg", myCostAvg);
     return resultMap;  
 
   }
@@ -61,15 +52,17 @@ public class GarageController {
   		HttpSession session) throws Exception {
   	log.debug("현재 차량은 " + no);
   	
+  	List<Garage> garages = garageService.listAll(no);
     List<Refuel> refuels = refuelService.listAll(no);
-    List<Refuel> costavg = refuelService.costAvg();
-    for (Refuel r : refuels) {
-      log.debug(r.toString());
-    }
-  	HashMap<String, Object> resultMap = new HashMap<>();
-  	resultMap.put("status", "success");
+    List<Refuel> costAvg = refuelService.costAvg();
+    List<Refuel> myCostAvg = refuelService.myCostAvg(no);
+    
+    HashMap<String, Object> resultMap = new HashMap<>();
+    resultMap.put("status", "success");
+    resultMap.put("data", garages);
     resultMap.put("refuelList", refuels);
-    resultMap.put("memCostAvg", costavg);
+    resultMap.put("memCostAvg", costAvg);
+    resultMap.put("myCostAvg", myCostAvg);
     return resultMap; 
   }
   

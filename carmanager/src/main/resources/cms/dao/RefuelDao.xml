@@ -14,20 +14,31 @@
 
   <select id="selectRefuelList" resultMap="refuelMap" parameterType="int">
     select
-      rno, grno, ref_dt, mile, cost, liter
-    from refuel
-    where grno = #{no}
-    order by ref_dt desc
-    limit 8
+     r.rno, r.grno, r.mile, r.cost, r.liter, DATE_FORMAT(ref_dt, '%m-%d') as group_date, g.c_nick, m.effi
+   from refuel r
+   left outer join garage g on r.grno = g.grno
+   left outer join model m on g.mdno = m.mdno
+   where r.grno = #{no}
+   order by ref_dt desc
+   limit 8
   </select>
    
   <select id="selectCostAvg" resultMap="refuelMap">
-  	select 
-  		month(ref_dt)as liter, 
-  		avg(cost)as cost 
-  	from refuel 
-  	group by month(ref_dt)
-  	order by liter desc
+  	select
+      DATE_FORMAT(ref_dt, '%Y-%m') as group_date, avg(cost) as cost
+    from refuel
+    group by DATE_FORMAT(ref_dt, '%Y-%m')
+    order by DATE_FORMAT(ref_dt, '%Y-%m') desc
   </select>
+
+  <select id="selectMemberCostAvg" resultMap="refuelMap" parameterType="int">
+  	select
+      grno, DATE_FORMAT(ref_dt, '%Y-%m') as group_date, avg(cost) as cost
+    from refuel where grno = #{no}
+    group by DATE_FORMAT(ref_dt, '%Y-%m')
+    order by DATE_FORMAT(ref_dt, '%Y-%m') desc
+  </select>
+  
+  
   
 </mapper>
