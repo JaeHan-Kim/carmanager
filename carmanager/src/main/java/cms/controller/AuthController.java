@@ -1,4 +1,4 @@
-package cms.controller;
+/*package cms.controller;
 
 import java.util.HashMap;
 
@@ -75,3 +75,4 @@ public class AuthController {
     return "redirect:login.do";
   }
 }
+*/
