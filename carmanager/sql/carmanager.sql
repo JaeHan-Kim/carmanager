@@ -293,6 +293,9 @@ ALTER TABLE official
 			meno -- 모델연비번호
 		);
 
+ALTER TABLE official
+	MODIFY COLUMN meno INTEGER NOT NULL AUTO_INCREMENT COMMENT '모델연비번호';
+
 -- 주유기록
 ALTER TABLE refuel
 	ADD CONSTRAINT FK_garage_TO_refuel -- 내차 -> 주유기록
