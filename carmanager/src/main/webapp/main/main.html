@@ -22,8 +22,8 @@ setTimeout(hideURLbar, 0); }, false);
 function hideURLbar(){ 
 window.scrollTo(0,1); } 
 
-
 </script>
+
 <!-- Bootstrap Core CSS -->
 <link href="../css/main/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
@@ -34,6 +34,16 @@ window.scrollTo(0,1); }
 <!-- //font-awesome icons -->
 <!-- js-->
 <script src="../js/main/jquery-1.11.1.min.js"></script>
+
+<script>
+  $(document).ready(function(){ 
+	  var useremail = sessionStorage.getItem('loginUseremail');
+	    $("#useremail").html(useremail);
+	  
+ });  
+</script>
+
+
 <script src="../js/main/modernizr.custom.js"></script>
 <!--webfonts 없어도 되는듯..? -->
 <link
@@ -151,7 +161,7 @@ window.scrollTo(0,1); }
                   <span class="prfil-img"><img
                     src="../img/main/a.png" alt=""> </span>
                   <div class="user-name">
-                    <p>ooo님</p>
+                    <p id="useremail"></p>
                     <span>안녕하세요.</span>
                   </div>
                   <!-- 빈칸 유지를 위한 아이콘 자리 -->
