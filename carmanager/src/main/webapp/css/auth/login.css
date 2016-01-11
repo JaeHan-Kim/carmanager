@@ -246,18 +246,11 @@ A:hover {
 	text-decoration:underline;
 }
 
+/* 로그인 영역 설정 끝 */
 
-
+/* 회원가입 영역 모달 처리 시작 */
 #loginmodal{border:3px solid #705c3b;background:#fff;}
-#loginmodal h2{color:#636363;font-size:24px;line-height:40px;}
-#loginmodal .p_c_text{font-size:12px;line-height:24px;}
-#loginmodal .login_line{margin:10px 0 0;height:80px;}
-#loginmodal .box_in{float:left;margin:0 10px 0; }
-#loginmodal input{width:120px;height:24px;display:block;margin:3px 0 0;}
-#loginmodal .btn_login{width:72px;height:60px;background:#363636;color:#e1e1e1;float:left;line-height:60px;text-align:center;}
-#loginmodal .find_join{clear:both;margin:20px 0 0 10px;}
 
-/** modal window styles **/
 #lean_overlay {
     position: fixed;
     z-index: 5;
@@ -271,10 +264,11 @@ A:hover {
 
 
 #loginmodal {
-  width: 250px;height:250px;  /*팝업창의 크기조절*/
+  width: 450px;
+  height:400px;  /*팝업창의 크기조절*/
   margin-top:100px;           /*팝업창 위아래 간격조절*/
   padding: 18px;
-  background: #f3f6fa;
+  background: black;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -283,4 +277,235 @@ A:hover {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* 오른쪽 로그인 영역 설정 끝 */
+/* 모달 영역 처리 끝 */
+
+.input {
+  width: 400px;
+  position: absolute;
+  z-index: 4;
+
+  font-family: 'Raleway', 'Lato', Arial, sans-serif;
+  color: white;
+  text-shadow: 0 2px 1px rgba(0,0,0,0.3);
+}
+
+.input label:hover ~ input {
+    border-color: #333;
+}
+
+.input label {
+    display: block;
+}
+
+/* 로그인폼 텍스트 */
+.input #topText {
+  font-size: 25px;
+  text-align: left;
+  padding-top: 1px;
+  margin-bottom: 15px;
+    border-bottom: 1px solid darkred;
+    border-bottom-width: 2px;
+    font-weight: normal;
+    color: white;
+    /*text-shadow: white 1px 1px 1px;*/
+}
+
+.input #now {
+    color: darkred;
+    font-weight: bold;
+}
+
+.input #textMycar {
+    color: darkred;
+    font-weight: bold;
+}
+
+.input #imgInput {
+  margin-left: 10px;
+  margin-right: 10px;
+  float: left;
+  width: 150px;
+  text-align: center;
+}
+
+.input #imgInput img {
+  height: 100px;
+  width: 100px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.input #imgInput label {
+  display: inline-block;
+  padding: .5em .75em;
+  
+  background: darkred;
+  border-radius: 5px;
+  border: 1px solid #4e3043;
+  box-shadow: inset 0 1px rgba(255,255,255,0.4), 0 2px 1px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  
+  color: white;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+.input #imgInput input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+
+.input #textInput input[type=text], 
+.input #textInput input[type=password] {
+  width: 140px;
+}
+
+.input #textInput input[type=text],
+.input #textInput input[type=password] {
+  padding: 8px 4px 8px 10px;
+  margin-bottom: 15px;
+
+  /* Styles */
+  border: 1px solid #4e3043; /* Fallback */
+  border: 1px solid rgba(78,48,67, 0.8);
+  background: rgba(0,0,0,0.5);
+  border-radius: 2px;
+  box-shadow: 
+      0 1px 0 rgba(255,255,255,0.2), 
+      inset 0 1px 1px rgba(0,0,0,0.1);
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+
+  /* Font styles */
+  font-family: 'Raleway', 'Lato', Arial, sans-serif;
+  color: #fff;
+  font-size: 13px;
+}
+
+.input #textInput input[type=button]:hover, 
+#button input[type=button]:hover, #imgInput label:hover {
+    background: red;
+    
+    /*box-shadow: 
+        inset 0 1px rgba(255,255,255,0.5), 
+        inset 0 20px 30px rgba(145,0,0,0.5);*/
+}
+
+.input #textInput input::-webkit-input-placeholder {
+    color: white;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.input #textInput input:-moz-placeholder {
+    color: white;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.input #textInput input:-ms-input-placeholder {
+    color: white;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.input #textInput input:hover, #imgInput label:hover, #button input:hover {
+    border-color: white;
+}
+
+.input #textInput input:focus, #imgInput label:focus, #button input:focus {
+    box-shadow: 
+        0 1px 0 rgba(255,255,255,0.2), 
+        inset 0 1px 1px rgba(0,0,0,0.1),
+        0 0 0 3px rgba(255,255,255,0.15);
+    outline: none;
+}
+
+.input #textInput input:focus {
+    outline: 1px solid white;
+}
+
+.input #textInput label {
+    display: none;
+    padding: 0 0 5px 2px;
+    cursor: pointer;
+}
+
+.input #button {
+  text-align: center;
+}
+
+.input #button input {
+  margin-left: 10px;
+}
+
+.input #button input{
+    /* Size and position */
+    width: 100px;
+    padding: 8px 5px;
+    
+    /* Styles */
+    background: #634056;
+    background: -moz-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: -ms-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: -o-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(99,64,86,0.5)), to(rgba(76,49,65,0.7)));
+    background: -webkit-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: darkred; /* linear-gradient(rgba(0,0,0,0.5), rgba(255,255,255,0.7));    */
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow: inset 0 1px rgba(255,255,255,0.4), 0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+.input #check {
+  /* Size and position */
+    width: 80px;
+    padding: 8px 5px;
+    
+    /* Styles */
+    background: #634056;
+    background: -moz-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: -ms-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: -o-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(99,64,86,0.5)), to(rgba(76,49,65,0.7)));
+    background: -webkit-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
+    background: darkred; /* linear-gradient(rgba(0,0,0,0.5), rgba(255,255,255,0.7));    */
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow: inset 0 1px rgba(255,255,255,0.4), 0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+
+    /* Font styles */
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
