@@ -134,12 +134,8 @@ window.scrollTo(0,1); }
       <div class="header-right">
         <!-- 유저별 차량 리스트 -->
         <div class="profile_details_left">
-          <ul class="nofitications-dropdown">
-            <li class="dropdown head-dpdn"><span>팥죽이</span></li>
-
-            <li class="dropdown head-dpdn"><span>엄마차</span></li>
-
-            <li class="dropdown head-dpdn"><span>오빠차</span></li>
+          <ul id="myCarList" class="nofitications-dropdown">
+           
           </ul>
           <div class="clearfix"></div>
         </div>
@@ -243,14 +239,23 @@ window.scrollTo(0,1); }
           var twoago = (moment().subtract(60, 'days').months() + 1) + "월";
           var oneago = (moment().subtract(30, 'days').months() + 1) + "월";
           var present = moment().format('MM')  + "월";
-          
+          var selectcar = $("#myCarList");
          $.getJSON('list.do', function(resultObj) {
+           
            var effic = new Array();
            var driveDt = new Array();
            for (var i = 0; i < 7; i++) {
              effic[i] = (resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter;
              driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
            }
+		   for (var garage of resultObj.data) {
+		     $("<li value='" + garage.myCarNo + "'" + "class='dropdown head-dpdn'><span>" + garage.nickName + "</span></li>").appendTo(selectcar)
+		   }
+           /* <li class="dropdown head-dpdn"><span>팥죽이</span></li>
+
+           <li class="dropdown head-dpdn"><span>엄마차</span></li>
+
+           <li class="dropdown head-dpdn"><span>오빠차</span></li> */
             alert("되네???")
           
             var lineChartData = {
@@ -613,8 +618,7 @@ window.scrollTo(0,1); }
     <!--footer-->
     <div class="footer">
       <p>
-        &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Design
-        by <a href="" target="_blank">내 차를 부탁해</a>
+        &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
       </p>
     </div>
     <!--//footer-->
@@ -639,7 +643,7 @@ window.scrollTo(0,1); }
         }
       }
     </script>
-  <!--scrolling js 스크롤바 색 조정-->
+  <!--scrolling js 스크롤바 조정-->
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>
   <!--//scrolling js-->
