@@ -5,20 +5,50 @@ public class Garage {
   protected int modelNo;
   protected int memberNo;
   protected String nickName;
+  protected String deailModel;
+  protected int effi;
   protected int mile;
+  
   
   public Garage() {
    
   }
   
   
-  @Override
-  public String toString() {
-    return "Garage [myCarNo=" + myCarNo + ", modelNo=" + modelNo + ", memberNo=" + memberNo + ", nickName=" + nickName
-        + ", mile=" + mile + "]";
-  }
 
-  public int getMyCarNo() {
+  @Override
+	public String toString() {
+		return "Garage [myCarNo=" + myCarNo + ", modelNo=" + modelNo + ", memberNo=" + memberNo + ", nickName=" + nickName
+		    + ", deailModel=" + deailModel + ", effi=" + effi + ", mile=" + mile + "]";
+	}
+
+
+
+	public String getDeailModel() {
+		return deailModel;
+	}
+
+
+
+	public void setDeailModel(String deailModel) {
+		this.deailModel = deailModel;
+	}
+
+
+
+	public int getEffi() {
+		return effi;
+	}
+
+
+
+	public void setEffi(int effi) {
+		this.effi = effi;
+	}
+
+
+
+	public int getMyCarNo() {
     return myCarNo;
   }
 

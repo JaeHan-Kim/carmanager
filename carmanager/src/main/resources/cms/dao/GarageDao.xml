@@ -10,6 +10,7 @@
     <id column="grno" property="myCarNo"/>
     <result column="mdno" property="modelNo"/>
     <result column="mno" property="memberNo"/>
+    <result column="trim" property="deailModel"/>
     <result column="c_nick" property="nickName"/>
   </resultMap>
 
