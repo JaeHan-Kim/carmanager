@@ -397,8 +397,9 @@ A:hover {
   font-size: 13px;
 }
 
+#imgInput label:hover, 
 .input #textInput input[type=button]:hover, 
-#button input[type=button]:hover, #imgInput label:hover {
+#button input[type=button]:hover {
     background: red;
     border: 1px solid white;
     

@@ -14,7 +14,7 @@
   
   <insert id="insert" parameterType="member">
     insert into members(email, nick, pwd)
-    values(#{email}, #{nick}, sha1(#{password}))
+    values(#{email}, #{nickName}, sha1(#{password}))
   </insert> 
   
   <select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">

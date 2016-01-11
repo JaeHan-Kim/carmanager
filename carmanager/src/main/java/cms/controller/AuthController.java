@@ -2,7 +2,6 @@ package cms.controller;
 
 import java.util.HashMap;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +21,6 @@ public class AuthController {
   static public Logger log = Logger.getLogger(AuthController.class);
 
   @Autowired MemberDao memberDao;
-  @Autowired ServletContext servletContext;
   
   @RequestMapping(value="login", method=RequestMethod.POST)
   public AjaxResult login(
@@ -37,12 +35,29 @@ public class AuthController {
         
     Member member = memberDao.selectOneByEmailPassword(paramMap);
     
+    System.out.println(member);
+    
     if (member == null) {
       session.invalidate();
       return new AjaxResult("failure", null);
     }
     
 //    session.setAttribute("loginUser", member);
+    
+    return new AjaxResult("success", member);
+  }
+  
+  @RequestMapping(value="join", method=RequestMethod.GET)
+  public String form() {
+    return "login";
+  }
+  
+  @RequestMapping(value="join", method=RequestMethod.POST)
+  public AjaxResult join(Member member) throws Exception {
+    
+    System.out.println(member);
+    
+    memberDao.insert(member);
     
     return new AjaxResult("success", member);
   }
