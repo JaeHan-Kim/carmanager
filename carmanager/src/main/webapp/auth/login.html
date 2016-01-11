@@ -124,6 +124,8 @@
 
 <div id="loginmodal" style="display:none;">
   <form class="input"  action='join.do' method='post'>
+    <div id="modalClose">
+  </div>
     <div id="topText">이메일 하나로 <span id="now">간편하게</span> 시작하세요!</div>
     <p>다른 정보는 받지 않습니다. 부담 없이 이용하세요.</p>  
     <div id="imgInput">
@@ -154,7 +156,7 @@
   
     <div id="button">
       <input type="button" class="btn btn-default" value="가입">
-      <input type="button" class="btn btn-default" value="취소">
+      <input type="button" class="btn btn-default" value="취소" onclick="$('#lean_overlay').click();">
     </div>
       
   </form>

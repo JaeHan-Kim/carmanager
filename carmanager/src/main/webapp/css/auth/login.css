@@ -266,7 +266,7 @@ A:hover {
 
 
 #loginmodal {
-  width: 450px;
+  width: 470px;
   height:400px;  /*팝업창의 크기조절*/
   margin-top:100px;           /*팝업창 위아래 간격조절*/
   padding: 18px;
@@ -283,7 +283,7 @@ A:hover {
 /* 모달 영역 처리 끝 */
 
 .input {
-  width: 400px;
+  width: 430px;
   position: absolute;
   z-index: 4;
 
