@@ -137,7 +137,7 @@ insert into model(model, mkno) values('레이 1.0 Bi-fuel LPI', 2);
 insert into model(model, mkno) values('레이 1.0 가솔린', 2);
 insert into model(model, mkno) values('그랜드카니발 2.2 디젤', 2);
 
---르노
+-- 르노
 insert into model(model, mkno) values('SM7 LPLi', 3);
 insert into model(model, mkno) values('SM5 1.5 DIESEL', 3);
 insert into model(model, mkno) values('QM5 4WD', 3);
@@ -183,7 +183,7 @@ insert into model(model, mkno) values('라보5MT', 4);
 insert into model(model, mkno) values('다마스밴', 4);
 insert into model(model, mkno) values('다마스 5인승', 4);
 
---쌍용
+-- 쌍용
 insert into model(model, mkno) values('티볼리 디젤 MT 2WD Short', 5);
 insert into model(model, mkno) values('티볼리 디젤 AT 2WD Short', 5);
 insert into model(model, mkno) values('티볼리 가솔린 MT 2WD Short', 5);
@@ -440,3 +440,4 @@ insert into official(mdno, fuel, effi) values(209, '경유', 11.7);
 insert into official(mdno, fuel, effi) values(210, '경유', 12.9);
 insert into official(mdno, fuel, effi) values(211, '경유', 12.2);
 insert into official(mdno, fuel, effi) values(212, '경유', 13.3);
+
