@@ -139,21 +139,20 @@
     <div id="textInput" class="form-group">
       <div id="email">
         <label for="email">Email</label>
-        <input id="jemail" type="text" name="jemail" placeholder="이메일" size="15">
-        <input type="button" id="check" value="중복체크">
+        <input id="jemail" type="text" name="jemail" placeholder="이메일">
       </div>
       <div id="nickName">
         <label for="nickname">NickName</label>
-        <input id="jnickname" type="text" name="jnickname" placeholder="별명" size="15">
+        <input id="jnickname" type="text" name="jnickname" placeholder="별명">
       </div>
       <div id="password">
         <label for="password">Password</label>
-        <input id="jpassword" type="password" name='pwd' size="15" placeholder="비밀번호">
+        <input id="jpassword" type="password" name='pwd' placeholder="비밀번호">
       </div>
       <div id="password_confirm">
         <label for="password_confirm">Password Confirm</label>
         <input id="jpassword_confirm" type="password" name='pwd_check' 
-               size="15" placeholder="비밀번호 확인" onkeyup="checkPwd()">
+               placeholder="비밀번호 확인" onkeyup="checkPwd()">
         <div id="checkPwd">동일한 암호를 입력하세요.</div>
       </div>
     </div>
@@ -216,7 +215,7 @@
 
     if(pw1!=pw2){
       document.getElementById('checkPwd').style.color = "red";
-      document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
+      document.getElementById('checkPwd').innerHTML = "암호가 일치하지 않습니다."; 
     }else{
       document.getElementById('checkPwd').style.color = "white";
       document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
