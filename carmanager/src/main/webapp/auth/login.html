@@ -12,6 +12,7 @@
   <script type="text/javascript" src="../js/auth/cycle2.js"></script>
   <script type="text/javascript" src="../js/auth/modernizr.custom.63321.js"></script>
   <script type="text/javascript" src="../js/auth/jquery.leanModal.min.js"></script>
+  <script type="text/javascript" src="../js/auth/httpRequest.js"></script>
   
   <script>
 	  $(document).ready(function(){ 
@@ -20,7 +21,8 @@
 		    $("#femail").val(email);					// email textbox에 쿠키값 출력
 		    $("#saveEmail").attr("checked", "checked");		// 체크박스에 체크
 	    }
-	  });  
+	  });
+
   </script>
 
 </head>
@@ -125,7 +127,7 @@
 <div id="loginmodal" style="display:none;">
   <form class="input" method='post'>
     <div id="modalClose">
-  </div>
+    </div>
     <div id="topText">이메일 하나로 <span id="now">간편하게</span> 시작하세요!</div>
     <p>다른 정보는 받지 않습니다. 부담 없이 이용하세요.</p>  
     <div id="imgInput">
@@ -137,21 +139,22 @@
     <div id="textInput" class="form-group">
       <div id="email">
         <label for="email">Email</label>
-        <input id="jemail" type="text" name="jemail" placeholder="이메일" size="15" required>
+        <input id="jemail" type="text" name="jemail" placeholder="이메일" size="15">
         <input type="button" id="check" value="중복체크">
       </div>
       <div id="nickName">
         <label for="nickname">NickName</label>
-        <input id="jnickname" type="text" name="jnickname" placeholder="별명" size="15" required>
+        <input id="jnickname" type="text" name="jnickname" placeholder="별명" size="15">
       </div>
       <div id="password">
         <label for="password">Password</label>
-        <input id="jpassword" type="password" name='jpassword' size="15" placeholder="비밀번호" required>
+        <input id="jpassword" type="password" name='pwd' size="15" placeholder="비밀번호">
       </div>
       <div id="password_confirm">
         <label for="password_confirm">Password Confirm</label>
-        <input id="jpassword_confirm" type="password" name='jpassword_confirm' 
-               size="15" placeholder="비밀번호 확인" required>
+        <input id="jpassword_confirm" type="password" name='pwd_check' 
+               size="15" placeholder="비밀번호 확인" onkeyup="checkPwd()">
+        <div id="checkPwd">동일한 암호를 입력하세요.</div>
       </div>
     </div>
   
@@ -206,6 +209,19 @@
     }, 'json');
   });
   
+  function checkPwd(){
+    var f1 = document.forms[2];
+    var pw1 = f1.pwd.value;
+    var pw2 = f1.pwd_check.value;
+
+    if(pw1!=pw2){
+      document.getElementById('checkPwd').style.color = "red";
+      document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
+    }else{
+      document.getElementById('checkPwd').style.color = "white";
+      document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+    }
+  } 
 </script>
 
 </body>
