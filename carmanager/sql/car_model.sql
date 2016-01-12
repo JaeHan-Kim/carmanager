@@ -149,7 +149,7 @@ insert into model(model, mkno) values('New SM7 2.5', 3);
 insert into model(model, mkno) values('New SM5 LPLi', 3);
 insert into model(model, mkno) values('New SM5 1.6', 3);
 insert into model(model, mkno) values('New SM5', 3);
-insert into model(model, mkno) values('New SM3', 1.6);
+insert into model(model, mkno) values('New SM3', 3);
 
 -- 쉐보레
 insert into model(model, mkno) values('트랙스 1.6 디젤', 4);
