@@ -399,7 +399,8 @@ A:hover {
 
 #imgInput label:hover, 
 .input #textInput input[type=button]:hover, 
-#button input[type=button]:hover {
+#button input[type=button]:hover,
+#button input[type=submit]:hover {
     background: red;
     border: 1px solid white;
     
@@ -423,7 +424,9 @@ A:hover {
     text-shadow: 0 1px 0 rgba(255,255,255,0.15);
 }
 
-.input #textInput input:hover, #imgInput label:hover, #button input:hover {
+.input #textInput input:hover, 
+#imgInput label:hover, 
+#button input:hover {
     border-color: white;
 }
 
