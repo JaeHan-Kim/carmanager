@@ -152,56 +152,50 @@ window.scrollTo(0,1); }
       <div class="main-page">
 
         <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
+        <!-- 차량 리스트 출력 -->
         <div class="col-md-4 compose-left">
           <div class="folder widget-shadow">
+            <ul id="carList">
+              <li class="head">회원님의 차고 입니다.</li>
+              
+            </ul>
+          </div>
+          
+          <script type="text/javascript">
+            var myList = $("#carList");
+            $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
+              for (var garage of resultObj.data) {
+                    /* <li id="carList"><a href="model.mdno"><i class="fa fa-inbox"></i>너부리야</a></li> */
+       		     $("<li value='" + garage.myCarNo + "'><a href='#'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
+       		     /* $("<li value='" + garage.myCarNo + "'" + "class='dropdown head-dpdn'><span>" + garage.nickName + "</span></li>").appendTo(selectcar) */ 
+              }
+            });
+          </script> 
+            
+          <div class="chat-grid widget-shadow">
             <ul>
-              <li class="head">등록 차량</li>
-              <li><a href="#"><i class="fa fa-inbox"></i>Inbox</a></li>
-              <li><a href="#"><i class="fa fa fa-envelope-o"></i>Sent
-              </a></li>
-              <li><a href="#"><i class="fa fa-file-text-o"></i>Drafts</a>
+              <li>
+                  <p>차량 애칭 : <span>너부리야</span></p>
+              </li>
+              <li>
+                  <p>제조사 : <span>키아키아</span></p>
+              </li>
+              <li>
+                  <p>모델명 : <span>k3333</span></p>
+              </li>
+              <li>
+                  <p>주행거리 : <span>10000</span></p>
               </li>
             </ul>
           </div>
           <div class="chat-grid widget-shadow">
-            <ul>
-              <li>
-                <div class="chat-right">
-                  <p><i class="fa fa-inbox"></i>차량 애칭</p>
-                  <h6>팥죽팥죽</h6>
-                </div>
-                <div class="clearfix"></div>
-              </li>
-              <li>
-                <div class="chat-right">
-                  <p><i class="fa fa-inbox"></i>제조사</p>
-                  <h6>키아키아</h6>
-                </div>
-                <div class="clearfix"></div>
-              </li>
-              <li>
-                <div class="chat-right">
-                  <p><i class="fa fa-inbox"></i>모델명</p>
-                  <h6>k3333333</h6>
-                </div>
-                <div class="clearfix"></div>
-              </li>
-              <li>
-                <div class="chat-right">
-                  <p><i class="fa fa-inbox"></i>주행거리</p>
-                  <h6>10000<span>km</span></h6>
-                </div>
-                <div class="clearfix"></div>
-              </li>
-            </ul>
-          </div>
-          <div class="chat-grid widget-shadow">
-            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-primary">차고에서 삭제하기</button>
           </div>
         </div>
+        <!-- 차량 등록폼 -->
         <div class="col-md-8 compose-right widget-shadow">
           <div class="panel-default">
-            <div class="panel-heading">차량 등록</div>
+            <div class="panel-heading">차고에 차량을 추가해 보세요.</div>
             <div class="panel-body">
               <form class="com-mail">
                 <div class="col-md-12">
@@ -239,6 +233,7 @@ window.scrollTo(0,1); }
         
       </div>
     </div>
+   
     <!--footer-->
     <div class="footer">
       <p>

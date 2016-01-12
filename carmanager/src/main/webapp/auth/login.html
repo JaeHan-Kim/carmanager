@@ -137,25 +137,26 @@
     <div id="textInput" class="form-group">
       <div id="email">
         <label for="email">Email</label>
-        <input id="jemail" type="text" name="email" placeholder="이메일" size="15" required>
+        <input id="jemail" type="text" name="jemail" placeholder="이메일" size="15" required>
         <input type="button" id="check" value="중복체크">
       </div>
       <div id="nickName">
         <label for="nickname">NickName</label>
-        <input id="jnickname" type="text" name="nickname" placeholder="별명" size="15" required>
+        <input id="jnickname" type="text" name="jnickname" placeholder="별명" size="15" required>
       </div>
       <div id="password">
         <label for="password">Password</label>
-        <input id="jpassword" type="password" name='password' size="15" placeholder="비밀번호" required>
+        <input id="jpassword" type="password" name='jpassword' size="15" placeholder="비밀번호" required>
       </div>
-      <div id="password">
-        <label for="password_confirm">Password</label>
-        <input id="jpassword_confirm" type="password" name='password_confirm' size="15" placeholder="비밀번호 확인" required>
+      <div id="password_confirm">
+        <label for="password_confirm">Password Confirm</label>
+        <input id="jpassword_confirm" type="password" name='jpassword_confirm' 
+               size="15" placeholder="비밀번호 확인" required>
       </div>
     </div>
   
     <div id="button">
-      <input id="joinBtn" type="button" class="btn btn-default" value="가입">
+      <input id="joinBtn" type="submit" class="btn btn-default" value="가입">
       <input type="button" class="btn btn-default" value="취소" onclick="$('#lean_overlay').click();">
     </div>
       
@@ -164,6 +165,27 @@
 
 <script>
   $('#joinBtn').click(function(event) {
+	  if($('#jemail').val().length < 1) {
+		  alert("이메일을 입력해주세요!");
+		  return false;
+	  }
+	  if($('#jnickname').val().length < 1) {
+      alert("별명을 입력해주세요!");
+      return false;
+	  }
+	  if($('#jpassword').val().length < 1) {
+      alert("비밀번호를 입력해주세요!");
+      return false;
+	  }
+	  if($('#jpassword_confirm').val().length < 1) {
+		  alert("비밀번호 확인을 해주세요!");
+      return false;
+    }
+	  if($('#jpassword').val() != $('#jpassword_confirm').val()) {
+		  alert("비밀번호가 일치하지 않습니다!");
+		  return false;
+	  }
+	  
     $.post('ajax/join.do', {
       email: $('#jemail').val(),
       nickName: $('#jnickname').val(),
@@ -178,6 +200,7 @@
       }
     }, 'json');
   });
+  
 </script>
 
 </body>
