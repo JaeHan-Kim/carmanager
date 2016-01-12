@@ -518,3 +518,11 @@ A:hover {
     font-weight: bold;
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
 }
+
+#checkPwd{
+  color : red;
+  font-size: 12px;
+  margin-left: 170px;
+  margin-top: -10px;
+}
+

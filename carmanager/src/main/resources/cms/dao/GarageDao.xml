@@ -23,5 +23,14 @@
     where mno = #{no}
   </select>
   
+  <select id="carDetail" resultMap="garageMap" parameterType="int">
+    select
+      g.grno, g.c_nick, k.maker, m.model, g.mile 
+    from garage g
+    left outer join model m on g.mdno = m.mdno
+    left outer join makers k on k.mkno = m.mkno
+    where grno = #{no}
+  </select>
+  
   
 </mapper>

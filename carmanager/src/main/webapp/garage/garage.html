@@ -15,19 +15,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript">
-  
-   
 addEventListener("load", function() { 
 setTimeout(hideURLbar, 0); }, false); 
 function hideURLbar(){ 
 window.scrollTo(0,1); } 
-
-
 </script>
 <!-- Bootstrap Core CSS -->
 <link href="../css/main/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
 <link href="../css/main/style.css" rel='stylesheet' type='text/css' />
+<!-- garage 에서 사용하는 CSS -->
+<link href="../css/garage/garage.css" rel='stylesheet' type='text/css' />
 <!-- font CSS -->
 <!-- font-awesome icons 빈칸 유지를 위해 링크를 막아둠 -->
 <!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
@@ -127,7 +125,7 @@ window.scrollTo(0,1); }
                   <span class="prfil-img"><img
                     src="../img/main/a.png" alt=""> </span>
                   <div class="user-name">
-                    <p>ooo님</p>
+                    <p id="useremail"></p>
                     <span>안녕하세요.</span>
                   </div>
                   <!-- 빈칸 유지를 위한 아이콘 자리 -->
@@ -158,10 +156,10 @@ window.scrollTo(0,1); }
         <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
         <!-- 차량 리스트 출력 -->
         <div class="col-md-4 compose-left">
+          
           <div class="folder widget-shadow">
             <ul id="carList">
               <li class="head">회원님의 차고 입니다.</li>
-              
             </ul>
           </div>
           
@@ -169,29 +167,58 @@ window.scrollTo(0,1); }
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-                    /* <li id="carList"><a href="model.mdno"><i class="fa fa-inbox"></i>너부리야</a></li> */
        		     $("<li value='" + garage.myCarNo + "'><a href='#'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
-       		     /* $("<li value='" + garage.myCarNo + "'" + "class='dropdown head-dpdn'><span>" + garage.nickName + "</span></li>").appendTo(selectcar) */ 
               }
             });
           </script> 
             
           <div class="chat-grid widget-shadow">
             <ul>
-              <li>
-                  <p>차량 애칭 : <span>너부리야</span></p>
-              </li>
-              <li>
-                  <p>제조사 : <span>키아키아</span></p>
-              </li>
-              <li>
-                  <p>모델명 : <span>k3333</span></p>
-              </li>
-              <li>
-                  <p>주행거리 : <span>10000</span></p>
-              </li>
-            </ul>
+							<li class="head">차량 확인후 삭제하세요.</li>
+							<li><a href="#">
+									<div class="chat-left">
+										<label>애칭</label>
+									</div>
+									<div class="chat-right">
+										<p>팥팥팥죽이</p>
+									</div>
+									<div class="clearfix"> </div>	
+								</a>
+							</li>
+							<li><a href="#">
+									<div class="chat-left">
+										<label>제조사</label>
+									</div>
+									<div class="chat-right">
+										<p>쉐슬람</p>
+									</div>
+									<div class="clearfix"> </div>	
+								</a>
+							</li>
+							<li><a href="#">
+									<div class="chat-left">
+										<label>모델명</label>
+									</div>
+									<div class="chat-right">
+										<p>트랙스 1.4 터보</p>
+									</div>
+									<div class="clearfix"> </div>	
+								</a>
+							</li>
+							<li><a href="#">
+									<div class="chat-left">
+										<label>주행거리</label>
+									</div>
+									<div class="chat-right">
+										<p>9134km</p>
+									</div>
+									<div class="clearfix"> </div>	
+								</a>
+							</li>
+						</ul>
+
           </div>
+          
           <div class="chat-grid widget-shadow">
             <button type="button" class="btn btn-primary">차고에서 삭제하기</button>
           </div>
