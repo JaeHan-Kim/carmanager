@@ -2072,7 +2072,7 @@ h4.modal-title {
 .chat-left {
     position: relative;
     float: left;
-    width: 25%;
+    width: 40%;
 }
 .chat-right {
     float: left;
@@ -2101,7 +2101,7 @@ h4.modal-title {
 	line-height: 1.2em;
 }
 .chat-right h6 {
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: #999;
     line-height: 1.4em;
 }
