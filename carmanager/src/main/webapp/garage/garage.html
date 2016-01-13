@@ -263,8 +263,8 @@ window.scrollTo(0,1); }
               <!--    <label>연료종류</label>
                  <input type="text" class="form-control1 control3"> -->
                  <div class="col-md-12">
-                <input id="btn_reg" type="submit" value="등록"> 
-                <input id="btn_reset" type="submit" value="리셋">
+                <input id="btn_reg" class="btn btn-success" value="등록"> 
+                <input id="btn_reset" type="reset" value="리셋">
                 </div>
                 <!--  <input type="text" id="Text2" class="form-control1 control3"/> -->
               </form>
@@ -280,6 +280,7 @@ window.scrollTo(0,1); }
  					for(var maker of resultObj.makers) {
  					  $("<option value='"+ maker.makerNo + "'>"+maker.makerName+"</option>").appendTo(makerList);
  					}
+ 					$("<option value='6'>기타</option>").appendTo(makerList);
         });
         $("#sel_list").change(function(event){
          	$('#sel_modellist').remove();
@@ -291,18 +292,13 @@ window.scrollTo(0,1); }
 	 					}
  					}); 
         });
-        $("#sel_modellist").click(function(event){
-				  alert("aasda");
+        $("#sel_modellist").change(function(event){
+          $.getJSON('makerlist.do', function(resultObj) {
+            
+          });
 				});
         $("#btn_reg").click(function(event){
 				  alert($("#sel_modellist").val());
-				});
-        $("#btn_reset").click(function(event){
-          $("#txt_nickname").val()="";
-          $("#sel_list").val()=0;
-          $("#sel_modellist").val()=0;
-          $("#txt_trim").val()="";
-          $("#txt_effi").val()="";
 				});
         </script>
         <!-- 차량 등록폼 끝 -->
