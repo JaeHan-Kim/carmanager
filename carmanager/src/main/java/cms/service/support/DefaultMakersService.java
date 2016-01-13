@@ -14,8 +14,8 @@ public class DefaultMakersService implements MakersService {
   @Autowired MakersDao makersDao;
 
   @Override
-  public List<Makers> listAll(int no) {
-    return makersDao.selectList(no);
+  public List<Makers> listAll() {
+    return makersDao.selectList();
   }
  
 }

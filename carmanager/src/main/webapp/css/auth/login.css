@@ -267,7 +267,7 @@ A:hover {
 
 #loginmodal {
   width: 470px;
-  height:400px;  /*팝업창의 크기조절*/
+  height:450px;  /*팝업창의 크기조절*/
   margin-top:100px;           /*팝업창 위아래 간격조절*/
   padding: 18px;
   background-color: RGB(10, 10, 10);
@@ -369,7 +369,7 @@ A:hover {
 
 .input #textInput input[type=text], 
 .input #textInput input[type=password] {
-  width: 140px;
+  width: 230px;
 }
 
 .input #textInput input[type=text],
@@ -394,7 +394,7 @@ A:hover {
   /* Font styles */
   font-family: 'Raleway', 'Lato', Arial, sans-serif;
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 #imgInput label:hover, 
@@ -450,6 +450,7 @@ A:hover {
 
 .input #button {
   text-align: center;
+  margin-top: 50px;
 }
 
 .input #button input {
@@ -487,41 +488,9 @@ A:hover {
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
 }
 
-.input #check {
-  /* Size and position */
-    width: 80px;
-    padding: 8px 5px;
-    margin-left: 5px;
-    
-    /* Styles */
-    background: #634056;
-    background: -moz-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
-    background: -ms-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
-    background: -o-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
-    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(99,64,86,0.5)), to(rgba(76,49,65,0.7)));
-    background: -webkit-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));
-    background: darkred; /* linear-gradient(rgba(0,0,0,0.5), rgba(255,255,255,0.7));    */
-    border-radius: 5px;
-    border: 1px solid #4e3043;
-    box-shadow: inset 0 1px rgba(255,255,255,0.4), 0 2px 1px rgba(0,0,0,0.1);
-    cursor: pointer;
-    -webkit-transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -ms-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-
-    /* Font styles */
-    color: white;
-    text-shadow: 0 1px 0 rgba(0,0,0,0.3);
-    font-size: 16px;
-    font-weight: bold;
-    font-family: 'Raleway', 'Lato', Arial, sans-serif;
-}
-
 #checkPwd{
-  color : red;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
   margin-left: 170px;
   margin-top: -10px;
 }

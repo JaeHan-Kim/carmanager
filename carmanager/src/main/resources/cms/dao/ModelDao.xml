@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cms.dao.ModelDao">
+  <resultMap type="model" id="ModelMap">
+    <id column="mdno" property="modelNo"/>
+    <result column="model" property="modelName"/>
+    <result column="mkno" property="makerNo"/>
+    <result column="fuel" property="fuelType"/>
+    <result column="effi" property="effi"/>
+  </resultMap>
+  
+<!--   <select id="selectCarList" resultMap="ModelMap" parameterType="string">
+  	select 
+  		m.mdno, m.model, m.mkno, o.fuel, o.effi
+		from model m
+		left outer join official o 
+		on m.mdno = o.mdno
+		<where model LIKE CONCAT(#{name},%)
+  </select> -->
+  
+  <select id="selectCarList" resultMap="ModelMap" parameterType="int">
+  	select 
+  		m.mdno, m.model, m.mkno, o.fuel, o.effi
+		from model m
+		left outer join official o 
+		on m.mdno = o.mdno
+		where mkno=#{no}
+  </select>
+</mapper>

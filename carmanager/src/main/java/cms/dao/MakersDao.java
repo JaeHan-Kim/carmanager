@@ -5,7 +5,7 @@ import java.util.List;
 import cms.domain.Makers;
 
 public interface MakersDao {
-  public List<Makers> selectList(int no);
+  public List<Makers> selectList();
 
   
 }

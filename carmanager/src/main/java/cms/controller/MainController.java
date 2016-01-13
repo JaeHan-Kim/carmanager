@@ -20,7 +20,7 @@ import cms.service.RefuelService;
 @Controller
 @RequestMapping("/main/*")
 public class MainController {
-  public static final Logger log = Logger.getLogger(GarageController.class);
+  public static final Logger log = Logger.getLogger(MainController.class);
 
   @Autowired GarageService garageService;
   @Autowired RefuelService refuelService;
@@ -30,7 +30,9 @@ public class MainController {
   public Object carList(
       HttpSession session, int no) throws Exception {
     
-    List<Garage> garages = garageService.listAll(no);
+  	//log.debug("현재 접속자 : "+no);
+    
+  	List<Garage> garages = garageService.listAll(no);
     List<Refuel> refuels = refuelService.listAll(no);
     List<Refuel> costAvg = refuelService.costAvg();
     List<Refuel> myCostAvg = refuelService.myCostAvg(no);

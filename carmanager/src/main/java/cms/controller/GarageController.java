@@ -10,10 +10,15 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cms.domain.AjaxResult;
 import cms.domain.Garage;
+import cms.domain.Makers;
+import cms.domain.Model;
 import cms.service.GarageService;
+import cms.service.MakersService;
+import cms.service.ModelService;
 import cms.service.RefuelService;
 
 @Controller
@@ -23,6 +28,8 @@ public class GarageController {
   
   @Autowired GarageService garageService;
   @Autowired RefuelService refuelService;
+  @Autowired MakersService makersService;
+  @Autowired ModelService modelService;
   @Autowired ServletContext servletContext;
   
   @RequestMapping("list")
@@ -51,4 +58,33 @@ public class GarageController {
     
   }
   
+  
+  @RequestMapping("makerlist")
+  public Object makerList() throws Exception {
+  	
+  	List<Makers> makers = makersService.listAll();
+  	
+  	//log.debug("---------------------");
+  	//log.debug(makers.toString());
+  	//log.debug("---------------------");
+  	HashMap<String, Object> resultMap = new HashMap<>();
+    
+  	resultMap.put("status", "success");
+  	resultMap.put("makers", makers);
+  	return resultMap;
+  }
+
+  @RequestMapping(value="modelsearch", method=RequestMethod.GET)
+  public Object searchList(int no) {
+  	//log.debug(no);
+  	
+  	List<Model> models = modelService.carSearch(no);
+  	
+  	//log.debug("---------------------");
+  	//log.debug(models.toString());
+  	//log.debug("---------------------");
+  	HashMap<String, Object> resultMap = new HashMap<>();
+  	resultMap.put("datas", models);
+  	return resultMap;
+  }
 }
