@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import cms.domain.AjaxResult;
 import cms.domain.Garage;
 import cms.service.GarageService;
 import cms.service.RefuelService;
@@ -35,6 +36,19 @@ public class GarageController {
     resultMap.put("data", garages);
     return resultMap;  
 
+  }
+  
+  @RequestMapping("detail")
+  public Object carDetail(
+      HttpSession session, int no) throws Exception {
+    
+    List<Garage> garages = garageService.carDetail(no);
+    
+    HashMap<String, Object> resultMap = new HashMap<>();
+    resultMap.put("status", "success");
+    resultMap.put("data", garages);
+    return new AjaxResult("success", garages);
+    
   }
   
 }
