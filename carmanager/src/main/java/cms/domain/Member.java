@@ -6,6 +6,7 @@ public class Member implements Serializable {
   private static final long serialVersionUID = 1L;
   
   protected int     memberNo;
+  protected int     myCarNo;
   protected String  email;
   protected String  nickName;
   protected String  password;
@@ -16,8 +17,16 @@ public class Member implements Serializable {
   
   @Override
   public String toString() {
-    return "Member [memberNo=" + memberNo + ", email=" + email + ", nickName=" + nickName + ", password=" + password
-        + ", memberPhoto=" + memberPhoto + ", grade=" + grade + "]";
+    return "Member [memberNo=" + memberNo + ", myCarNo=" + myCarNo + ", email=" + email + ", nickName=" + nickName
+        + ", password=" + password + ", memberPhoto=" + memberPhoto + ", grade=" + grade + "]";
+  }
+
+  public int getMyCarNo() {
+    return myCarNo;
+  }
+
+  public void setMyCarNo(int myCarNo) {
+    this.myCarNo = myCarNo;
   }
 
   public int getMemberNo() {

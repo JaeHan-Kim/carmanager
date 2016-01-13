@@ -37,6 +37,8 @@ public class MainController {
     List<Refuel> costAvg = refuelService.costAvg();
     List<Refuel> myCostAvg = refuelService.myCostAvg(no);
     
+    
+    
     HashMap<String, Object> resultMap = new HashMap<>();
     resultMap.put("status", "success");
     resultMap.put("data", garages);
