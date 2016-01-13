@@ -15,6 +15,7 @@
   <script type="text/javascript" src="../js/auth/httpRequest.js"></script>
   
   <script>
+    /* 입력한 이메일을 쿠키에 저장하기 위한 스크립트 */
 	  $(document).ready(function(){ 
 		  var email = $.cookie("email");
 		  if(email != null && email != ""){
@@ -59,8 +60,10 @@
     </div>
   </div>
   
+  <!-- 로그인 양식 뒷부분의 배경 -->
   <form id="null"></form>
   
+  <!-- 로그인 양식 -->
   <form class="form-4" method="POST">
     <div id="topText"><span id="textMycar">내 차를 부탁해</span> 시작하기</div>
     <p>회원이라면 <span id="now">지금</span> 들어오세요.</p> 
@@ -81,13 +84,13 @@
     </div>  
     
     <p></p>
-<!--     <p hidden="">입력한 이메일과 비밀번호가 일치하지 않습니다. 다시 입력해주세요.</p>
- -->
-     <p>
+    <!-- <p hidden="">입력한 이메일과 비밀번호가 일치하지 않습니다. 다시 입력해주세요.</p> -->
+    <p>
       <input id="loginBtn" type="button" value="시작하기">
     </p>       
 
 		<script>
+		  /* 이메일 저장 체크박스를 활성화시키면, 로그인 버튼을 눌렀을 때 이메일을 쿠키에 저장한다. */		
 			$('#loginBtn').click(function(event) {
 				var checkStatus = $("#saveEmail").is(":checked"); 
 			  if(checkStatus){									
@@ -96,6 +99,7 @@
 					$.cookie("email", "");				
 			  }   
 
+			  /* 로그인 버튼을 눌렀을 때 일어나는 이벤트. */
 				$.post('ajax/login.do', {
 					email: $('#femail').val(),
 					password: $('#fpassword').val(), 
@@ -103,6 +107,7 @@
 					var ajaxResult = resultObj.ajaxResult;
 					if (ajaxResult.status == "success") {
 						sessionStorage.setItem('loginUser', ajaxResult.data.memberNo);
+						sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
 						sessionStorage.setItem('loginUseremail', ajaxResult.data.email);
 			      location.href = "../main/main.html";
 					} else {
@@ -111,6 +116,7 @@
 				}, 'json');
 			});
 			
+			/* 회원가입 링크를 눌렀을 때 모달을 띄우는 부분 */
 			$(function(){
 				$('#modaltrigger').leanModal({
 					top: 110, overlay: 0.8, closeButton: ".hidemodal" 
@@ -123,7 +129,7 @@
  
 </div>
 
-<!-- 모달로 띄우는 부분 --> 
+<!-- 모달로 띄우는 부분: 회원가입 양식 --> 
 <div id="loginmodal" style="display:none;">
   <form class="input" method='post'>
     <div id="modalClose">
@@ -133,8 +139,10 @@
     <div id="imgInput">
       <img src="../img/auth/exam.png" class="img-thumbnail"><br>
       <label for="fileInput">사진 등록</label>
-      <input type="file" id="fileInput">
+      <input type="file" id="fileInput" multiple>
     </div>
+    <!-- input file의 multiple 부분은 다중 파일 업로드 실험. 파일을 여러개 선택할 수 있다.
+         단, 다중 파일을 지정한 경로와 DB에 저장하는 것은 좀더 조사가 필요. -->
     
     <div id="textInput" class="form-group">
       <div id="email">
@@ -165,7 +173,9 @@
   </form>
 </div>
 
+<!-- 회원가입 양식 검증 스크립트 -->
 <script>
+  /* 빈 칸이 있을 경우 alert 창을 띄운다. */
   $('#joinBtn').click(function(event) {
 	  if($('#jemail').val().length < 1) {
 		  alert("이메일을 입력해주세요!");
@@ -193,6 +203,7 @@
 		  return false;
 	  }
 	  
+	  /* 입력된 값(email, nickName, password를 넘긴다.) */
     $.post('ajax/join.do', {
       email: $('#jemail').val(),
       nickName: $('#jnickname').val(),
@@ -208,6 +219,7 @@
     }, 'json');
   });
   
+  /* 패스워드 일치여부를 검증한다. #jpassword_confirmd에 글자를 입력할 때 마다 검사한다. */
   function checkPwd(){
     var f1 = document.forms[2];
     var pw1 = f1.pwd.value;

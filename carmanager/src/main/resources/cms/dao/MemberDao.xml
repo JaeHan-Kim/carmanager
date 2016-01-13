@@ -10,6 +10,7 @@
     <result column="pwd" property="password"/>
     <result column="nick" property="nickName"/>
     <result column="photo" property="memberPhoto"/>
+    <result column="grno" property="myCarNo"/>
   </resultMap>
   
   <insert id="insert" parameterType="member">
@@ -18,9 +19,11 @@
   </insert> 
   
   <select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">
-    select mno, email, nick, photo, grade
-    from members
+    select m.mno, m.email, m.nick, m.photo, m.grade, g.grno
+    from members m left outer join garage g
+    on g.mno = m.mno
     where email=#{email} and pwd=sha1(#{password})
+    order by g.grno limit 1
   </select>
   
 </mapper>
