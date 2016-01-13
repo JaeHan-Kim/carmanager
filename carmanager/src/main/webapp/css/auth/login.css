@@ -268,7 +268,6 @@ A:hover {
 #loginmodal {
   width: 470px;
   height:450px;  /*팝업창의 크기조절*/
-  margin-top:100px;           /*팝업창 위아래 간격조절*/
   padding: 18px;
   background-color: RGB(10, 10, 10);
   opacity: 0.9;
@@ -282,6 +281,7 @@ A:hover {
 
 /* 모달 영역 처리 끝 */
 
+/* 로그인 폼 CSS */
 .input {
   width: 430px;
   position: absolute;
@@ -494,4 +494,4 @@ A:hover {
   margin-left: 170px;
   margin-top: -10px;
 }
-
+/* 로그인 폼 종료 */

@@ -23,7 +23,7 @@
     where mno = #{no}
   </select>
   
-  <select id="carDetail" resultMap="garageMap" parameterType="int">
+  <select id="selectDetail" resultMap="garageMap" parameterType="int">
     select
       g.grno, g.c_nick, k.maker, m.model, g.mile 
     from garage g

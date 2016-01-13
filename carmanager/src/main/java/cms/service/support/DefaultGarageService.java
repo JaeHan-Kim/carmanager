@@ -17,5 +17,10 @@ public class DefaultGarageService implements GarageService {
   public List<Garage> listAll(int no) {
     return garageDao.selectList(no);
   }
+
+  @Override
+  public List<Garage> carDetail(int no) {
+    return garageDao.selectDetail(no);
+  }
  
 }

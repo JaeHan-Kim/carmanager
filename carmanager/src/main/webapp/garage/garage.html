@@ -167,60 +167,78 @@ window.scrollTo(0,1); }
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-       		     $("<li value='" + garage.myCarNo + "'><a href='#'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
+       		    $("<li value='" + garage.myCarNo + "'><a href='"+ garage.myCarNo +"'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
+              
+	          var ajaxResult = resultObj.ajaxResult;
+		      var garage = ajaxResult.data;
+		      alert(garage.nickName);
+			  $("#detail").val(garage.nickName);
+        	    
+		    /*  $("#fcontent").val(board.content);
+        	    $("#fviews").text(board.views);
+        	    $("#fcreatedDate").text(board.createdDate); */
+        	  
+                /* $("<li value='" + garage.myCarNo +"'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + garage.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail) */   
+        	    /* $("#fnickName").val(garage.nickName); */
+               
             });
-          </script> 
-            
+          </script>
+
           <div class="chat-grid widget-shadow">
             <ul>
-							<li class="head">차량 확인후 삭제하세요.</li>
-							<li><a href="#">
-									<div class="chat-left">
-										<label>애칭</label>
-									</div>
-									<div class="chat-right">
-										<p>팥팥팥죽이</p>
-									</div>
-									<div class="clearfix"> </div>	
-								</a>
-							</li>
-							<li><a href="#">
-									<div class="chat-left">
-										<label>제조사</label>
-									</div>
-									<div class="chat-right">
-										<p>쉐슬람</p>
-									</div>
-									<div class="clearfix"> </div>	
-								</a>
-							</li>
-							<li><a href="#">
-									<div class="chat-left">
-										<label>모델명</label>
-									</div>
-									<div class="chat-right">
-										<p>트랙스 1.4 터보</p>
-									</div>
-									<div class="clearfix"> </div>	
-								</a>
-							</li>
-							<li><a href="#">
-									<div class="chat-left">
-										<label>주행거리</label>
-									</div>
-									<div class="chat-right">
-										<p>9134km</p>
-									</div>
-									<div class="clearfix"> </div>	
-								</a>
-							</li>
-						</ul>
+              <li class="head">차량 확인후 삭제하세요.</li>
+              <li><a href="#">
+                  <div class="chat-left">
+                    <label for="detail">애칭</label>
+                  </div>
+                  <div class="chat-right">
+                    <input type=text id="detail" readonly>
+                  </div>
+              <div class="clearfix"></div>
+              </a></li>
+
+              <li><a href="#">
+                  <div class="chat-left">
+                    <label>제조사</label>
+                  </div>
+                  <div class="chat-right">
+                    <p>쉐슬람</p>
+                  </div>
+                  <div class="clearfix"></div>
+              </a></li>
+              <li><a href="#">
+                  <div class="chat-left">
+                    <label>모델명</label>
+                  </div>
+                  <div class="chat-right">
+                    <p>트랙스 1.4 터보</p>
+                  </div>
+                  <div class="clearfix"></div>
+              </a></li>
+              <li><a href="#">
+                  <div class="chat-left">
+                    <label>주행거리</label>
+                  </div>
+                  <div class="chat-right">
+                    <p>9134km</p>
+                  </div>
+                  <div class="clearfix"></div>
+              </a></li>
+            </ul>
 
           </div>
-          
+          <!-- <script type="text/javascript">
+            var detail = $("#carDetail");
+            $.getJSON('detail.do?no=' + garage.grno, function(resultObj) {
+              for (var garage of resultObj.data) {
+               alert(garage.grno);
+              }
+            });
+          </script> -->
+
           <div class="chat-grid widget-shadow">
-            <button type="button" class="btn btn-primary">차고에서 삭제하기</button>
+            <button type="button" class="btn btn-primary col-md-6">차고에서 삭제하기</button>
           </div>
         </div>
         <!-- 차량 등록폼 시작-->
