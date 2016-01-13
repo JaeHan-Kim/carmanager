@@ -261,7 +261,7 @@ window.scrollTo(0,1); }
                 <div id ="div_modelinput" class="col-md-13">
                		<label>&nbsp;&nbsp;&nbsp;&nbsp;차량모델명</label>
                   <div class="col-md-12 grid_box1">
-                    <input type="text" class="form-control1 control3">
+                    <input id="txt_modellist" type="text" class="form-control1 control3">
                   </div>
                 </div>
                 <div id ="div_modellist" class="col-md-13">
@@ -295,6 +295,8 @@ window.scrollTo(0,1); }
           </div>
         </div>
         <script type="text/javascript">
+        alert(sessionStorage.getItem('loginUsercarNo'));
+        //alert(sessionStorage.getItem("loginUser"));
         var makerList = $("#sel_list");
         var carList = $("#sel_modellist");
         
@@ -332,12 +334,24 @@ window.scrollTo(0,1); }
         });
         $("#sel_modellist").change(function(event){
           alert("asd");
-          //$.getJSON('makerlist.do', function(resultObj) {
-            
+          //$.getJSON('refuellist.do?no='+, function(resultObj) {
+          //  
           //});
 				});
         $("#btn_reg").click(function(event){
-          alert($("#refuelType").val());
+          var flag = true;
+        
+          if ($('input:radio[name=refuelType]:checked').val() == undefined) {
+            alert("연료 종류 입력해 주세요!");
+          } else {
+            alert($('input:radio[name=refuelType]:checked').val());
+          }
+        alert($('#txt_nickname').val());
+        alert($('#sel_list').val());
+        alert($('#txt_modellist').val());
+        alert($('#sel_modellist').val());
+        alert($('#txt_trim').val());
+        alert($('#txt_effi').val());
 				});
         </script>
         <!-- 차량 등록폼 끝 -->

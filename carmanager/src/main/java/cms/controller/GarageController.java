@@ -87,4 +87,17 @@ public class GarageController {
   	resultMap.put("datas", models);
   	return resultMap;
   }
+  @RequestMapping(value="refuellist", method=RequestMethod.GET)
+  public Object refuelList(int no) {
+  	log.debug(no);
+  	
+  	//List<Model> models = modelService.carSearch(no);
+  	
+  	// log.debug("---------------------");
+  	// log.debug(models.toString());
+  	// log.debug("---------------------");
+  	HashMap<String, Object> resultMap = new HashMap<>();
+  	// resultMap.put("datas", models);
+  	return resultMap;
+  }
 }
