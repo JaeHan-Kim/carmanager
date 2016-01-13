@@ -62,4 +62,14 @@ public class AuthController {
     return new AjaxResult("success", member);
   }
   
+  @RequestMapping(value="check", method=RequestMethod.POST)
+  public AjaxResult check(Member member) throws Exception {
+    
+    System.out.println(member);
+    
+    if(memberDao.checkEmail(member) > 0)
+      return new AjaxResult("failure", null);
+    
+    return new AjaxResult("success", member);
+  }
 }
