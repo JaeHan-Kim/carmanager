@@ -165,35 +165,36 @@ window.scrollTo(0,1); }
           
           <script type="text/javascript">
             var myList = $("#carList");
-            var carDetail = $("#detail");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-       		    $("<li value='" + garage.myCarNo + "'><a href='"+ garage.myCarNo +"'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
-                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>'" + garage.nickName + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)
-                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>'" + garage.modelNo + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)  
-                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>'" + garage.nickName + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)
-                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>'" + garage.mile + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)
+       		    $("<li value='" + garage.myCarNo + "'><a class='detailLnk' href='"+ garage.myCarNo +"'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
+              $("a.detailLnk").click(clickDetailLnk);
             });
             
-         /* $.getJSON('detail.do?no=' + garages.myCarNo, function(resultObj) {
-            var ajaxResult = resultObj.ajaxResult;
-	        var garage = ajaxResult.data; */
-        	    
+            $.getJSON('detail.do?no=1' /* + sessionStorage.getItem("loginUsercarNo") */, function(resultObj) {
+              /* alert(resultObj.data.nickName); */
+              /* var garage = resultObj.data; */
+              /* $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>팥팥이</p></div><div class='clearfix'></div></a></li>").appendTo(detail) */
+  	          $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+              $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
+              $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+              $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
+            
+             });
 		    /*  $("#fcontent").val(board.content);
         	    $("#fviews").text(board.views);
         	    $("#fcreatedDate").text(board.createdDate); */
         	  
                 /* $("<li value='" + garage.myCarNo +"'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + garage.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail) */   
         	    /* $("#fnickName").val(garage.nickName); */
-              
-       /*      }); */
+
           </script>
 
           <div class="chat-grid widget-shadow">
             <ul id="detail">
               <li class="head">차량 확인후 삭제하세요.</li>
-              <!-- <li id="detail"><a href="#">
+              <!-- <li><a href="#">
                   <div class="chat-left">
                     <label>애칭</label>
                   </div>
@@ -201,34 +202,6 @@ window.scrollTo(0,1); }
                     <p>팥팥이</p>
                   </div>
               <div class="clearfix"></div>
-              </a></li> -->
-
-              <!-- <li><a href="#">
-                  <div class="chat-left">
-                    <label>제조사</label>
-                  </div>
-                  <div class="chat-right">
-                    <p>쉐슬람</p>
-                  </div>
-                  <div class="clearfix"></div>
-              </a></li>
-              <li><a href="#">
-                  <div class="chat-left">
-                    <label>모델명</label>
-                  </div>
-                  <div class="chat-right">
-                    <p>트랙스 1.4 터보</p>
-                  </div>
-                  <div class="clearfix"></div>
-              </a></li>
-              <li><a href="#">
-                  <div class="chat-left">
-                    <label>주행거리</label>
-                  </div>
-                  <div class="chat-right">
-                    <p>9134km</p>
-                  </div>
-                  <div class="clearfix"></div>
               </a></li> -->
             </ul>
 
@@ -246,7 +219,7 @@ window.scrollTo(0,1); }
             <button type="button" class="btn btn-primary col-md-6">차고에서 삭제하기</button>
           </div>
         </div>
-        <!-- 차량 등록폼 시작-->
+         <!-- 차량 등록폼 시작-->
         <div class="col-md-8 compose-right widget-shadow">
           <div class="panel-default">
             <div class="panel-heading">차고에 차량을 추가해 보세요.</div>

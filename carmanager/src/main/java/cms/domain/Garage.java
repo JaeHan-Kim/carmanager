@@ -3,8 +3,10 @@ package cms.domain;
 public class Garage {
   protected int myCarNo;
   protected int modelNo;
+  protected String maker;
   protected int memberNo;
   protected String nickName;
+  protected String model;
   protected String deailModel;
   protected int effi;
   protected int mile;
@@ -14,17 +16,34 @@ public class Garage {
    
   }
   
-  
+	@Override
+  public String toString() {
+    return "Garage [myCarNo=" + myCarNo + ", modelNo=" + modelNo + ", maker=" + maker + ", memberNo=" + memberNo
+        + ", nickName=" + nickName + ", model=" + model + ", deailModel=" + deailModel + ", effi=" + effi + ", mile="
+        + mile + "]";
+  }
 
-  @Override
-	public String toString() {
-		return "Garage [myCarNo=" + myCarNo + ", modelNo=" + modelNo + ", memberNo=" + memberNo + ", nickName=" + nickName
-		    + ", deailModel=" + deailModel + ", effi=" + effi + ", mile=" + mile + "]";
-	}
+  public String getModel() {
+    return model;
+  }
+
+  public void setModel(String model) {
+    this.model = model;
+  }
+
+  public String getMaker() {
+    return maker;
+  }
 
 
 
-	public String getDeailModel() {
+  public void setMaker(String maker) {
+    this.maker = maker;
+  }
+
+
+
+  public String getDeailModel() {
 		return deailModel;
 	}
 

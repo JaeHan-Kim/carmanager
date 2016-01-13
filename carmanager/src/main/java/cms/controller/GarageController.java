@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cms.domain.AjaxResult;
 import cms.domain.Garage;
 import cms.domain.Makers;
 import cms.domain.Model;
@@ -46,15 +45,17 @@ public class GarageController {
   }
   
   @RequestMapping("detail")
-  public Object carDetail(
+  public Object carDet(
       HttpSession session, int no) throws Exception {
     
-    List<Garage> garages = garageService.carDetail(no);
+    Garage garages = garageService.carDetail(no);
+    
+    log.debug(garages.toString());
     
     HashMap<String, Object> resultMap = new HashMap<>();
     resultMap.put("status", "success");
     resultMap.put("data", garages);
-    return new AjaxResult("success", garages);
+    return resultMap;
     
   }
   

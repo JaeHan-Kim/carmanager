@@ -7,7 +7,7 @@ import cms.domain.Garage;
 public interface GarageDao {
   public List<Garage> selectList(int no);
 
-  public List<Garage> selectDetail(int no);
+  public Garage selectDetail(int no);
   
   
 }

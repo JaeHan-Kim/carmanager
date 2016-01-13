@@ -133,42 +133,50 @@
 <!-- 모달로 띄우는 부분: 회원가입 양식 --> 
 <div id="loginmodal" style="display:none;">
   <form class="input" method='post'>
-    <div id="modalClose">
-    </div>
-    <div id="topText">이메일 하나로 <span id="now">간편하게</span> 시작하세요!</div>
-    <p>다른 정보는 받지 않습니다. 부담 없이 이용하세요.</p>  
-    <div id="imgInput">
-      <img src="../img/auth/exam.png" class="img-thumbnail"><br>
-      <label for="fileInput">사진 등록</label>
-      <input type="file" id="fileInput" multiple>
-    </div>
-    <!-- input file의 multiple 부분은 다중 파일 업로드 실험. 파일을 여러개 선택할 수 있다.
-         단, 다중 파일을 지정한 경로와 DB에 저장하는 것은 좀더 조사가 필요. -->
-    
-    <div id="textInput" class="form-group">
-      <div id="email">
-        <label for="email">Email</label>
-        <input id="jemail" type="text" name="jemail" placeholder="이메일">
-      </div>
-      <div id="nickName">
-        <label for="nickname">NickName</label>
-        <input id="jnickname" type="text" name="jnickname" placeholder="별명">
-      </div>
-      <div id="password">
-        <label for="password">Password</label>
-        <input id="jpassword" type="password" name='pwd' placeholder="비밀번호">
-      </div>
-      <div id="password_confirm">
-        <label for="password_confirm">Password Confirm</label>
-        <input id="jpassword_confirm" type="password" name='pwd_check' 
-               placeholder="비밀번호 확인" onkeyup="checkPwd()">
-        <div id="checkPwd">동일한 암호를 입력하세요.</div>
-      </div>
-    </div>
-  
-    <div id="button">
-      <input id="joinBtn" type="submit" class="btn btn-default" value="가입">
-      <input type="button" class="btn btn-default" value="취소" onclick="$('#lean_overlay').click();">
+	  <div id="closeButton">
+	    <button id="closeModal" type="reset" onclick="$('#lean_overlay').click();">X</button>
+	  </div>
+	  <div id="inputArea">
+	    <div id="topText">
+	      이메일 하나로 <span id="now">간편하게</span> 시작하세요! 
+	    
+	    </div>
+	    
+	    <p>다른 정보는 받지 않습니다. 부담 없이 이용하세요.</p>  
+	    <div id="imgInput">
+	      <img src="../img/auth/exam.png" class="img-thumbnail"><br>
+	      <label for="fileInput">사진 등록</label>
+	      <input type="file" id="fileInput" multiple>
+	    </div>
+	    <!-- input file의 multiple 부분은 다중 파일 업로드 실험. 파일을 여러개 선택할 수 있다.
+	         단, 다중 파일을 지정한 경로와 DB에 저장하는 것은 좀더 조사가 필요. -->
+	    
+	    <div id="textInput" class="form-group">
+	      <div id="email">
+	        <label for="email">Email</label>
+	        <input id="jemail" type="text" name="jemail" placeholder="이메일">
+	      </div>
+	      <div id="nickName">
+	        <label for="nickname">NickName</label>
+	        <input id="jnickname" type="text" name="jnickname" placeholder="별명">
+	      </div>
+	      <div id="password">
+	        <label for="password">Password</label>
+	        <input id="jpassword" type="password" name='pwd' placeholder="비밀번호">
+	      </div>
+	      <div id="password_confirm">
+	        <label for="password_confirm">Password Confirm</label>
+	        <input id="jpassword_confirm" type="password" name='pwd_check' 
+	               placeholder="비밀번호 확인" onkeyup="checkPwd()">
+	        <div id="checkPwd">동일한 암호를 입력하세요.</div>
+	      </div>
+	    </div>
+	  
+	    <div id="button">
+	      <input id="joinBtn" type="submit" class="btn btn-default" value="가입">
+	      <button type="reset" class="btn btn-default">리셋</button>
+	      <!-- onclick="$('#lean_overlay').click();" -->
+	    </div>
     </div>
       
   </form>
