@@ -306,11 +306,12 @@ A:hover {
   text-align: left;
   padding-top: 1px;
   margin-bottom: 15px;
-    border-bottom: 1px solid darkred;
-    border-bottom-width: 2px;
-    font-weight: normal;
-    color: white;
-    /*text-shadow: white 1px 1px 1px;*/
+  border-bottom: 1px solid darkred;
+  border-bottom-width: 2px;
+  font-weight: normal;
+  color: white;
+  /*text-shadow: white 1px 1px 1px;*/
+  position: relative;
 }
 
 .input #now {
@@ -400,7 +401,8 @@ A:hover {
 #imgInput label:hover, 
 .input #textInput input[type=button]:hover, 
 #button input[type=button]:hover,
-#button input[type=submit]:hover {
+#button input[type=submit]:hover,
+#button button[type=reset]:hover {
     background: red;
     border: 1px solid white;
     
@@ -426,7 +428,8 @@ A:hover {
 
 .input #textInput input:hover, 
 #imgInput label:hover, 
-#button input:hover {
+#button input:hover,
+#button button:hover {
     border-color: white;
 }
 
@@ -453,11 +456,13 @@ A:hover {
   margin-top: 50px;
 }
 
-.input #button input {
+.input #button input, 
+.input #button button {
   margin-left: 10px;
 }
 
-.input #button input{
+.input #button input,
+.input #button button {
     /* Size and position */
     width: 100px;
     padding: 8px 5px;
@@ -486,6 +491,24 @@ A:hover {
     font-size: 16px;
     font-weight: bold;
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+#closeButton {
+	position: relative;
+	margin-left:98%;
+	top: -14px;
+}
+
+#closeModal {
+	background-color: rgb(10, 10, 10);
+	border: 0px;
+	font-weight: bold;
+	font-size:15px;
+}
+
+#inputArea {
+  position: relative;
+  top: -20px;
 }
 
 #checkPwd{
