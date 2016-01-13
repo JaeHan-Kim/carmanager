@@ -165,15 +165,20 @@ window.scrollTo(0,1); }
           
           <script type="text/javascript">
             var myList = $("#carList");
+            var carDetail = $("#detail");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
        		    $("<li value='" + garage.myCarNo + "'><a href='"+ garage.myCarNo +"'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
+                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>'" + garage.nickName + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)
+                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>'" + garage.modelNo + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)  
+                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>'" + garage.nickName + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)
+                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>'" + garage.mile + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)
               }
-              
-	          var ajaxResult = resultObj.ajaxResult;
-		      var garage = ajaxResult.data;
-		      alert(garage.nickName);
-			  $("#detail").val(garage.nickName);
+            });
+            
+         /* $.getJSON('detail.do?no=' + garages.myCarNo, function(resultObj) {
+            var ajaxResult = resultObj.ajaxResult;
+	        var garage = ajaxResult.data; */
         	    
 		    /*  $("#fcontent").val(board.content);
         	    $("#fviews").text(board.views);
@@ -181,24 +186,24 @@ window.scrollTo(0,1); }
         	  
                 /* $("<li value='" + garage.myCarNo +"'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + garage.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail) */   
         	    /* $("#fnickName").val(garage.nickName); */
-               
-            });
+              
+       /*      }); */
           </script>
 
           <div class="chat-grid widget-shadow">
-            <ul>
+            <ul id="detail">
               <li class="head">차량 확인후 삭제하세요.</li>
-              <li><a href="#">
+              <!-- <li id="detail"><a href="#">
                   <div class="chat-left">
-                    <label for="detail">애칭</label>
+                    <label>애칭</label>
                   </div>
                   <div class="chat-right">
-                    <input type=text id="detail" readonly>
+                    <p>팥팥이</p>
                   </div>
               <div class="clearfix"></div>
-              </a></li>
+              </a></li> -->
 
-              <li><a href="#">
+              <!-- <li><a href="#">
                   <div class="chat-left">
                     <label>제조사</label>
                   </div>
@@ -224,7 +229,7 @@ window.scrollTo(0,1); }
                     <p>9134km</p>
                   </div>
                   <div class="clearfix"></div>
-              </a></li>
+              </a></li> -->
             </ul>
 
           </div>
