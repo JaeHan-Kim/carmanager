@@ -7,7 +7,7 @@ import cms.domain.Garage;
 public interface GarageService {
   List<Garage> listAll(int no);
 
-  List<Garage> carDetail(int no);
+  Garage carDetail(int no);
   
   
 }

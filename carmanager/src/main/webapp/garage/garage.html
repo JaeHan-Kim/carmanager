@@ -165,35 +165,36 @@ window.scrollTo(0,1); }
           
           <script type="text/javascript">
             var myList = $("#carList");
-            var carDetail = $("#detail");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-       		    $("<li value='" + garage.myCarNo + "'><a href='"+ garage.myCarNo +"'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
-                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>'" + garage.nickName + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)
-                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>'" + garage.modelNo + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)  
-                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>'" + garage.nickName + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)
-                $("<li value='" + garage.myCarNo + "'><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>'" + garage.mile + "'</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail)
+       		    $("<li value='" + garage.myCarNo + "'><a class='detailLnk' href='"+ garage.myCarNo +"'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
+              $("a.detailLnk").click(clickDetailLnk);
             });
             
-         /* $.getJSON('detail.do?no=' + garages.myCarNo, function(resultObj) {
-            var ajaxResult = resultObj.ajaxResult;
-	        var garage = ajaxResult.data; */
-        	    
+            $.getJSON('detail.do?no=1' /* + sessionStorage.getItem("loginUsercarNo") */, function(resultObj) {
+              /* alert(resultObj.data.nickName); */
+              /* var garage = resultObj.data; */
+              /* $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>팥팥이</p></div><div class='clearfix'></div></a></li>").appendTo(detail) */
+  	          $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+              $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
+              $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+              $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
+            
+             });
 		    /*  $("#fcontent").val(board.content);
         	    $("#fviews").text(board.views);
         	    $("#fcreatedDate").text(board.createdDate); */
         	  
                 /* $("<li value='" + garage.myCarNo +"'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + garage.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail) */   
         	    /* $("#fnickName").val(garage.nickName); */
-              
-       /*      }); */
+
           </script>
 
           <div class="chat-grid widget-shadow">
             <ul id="detail">
               <li class="head">차량 확인후 삭제하세요.</li>
-              <!-- <li id="detail"><a href="#">
+              <!-- <li><a href="#">
                   <div class="chat-left">
                     <label>애칭</label>
                   </div>
@@ -201,34 +202,6 @@ window.scrollTo(0,1); }
                     <p>팥팥이</p>
                   </div>
               <div class="clearfix"></div>
-              </a></li> -->
-
-              <!-- <li><a href="#">
-                  <div class="chat-left">
-                    <label>제조사</label>
-                  </div>
-                  <div class="chat-right">
-                    <p>쉐슬람</p>
-                  </div>
-                  <div class="clearfix"></div>
-              </a></li>
-              <li><a href="#">
-                  <div class="chat-left">
-                    <label>모델명</label>
-                  </div>
-                  <div class="chat-right">
-                    <p>트랙스 1.4 터보</p>
-                  </div>
-                  <div class="clearfix"></div>
-              </a></li>
-              <li><a href="#">
-                  <div class="chat-left">
-                    <label>주행거리</label>
-                  </div>
-                  <div class="chat-right">
-                    <p>9134km</p>
-                  </div>
-                  <div class="clearfix"></div>
               </a></li> -->
             </ul>
 
@@ -286,8 +259,8 @@ window.scrollTo(0,1); }
               <!--    <label>연료종류</label>
                  <input type="text" class="form-control1 control3"> -->
                  <div class="col-md-12">
-                <input id="btn_reg" class="btn btn-success" value="등록"> 
-                <input id="btn_reset" type="reset" value="리셋">
+                <input id="btn_reg" type="submit" value="등록"> 
+                <input id="btn_reset" type="submit" value="리셋">
                 </div>
                 <!--  <input type="text" id="Text2" class="form-control1 control3"/> -->
               </form>
@@ -303,7 +276,6 @@ window.scrollTo(0,1); }
  					for(var maker of resultObj.makers) {
  					  $("<option value='"+ maker.makerNo + "'>"+maker.makerName+"</option>").appendTo(makerList);
  					}
- 					$("<option value='6'>기타</option>").appendTo(makerList);
         });
         $("#sel_list").change(function(event){
          	$('#sel_modellist').remove();
@@ -315,13 +287,18 @@ window.scrollTo(0,1); }
 	 					}
  					}); 
         });
-        $("#sel_modellist").change(function(event){
-          $.getJSON('makerlist.do', function(resultObj) {
-            
-          });
+        $("#sel_modellist").click(function(event){
+				  alert("aasda");
 				});
         $("#btn_reg").click(function(event){
 				  alert($("#sel_modellist").val());
+				});
+        $("#btn_reset").click(function(event){
+          $("#txt_nickname").val()="";
+          $("#sel_list").val()=0;
+          $("#sel_modellist").val()=0;
+          $("#txt_trim").val()="";
+          $("#txt_effi").val()="";
 				});
         </script>
         <!-- 차량 등록폼 끝 -->
