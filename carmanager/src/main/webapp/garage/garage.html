@@ -219,7 +219,7 @@ window.scrollTo(0,1); }
             <button type="button" class="btn btn-primary col-md-6">차고에서 삭제하기</button>
           </div>
         </div>
-        <!-- 차량 등록폼 시작-->
+         <!-- 차량 등록폼 시작-->
         <div class="col-md-8 compose-right widget-shadow">
           <div class="panel-default">
             <div class="panel-heading">차고에 차량을 추가해 보세요.</div>
@@ -234,7 +234,7 @@ window.scrollTo(0,1); }
                 <div id ="div_modelinput" class="col-md-13">
                		<label>&nbsp;&nbsp;&nbsp;&nbsp;차량모델명</label>
                   <div class="col-md-12 grid_box1">
-                    <input type="text" class="form-control1 control3">
+                    <input id="txt_modellist" type="text" class="form-control1 control3">
                   </div>
                 </div>
                 <div id ="div_modellist" class="col-md-13">
@@ -252,23 +252,13 @@ window.scrollTo(0,1); }
                  <input id="txt_effi" type="text" class="form-control1 control3"> 
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">연료종류</label>
-                  <div class="col-md-12">
-                    <div class="radio-inline col-md-3">
-                      <label><input type="radio"
-                        name="refuelType" value="휘발유">휘발유</label>
-                    </div>
-                    <div class="radio-inline col-md-3">
-                      <label><input type="radio"
-                        name="refuelType" value="경유">경유</label>
-                    </div>
-                    <div class="radio-inline col-md-3">
-                      <label><input type="radio"
-                        name="refuelType" value="LPG">LPG</label>
-                    </div>
-                  </div>
-                </div>
-
+									<label class="col-sm-2 control-label">연료종류</label>
+									<div class="col-md-12">
+										<div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="휘발유">휘발유</label></div>
+										<div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="경유">경유</label></div>
+										<div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="LPG">LPG</label></div>
+									</div>
+								</div>
               </form>
             </div>
             <div class="panel-heading">
@@ -278,6 +268,8 @@ window.scrollTo(0,1); }
           </div>
         </div>
         <script type="text/javascript">
+        alert(sessionStorage.getItem('loginUsercarNo'));
+        //alert(sessionStorage.getItem("loginUser"));
         var makerList = $("#sel_list");
         var carList = $("#sel_modellist");
         
@@ -290,6 +282,7 @@ window.scrollTo(0,1); }
  					for(var maker of resultObj.makers) {
  					  $("<option value='"+ maker.makerNo + "'>"+maker.makerName+"</option>").appendTo(makerList);
  					}
+ 					$("<option value='6'>기타</option>").appendTo(makerList);
         });
         
         $("#sel_list").change(function(event){
@@ -312,16 +305,26 @@ window.scrollTo(0,1); }
 	 					}
  					}); 
         });
-
-        $("#btn_reg").click(function(event){
-          alert($("#refuelType").val());
+        $("#sel_modellist").change(function(event){
+          alert("asd");
+          //$.getJSON('refuellist.do?no='+, function(resultObj) {
+          //  
+          //});
 				});
-        $("#btn_reset").click(function(event){
-          $("#txt_nickname").val()="";
-          $("#sel_list").val()=0;
-          $("#sel_modellist").val()=0;
-          $("#txt_trim").val()="";
-          $("#txt_effi").val()="";
+        $("#btn_reg").click(function(event){
+          var flag = true;
+        
+          if ($('input:radio[name=refuelType]:checked').val() == undefined) {
+            alert("연료 종류 입력해 주세요!");
+          } else {
+            alert($('input:radio[name=refuelType]:checked').val());
+          }
+        alert($('#txt_nickname').val());
+        alert($('#sel_list').val());
+        alert($('#txt_modellist').val());
+        alert($('#sel_modellist').val());
+        alert($('#txt_trim').val());
+        alert($('#txt_effi').val());
 				});
         </script>
         <!-- 차량 등록폼 끝 -->
