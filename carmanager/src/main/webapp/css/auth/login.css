@@ -267,7 +267,7 @@ A:hover {
 
 #loginmodal {
   width: 470px;
-  height:450px;  /*팝업창의 크기조절*/
+  height:470px;  /*팝업창의 크기조절*/
   padding: 18px;
   background-color: RGB(10, 10, 10);
   opacity: 0.9;
@@ -327,9 +327,12 @@ A:hover {
 .input #imgInput {
   margin-left: 10px;
   margin-right: 10px;
+  margin-top: 40px;
   float: left;
   width: 150px;
+  height:220px;
   text-align: center;
+  /* border: 1px solid red; */
 }
 
 .input #imgInput img {
@@ -452,8 +455,9 @@ A:hover {
 }
 
 .input #button {
-  text-align: center;
-  margin-top: 50px;
+  text-align: right;
+  margin-top: 25px;
+  margin-right: 29px;
 }
 
 .input #button input, 
@@ -511,7 +515,10 @@ A:hover {
   top: -20px;
 }
 
-#checkEmail, #checkPwd{
+#checkEmail, 
+#checkNickname, 
+#checkPwd1, 
+#checkPwd2 {
   font-size: 14px;
   font-weight: bold;
   margin-left: 170px;
