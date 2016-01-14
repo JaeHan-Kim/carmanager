@@ -238,11 +238,12 @@
       email: $('#jemail').val(),
       nickName: $('#jnickname').val(),
       password: $('#jpassword').val()
-      
     }, function(resultObj) {
       var ajaxResult = resultObj.ajaxResult;
       if (ajaxResult.status == "success") {
         location.href = "login.html";
+      } else if (ajaxResult.status == "failure") {
+    	  alert("입력한 값이 양식에 맞는지 확인해주세요.");
       } else {
     	  alert("회원가입에 실패했습니다.");
       }

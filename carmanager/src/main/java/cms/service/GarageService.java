@@ -13,5 +13,8 @@ public interface GarageService {
   
   int myCarCount (int no);
   
+  int addMyCar(Garage garage);
+  
+  Garage lastAddCar (int no);
   
 }

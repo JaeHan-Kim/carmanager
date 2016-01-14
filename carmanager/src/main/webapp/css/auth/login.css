@@ -235,7 +235,7 @@ A:hover {
 
 /* 회원가입 영역 모달 처리 시작 */
 #loginmodal{
-	border:3px solid pink;
+	border:1px solid gray;
 }
 
 #lean_overlay {
@@ -421,7 +421,9 @@ A:hover {
     border-color: white;
 }
 
-.input #textInput input:focus, #imgInput label:focus, #button input:focus {
+.input #textInput input:focus, 
+#imgInput label:focus, 
+#button input:focus {
     box-shadow: 
         0 1px 0 rgba(255,255,255,0.2), 
         inset 0 1px 1px rgba(0,0,0,0.1),
