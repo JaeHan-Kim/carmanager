@@ -53,7 +53,7 @@ public class MainController {
   @RequestMapping(value="select", method=RequestMethod.GET)
   public Object selList(int no,
       HttpSession session) throws Exception {
-    //log.debug("현재 차량은 " + no + "입니다.");
+    log.debug("현재 차량은 " + no + "입니다.");
     
     List<Garage> garages = garageService.listAll(no);
     List<Refuel> refuels = refuelService.listAll(no);
