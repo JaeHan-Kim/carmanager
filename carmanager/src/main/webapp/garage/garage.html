@@ -161,7 +161,10 @@ window.scrollTo(0,1); }
           </div>
 
           <div class="chat-grid widget-shadow">
-            <button id='btn_delete' type="submit" class="btn btn-primary col-md-6">차고에서 삭제하기</button>
+            <button id='btn_delete' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btn_msg">차고에서 삭제하기</button>
+            <div id="#btn_msg" class="collapse">
+              잠깐! 차량 선택 후 삭제해 주세요.
+            </div>
           </div>
          <!-- 리스트 출력을 위한 스크립트 -->
           <script type="text/javascript">
@@ -173,14 +176,6 @@ window.scrollTo(0,1); }
               $("a.detailLink").click(clickDetailLink);
             });
             
-           /*  $.getJSON('detail.do?no='+ myCarNo, function(resultObj) {
-                
-    	        $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
-                $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
-                $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
-                $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
-            }); */
-              
            function clickDetailLink(event) {
            	 event.preventDefault(); 
            	 $(detail).empty();
@@ -196,8 +191,9 @@ window.scrollTo(0,1); }
            	 });
            }
            
+           if ($('#deleteNo').val() != null) {
             $('#btn_delete').click(function(resultObj) {
-            alert($('#deleteNo').val())
+            /* alert($('#deleteNo').val()) */
               $.post('delete.do', {
                   no: $('#deleteNo').val()
                 }, function(resultObj) {
@@ -209,6 +205,7 @@ window.scrollTo(0,1); }
                   }
               }, 'json');
             });
+           } 
          /*  $.getJSON('delete.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
           location.href = "garage.html";
           }); */
