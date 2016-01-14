@@ -167,30 +167,41 @@ window.scrollTo(0,1); }
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-       		    $("<li value='" + garage.myCarNo + "'><a class='detailLnk' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
+       		    $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
-              $("a.detailLnk").click(clickDetailLnk);
+              $("a.detailLink").click(clickDetailLink);
             });
             
-            $.getJSON('detail.do?no=' + sessionStorage.getItem("loginUsercarNo"), function(resultObj) {
-              /* var garage = resultObj.data; */
-              /* $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>팥팥이</p></div><div class='clearfix'></div></a></li>").appendTo(detail) */
-  	          $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
-              $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
-              $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
-              $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
+           /*  $.getJSON('detail.do?no='+ myCarNo, function(resultObj) {
+                
+    	        $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+                $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
+                $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+                $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
+            }); */
+              
+           function clickDetailLink(event) {
+           	 event.preventDefault(); 
+           	 $(detail).empty();
+           	 alert($(event.target).attr("myCarNo"))
+           	 /* $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
+                 $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
+     	         $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+                 $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
+                 $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+                 $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
+             }); */
+               
+           
+           }
+              
             
-             });
             
-            function clickDetailLnk(event) {
-            	event.preventDefault(); 
-            	location.href = "garage.html?no=" + $(event.target).attr("myCarNo");
-            }
           </script>
 
           <div class="chat-grid widget-shadow">
             <ul id="detail">
-              <li class="head">차량 확인후 삭제하세요.</li>
+              <!-- <li class="head">차량 확인후 삭제하세요.</li> -->
               <!-- <li><a href="#">
                   <div class="chat-left">
                     <label>애칭</label>

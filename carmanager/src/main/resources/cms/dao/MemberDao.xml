@@ -30,4 +30,8 @@
     select count(mno) from members where email=#{email}
   </select>
   
+  <select id="checkNickname" resultType="int" parameterType="member">
+    select count(mno) from members where nick=#{nickName}
+  </select>
+  
 </mapper>

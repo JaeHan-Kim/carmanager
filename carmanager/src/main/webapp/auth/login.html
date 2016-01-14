@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../css/auth/login.css">
   
   <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/auth/jquery.cookie.js"></script>  
   <script type="text/javascript" src="../js/auth/jquery.placeholder.min.js"></script>
   <script type="text/javascript" src="../js/auth/cycle2.js"></script>
@@ -153,21 +154,23 @@
 	      <div id="email">
 	        <label for="email">Email</label>
 	        <input id="jemail" type="text" name="jemail" placeholder="이메일">
-	        <div id="checkEmail">&nbsp;</div>
+	        <div id="checkEmail"></div>
 	      </div>
 	      <div id="nickName">
 	        <label for="nickname">NickName</label>
 	        <input id="jnickname" type="text" name="jnickname" placeholder="별명">
+	        <div id="checkNickname"></div>
 	      </div>
 	      <div id="password">
 	        <label for="password">Password</label>
 	        <input id="jpassword" type="password" name='pwd' placeholder="비밀번호">
+	        <div id="checkPwd1"></div>
 	      </div>
 	      <div id="password_confirm">
 	        <label for="password_confirm">Password Confirm</label>
 	        <input id="jpassword_confirm" type="password" name='pwd_check' 
 	               placeholder="비밀번호 확인" onkeyup="checkPwd()">
-	        <div id="checkPwd">동일한 암호를 입력하세요.</div>
+	        <div id="checkPwd2"></div>
 	      </div>
 	    </div>
 	  
@@ -228,31 +231,78 @@
   });
   
   $('#jemail').blur(function() {
-	  $.post('ajax/check.do', {
+	  $.post('ajax/checkEmail.do', {
 		  email: $('#jemail').val()
-		  
-		  }, function(resultObj) {
+	  }, function(resultObj) {
 		  var ajaxResult = resultObj.ajaxResult;
 		  
 		  if(ajaxResult.status != "notEmail") {
-		  
 		    if (ajaxResult.status == "success") {
 			    document.getElementById('checkEmail').style.color = "white";
 		      document.getElementById('checkEmail').innerHTML = "사용할 수 있는 이메일입니다.";
-			  
-		      if($('#jemail').val().length < 1) {
-		        document.getElementById('checkEmail').style.color = "red";
-	          document.getElementById('checkEmail').innerHTML = "이메일을 입력해주세요.";
-	        }
 		    } else {
 			    document.getElementById('checkEmail').style.color = "red";
-		      document.getElementById('checkEmail').innerHTML = "사용할 수 없는 이메일입니다.";
+		      document.getElementById('checkEmail').innerHTML = "이미 가입된 이메일입니다.";
 		    }
 		  } else {
-	      document.getElementById('checkEmail').style.color = "red";
-	      document.getElementById('checkEmail').innerHTML = "올바른 이메일 형식이 아닙니다.";
+			  if($('#jemail').val().length < 1) {
+          document.getElementById('checkEmail').style.color = "red";
+		      document.getElementById('checkEmail').innerHTML = "이메일을 입력해주세요.";
+        } else {
+          document.getElementById('checkEmail').style.color = "red";
+	        document.getElementById('checkEmail').innerHTML = "올바른 이메일 형식이 아닙니다.";
+        }
 		  }
 	  }, 'json');
+  });
+  
+  $('#jnickname').blur(function() {
+    $.post('ajax/checkNickname.do', {
+      nickName: $('#jnickname').val()
+    }, function(resultObj) {
+      var ajaxResult = resultObj.ajaxResult;
+      
+      if(ajaxResult.status != "notNickName") {
+	      if (ajaxResult.status == "success") {
+	        document.getElementById('checkNickname').style.color = "white";
+	        document.getElementById('checkNickname').innerHTML = "사용할 수 있는 별명입니다.";
+	      } else {
+	        document.getElementById('checkNickname').style.color = "red";
+	        document.getElementById('checkNickname').innerHTML = "이미 존재하는 별명입니다.";
+	      }
+      } else {
+    	  if($('#jnickname').val().length < 1) {
+          document.getElementById('checkNickname').style.color = "red";
+	        document.getElementById('checkNickname').innerHTML = "별명을 입력해주세요.";
+	      } else {
+          document.getElementById('checkNickname').style.color = "red";
+          document.getElementById('checkNickname').innerHTML = "4~10자의 영문과 숫자만 가능합니다.";
+	      }
+      }
+    }, 'json');
+  });
+  
+  $('#jpassword').blur(function() {
+    $.post('ajax/checkPassword.do', {
+      password: $('#jpassword').val()
+    }, function(resultObj) {
+      var ajaxResult = resultObj.ajaxResult;
+      
+      if(ajaxResult.status != "notPassword") {
+        if (ajaxResult.status == "success") {
+          document.getElementById('checkPwd1').style.color = "white";
+          document.getElementById('checkPwd1').innerHTML = "사용할 수 있는 비밀번호입니다.";
+        }
+      } else {
+        if($('#jpassword').val().length < 1) {
+          document.getElementById('checkPwd1').style.color = "red";
+          document.getElementById('checkPwd1').innerHTML = "비밀번호를 입력해주세요.";
+        } else {
+          document.getElementById('checkPwd1').style.color = "red";
+          document.getElementById('checkPwd1').innerHTML = "6~12자의 영문과 숫자만 가능합니다.";
+        }
+      }
+    }, 'json');
   });
   
   /* 패스워드 일치여부를 검증한다. #jpassword_confirmd에 글자를 입력할 때 마다 검사한다. */
@@ -262,11 +312,11 @@
     var pw2 = form.pwd_check.value;
 
     if(pw1!=pw2){
-      document.getElementById('checkPwd').style.color = "red";
-      document.getElementById('checkPwd').innerHTML = "암호가 일치하지 않습니다."; 
+      document.getElementById('checkPwd2').style.color = "red";
+      document.getElementById('checkPwd2').innerHTML = "비밀번호가 일치하지 않습니다."; 
     }else{
-      document.getElementById('checkPwd').style.color = "white";
-      document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+      document.getElementById('checkPwd2').style.color = "white";
+      document.getElementById('checkPwd2').innerHTML = "비밀번호가 확인 되었습니다."; 
     }
   }
   
