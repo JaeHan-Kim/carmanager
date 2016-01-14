@@ -71,6 +71,7 @@
     <p>
       <label for="login">Email</label>
       <input type="text" name="login" placeholder="이메일" id="femail" required>
+      <!-- onkeyup="if((arguments[0]||event).keyCode == 13) LoginCheck()" -->
     </p>
     <p>
       <label for="password">Password</label>
@@ -87,35 +88,54 @@
     <p></p>
     <!-- <p hidden="">입력한 이메일과 비밀번호가 일치하지 않습니다. 다시 입력해주세요.</p> -->
     <p>
-      <input id="loginBtn" type="button" value="시작하기">
+      <input id="loginBtn" type="button" value="시작하기" onfocus="this.blur()">
     </p>       
 
 		<script>
-		  /* 이메일 저장 체크박스를 활성화시키면, 로그인 버튼을 눌렀을 때 이메일을 쿠키에 저장한다. */		
-			$('#loginBtn').click(function(event) {
-				var checkStatus = $("#saveEmail").is(":checked"); 
-			  if(checkStatus){									
-				  $.cookie("email", $("#femail").val());	
-			  }else{    
-					$.cookie("email", "");				
-			  }   
-
-			  /* 로그인 버튼을 눌렀을 때 일어나는 이벤트. */
-				$.post('ajax/login.do', {
-					email: $('#femail').val(),
-					password: $('#fpassword').val(), 
-				}, function(resultObj) {
-					var ajaxResult = resultObj.ajaxResult;
-					if (ajaxResult.status == "success") {
-						sessionStorage.setItem('loginUser', ajaxResult.data.memberNo);
-						sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
-						sessionStorage.setItem('loginUseremail', ajaxResult.data.email);
-			      location.href = "../main/main.html";
-					} else {
-						alert("이메일과 패스워드가 일치하지 않습니다.");
-					}
-				}, 'json');
+		/* 버튼 클릭 및 인풋박스 안에서 엔터를 눌러도 로그인 기능이 동작하도록 하는 부분 */
+			$('#loginBtn').click(loginEvent);
+			$("#femail").keyup(function(e){
+        if(e.keyCode == 13)  loginEvent(); 
+      });
+			$("#fpassword").keyup(function(e){
+				if(e.keyCode == 13)  loginEvent(); 
 			});
+		  
+			/* 로그인 및 쿠키 저장 기능 */
+			function loginEvent(event) {
+		  /* 이메일 저장 체크박스를 활성화시키면, 로그인 버튼을 눌렀을 때 이메일을 쿠키에 저장한다. */		
+	      var checkStatus = $("#saveEmail").is(":checked"); 
+	      if(checkStatus){                  
+	        $.cookie("email", $("#femail").val());  
+	      }else{    
+	        $.cookie("email", "");        
+	      }   
+	
+	      if ($('#femail').val().length < 1 || $('#fpassword').val().length < 1) {
+          alert("이메일과 패스워드를 모두 입력해주세요.");
+          if ($('#femail').val().length < 1) {
+        	  $('#femail').focus();
+          } else {
+        	  $('#fpassword').focus();
+          }
+        } else {
+		      /* 로그인 버튼을 눌렀을 때 일어나는 이벤트. */
+		      $.post('ajax/login.do', {
+		        email: $('#femail').val(),
+		        password: $('#fpassword').val(), 
+		      }, function(resultObj) {
+		        var ajaxResult = resultObj.ajaxResult;
+		        if (ajaxResult.status == "success") {
+		          sessionStorage.setItem('loginUser', ajaxResult.data.memberNo);
+		          sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
+		          sessionStorage.setItem('loginUseremail', ajaxResult.data.email);
+		          location.href = "../main/main.html";
+		        } else {
+		          alert("이메일과 패스워드가 일치하지 않습니다.");
+		        }
+		      }, 'json');
+			  }
+	    }
 			
 			/* 회원가입 링크를 눌렀을 때 모달을 띄우는 부분 */
 			$(function(){
@@ -177,7 +197,6 @@
 	    <div id="button">
 	      <input id="joinBtn" type="submit" class="btn btn-default" value="가입">
 	      <input type="reset" class="btn btn-default" value="리셋">
-	      <!-- onclick="$('#lean_overlay').click();" -->
 	    </div>
     </div>
       
@@ -230,25 +249,26 @@
     }, 'json');
   });
   
+  /* 각 입력 항목에서 포커스가 사라졌을 때 지정된 검증을 하는 기능 */
   $('#jemail').blur(function() {
 	  $.post('ajax/checkEmail.do', {
 		  email: $('#jemail').val()
 	  }, function(resultObj) {
 		  var ajaxResult = resultObj.ajaxResult;
 		  
-		  if(ajaxResult.status != "notEmail") {
-		    if (ajaxResult.status == "success") {
+		  if(ajaxResult.status != "notEmail") { /* 규칙에 맞는 이메일일 경우 할 검사 */
+		    if (ajaxResult.status == "success") { /* 규칙에 맞는 이메일일 경우 */
 			    document.getElementById('checkEmail').style.color = "white";
 		      document.getElementById('checkEmail').innerHTML = "사용할 수 있는 이메일입니다.";
-		    } else {
+		    } else { /* 이미 존재하는 이메일일 경우 */
 			    document.getElementById('checkEmail').style.color = "red";
 		      document.getElementById('checkEmail').innerHTML = "이미 가입된 이메일입니다.";
 		    }
-		  } else {
-			  if($('#jemail').val().length < 1) {
+		  } else { /* 규칙에 맞지 않는 이메일일 경우 할 검사 */
+			  if($('#jemail').val().length < 1) { /* 이메일을 입력하지 않았을 경우 */
           document.getElementById('checkEmail').style.color = "red";
 		      document.getElementById('checkEmail').innerHTML = "이메일을 입력해주세요.";
-        } else {
+        } else { /* 규칙에 맞지 않는 이메일일 경우 */
           document.getElementById('checkEmail').style.color = "red";
 	        document.getElementById('checkEmail').innerHTML = "올바른 이메일 형식이 아닙니다.";
         }
@@ -305,7 +325,7 @@
     }, 'json');
   });
   
-  /* 패스워드 일치여부를 검증한다. #jpassword_confirmd에 글자를 입력할 때 마다 검사한다. */
+  /* 패스워드 일치여부를 검증한다. 패스워드 확인에 글자를 입력할 때 마다 검사한다. */
   function checkPwd() {
     var form = document.forms[2];
     var pw1 = form.pwd.value;
