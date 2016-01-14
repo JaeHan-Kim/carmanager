@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +35,7 @@ public class GarageController {
   @Autowired ServletContext servletContext;
   
   @RequestMapping("list")
-  public Object carList(
-  		HttpSession session, int no) throws Exception {
+  public Object carList(int no) throws Exception {
 
     List<Garage> garages = garageService.listAll(no);
     
@@ -48,20 +46,14 @@ public class GarageController {
 
   }
   
-  @RequestMapping("detail")
-  public Object carDet(
-      HttpSession session, int no) throws Exception {
+  @RequestMapping(value="detail", method=RequestMethod.GET)
+  public Object carDetail(int no) throws Exception {
     
     Garage garages = garageService.carDetail(no);
-    
     //log.debug(garages.toString());
-    
-    HashMap<String, Object> resultMap = new HashMap<>();
-    resultMap.put("status", "success");
-    resultMap.put("data", garages);
-    return resultMap;
-    
+    return new AjaxResult("success", garages);
   }
+  
   @RequestMapping(value="delete", method=RequestMethod.POST)
   public Object deleteCar(int no) throws Exception {
     

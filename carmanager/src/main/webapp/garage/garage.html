@@ -192,11 +192,14 @@ window.scrollTo(0,1); }
            	 event.preventDefault(); 
            	 $(detail).empty();
            	 $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
-                 $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
-     	         $("<li id='deleteNo' value='" + resultObj.data.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
-                 $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
-                 $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
-                 $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
+           	  var ajaxResult = resultObj.ajaxResult;
+              if (ajaxResult.status == "success") {
+           	     $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
+     	         $("<li id='deleteNo' value='" + ajaxResult.data.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + ajaxResult.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+                 $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + ajaxResult.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
+                 $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + ajaxResult.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+                 $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + ajaxResult.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
+              }
            	 });
            }
            
