@@ -57,9 +57,7 @@ public class GarageController {
   @RequestMapping(value="delete", method=RequestMethod.POST)
   public Object deleteCar(int no) throws Exception {
     
-    HashMap<String, Object> paramMap = new HashMap<>();
-    paramMap.put("no", no);
-    
+    garageService.carDelete(no);
     return new AjaxResult("success", null);
   }
   
