@@ -159,7 +159,7 @@ window.scrollTo(0,1); }
           
           <div class="folder widget-shadow">
             <ul id="carList">
-              <li class="head">회원님의 차고 입니다.</li>
+              <li class="head">회원님의 차고 입니다(클릭하세요).</li>
             </ul>
           </div>
           
@@ -183,14 +183,14 @@ window.scrollTo(0,1); }
            function clickDetailLink(event) {
            	 event.preventDefault(); 
            	 $(detail).empty();
-           	 alert($(event.target).attr("myCarNo"))
-           	 /* $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
+           	 /* alert($(event.target).attr("myCarNo")) */
+           	 $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
                  $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
      	         $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
                  $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
-             }); */
+             });
                
            
            }
