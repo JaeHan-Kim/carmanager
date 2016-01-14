@@ -102,14 +102,19 @@ public class GarageController {
   	return resultMap;
   }
   @RequestMapping(value="addmycar", method=RequestMethod.POST)
-  public AjaxResult addMyCar(int mno) {
-  	int myCarCnt = garageService.myCarCount(mno);
-  	log.debug("연결된당 접속한 유저번호는 : " + mno);
-  	log.debug("보유한 차량 갯수는 : " + myCarCnt);
-  	if (myCarCnt > 2) {
-  		return new AjaxResult("failure", null);
-  	}
-  	
+  public AjaxResult addMyCar(Garage garage) {
+  	log.debug(garage.toString());
+//  public AjaxResult addMyCar(int memberNo,
+//      int modelNo, String nickName,
+//      float effi, int mile, String deailModel) {
+  	// log.debug(nickName);
+  	// int myCarCnt = garageService.myCarCount(mno);
+  	// log.debug("연결된당 접속한 유저번호는 : " + mno);
+  	// log.debug("보유한 차량 갯수는 : " + myCarCnt);
+  	//if (myCarCnt > 2) {
+  	//	return new AjaxResult("failure", null);
+  	//}
+
   	return new AjaxResult("success", null);
   }
 }

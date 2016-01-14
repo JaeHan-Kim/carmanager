@@ -236,6 +236,10 @@ window.scrollTo(0,1); }
                  <label>세부 모델명</label> 
                  <input id="txt_trim" type="text" class="form-control1 control3"> 
                 </div>
+								<div class="col-md-12">
+                 <label  for="txt_mile">주행거리</label> 
+                 <input id="txt_mile" type="text" class="form-control1 control3"> 
+                </div>
                 <div class="col-md-12">
                  <label  for="txt_effi">공인연비</label> 
                  <input id="txt_effi" type="text" class="form-control1 control3"> 
@@ -268,7 +272,6 @@ window.scrollTo(0,1); }
  					for(var maker of resultObj.makers) {
  					  $("<option value='"+ maker.makerNo + "'>"+maker.makerName+"</option>").appendTo(makerList);
  					}
- 					$("<option value='6'>기타</option>").appendTo(makerList);
         });
         
         $("#sel_list").change(function(event){
@@ -305,8 +308,9 @@ window.scrollTo(0,1); }
  					}); 
 				});
         $("#btn_reg").click(function(event){
-          var modelname;
-          alert(sessionStorage.getItem('loginUsercarNo'));
+          var detailModel;
+          var modelNo = $('#sel_modellist').val();
+         	alert("모델 번호 : " + modelNo);
           if ($('#txt_nickname').val().length < 1) {
             alert("닉네임을 입력해 주세요!");
             return false;
@@ -315,34 +319,52 @@ window.scrollTo(0,1); }
             alert("제조사를 입력해 주세요!");
             return false;
           }
-          if ($('#sel_modellist').val() == 0) {
-            alert("닉네임을 입력해 주세요!");
-            return false;
+          if ($('#sel_list').val() == 6) {
+	          if ($('#txt_modellist').val().length < 1) {
+	            alert("차량 모델명(텍스트)을 입력해 주세요!");
+	            return false;
+	          }
+	          modelNo = 1;
+	          deailModel = $('#txt_modellist').val() + "" + $('#txt_trim').val();
+	          alert("모델 번호 : " + modelNo);
+	          alert(deailModel);
+          } else if ($('#sel_modellist').val() == 0) {
+            	alert("차량 모델명(리스트)을 입력해 주세요!");
+            	return false;
+          }
+          if ($('#txt_effi').val().length < 1) {
+            alert("공인 연비를 입력해 주세요!");
+           	return false;
+          }
+          if ($('#txt_mile').val().length < 1) {
+            alert("주행거리를 입력해 주세요!");
+           	return false;
           }
           if ($('input:radio[name=refuelType]:checked').val() == undefined) {
             alert("연료 종류 입력해 주세요!");
            	return false;
           }
+          alert("모델 번호 : " + modelNo);
         $.post('addmycar.do', {
-      		mno: sessionStorage.getItem('loginUsercarNo'),
+          memberNo: sessionStorage.getItem('loginUsercarNo'),
+          modelNo: modelNo,
+          nickName: $('#txt_nickname').val(),
+          mile: $('#txt_mile').val(),
+          effi: $('#txt_effi').val()
         }, function(resultObj) {
+/*           memberNo: sessionStorage.getItem('loginUsercarNo'),
+          modelNo: modelNo,
+          nickName: $('#txt_nickname').val(),
+          effi: $('#txt_effi').val(),
+          mile: $('#txt_mile').val(),
+          deailModel: detailModel */
           var ajaxResult = resultObj.ajaxResult;
           if (ajaxResult.status == "failure") { 
             alert("차량은 최대 3대까지 등록 가능합니다.");
             return false;
           }
-          
-          
           alert("등록 성공!");
         }, 'json');
-        
-        alert($('#txt_nickname').val());	 	// 닉네임
-        alert($('#sel_list').val()); 		 		// 제조사 리스트
-        alert($('#txt_modellist').val());		// 기타 모델
-        alert($('#sel_modellist').val());		// 제조사 모델명 
-        alert($('#txt_trim').val());				// 상세 모델명
-        alert($('#txt_effi').val());				// 연비
-        alert($('input:radio[name=refuelType]:checked').val()); // 연료 종류
         });
         
         

@@ -8,7 +8,7 @@ public class Garage {
   protected String nickName;
   protected String model;
   protected String deailModel;
-  protected int effi;
+  protected float effi;
   protected int mile;
   
   
@@ -16,14 +16,18 @@ public class Garage {
    
   }
   
-	@Override
-  public String toString() {
-    return "Garage [myCarNo=" + myCarNo + ", modelNo=" + modelNo + ", maker=" + maker + ", memberNo=" + memberNo
-        + ", nickName=" + nickName + ", model=" + model + ", deailModel=" + deailModel + ", effi=" + effi + ", mile="
-        + mile + "]";
-  }
+  
 
-  public String getModel() {
+  @Override
+	public String toString() {
+		return "Garage [myCarNo=" + myCarNo + ", modelNo=" + modelNo + ", maker=" + maker + ", memberNo=" + memberNo
+		    + ", nickName=" + nickName + ", model=" + model + ", deailModel=" + deailModel + ", effi=" + effi + ", mile="
+		    + mile + "]";
+	}
+
+
+
+	public String getModel() {
     return model;
   }
 
@@ -54,18 +58,13 @@ public class Garage {
 	}
 
 
-
-	public int getEffi() {
+	public float getEffi() {
 		return effi;
 	}
 
-
-
-	public void setEffi(int effi) {
+	public void setEffi(float effi) {
 		this.effi = effi;
 	}
-
-
 
 	public int getMyCarNo() {
     return myCarNo;
