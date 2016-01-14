@@ -179,7 +179,6 @@ window.scrollTo(0,1); }
            function clickDetailLink(event) {
            	 event.preventDefault(); 
            	 $(detail).empty();
-           	 alert($(event.target).attr("myCarNo"));
            	 $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
            	  var ajaxResult = resultObj.ajaxResult;
               if (ajaxResult.status == "success") {
