@@ -10,4 +10,7 @@ public interface GarageDao {
   public Garage selectDetail(int no);
   
   public int selectCount(int no);
+  
+  public int delete(int no);
+  
 }

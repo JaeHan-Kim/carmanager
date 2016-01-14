@@ -36,4 +36,9 @@
 		select count(grno) as myCarCnt from garage where mno = #{no}
   </select>
 
+  <delete id="delete" parameterType="map">
+    delete from garage
+    where grno=#{no}
+  </delete>
+
   </mapper>
