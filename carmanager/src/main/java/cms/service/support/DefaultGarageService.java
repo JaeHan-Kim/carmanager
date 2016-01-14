@@ -22,5 +22,10 @@ public class DefaultGarageService implements GarageService {
   public Garage carDetail(int no) {
     return garageDao.selectDetail(no);
   }
+
+	@Override
+	public int myCarCount(int no) {
+		return garageDao.selectCount(no);
+	}
  
 }

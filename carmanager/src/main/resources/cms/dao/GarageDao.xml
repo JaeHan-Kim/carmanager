@@ -31,9 +31,9 @@
     left outer join makers k on k.mkno = m.mkno
     where grno = #{no}
   </select>
-<!-- 
-  <select id="selectCount" resultMap="int" parameterType="int">
-		select grno from garage where mno = #{no}
+
+  <select id="selectCount" resultType="int" parameterType="int">
+		select count(grno) as myCarCnt from garage where mno = #{no}
   </select>
-  -->
+
   </mapper>
