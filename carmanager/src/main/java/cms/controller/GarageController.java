@@ -62,6 +62,14 @@ public class GarageController {
     return resultMap;
     
   }
+  @RequestMapping("delete")
+  public Object deleteCar(int no) throws Exception {
+    
+    HashMap<String, Object> resultMap = new HashMap<>();
+    resultMap.put("no", no);
+    
+    return resultMap;
+  }
   
   
   @RequestMapping("makerlist")

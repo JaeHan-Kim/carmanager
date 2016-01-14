@@ -14,4 +14,7 @@ public interface GarageDao {
   public int insertCar(Garage garage);
   
   public Garage selectOne(int no);
+
+  public int delete(int no);
+  
 }

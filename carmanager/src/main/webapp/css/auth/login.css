@@ -154,8 +154,7 @@ body {
 }
 
 .form-4 input[type=text]:hover,
-.form-4 input[type=password]:hover,
-.form-4 input[type=submit]:hover {
+.form-4 input[type=password]:hover {
     border-color: white;
 }
 
@@ -166,11 +165,6 @@ body {
         inset 0 1px 1px rgba(0,0,0,0.1),
         0 0 0 3px rgba(255,255,255,0.15);
     outline: none;
-}
-
-.no-boxshadow .form-4 input[type=text]:focus,
-.no-boxshadow .form-4 input[type=password]:focus {
-    outline: 1px solid white;
 }
 
 .form-4 input[type=button] {
@@ -206,11 +200,6 @@ body {
     border: 1px solid white;
 }
 
-.no-boxshadow .form-4 input[type=button]:hover {
-    background: #594642;
-    border: 1px solid white;
-}
-
 .form-4 label {
     display: none;
     padding: 0 0 5px 2px;
@@ -219,10 +208,6 @@ body {
 
 .form-4 label:hover ~ input {
     border-color: #333;
-}
-
-.no-placeholder .form-4 label {
-    display: block;
 }
 
 #saveLabel {
@@ -250,7 +235,7 @@ A:hover {
 
 /* 회원가입 영역 모달 처리 시작 */
 #loginmodal{
-	border:3px solid white;
+	border:3px solid pink;
 }
 
 #lean_overlay {
@@ -460,17 +445,13 @@ A:hover {
   margin-right: 29px;
 }
 
-.input #button input, 
-.input #button button {
-  margin-left: 10px;
-}
-
 .input #button input,
 .input #button button {
     /* Size and position */
     width: 100px;
     padding: 8px 5px;
-    
+    margin-left: 10px;
+      
     /* Styles */
     background: #634056;
     background: -moz-linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));

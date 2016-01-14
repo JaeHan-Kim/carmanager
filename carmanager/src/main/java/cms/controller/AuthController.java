@@ -63,6 +63,7 @@ public class AuthController {
     return new AjaxResult("success", member);
   }
   
+  /* 이메일 정규표현식에 대한 검사 및 중복검사 */  
   @RequestMapping(value="checkEmail", method=RequestMethod.POST)
   public AjaxResult checkEmail(Member member) throws Exception {
     
@@ -81,6 +82,7 @@ public class AuthController {
     return new AjaxResult("notEmail", null);
   }
   
+  /* 닉네임 정규표현식에 대한 검사 및 중복검사 */
   @RequestMapping(value="checkNickname", method=RequestMethod.POST)
   public AjaxResult checkNickname(Member member) throws Exception {
     
@@ -99,6 +101,7 @@ public class AuthController {
     return new AjaxResult("notNickName", null);
   }
   
+  /* 패스워드 정규표현식에 대한 검사 */
   @RequestMapping(value="checkPassword", method=RequestMethod.POST)
   public AjaxResult checkPassword(Member member) throws Exception {
     

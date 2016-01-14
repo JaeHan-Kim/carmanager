@@ -159,10 +159,18 @@ window.scrollTo(0,1); }
           
           <div class="folder widget-shadow">
             <ul id="carList">
-              <li class="head">회원님의 차고 입니다.</li>
+              <li class="head">회원님의 차고 입니다(클릭하세요).</li>
             </ul>
           </div>
           
+          <div class="chat-grid widget-shadow">
+            <ul id="detail"></ul>
+          </div>
+
+          <div class="chat-grid widget-shadow">
+            <button id='btn_delete' type="submit" class="btn btn-primary col-md-6">차고에서 삭제하기</button>
+          </div>
+         <!-- 리스트 출력을 위한 스크립트 -->
           <script type="text/javascript">
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
@@ -170,6 +178,7 @@ window.scrollTo(0,1); }
        		    $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
               $("a.detailLink").click(clickDetailLink);
+              $("a.detailLink").click(clickDelete);
             });
             
            /*  $.getJSON('detail.do?no='+ myCarNo, function(resultObj) {
@@ -183,41 +192,35 @@ window.scrollTo(0,1); }
            function clickDetailLink(event) {
            	 event.preventDefault(); 
            	 $(detail).empty();
+<<<<<<< HEAD
            	 /* $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
+=======
+           	 /* alert($(event.target).attr("myCarNo")) */
+           	 $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
+>>>>>>> 2466e71c5b6f19939bea730e3adc7d52d13eaa10
                  $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
      	         $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
                  $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
-             }); */
-               
-           
+             });
            }
-              
-            
+           
+           function clickDelete(event) {
+             event.preventDefault();
+             $('#btn_delete').click(function(event) {
+              alert($(event.target).attr("myCarNo"))
+             /*  $.getJSON('delete.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
+              location.href = "garage.html";
+              }); */
+             });
+             
+           }
             
           </script>
-
-          <div class="chat-grid widget-shadow">
-            <ul id="detail">
-              <!-- <li class="head">차량 확인후 삭제하세요.</li> -->
-              <!-- <li><a href="#">
-                  <div class="chat-left">
-                    <label>애칭</label>
-                  </div>
-                  <div class="chat-right">
-                    <p>팥팥이</p>
-                  </div>
-              <div class="clearfix"></div>
-              </a></li> -->
-            </ul>
-
-          </div>
-
-          <div class="chat-grid widget-shadow">
-            <button type="button" class="btn btn-primary col-md-6">차고에서 삭제하기</button>
-          </div>
         </div>
+        <!-- 리스트 출력 끝 -->        
+        
          <!-- 차량 등록폼 시작-->
         <div class="col-md-8 compose-right widget-shadow">
           <div class="panel-default">

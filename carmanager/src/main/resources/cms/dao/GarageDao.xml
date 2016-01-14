@@ -48,4 +48,9 @@
     values(#{modelNo},#{memberNo},#{deailModel},#{nickName},#{mile},#{effi})
   </insert>
   
+  <delete id="delete" parameterType="map">
+    delete from garage
+    where grno=#{no}
+  </delete>
+
   </mapper>
