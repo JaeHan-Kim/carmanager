@@ -14,11 +14,11 @@ update members set pwd=sha1(1111);
 
 
 -- 내차등록
-insert into garage(mdno, mno, c_nick, mile, effi) values(20, 1, '엄마차', 1000, 14.1); 
-insert into garage(mdno, mno, c_nick, mile, effi) values(71, 2, '태웅차', 1000, 11.3); 
-insert into garage(mdno, mno, c_nick, mile, effi) values(141, 3, '다인차', 1000, 18.5); 
-insert into garage(mdno, mno, c_nick, mile, effi) values(150, 4, '영호차', 1000, 11.3); 
-insert into garage(mdno, mno, c_nick, mile, effi) values(200, 1, '재한차', 1000, 18.5);
+insert into garage(mdno, mno, c_nick, mile, effi, trim) values(20, 1, '엄마차', 1000, 14.1,''); 
+insert into garage(mdno, mno, c_nick, mile, effi, trim) values(71, 2, '태웅차', 1000, 11.3,''); 
+insert into garage(mdno, mno, c_nick, mile, effi, trim) values(141, 3, '다인차', 1000, 18.5,''); 
+insert into garage(mdno, mno, c_nick, mile, effi, trim) values(150, 4, '영호차', 1000, 11.3,''); 
+insert into garage(mdno, mno, c_nick, mile, effi, trim) values(200, 1, '재한차', 1000, 18.5,'');
 
 -- 주유등록 (엄마차)
 insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2015-11-01', 1200, 30000, 20.13);
