@@ -256,7 +256,7 @@ ALTER TABLE comments
 -- 차종
 CREATE TABLE model (
 	mdno  INTEGER     NOT NULL COMMENT '모델번호', -- 모델번호
-	model VARCHAR(50) NOT NULL COMMENT '모델명', -- 모델명
+	model VARCHAR(50) NULL     COMMENT '모델명', -- 모델명
 	mkno  INTEGER     NOT NULL COMMENT '제조사번호' -- 제조사번호
 )
 COMMENT '차종';

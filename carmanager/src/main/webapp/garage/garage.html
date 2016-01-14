@@ -266,7 +266,6 @@ window.scrollTo(0,1); }
           </div>
         </div>
         <script type="text/javascript">
-        alert(sessionStorage.getItem('loginUsercarNo'));
         //alert(sessionStorage.getItem("loginUser"));
         var makerList = $("#sel_list");
         var carList = $("#sel_modellist");
@@ -318,6 +317,7 @@ window.scrollTo(0,1); }
 				});
         $("#btn_reg").click(function(event){
           var modelname;
+          alert(sessionStorage.getItem('loginUsercarNo'));
           if ($('#txt_nickname').val().length < 1) {
             alert("닉네임을 입력해 주세요!");
             return false;
@@ -334,10 +334,19 @@ window.scrollTo(0,1); }
             alert("연료 종류 입력해 주세요!");
            	return false;
           }
+        $.post('addmycar.do', {
+      		mno: sessionStorage.getItem('loginUsercarNo'),
+        }, function(resultObj) {
+          var ajaxResult = resultObj.ajaxResult;
+          if (ajaxResult.status == "failure") { 
+            alert("차량은 최대 3대까지 등록 가능합니다.");
+            return false;
+          }
           
-          $.post('addmycar.do', {
-      	    no: 1,
-        }, function(resultObj) {}, 'json');
+          
+          alert("등록 성공!");
+        }, 'json');
+        
         alert($('#txt_nickname').val());	 	// 닉네임
         alert($('#sel_list').val()); 		 		// 제조사 리스트
         alert($('#txt_modellist').val());		// 기타 모델

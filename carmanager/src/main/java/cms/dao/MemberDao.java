@@ -11,4 +11,6 @@ public interface MemberDao {
   Member selectOneByEmailPassword(Map<String,Object> paramMap);
   
   int checkEmail(Member member);
+  
+  int checkNickname(Member member);
 }

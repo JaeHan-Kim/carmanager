@@ -63,8 +63,8 @@ public class AuthController {
     return new AjaxResult("success", member);
   }
   
-  @RequestMapping(value="check", method=RequestMethod.POST)
-  public AjaxResult check(Member member) throws Exception {
+  @RequestMapping(value="checkEmail", method=RequestMethod.POST)
+  public AjaxResult checkEmail(Member member) throws Exception {
     
     String email = member.getEmail();
     String regex = "\\w+@\\w+\\.\\w+";
@@ -79,5 +79,39 @@ public class AuthController {
     } 
     
     return new AjaxResult("notEmail", null);
+  }
+  
+  @RequestMapping(value="checkNickname", method=RequestMethod.POST)
+  public AjaxResult checkNickname(Member member) throws Exception {
+    
+    String nickName = member.getNickName();
+    String regex = "^[a-zA-Z]{1}[a-zA-Z0-9_]{3,11}$";
+    
+    boolean nickNameCheck = Pattern.matches(regex, nickName);
+    
+    if(nickNameCheck == true) {
+      if(memberDao.checkNickname(member) > 0)
+        return new AjaxResult("failure", null);
+  
+      return new AjaxResult("success", member);
+    }
+    
+    return new AjaxResult("notNickName", null);
+  }
+  
+  @RequestMapping(value="checkPassword", method=RequestMethod.POST)
+  public AjaxResult checkPassword(Member member) throws Exception {
+    
+    String password = member.getPassword();
+    String regex = "^[a-zA-Z]{1}[a-zA-Z0-9_]{5,13}$";
+    
+    boolean passwordCheck = Pattern.matches(regex, password);
+    
+    if(passwordCheck == true) {
+  
+      return new AjaxResult("success", member);
+    }
+    
+    return new AjaxResult("notPassword", null);
   }
 }

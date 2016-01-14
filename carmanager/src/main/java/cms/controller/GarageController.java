@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cms.domain.AjaxResult;
 import cms.domain.Garage;
 import cms.domain.Makers;
 import cms.domain.Model;
@@ -101,10 +102,14 @@ public class GarageController {
   	return resultMap;
   }
   @RequestMapping(value="addmycar", method=RequestMethod.POST)
-  public Object addMyCar(int no) {
-  	log.debug("연결된당 ");
+  public AjaxResult addMyCar(int mno) {
+  	int myCarCnt = garageService.myCarCount(mno);
+  	log.debug("연결된당 접속한 유저번호는 : " + mno);
+  	log.debug("보유한 차량 갯수는 : " + myCarCnt);
+  	if (myCarCnt > 2) {
+  		return new AjaxResult("failure", null);
+  	}
   	
-  	HashMap<String, Object> resultMap = new HashMap<>();
-  	return resultMap;
+  	return new AjaxResult("success", null);
   }
 }

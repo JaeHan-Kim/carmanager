@@ -14,7 +14,7 @@ update members set pwd=sha1(1111);
 
 
 -- 내차등록
-insert into garage(mdno, mno, c_nick, mile, effi) values(1, 1, '엄마차', 1000, 14.1); 
+insert into garage(mdno, mno, c_nick, mile, effi) values(20, 1, '엄마차', 1000, 14.1); 
 insert into garage(mdno, mno, c_nick, mile, effi) values(71, 2, '태웅차', 1000, 11.3); 
 insert into garage(mdno, mno, c_nick, mile, effi) values(141, 3, '다인차', 1000, 18.5); 
 insert into garage(mdno, mno, c_nick, mile, effi) values(150, 4, '영호차', 1000, 11.3); 
@@ -32,13 +32,13 @@ insert into refuel(grno, ref_dt, mile, cost, liter) values(1, '2016-01-14', 2800
 
 -- 주유등록 (태웅차)
 insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-11-01', 1200, 10000, 20.13);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-11-11', 1400, 35000, 21.11);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-11-11', 1400, 35000, 15.11);
 insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-11-29', 1600, 64000, 21.23);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-12-09', 1900, 10000, 30.20);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-12-15', 2100, 40000, 23.03);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-12-09', 1900, 10000, 10.20);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2015-12-15', 2100, 40000, 40.03);
 insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-01', 2200, 36000, 21.01);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-09', 2400, 38000, 25);
-insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-11', 2800, 39000, 19.50);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-09', 2400, 38000, 35);
+insert into refuel(grno, ref_dt, mile, cost, liter) values(2, '2016-01-11', 2800, 39000, 26.50);
 
 -- 주유등록 (재한차)
 insert into refuel(grno, ref_dt, mile, cost, liter) values(5, '2015-11-5', 1200, 20000, 18.13);
