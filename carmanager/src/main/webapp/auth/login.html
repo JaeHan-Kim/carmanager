@@ -88,7 +88,7 @@
     <p></p>
     <!-- <p hidden="">입력한 이메일과 비밀번호가 일치하지 않습니다. 다시 입력해주세요.</p> -->
     <p>
-      <input id="loginBtn" type="button" value="시작하기">
+      <input id="loginBtn" type="button" value="시작하기" onfocus="this.blur()">
     </p>       
 
 		<script>
@@ -113,6 +113,11 @@
 	
 	      if ($('#femail').val().length < 1 || $('#fpassword').val().length < 1) {
           alert("이메일과 패스워드를 모두 입력해주세요.");
+          if ($('#femail').val().length < 1) {
+        	  $('#femail').focus();
+          } else {
+        	  $('#fpassword').focus();
+          }
         } else {
 		      /* 로그인 버튼을 눌렀을 때 일어나는 이벤트. */
 		      $.post('ajax/login.do', {
