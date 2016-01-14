@@ -103,6 +103,7 @@ public class GarageController {
   @RequestMapping(value="addmycar", method=RequestMethod.POST)
   public Object addMyCar(int no) {
   	log.debug("연결된당 ");
+  	
   	HashMap<String, Object> resultMap = new HashMap<>();
   	return resultMap;
   }

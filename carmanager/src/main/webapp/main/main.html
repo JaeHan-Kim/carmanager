@@ -251,15 +251,19 @@ window.scrollTo(0,1); }
           var oneago = (moment().subtract(30, 'days').months() + 1) + "월";
           var present = moment().format('MM')  + "월";
           var selectcar = $("#myCarList");
-         $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
+         $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
            //alert(sessionStorage.getItem("loginUser"));
            var effic = new Array();
            var driveDt = new Array();
-           for (var i = 0; i < 7; i++) {
-             effic[i] = (resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter;
-             driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
+           if (resultObj.refuelList != "") {
+          	 	for (var i = 0; i < 7; i++) {
+             	effic[i] = (resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter;
+             	driveDt[i] = resultObj.refuelList[i].group_date
+             	//driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
+           	 }
            }
 		   for (var garage of resultObj.data) {
+		     alert(garage.myCarNo + "차량 이름" + garage.nickName);
 		     $("<li value='" + garage.myCarNo + "'" + "class='dropdown head-dpdn'><span>" 
 		         + garage.nickName + "</span></li>").appendTo(selectcar)
 		   }
