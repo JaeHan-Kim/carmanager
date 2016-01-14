@@ -24,7 +24,7 @@ window.scrollTo(0,1); }
 <!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
 <!-- //font-awesome icons -->
 <!-- js-->
-<script src="../js/main/jquery-1.11.1.min.js"></script>
+<script src="../js/main/jquery.js"></script>
 <script src="../js/main/modernizr.custom.js"></script>
 <!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
 <link
@@ -168,7 +168,7 @@ window.scrollTo(0,1); }
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-       		    $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'></i>" + garage.nickName + "</a></li>").appendTo(myList)
+       		    $("<li><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'></i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
               $("a.detailLink").click(clickDetailLink);
             });
@@ -184,6 +184,7 @@ window.scrollTo(0,1); }
            function clickDetailLink(event) {
            	 event.preventDefault(); 
            	 $(detail).empty();
+           	 alert($(event.target).attr("myCarNo"));
            	 $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
            	  var ajaxResult = resultObj.ajaxResult;
               if (ajaxResult.status == "success") {
@@ -364,7 +365,7 @@ window.scrollTo(0,1); }
             return false;
           }
           alert("등록 성공!");
-          $("<li value='" + ajaxResult.data.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + ajaxResult.data.myCarNo + "'><i class='fa fa-inbox'</i>" + ajaxResult.data.nickName + "</a></li>").appendTo(myList)
+          location.href = "garage.html";
         }, 'json');
         });
         
