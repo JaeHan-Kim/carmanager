@@ -34,4 +34,21 @@
     select count(mno) from members where nick=#{nickName}
   </select>
   
+  <select id="selectOne" resultMap="memberMap" parameterType="map">
+    select 
+      email, 
+      nick, 
+      photo
+    from members
+    where mno=#{memberNo}
+  </select>
+  
+  <update id="update" parameterType="member">
+    update members set 
+      nick=#{nickName}, 
+      pwd=sha1(#{password}), 
+      photo=#{memberPhoto} 
+    where mno=#{memberNo} 
+  </update>
+  
 </mapper>

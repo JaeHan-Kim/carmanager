@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>내 차를 부탁해</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="application/x-javascript">   
+	addEventListener("load", function() { 
+	setTimeout(hideURLbar, 0); }, false); 
+	function hideURLbar(){ 
+	window.scrollTo(0,1); }
+</script>
+
+<!-- Bootstrap Core CSS -->
+<link href="../css/main/bootstrap.css" rel='stylesheet' type='text/css' />
+
+<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
+<link href="../css/main/style.css" rel='stylesheet' type='text/css' />
+
+<!-- font CSS -->
+<!-- font-awesome icons 빈칸 유지를 위해 링크를 막아둠 -->
+<!-- <link href="../css/main/test/font-awesome.css" rel="stylesheet">
+ -->
+<!-- //font-awesome icons -->
+<!-- js-->
+<script src="../js/main/jquery.min.js"></script>
+<script src="../js/main/modernizr.custom.js"></script>
+<!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
+<!-- <link
+  href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'
+  rel='stylesheet' type='text/css'>
+ --><!--//webfonts-->
+
+<!--animate-->
+<!-- <link href="../css/main/animate.css" rel="stylesheet" type="text/css" media="all">
+ --><script src="../js/main/wow.min.js"></script>
+<script>
+  new WOW().init();
+</script>
+<!--//end-animate-->
+
+<!-- Metis Menu -->
+<script src="../js/main/metisMenu.min.js"></script>
+<script src="../js/main/custom.js"></script>
+<link href="../css/main/custom.css" rel="stylesheet">
+<!--//Metis Menu -->
+
+<!-- mypage 관련 스크립트 -->
+<script src="../js/mypage/mypage.js"></script>
+
+</head>
+
+<body class="cbp-spmenu-push">
+  <div class="main-content">
+    <!--left-fixed -navigation-->
+    <div class=" sidebar" role="navigation">
+      <div class="navbar-collapse">
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
+          id="cbp-spmenu-s1">
+          <ul class="nav" id="side-menu">
+            <li><a href="main.html" class=""><i
+                class="fa fa-home nav_icon"></i>Dashboard</a></li>
+            <li><a href="../mypage/mypage.html" class=""><i
+                class="fa fa-home nav_icon"></i>My page</a></li>
+            <li><a href="../garage/garage.html" class=""><i
+                class="fa fa-home nav_icon"></i>차량 등록</a></li>
+            <li><a href="../refuel/refuel.html" class=""><i
+                class="fa fa-home nav_icon"></i>차량 관리</a></li>
+            <li><a href="../center/center.html" class=""><i
+                class="fa fa-home nav_icon"></i>정 비 소</a></li>
+            <li><a href="../goods/goods.html" class=""><i
+                class="fa fa-home nav_icon"></i>맞춤 서비스</a></li>
+            <li><a href="../comunity/comunity.html" class=""><i
+                class="fa fa-home nav_icon"></i>커뮤니티</a></li>
+          </ul>
+          <!-- //sidebar-collapse -->
+        </nav>
+      </div>
+    </div>
+    <!--left-fixed -navigation-->
+
+    <!-- header-starts -->
+    <div class="sticky-header header-section ">
+      <div class="header-left">
+        
+        <!--toggle button start-->
+        <button id="showLeftPush">
+          <img src="../img/main/menu.png">
+        </button>
+        <!--toggle button end-->
+        
+        <!--logo -->
+        <div class="logo">
+          <a href="index.html">
+            <h1>내 차를 부탁해</h1> <span>간편, 쉽고, 재밌는 시작!</span>
+          </a>
+        </div>
+        <!--//logo-->
+
+      </div>
+      <!-- header-left end-->
+
+      <!-- header-right -->
+      <div class="header-right">
+
+        <!-- 로그인 유저 정보 -->
+        <div class="profile_details">
+          <ul>
+          <li class="dropdown profile_details_drop"><a href="#"
+              class="dropdown-toggle" data-toggle="dropdown"
+              aria-expanded="false">
+                <div class="profile_img">
+                  <span class="prfil-img"><img
+                    src="../img/main/a.png" alt=""> </span>
+                  <div class="user-name">
+                    <p id="useremail"></p>
+                    <span>안녕하세요.</span>
+                  </div>
+
+                  <!-- 빈칸 유지를 위한 아이콘 자리 -->
+                  <i class="fa fa-angle-down lnr"></i> <i
+                    class="fa fa-angle-up lnr"></i>
+                  <div class="clearfix"></div>
+                </div>
+            </a>
+
+              <ul class="dropdown-menu drp-mnu">
+                <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
+                <li><a href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
+              </ul>
+          </li>
+          </ul>
+        </div>
+        <!-- 로그인 유저 정보 end -->
+        <div class="clearfix"></div>
+      </div>
+      <!-- header-right -->
+      <div class="clearfix"></div>
+    </div>
+    <!-- //header-ends -->
+
+    <!-- main content start-->
+    
+    <div id="page-wrapper">
+			<div class="main-page login-page ">
+				<h3 class="title1">My Page</h3>
+				<div class="widget-shadow">
+					<div class="login-top">
+						<h2>나의 라이센스</h2>
+					</div>
+									  
+					<div class="login-body" style="height: 410px; position: relative;">
+						<div class="login-image">
+	            <img id="photo" class="img_photo" width="150" height="170"/><br><br>
+				      <input id="avatar" type="file" name="avatar"/>
+ 					  </div>
+						
+				    <div class="login-form">
+                <label>nickname</label><input type="text" id="nickname" class="form-control1 control3"> 
+                <label>email</label><input type="text" id="email" class="form-control1 control3">
+                <label>password</label><input type="password" id="password" class="form-control1 control3">
+                <label>password 확인</label><input type="password" id="re_password" class="form-control1 control3">
+                <label id="lbl_pwdfail" hidden="true">암호가 일치하지 않습니다.</label>
+    			  </div>
+					</div>
+				</div>
+				
+				<div class="login-page-bottom">
+					<h5></h5>
+					<input type="button" id="btn_update" value="수정">
+				  <input type="button" id="btn_cancel" value="취소">
+				</div>
+			</div>
+		</div>
+    
+    <!--footer-->
+    <div class="footer">
+      <p>
+        &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
+      </p>
+    </div>
+    <!--//footer-->
+
+  <!-- Classie 메뉴 접히고 펼쳐지는 부분` -->
+  <script src="../js/main/classie.js"></script>
+  <script>
+      var menuLeft = document.getElementById('cbp-spmenu-s1'), showLeftPush = document
+          .getElementById('showLeftPush'), body = document.body;
+
+      showLeftPush.onclick = function() {
+        classie.toggle(this, 'active');
+        classie.toggle(body, 'cbp-spmenu-push-toright');
+        classie.toggle(menuLeft, 'cbp-spmenu-open');
+        disableOther('showLeftPush');
+      };
+
+      function disableOther(button) {
+        if (button !== 'showLeftPush') {
+          classie.toggle(showLeftPush, 'disabled');
+        }
+      }
+    </script>
+    
+  <!--scrolling js 스크롤바 조정-->
+  <script src="../js/main/jquery.nicescroll.js"></script>
+  <script src="../js/main/scripts.js"></script>
+  <!--//scrolling js-->
+  
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../js/main/bootstrap.js"></script>
+  
+	<script>
+    $("#btn_update").click(function(event) {
+		  var pwd = document.getElementById('password').value;
+			var re_pwd = document.getElementById('re_password').value;    
+		  if (pwd !== re_pwd) {
+			  $("#lbl_pwdfail").show();
+				$("#password").val("");
+				$("#re_password").val("");
+				$("#avatar").val("");
+			  return false;
+			} else {
+			  $("#lbl_pwdfail").hide();
+			}
+
+		  var file_data = $("#avatar").prop("files")[0];
+      var form_data = new FormData(); 
+      form_data.append("file", file_data)		  
+      form_data.append('memberNo', sessionStorage.getItem('loginUser'))
+	    form_data.append('nickName', $("#nickname").val())
+	    form_data.append('password', $("#password").val()) 
+			
+      $.ajax({
+          url : "ajax/update.do",
+          dataType : 'script',
+          cache : false,
+          contentType : false,
+          processData : false,
+          data : form_data,
+          type : 'post'
+      });
+ 
+     	location.reload();
+    
+    });
+ 	  
+	  $('#btn_cancel').click(function(event) {
+			location.reload();
+		});
+	  
+	</script>
+</body>
+</html>

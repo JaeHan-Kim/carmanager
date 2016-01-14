@@ -1545,6 +1545,17 @@ button.note-color-btn {
 .login-body {
 	padding: 2em;
 }
+
+.login-image {
+	width: 50%;
+	float: left;
+}
+
+.login-form {
+	width: 50%;
+	float: left;
+}
+
 .login-top  h4 {
     font-size: 1.1em;
     color: #555;
@@ -1605,18 +1616,19 @@ button.note-color-btn {
 .forgot a:hover{
     color: #e94e02;
 }
-.login-page input[type="submit"] {
+
+.login-page input[type="button"] {
     border: none;
     outline: none;
     cursor: pointer;
     color: #fff;
     background: #6164C1;
-    width: 100%;
+    width: 30%;
     padding: .5em 1em;
     font-size: 1em;
     margin: 0.5em 0 0;
 }
-.login-page input[type="submit"]:hover{
+.login-page input[type="button"]:hover{
     background: #4F52BA;
 }
 .login-page-bottom {
