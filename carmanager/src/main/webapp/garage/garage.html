@@ -168,7 +168,7 @@ window.scrollTo(0,1); }
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-       		    $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
+       		    $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'></i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
               $("a.detailLink").click(clickDetailLink);
             });
@@ -198,7 +198,7 @@ window.scrollTo(0,1); }
            
             $('#btn_delete').click(function(resultObj) {
             alert($('#deleteNo').val())
-              $.post('delete.do?no=', {
+              $.post('delete.do', {
                   no: $('#deleteNo').val()
                 }, function(resultObj) {
                   var ajaxResult = resultObj.ajaxResult;
