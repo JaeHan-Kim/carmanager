@@ -402,7 +402,7 @@ A:hover {
 .input #textInput input[type=button]:hover, 
 #button input[type=button]:hover,
 #button input[type=submit]:hover,
-#button button[type=reset]:hover {
+#button input[type=reset]:hover {
     background: red;
     border: 1px solid white;
     
@@ -511,10 +511,11 @@ A:hover {
   top: -20px;
 }
 
-#checkPwd{
+#checkEmail, #checkPwd{
   font-size: 14px;
   font-weight: bold;
   margin-left: 170px;
   margin-top: -10px;
+  margin-bottom: 5px;
 }
 /* 로그인 폼 종료 */

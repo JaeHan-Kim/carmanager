@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import cms.domain.Garage;
 import cms.domain.Makers;
 import cms.domain.Model;
+import cms.domain.Official;
 import cms.service.GarageService;
 import cms.service.MakersService;
 import cms.service.ModelService;
+import cms.service.OfficialService;
 import cms.service.RefuelService;
 
 @Controller
@@ -29,6 +31,7 @@ public class GarageController {
   @Autowired RefuelService refuelService;
   @Autowired MakersService makersService;
   @Autowired ModelService modelService;
+  @Autowired OfficialService officialService;
   @Autowired ServletContext servletContext;
   
   @RequestMapping("list")
@@ -86,6 +89,22 @@ public class GarageController {
   	//log.debug("---------------------");
   	HashMap<String, Object> resultMap = new HashMap<>();
   	resultMap.put("datas", models);
+  	return resultMap;
+  }
+  @RequestMapping(value="refuellist", method=RequestMethod.GET)
+  public Object refuelList(int no) {
+  	
+  	Official model = officialService.effiSearch(no);
+  	
+  	HashMap<String, Object> resultMap = new HashMap<>();
+  	resultMap.put("data", model);
+  	return resultMap;
+  }
+  @RequestMapping(value="addmycar", method=RequestMethod.POST)
+  public Object addMyCar(int no) {
+  	log.debug("연결된당 ");
+  	
+  	HashMap<String, Object> resultMap = new HashMap<>();
   	return resultMap;
   }
 }

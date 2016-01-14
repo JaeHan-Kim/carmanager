@@ -9,5 +9,5 @@ public interface GarageService {
 
   Garage carDetail(int no);
   
-  
+//  int  (int no);
 }

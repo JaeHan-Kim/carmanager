@@ -208,12 +208,12 @@ window.scrollTo(0,1); }
             <button type="button" class="btn btn-primary col-md-6">차고에서 삭제하기</button>
           </div>
         </div>
-        <!-- 차량 등록폼 시작-->
+         <!-- 차량 등록폼 시작-->
         <div class="col-md-8 compose-right widget-shadow">
           <div class="panel-default">
             <div class="panel-heading">차고에 차량을 추가해 보세요.</div>
             <div class="panel-body">
-              <form class="com-mail">
+              <form id="form_carInput" class="com-mail">
                 <div class="col-md-12">
                   <label>애칭</label> 
                   <input id="txt_nickname" type="text" class="form-control1 control3">
@@ -223,7 +223,7 @@ window.scrollTo(0,1); }
                 <div id ="div_modelinput" class="col-md-13">
                		<label>&nbsp;&nbsp;&nbsp;&nbsp;차량모델명</label>
                   <div class="col-md-12 grid_box1">
-                    <input type="text" class="form-control1 control3">
+                    <input id="txt_modellist" type="text" class="form-control1 control3">
                   </div>
                 </div>
                 <div id ="div_modellist" class="col-md-13">
@@ -240,33 +240,23 @@ window.scrollTo(0,1); }
                  <label  for="txt_effi">공인연비</label> 
                  <input id="txt_effi" type="text" class="form-control1 control3"> 
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">연료종류</label>
-                  <div class="col-md-12">
-                    <div class="radio-inline col-md-3">
-                      <label><input type="radio"
-                        name="refuelType" value="휘발유">휘발유</label>
-                    </div>
-                    <div class="radio-inline col-md-3">
-                      <label><input type="radio"
-                        name="refuelType" value="경유">경유</label>
-                    </div>
-                    <div class="radio-inline col-md-3">
-                      <label><input type="radio"
-                        name="refuelType" value="LPG">LPG</label>
-                    </div>
-                  </div>
-                </div>
-
+									<label class="col-sm-2 control-label">연료종류</label>
+									<div class="col-md-12">
+										<div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="휘발유">휘발유</label></div>
+										<div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="경유">경유</label></div>
+										<div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="LPG">LPG</label></div>
+									</div>
               </form>
             </div>
-            <div class="panel-heading">
-            <input id="btn_reg" class="btn btn-success" value="등록"> 
-                <input id="btn_reset" type="reset" value="리셋">
-            </div>
+									<div class="panel-footer">
+									<input id="btn_reg" type="submit" value="등록"> 
+					  			<input id="btn_reset" type="submit" value="리셋">
+									</div>
           </div>
         </div>
         <script type="text/javascript">
+        alert(sessionStorage.getItem('loginUsercarNo'));
+        //alert(sessionStorage.getItem("loginUser"));
         var makerList = $("#sel_list");
         var carList = $("#sel_modellist");
         
@@ -279,6 +269,7 @@ window.scrollTo(0,1); }
  					for(var maker of resultObj.makers) {
  					  $("<option value='"+ maker.makerNo + "'>"+maker.makerName+"</option>").appendTo(makerList);
  					}
+ 					$("<option value='6'>기타</option>").appendTo(makerList);
         });
         
         $("#sel_list").change(function(event){
@@ -301,17 +292,59 @@ window.scrollTo(0,1); }
 	 					}
  					}); 
         });
-
+        $("#sel_modellist").change(function(event){
+          $.getJSON('refuellist.do?no='+$("#sel_modellist").val(), function(resultObj) {
+           $('#txt_effi').val(resultObj.data.effi)
+           if (resultObj.data.modelFuel == "휘발유") {
+             $('input:radio[name=refuelType]')[0].checked = true;
+           } else if (resultObj.data.modelFuel == "경유"){
+             $('input:radio[name=refuelType]')[1].checked = true;
+           } 
+           else {
+             $('input:radio[name=refuelType]')[2].checked = true;
+           }
+ 					}); 
+				});
         $("#btn_reg").click(function(event){
-          alert($("#refuelType").val());
-				});
+          var modelname;
+          if ($('#txt_nickname').val().length < 1) {
+            alert("닉네임을 입력해 주세요!");
+            return false;
+          }
+          if ($('#sel_list').val() == 0) {
+            alert("제조사를 입력해 주세요!");
+            return false;
+          }
+          if ($('#sel_modellist').val() == 0) {
+            alert("닉네임을 입력해 주세요!");
+            return false;
+          }
+          if ($('input:radio[name=refuelType]:checked').val() == undefined) {
+            alert("연료 종류 입력해 주세요!");
+           	return false;
+          }
+          
+          $.post('addmycar.do', {
+      	    no: 1,
+        }, function(resultObj) {}, 'json');
+        alert($('#txt_nickname').val());	 	// 닉네임
+        alert($('#sel_list').val()); 		 		// 제조사 리스트
+        alert($('#txt_modellist').val());		// 기타 모델
+        alert($('#sel_modellist').val());		// 제조사 모델명 
+        alert($('#txt_trim').val());				// 상세 모델명
+        alert($('#txt_effi').val());				// 연비
+        alert($('input:radio[name=refuelType]:checked').val()); // 연료 종류
+        });
+        
+        
         $("#btn_reset").click(function(event){
-          $("#txt_nickname").val()="";
-          $("#sel_list").val()=0;
-          $("#sel_modellist").val()=0;
-          $("#txt_trim").val()="";
-          $("#txt_effi").val()="";
+       		$("#form_carInput").each(function() {  
+            this.reset();
+            $('#div_modellist').css('display', 'none');
+        		$('#div_modelinput').css('display', 'none');
+         });  
 				});
+
         </script>
         <!-- 차량 등록폼 끝 -->
         <div class="clearfix"></div>
