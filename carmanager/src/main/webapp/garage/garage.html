@@ -183,7 +183,6 @@ window.scrollTo(0,1); }
            function clickDetailLink(event) {
            	 event.preventDefault(); 
            	 $(detail).empty();
-           	 alert($(event.target).attr("myCarNo"))
            	 /* $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
                  $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
      	         $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
@@ -319,9 +318,9 @@ window.scrollTo(0,1); }
  					}); 
 				});
         $("#btn_reg").click(function(event){
-          var detailModel;
+          var detailModel = $('#txt_trim').val();
           var modelNo = $('#sel_modellist').val();
-         	alert("모델 번호 : " + modelNo);
+
           if ($('#txt_nickname').val().length < 1) {
             alert("닉네임을 입력해 주세요!");
             return false;
@@ -336,9 +335,7 @@ window.scrollTo(0,1); }
 	            return false;
 	          }
 	          modelNo = 1;
-	          deailModel = $('#txt_modellist').val() + "" + $('#txt_trim').val();
-	          alert("모델 번호 : " + modelNo);
-	          alert(deailModel);
+	          detailModel = $('#txt_modellist').val() + " " + $('#txt_trim').val();
           } else if ($('#sel_modellist').val() == 0) {
             	alert("차량 모델명(리스트)을 입력해 주세요!");
             	return false;
@@ -355,26 +352,21 @@ window.scrollTo(0,1); }
             alert("연료 종류 입력해 주세요!");
            	return false;
           }
-          alert("모델 번호 : " + modelNo);
         $.post('addmycar.do', {
-          memberNo: sessionStorage.getItem('loginUsercarNo'),
+          memberNo: sessionStorage.getItem("loginUser"),
           modelNo: modelNo,
           nickName: $('#txt_nickname').val(),
           mile: $('#txt_mile').val(),
-          effi: $('#txt_effi').val()
-        }, function(resultObj) {
-/*           memberNo: sessionStorage.getItem('loginUsercarNo'),
-          modelNo: modelNo,
-          nickName: $('#txt_nickname').val(),
           effi: $('#txt_effi').val(),
-          mile: $('#txt_mile').val(),
-          deailModel: detailModel */
+          deailModel: detailModel
+        }, function(resultObj) {
           var ajaxResult = resultObj.ajaxResult;
           if (ajaxResult.status == "failure") { 
             alert("차량은 최대 3대까지 등록 가능합니다.");
             return false;
           }
           alert("등록 성공!");
+          $("<li value='" + ajaxResult.data.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + ajaxResult.data.myCarNo + "'><i class='fa fa-inbox'</i>" + ajaxResult.data.nickName + "</a></li>").appendTo(myList)
         }, 'json');
         });
         

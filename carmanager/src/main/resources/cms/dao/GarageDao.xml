@@ -35,5 +35,17 @@
   <select id="selectCount" resultType="int" parameterType="int">
 		select count(grno) as myCarCnt from garage where mno = #{no}
   </select>
-
+  
+  <select id="selectOne" resultMap="garageMap" parameterType="int">
+		select grno, mdno, mno, trim, c_nick, mile, effi from garage 
+		where mno = #{no}
+		order by grno desc
+		limit 1;
+  </select>
+  
+	<insert id="insertCar"  parameterType="garage">
+    insert into garage(mdno, mno, trim, c_nick, mile, effi) 
+    values(#{modelNo},#{memberNo},#{deailModel},#{nickName},#{mile},#{effi})
+  </insert>
+  
   </mapper>

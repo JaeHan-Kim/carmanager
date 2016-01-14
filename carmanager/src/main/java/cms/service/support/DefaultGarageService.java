@@ -27,5 +27,15 @@ public class DefaultGarageService implements GarageService {
 	public int myCarCount(int no) {
 		return garageDao.selectCount(no);
 	}
+
+	@Override
+	public int addMyCar(Garage garage) {
+		return garageDao.insertCar(garage);
+	}
+
+	@Override
+	public Garage lastAddCar(int no) {
+		return garageDao.selectOne(no);
+	}
  
 }
