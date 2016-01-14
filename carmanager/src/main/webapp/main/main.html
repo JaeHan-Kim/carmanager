@@ -249,6 +249,12 @@ window.scrollTo(0,1); }
           var oneago = (moment().subtract(30, 'days').months() + 1) + "월";
           var present = moment().format('MM')  + "월";
           var selectcar = $("#myCarList");
+		   		function clickDetailLnk(event) {
+		   		 //alert( $(event.target).attr("carNo"));
+		   			$.getJSON('list.do?no=' + $(event.target).attr("carNo") + '&carNo='+sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
+		   			});
+		   		}
+          
          	$.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
            //alert(sessionStorage.getItem("loginUser"));
            var effic = new Array();
@@ -261,11 +267,10 @@ window.scrollTo(0,1); }
            	 }
            }
 		   		 for (var garage of resultObj.data) {
-		     	 $("<li value='" + garage.myCarNo + "'" + "class='dropdown head-dpdn'><span>" 
+		     	 $("<li class='dropdown head-dpdn'><span class='carN' carNo='" + garage.myCarNo + "'>" 
 		         + garage.nickName + "</span></li>").appendTo(selectcar)
 		   		 }
-       
-          
+		   		 $("span.carN").click(clickDetailLnk);
             var lineChartData = {
         			labels : [driveDt[6],driveDt[5],driveDt[4],driveDt[3],driveDt[2],driveDt[1],driveDt[0]],
         			datasets : [
