@@ -62,13 +62,13 @@ public class GarageController {
     return resultMap;
     
   }
-  @RequestMapping("delete")
+  @RequestMapping(value="delete", method=RequestMethod.POST)
   public Object deleteCar(int no) throws Exception {
     
-    HashMap<String, Object> resultMap = new HashMap<>();
-    resultMap.put("no", no);
+    HashMap<String, Object> paramMap = new HashMap<>();
+    paramMap.put("no", no);
     
-    return resultMap;
+    return new AjaxResult("success", null);
   }
   
   

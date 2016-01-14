@@ -178,7 +178,6 @@ window.scrollTo(0,1); }
        		    $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
               $("a.detailLink").click(clickDetailLink);
-              $("a.detailLink").click(clickDelete);
             });
             
            /*  $.getJSON('detail.do?no='+ myCarNo, function(resultObj) {
@@ -192,27 +191,32 @@ window.scrollTo(0,1); }
            function clickDetailLink(event) {
            	 event.preventDefault(); 
            	 $(detail).empty();
-           	 /* alert($(event.target).attr("myCarNo")) */
+           	  /* alert($(event.target).attr("myCarNo")) */
            	 $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
                  $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
-     	         $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+     	         $("<li id='deleteNo' value='" + resultObj.data.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
                  $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + resultObj.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
-             });
+           	 });
            }
            
-           function clickDelete(event) {
-             event.preventDefault();
-             $('#btn_delete').click(function(event) {
-              alert($(event.target).attr("myCarNo"))
-             /*  $.getJSON('delete.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
-              location.href = "garage.html";
-              }); */
-             });
-             
-           }
-            
+            $('#btn_delete').click(function(resultObj) {
+            alert($('#deleteNo').val())
+              $.post('delete.do?no=', {
+                  no: $('#deleteNo').val()
+                }, function(resultObj) {
+                  var ajaxResult = resultObj.ajaxResult;
+                  if (ajaxResult.status == "success") {
+                    location.href = "garage.html";
+                  } else {
+                    alert("차량 삭제에 실패하였습니다.");
+                  }
+              }, 'json');
+            });
+         /*  $.getJSON('delete.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
+          location.href = "garage.html";
+          }); */
           </script>
         </div>
         <!-- 리스트 출력 끝 -->        
