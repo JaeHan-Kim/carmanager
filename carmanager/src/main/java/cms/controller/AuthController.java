@@ -36,8 +36,6 @@ public class AuthController {
         
     Member member = memberDao.selectOneByEmailPassword(paramMap);
     
-    System.out.println(member);
-    
     if (member == null) {
       session.invalidate();
       return new AjaxResult("failure", null);
@@ -56,7 +54,23 @@ public class AuthController {
   @RequestMapping(value="join", method=RequestMethod.POST)
   public AjaxResult join(Member member) throws Exception {
     
-    System.out.println(member);
+    String email = member.getEmail();
+    String nickName = member.getNickName();
+    String password = member.getPassword();
+    
+    String regexEmail = "\\w+@\\w+\\.\\w+";
+    String regexNickname = "^[a-zA-Z]{1}[a-zA-Z0-9_]{3,11}$";
+    String regexPassword = "^[a-zA-Z]{1}[a-zA-Z0-9_]{3,11}$";
+
+    boolean emailCheck = Pattern.matches(regexEmail, email);
+    boolean nickNameCheck = Pattern.matches(regexNickname, nickName);
+    boolean passwordCheck = Pattern.matches(regexPassword, password);
+    
+    if (emailCheck == false || 
+        nickNameCheck == false || 
+        passwordCheck == false) {
+      return new AjaxResult("failure", null);
+    }
     
     memberDao.insert(member);
     
