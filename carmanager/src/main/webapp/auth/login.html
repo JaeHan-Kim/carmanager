@@ -229,20 +229,29 @@
   
   $('#jemail').blur(function() {
 	  $.post('ajax/check.do', {
-	    var ajaxResult = resultObj.ajaxResult;
-	  
-	    if (ajaxResult.status == "success") {
-		    document.getElementById('checkEmail').style.color = "white";
-	      document.getElementById('checkEmail').innerHTML = "사용할 수 있는 이메일입니다.";
+		  email: $('#jemail').val()
 		  
-	      if($('#jemail').val().length < 1) {
-	        document.getElementById('checkEmail').style.color = "red";
-          document.getElementById('checkEmail').innerHTML = "이메일을 입력해주세요.";
-        }
-	    } else {
-		    document.getElementById('checkEmail').style.color = "red";
-	      document.getElementById('checkEmail').innerHTML = "사용할 수 없는 이메일입니다.";
-	    }
+		  }, function(resultObj) {
+		  var ajaxResult = resultObj.ajaxResult;
+		  
+		  if(ajaxResult.status != "notEmail") {
+		  
+		    if (ajaxResult.status == "success") {
+			    document.getElementById('checkEmail').style.color = "white";
+		      document.getElementById('checkEmail').innerHTML = "사용할 수 있는 이메일입니다.";
+			  
+		      if($('#jemail').val().length < 1) {
+		        document.getElementById('checkEmail').style.color = "red";
+	          document.getElementById('checkEmail').innerHTML = "이메일을 입력해주세요.";
+	        }
+		    } else {
+			    document.getElementById('checkEmail').style.color = "red";
+		      document.getElementById('checkEmail').innerHTML = "사용할 수 없는 이메일입니다.";
+		    }
+		  } else {
+	      document.getElementById('checkEmail').style.color = "red";
+	      document.getElementById('checkEmail').innerHTML = "올바른 이메일 형식이 아닙니다.";
+		  }
 	  }, 'json');
   });
   
