@@ -138,7 +138,6 @@
 	  <div id="inputArea">
 	    <div id="topText">
 	      이메일 하나로 <span id="now">간편하게</span> 시작하세요! 
-	    
 	    </div>
 	    
 	    <p>다른 정보는 받지 않습니다. 부담 없이 이용하세요.</p>  
@@ -154,6 +153,7 @@
 	      <div id="email">
 	        <label for="email">Email</label>
 	        <input id="jemail" type="text" name="jemail" placeholder="이메일">
+	        <div id="checkEmail">&nbsp;</div>
 	      </div>
 	      <div id="nickName">
 	        <label for="nickname">NickName</label>
@@ -173,7 +173,7 @@
 	  
 	    <div id="button">
 	      <input id="joinBtn" type="submit" class="btn btn-default" value="가입">
-	      <button type="reset" class="btn btn-default">리셋</button>
+	      <input type="reset" class="btn btn-default" value="리셋">
 	      <!-- onclick="$('#lean_overlay').click();" -->
 	    </div>
     </div>
@@ -227,11 +227,39 @@
     }, 'json');
   });
   
+  $('#jemail').blur(function() {
+	  $.post('ajax/check.do', {
+		  email: $('#jemail').val()
+		  
+		  }, function(resultObj) {
+		  var ajaxResult = resultObj.ajaxResult;
+		  
+		  if(ajaxResult.status != "notEmail") {
+		  
+		    if (ajaxResult.status == "success") {
+			    document.getElementById('checkEmail').style.color = "white";
+		      document.getElementById('checkEmail').innerHTML = "사용할 수 있는 이메일입니다.";
+			  
+		      if($('#jemail').val().length < 1) {
+		        document.getElementById('checkEmail').style.color = "red";
+	          document.getElementById('checkEmail').innerHTML = "이메일을 입력해주세요.";
+	        }
+		    } else {
+			    document.getElementById('checkEmail').style.color = "red";
+		      document.getElementById('checkEmail').innerHTML = "사용할 수 없는 이메일입니다.";
+		    }
+		  } else {
+	      document.getElementById('checkEmail').style.color = "red";
+	      document.getElementById('checkEmail').innerHTML = "올바른 이메일 형식이 아닙니다.";
+		  }
+	  }, 'json');
+  });
+  
   /* 패스워드 일치여부를 검증한다. #jpassword_confirmd에 글자를 입력할 때 마다 검사한다. */
-  function checkPwd(){
-    var f1 = document.forms[2];
-    var pw1 = f1.pwd.value;
-    var pw2 = f1.pwd_check.value;
+  function checkPwd() {
+    var form = document.forms[2];
+    var pw1 = form.pwd.value;
+    var pw2 = form.pwd_check.value;
 
     if(pw1!=pw2){
       document.getElementById('checkPwd').style.color = "red";
@@ -240,7 +268,8 @@
       document.getElementById('checkPwd').style.color = "white";
       document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
     }
-  } 
+  }
+  
 </script>
 
 </body>

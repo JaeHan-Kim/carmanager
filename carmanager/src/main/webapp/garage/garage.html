@@ -167,13 +167,12 @@ window.scrollTo(0,1); }
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-       		    $("<li value='" + garage.myCarNo + "'><a class='detailLnk' href='"+ garage.myCarNo +"'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
+       		    $("<li value='" + garage.myCarNo + "'><a class='detailLnk' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'</i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
               $("a.detailLnk").click(clickDetailLnk);
             });
             
-            $.getJSON('detail.do?no=1' /* + sessionStorage.getItem("loginUsercarNo") */, function(resultObj) {
-              /* alert(resultObj.data.nickName); */
+            $.getJSON('detail.do?no=' + sessionStorage.getItem("loginUsercarNo"), function(resultObj) {
               /* var garage = resultObj.data; */
               /* $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>팥팥이</p></div><div class='clearfix'></div></a></li>").appendTo(detail) */
   	          $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
@@ -182,13 +181,11 @@ window.scrollTo(0,1); }
               $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + resultObj.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
             
              });
-		    /*  $("#fcontent").val(board.content);
-        	    $("#fviews").text(board.views);
-        	    $("#fcreatedDate").text(board.createdDate); */
-        	  
-                /* $("<li value='" + garage.myCarNo +"'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + garage.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(carDetail) */   
-        	    /* $("#fnickName").val(garage.nickName); */
-
+            
+            function clickDetailLnk(event) {
+            	event.preventDefault(); 
+            	location.href = "garage.html?no=" + $(event.target).attr("myCarNo");
+            }
           </script>
 
           <div class="chat-grid widget-shadow">
@@ -206,14 +203,6 @@ window.scrollTo(0,1); }
             </ul>
 
           </div>
-          <!-- <script type="text/javascript">
-            var detail = $("#carDetail");
-            $.getJSON('detail.do?no=' + garage.grno, function(resultObj) {
-              for (var garage of resultObj.data) {
-               alert(garage.grno);
-              }
-            });
-          </script> -->
 
           <div class="chat-grid widget-shadow">
             <button type="button" class="btn btn-primary col-md-6">차고에서 삭제하기</button>

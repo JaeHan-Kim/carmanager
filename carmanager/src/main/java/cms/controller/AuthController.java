@@ -1,6 +1,7 @@
 package cms.controller;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -62,4 +63,21 @@ public class AuthController {
     return new AjaxResult("success", member);
   }
   
+  @RequestMapping(value="check", method=RequestMethod.POST)
+  public AjaxResult check(Member member) throws Exception {
+    
+    String email = member.getEmail();
+    String regex = "\\w+@\\w+\\.\\w+";
+    
+    boolean emailCheck = Pattern.matches(regex, email);
+    
+    if (emailCheck == true) {
+      if(memberDao.checkEmail(member) > 0)
+        return new AjaxResult("failure", null);
+    
+      return new AjaxResult("success", member);
+    } 
+    
+    return new AjaxResult("notEmail", null);
+  }
 }

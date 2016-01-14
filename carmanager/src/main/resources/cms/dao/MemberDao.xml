@@ -26,4 +26,8 @@
     order by g.grno limit 1
   </select>
   
+  <select id="checkEmail" resultType="int" parameterType="member">
+    select count(mno) from members where email=#{email}
+  </select>
+  
 </mapper>

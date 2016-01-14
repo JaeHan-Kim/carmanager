@@ -54,7 +54,7 @@ public class GarageController {
     
     Garage garages = garageService.carDetail(no);
     
-    log.debug(garages.toString());
+    //log.debug(garages.toString());
     
     HashMap<String, Object> resultMap = new HashMap<>();
     resultMap.put("status", "success");

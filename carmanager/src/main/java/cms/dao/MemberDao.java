@@ -9,4 +9,6 @@ public interface MemberDao {
   int insert(Member member);
   
   Member selectOneByEmailPassword(Map<String,Object> paramMap);
+  
+  int checkEmail(Member member);
 }
