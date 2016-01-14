@@ -28,14 +28,15 @@ public class MainController {
   
   @RequestMapping("list")
   public Object carList(
-      HttpSession session, int no) throws Exception {
+      HttpSession session, int no, int carNo) throws Exception {
     
   	//log.debug("현재 접속자 : "+no);
-    
+  	log.debug("mno" + no);
+    log.debug(carNo);
   	List<Garage> garages = garageService.listAll(no);
-    List<Refuel> refuels = refuelService.listAll(no);
+    List<Refuel> refuels = refuelService.listAll(carNo);
     List<Refuel> costAvg = refuelService.costAvg();
-    List<Refuel> myCostAvg = refuelService.myCostAvg(no);
+    List<Refuel> myCostAvg = refuelService.myCostAvg(carNo);
     
     
     

@@ -350,7 +350,9 @@ window.scrollTo(0,1); }
         
         $("#btn_reset").click(function(event){
        		$("#form_carInput").each(function() {  
-            this.reset();  
+            this.reset();
+            $('#div_modellist').css('display', 'none');
+        		$('#div_modelinput').css('display', 'none');
          });  
 				});
 
