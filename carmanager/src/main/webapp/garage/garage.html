@@ -192,12 +192,9 @@ window.scrollTo(0,1); }
            function clickDetailLink(event) {
            	 event.preventDefault(); 
            	 $(detail).empty();
-<<<<<<< HEAD
-           	 /* $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
-=======
+           	 /* $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) { */
            	 /* alert($(event.target).attr("myCarNo")) */
            	 $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
->>>>>>> 2466e71c5b6f19939bea730e3adc7d52d13eaa10
                  $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
      	         $("<li><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + resultObj.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + resultObj.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
