@@ -42,8 +42,6 @@ window.scrollTo(0,1); }
 	  var userCarNo = sessionStorage.getItem('loginUsercarNo');
 	    $("#useremail").html(useremail);
  });  
-  alert(sessionStorage.getItem('loginUseremail'));
-  alert(sessionStorage.getItem('loginUsercarNo'));
 </script>
 
 
@@ -263,7 +261,6 @@ window.scrollTo(0,1); }
            	 }
            }
 		   for (var garage of resultObj.data) {
-		     alert(garage.myCarNo + "차량 이름" + garage.nickName);
 		     $("<li value='" + garage.myCarNo + "'" + "class='dropdown head-dpdn'><span>" 
 		         + garage.nickName + "</span></li>").appendTo(selectcar)
 		   }
