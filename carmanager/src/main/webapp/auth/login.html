@@ -154,7 +154,7 @@
 <div id="loginmodal" style="display:none;">
   <form class="input" method='post'>
 	  <div id="closeButton">
-	    <button id="closeModal" type="reset" onclick="$('#lean_overlay').click();">X</button>
+	    <button id="closeModal" type="reset" onclick="$('#lean_overlay').click(); resetAll()">X</button>
 	  </div>
 	  <div id="inputArea">
 	    <div id="topText">
@@ -196,7 +196,7 @@
 	  
 	    <div id="button">
 	      <input id="joinBtn" type="submit" class="btn btn-default" value="가입">
-	      <input type="reset" class="btn btn-default" value="리셋">
+	      <input type="reset" class="btn btn-default" value="리셋" onclick="resetAll()">
 	    </div>
     </div>
       
@@ -330,6 +330,7 @@
     
     if(!emailPattern.test($('#jemail').val()) ||
     	 $('#jnickname').val().length > 10 ||
+    	 $('#jnickname').val().length < 0  ||
     	 !passwordPattern.test($('#jpassword').val())) {
     	alert("입력한 값이 양식에 맞는지 확인해주세요.");
     	return false;
@@ -350,6 +351,12 @@
     }, 'json');
   });
   
+  function resetAll() {
+	  document.getElementById('checkEmail').innerHTML = "";
+	  document.getElementById('checkNickname').innerHTML = "";
+	  document.getElementById('checkPwd1').innerHTML = "";
+    document.getElementById('checkPwd2').innerHTML = "";
+  }
 </script>
 
 </body>

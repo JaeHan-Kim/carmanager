@@ -83,11 +83,8 @@ public class AuthController {
   public AjaxResult checkNickname(Member member) throws Exception {
     
     String nickName = member.getNickName();
-    String regex = "^{0,11}$";
     
-    boolean nickNameCheck = Pattern.matches(regex, nickName);
-    
-    if(nickNameCheck == true) {
+    if(nickName.length() > 0 && nickName.length() <= 10) {
       if(memberDao.checkNickname(member) > 0)
         return new AjaxResult("failure", null);
   
