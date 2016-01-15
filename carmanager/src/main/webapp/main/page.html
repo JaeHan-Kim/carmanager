@@ -1,57 +1,53 @@
 <!DOCTYPE HTML>
+<!-- 현재 스크립트나 CSS 임포트는 각 기능이 있는 위치에 쓰여있기 때문에 
+     실제로 사용할 때 정리해서 사용할 것을 권장합니다. -->
 <html>
 <head>
 <title>new 내 차를 부탁해</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords"
-  content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript">
-  
-   
-addEventListener("load", function() { 
-setTimeout(hideURLbar, 0); }, false); 
-function hideURLbar(){ 
-window.scrollTo(0,1); } 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+	<script type="application/x-javascript">
+	  addEventListener("load", function() { 
+	  setTimeout(hideURLbar, 0); }, false); 
+	  function hideURLbar(){ 
+	  window.scrollTo(0,1); } 
+	</script>
 
-</script>
-<!-- Bootstrap Core CSS -->
-<link href="../css/main/bootstrap.css" rel='stylesheet' type='text/css' />
-<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
-<link href="../css/main/style.css" rel='stylesheet' type='text/css' />
-<!-- font CSS -->
-<!-- font-awesome icons 빈칸 유지를 위해 링크를 막아둠 -->
-<!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
-<!-- //font-awesome icons -->
-<!-- js-->
-<script src="../js/main/jquery-1.11.1.min.js"></script>
-<script src="../js/main/modernizr.custom.js"></script>
-<!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
-<link
-  href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'
-  rel='stylesheet' type='text/css'>
-<!--//webfonts-->
-<!--animate-->
-<link href="../css/main/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="../js/main/wow.min.js"></script>
-<script>
-  new WOW().init();
-</script>
-<!--//end-animate-->
-
-<!-- chart 챠트 -->
-<script src="../lib/Chart.js/Chart.js"></script>
-<!-- 차트에 날짜 데이터 이용하기 -->
-<script src="../js/main/moment_local.js" type="text/javascript"></script>
-<!-- //chart -->
-
-<!-- Metis Menu -->
-<script src="../js/main/metisMenu.min.js"></script>
-<script src="../js/main/custom.js"></script>
-<link href="../css/main/custom.css" rel="stylesheet">
-<!--//Metis Menu -->
+	<!-- Bootstrap Core CSS -->
+	<link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
+	<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
+	<link type='text/css' rel='stylesheet' href="../css/main/style.css" />
+	<!-- font CSS -->
+	<!-- font-awesome icons 빈칸 유지를 위해 링크를 막아둠 -->
+	<!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
+	<!-- //font-awesome icons -->
+	<!-- js-->
+	<script src="../js/main/jquery-1.11.1.min.js"></script>
+	<script src="../js/main/modernizr.custom.js"></script>
+	<!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
+	<link type='text/css' rel='stylesheet'
+	      href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'>
+	<!--//webfonts-->
+	<!--animate-->
+	<link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
+	<script src="../js/main/wow.min.js"></script>
+	<script>
+	  new WOW().init();
+	</script>
+	<!--//end-animate-->
+	
+	<!-- chart 챠트 -->
+	<script src="../lib/Chart.js/Chart.js"></script>
+	<!-- 차트에 날짜 데이터 이용하기 -->
+	<script type="text/javascript" src="../js/main/moment_local.js"></script>
+	<!-- //chart -->
+	
+	<!-- Metis Menu -->
+	<script src="../js/main/metisMenu.min.js"></script>
+	<script src="../js/main/custom.js"></script>
+	<link rel="stylesheet" href="../css/main/custom.css">
+	<!--//Metis Menu -->
 </head>
 
 <body class="cbp-spmenu-push">
@@ -62,20 +58,34 @@ window.scrollTo(0,1); }
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
           id="cbp-spmenu-s1">
           <ul class="nav" id="side-menu">
-            <li><a href="main.html" class=""><i
-                class="fa fa-home nav_icon"></i>Dashboard</a></li>
-            <li><a href="../mypage/mypage.html" class=""><i
-                class="fa fa-home nav_icon"></i>My page</a></li>
-            <li><a href="../garage/garage.html" class=""><i
-                class="fa fa-home nav_icon"></i>차량 등록</a></li>
-            <li><a href="../refuel/refuel.html" class=""><i
-                class="fa fa-home nav_icon"></i>차량 관리</a></li>
-            <li><a href="../center/center.html" class=""><i
-                class="fa fa-home nav_icon"></i>정 비 소</a></li>
-            <li><a href="../goods/goods.html" class=""><i
-                class="fa fa-home nav_icon"></i>맞춤 서비스</a></li>
-            <li><a href="../comunity/comunity.html" class=""><i
-                class="fa fa-home nav_icon"></i>커뮤니티</a></li>
+            <li>
+              <a href="main.html" class="">
+              <i class="fa fa-home nav_icon"></i>Dashboard</a>
+            </li>
+            <li>
+              <a href="../mypage/mypage.html" class="">
+              <i class="fa fa-home nav_icon"></i>My page</a>
+            </li>
+            <li>
+              <a href="../garage/garage.html" class="">
+              <i class="fa fa-home nav_icon"></i>차량 등록</a>
+            </li>
+            <li>
+              <a href="../refuel/refuel.html" class="">
+              <i class="fa fa-home nav_icon"></i>차량 관리</a>
+            </li>
+            <li>
+              <a href="../center/center.html" class="">
+              <i class="fa fa-home nav_icon"></i>정 비 소</a>
+            </li>
+            <li>
+              <a href="../goods/goods.html" class="">
+              <i class="fa fa-home nav_icon"></i>맞춤 서비스</a>
+            </li>
+            <li>
+              <a href="../comunity/comunity.html" class="">
+              <i class="fa fa-home nav_icon"></i>커뮤니티</a>
+            </li>
           </ul>
           <!-- //sidebar-collapse -->
         </nav>
@@ -93,14 +103,14 @@ window.scrollTo(0,1); }
         <!--toggle button end-->
         <!--logo -->
         <div class="logo">
-         <a href="main.html">
-            <h1>내 차를 부탁해</h1> <span>간편, 쉽고, 재밌는 시작!</span>
+          <a href="main.html">
+            <h1>내 차를 부탁해</h1>
+            <span>간편, 쉽고, 재밌는 시작!</span>
           </a>
         </div>
         <!--//logo-->
 
         <!--<div class="clearfix"> </div>-->
-
       </div>
       <!-- header-left end-->
 
@@ -109,27 +119,28 @@ window.scrollTo(0,1); }
         <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
-          <li class="dropdown profile_details_drop"><a href="#"
-              class="dropdown-toggle" data-toggle="dropdown"
-              aria-expanded="false">
-                <div class="profile_img">
-                  <span class="prfil-img"><img
-                    src="../img/main/a.png" alt=""> </span>
-                  <div class="user-name">
-                    <p>ooo님</p>
-                    <span>안녕하세요.</span>
-                  </div>
-                  <!-- 빈칸 유지를 위한 아이콘 자리 -->
-                  <i class="fa fa-angle-down lnr"></i> <i
-                    class="fa fa-angle-up lnr"></i>
-                  <div class="clearfix"></div>
-                </div>
-            </a>
-              <ul class="dropdown-menu drp-mnu">
-                <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
-                <li><a href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
-              </ul>
-          </li>
+	          <li class="dropdown profile_details_drop">
+	            <a href="#" class="dropdown-toggle" 
+	               data-toggle="dropdown" aria-expanded="false">
+	              <div class="profile_img">
+	                <span class="prfil-img">
+	                  <img src="../img/main/a.png" alt=""> 
+	                </span>
+	                <div class="user-name">
+	                  <p>ooo님</p>
+	                  <span>안녕하세요.</span>
+	                </div>
+	                <!-- 빈칸 유지를 위한 아이콘 자리 -->
+	                <i class="fa fa-angle-down lnr"></i> 
+	                <i class="fa fa-angle-up lnr"></i>
+	                <div class="clearfix"></div>
+	              </div>
+	            </a>
+	            <ul class="dropdown-menu drp-mnu">
+	              <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
+	              <li><a href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
+	            </ul>
+	          </li>
           </ul>
         </div>
         <!-- 로그인 유저 정보 end -->
@@ -163,29 +174,28 @@ window.scrollTo(0,1); }
   <!-- Classie 메뉴 접히고 펼쳐지는 부분` -->
   <script src="../js/main/classie.js"></script>
   <script>
-      var menuLeft = document.getElementById('cbp-spmenu-s1'), showLeftPush = document
-          .getElementById('showLeftPush'), body = document.body;
+    var menuLeft = document.getElementById('cbp-spmenu-s1'), 
+        showLeftPush = document.getElementById('showLeftPush'), 
+        body = document.body;
 
-      showLeftPush.onclick = function() {
-        classie.toggle(this, 'active');
-        classie.toggle(body, 'cbp-spmenu-push-toright');
-        classie.toggle(menuLeft, 'cbp-spmenu-open');
-        disableOther('showLeftPush');
-      };
+    showLeftPush.onclick = function() {
+      classie.toggle(this, 'active');
+      classie.toggle(body, 'cbp-spmenu-push-toright');
+      classie.toggle(menuLeft, 'cbp-spmenu-open');
+      disableOther('showLeftPush');
+    };
 
-      function disableOther(button) {
-        if (button !== 'showLeftPush') {
-          classie.toggle(showLeftPush, 'disabled');
-        }
+    function disableOther(button) {
+      if (button !== 'showLeftPush') {
+        classie.toggle(showLeftPush, 'disabled');
       }
-    </script>
+    }
+  </script>
   <!--scrolling js 스크롤바 조정-->
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>
   <!--//scrolling js-->
   <!-- Bootstrap Core JavaScript -->
-  <script src="../js/main/bootstrap.js">
-      
-    </script>
+  <script src="../js/main/bootstrap.js"></script>
 </body>
 </html>
