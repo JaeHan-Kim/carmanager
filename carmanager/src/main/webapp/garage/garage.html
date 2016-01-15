@@ -225,7 +225,14 @@ window.scrollTo(0,1); }
          <!-- 차량 등록폼 시작-->
         <div class="col-md-8 compose-right widget-shadow">
           <div class="panel-default">
-            <div class="panel-heading">차고에 차량을 추가해 보세요.</div>
+            <div class="panel-heading">
+            차고에 차량을 추가해 보세요.
+            <span class="btn_set">
+            <button id="btn_reg" type="submit" class="btn_color btn btn-default">등록</button>
+              <button id="btn_reset" type="submit" class="btn_color btn btn-default">리셋</button>
+            </span>
+            
+            </div>
             <div class="panel-body">
               <form id="form_carInput" class="com-mail">
                 <div class="col-md-12">
@@ -266,10 +273,8 @@ window.scrollTo(0,1); }
                   </div>
               </form>
             </div>
-                  <div class="panel-footer">
-                  <input id="btn_reg" type="submit" value="등록"> 
-                  <input id="btn_reset" type="submit" value="리셋">
-                  </div>
+            <div class="panel-footer">
+            </div>
           </div>
         </div>
         <script type="text/javascript">
