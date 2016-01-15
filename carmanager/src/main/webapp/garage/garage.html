@@ -161,7 +161,21 @@ window.scrollTo(0,1); }
           </div>
 
           <div id="btn_msg" class="chat-grid widget-shadow">
-           <button id='btn_delete' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button>
+            <button id='btn_delete' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button>
+            <!-- <button type="submit" class="btn btn-primary col-md-6" data-toggle="modal" data-target="#btnMsg">차고에서 삭제하기</button> -->
+             <!-- <div id="btnMsg" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="mySmallModalLabel">다시 시도해 주세요.</h4>
+                  </div>
+                  <div class="modal-body">차량 선택 후 삭제 가능합니다.</div>
+                </div>
+              </div>
+            </div> -->
           </div>
 
          <!-- 리스트 출력을 위한 스크립트 -->
@@ -181,7 +195,7 @@ window.scrollTo(0,1); }
               var ajaxResult = resultObj.ajaxResult;
               if (ajaxResult.status == "success") {
                  $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
-               $("<li id='deleteNo' value='" + ajaxResult.data.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + ajaxResult.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+                 $("<li id='deleteNo' value='" + ajaxResult.data.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + ajaxResult.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + ajaxResult.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
                  $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + ajaxResult.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + ajaxResult.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail) 
@@ -207,14 +221,21 @@ window.scrollTo(0,1); }
                    $('#btn_msg').click(btnMsg);
                  }
               function btnMsg(e){
-                $("<div id='btnMsg' class='collapse'>잠깐! 차량 선택 후 삭제해 주세요.</div>").appendTo(btn_msg)
+                /* $("<div id='btnMsg' class='modal fade' tabindex='-1' role='dialog' aria-labelledby='mySmallModalLabel'>" +
+                  "<div class='modal-dialog modal-sm'><div class='modal-content'>" +
+                  "<div class='modal-header'>" +
+                    "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>×</span>" +"
+                    "</button>" +
+                      "<h4 class='modal-title' id='mySmallModalLabel'>다시 시도해 주세요.</h4>" +
+                    "</div>"
+                    "<div class='modal-body'>차량 선택 후 삭제 가능합니다.</div>" +
+                  "</div>" +
+                "</div>" +
+              "</div>").appendTo(btn_msg) */
+                $("<div id='btnMsg' class='collapse'>잠깐! 차량 선택 후 삭제 가능합니다.</div>").appendTo(btn_msg)
               }
               
             });
-                
-           
-             
-            
          /*  $.getJSON('delete.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
           location.href = "garage.html";
           }); */
