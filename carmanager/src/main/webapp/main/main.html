@@ -228,7 +228,7 @@ window.scrollTo(0,1); }
             <canvas id="bar" height="300" width="400"> </canvas>
           </div>
           <div class="col-md-4 charts-grids widget states-mdl">
-            <h4 class="title">공연 연비 대비 연비 입니다.</h4>
+            <h4 class="title">공인 연비 대비 연비 입니다.</h4>
             <canvas id="line" height="300" width="400"> </canvas>
           </div>
           <div class="col-md-4 charts-grids widget">
@@ -243,15 +243,14 @@ window.scrollTo(0,1); }
           var present = moment().format('MM')  + "월";
           var selectcar = $("#myCarList");
 		   		function clickDetailLnk(event) {
-		   		 //alert( $(event.target).attr("carNo"));
-		   			$.getJSON('list.do?no=' + $(event.target).attr("carNo") + '&carNo='+sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
-		   			});
+		   		 	alert( $(event.target).attr("carNo"));
 		   		}
           
          	$.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
            //alert(sessionStorage.getItem("loginUser"));
            var effic = new Array();
            var driveDt = new Array();
+           
            if (resultObj.refuelList != "") {
           	 	for (var i = 0; i < 7; i++) {
              	effic[i] = (resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter;
@@ -332,7 +331,11 @@ window.scrollTo(0,1); }
                     }
                   ]
                 };
-              new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+              var ctx = document.getElementById("bar").getContext("2d");
+          		var myBar = new Chart(ctx).Bar(barChartData, {
+          		'responsive' : true,
+          		'datasetStroke' : true,
+          		});
          });
          
          
@@ -381,7 +384,7 @@ window.scrollTo(0,1); }
                     }
                   ];
               new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
-           
+        //function barChart(effic, driveDt) {}
           
           
         </script>

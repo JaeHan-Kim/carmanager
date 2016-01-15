@@ -17,12 +17,11 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	
-    <!-- 멀티파트 요청 파라미터를 처리할 객체 등록 
+  <!-- 멀티파트 요청 파라미터를 처리할 객체 등록 -->
 	<bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     <property name="maxUploadSize" value="10000000"/>
 	</bean>
-  -->
 	
    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
     <property name="viewResolvers">

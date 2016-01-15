@@ -13,4 +13,8 @@ public interface MemberDao {
   int checkEmail(Member member);
   
   int checkNickname(Member member);
+  
+  Member selectOne(int no);
+  
+  int update(Member member);
 }
