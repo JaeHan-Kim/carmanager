@@ -78,14 +78,20 @@ public class AuthController {
     return new AjaxResult("notEmail", null);
   }
   
-  /* 닉네임 중복검사 */
+  /* 닉네임 정규표현식에 대한 검사 및 중복검사 */
   @RequestMapping(value="checkNickname", method=RequestMethod.POST)
   public AjaxResult checkNickname(Member member) throws Exception {
     
-    if(memberDao.checkNickname(member) > 0)
-      return new AjaxResult("failure", null);
+    String nickName = member.getNickName();
+    
+    if(nickName.length() > 0 && nickName.length() <= 10) {
+      if(memberDao.checkNickname(member) > 0)
+        return new AjaxResult("failure", null);
   
       return new AjaxResult("success", member);
+    }
+    
+    return new AjaxResult("notNickName", null);
   }
   
   /* 패스워드 정규표현식에 대한 검사 */
