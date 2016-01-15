@@ -260,13 +260,13 @@ window.scrollTo(0,1); }
         <div class="col-md-8 compose-right widget-shadow">
           <div class="panel-default">
             <div class="panel-heading">
-              차고에 차량을 추가해 보세요. <span class="btn_set">
-                <button id="btn_reg" type="submit"
-                  class="btn_color btn btn-default">등록</button>
-                <button id="btn_reset" type="submit"
-                  class="btn_color btn btn-default">리셋</button>
-              </span>
-
+            차고에 차량을 추가해 보세요.
+            <span class="btn_set">
+            <button id="btn_reg" type="submit" class="btn_color btn btn-default">등록</button>
+              <button id="btn_reset" type="submit" class="btn_color btn btn-default">리셋</button>
+            <div class="clearfix"></div>
+            </span>
+            
             </div>
             <div class="panel-body">
               <form id="form_carInput" class="com-mail">
@@ -377,34 +377,62 @@ window.scrollTo(0,1); }
           var modelNo = $('#sel_modellist').val();
 
           if ($('#txt_nickname').val().length < 1) {
-            alert("닉네임을 입력해 주세요!");
+            swal({   
+              title: "Error!",   
+              text: "닉네임을 입력해 주세요!",   
+              type: "error",   
+              confirmButtonText: "확인" });
             return false;
           }
           if ($('#sel_list').val() == 0) {
-            alert("제조사를 입력해 주세요!");
+            swal({   
+              title: "Error!",   
+              text: "제조사를 입력해 주세요!",   
+              type: "error",   
+              confirmButtonText: "확인" });
             return false;
           }
           if ($('#sel_list').val() == 6) {
             if ($('#txt_modellist').val().length < 1) {
-              alert("차량 모델명(텍스트)을 입력해 주세요!");
+              swal({   
+                title: "Error!",   
+                text: "차량 모델명을 입력해 주세요!",   
+                type: "error",   
+                confirmButtonText: "확인" });
               return false;
             }
             modelNo = 1;
             detailModel = $('#txt_modellist').val() + " " + $('#txt_trim').val();
           } else if ($('#sel_modellist').val() == 0) {
-              alert("차량 모델명(리스트)을 입력해 주세요!");
+            swal({   
+              title: "Error!",   
+              text: "차량 모델명을 입력해 주세요!",   
+              type: "error",   
+              confirmButtonText: "확인" });
               return false;
           }
           if ($('#txt_effi').val().length < 1) {
-            alert("공인 연비를 입력해 주세요!");
+            swal({   
+              title: "Error!",   
+              text: "공인 연비를 입력해 주세요!",   
+              type: "error",   
+              confirmButtonText: "확인" });
             return false;
           }
           if ($('#txt_mile').val().length < 1) {
-            alert("주행거리를 입력해 주세요!");
+            swal({   
+              title: "Error!",   
+              text: "주행거리를 입력해 주세요!",   
+              type: "error",   
+              confirmButtonText: "확인" });
             return false;
           }
           if ($('input:radio[name=refuelType]:checked').val() == undefined) {
-            alert("연료 종류 입력해 주세요!");
+            swal({   
+              title: "Error!",   
+              text: "연료 종류 입력해 주세요!",   
+              type: "error",   
+              confirmButtonText: "확인" });
             return false;
           }
         $.post('addmycar.do', {
@@ -417,11 +445,19 @@ window.scrollTo(0,1); }
         }, function(resultObj) {
           var ajaxResult = resultObj.ajaxResult;
           if (ajaxResult.status == "failure") { 
-            alert("차량은 최대 3대까지 등록 가능합니다.");
+            swal({   
+              title: "Error!",   
+              text: "차량은 최대 3대까지 등록 가능합니다.",   
+              type: "error",   
+              confirmButtonText: "확인" });
             return false;
           }
-          //alert("등록 성공!");
-          location.href = "garage.html";
+          swal({   
+              title: "등록 성공!",   
+              type: "success",   
+              confirmButtonText: "확인" }, function() {   
+                location.href = "garage.html";
+              });
         }, 'json');
         });
         
