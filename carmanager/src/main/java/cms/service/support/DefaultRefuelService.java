@@ -27,6 +27,11 @@ public class DefaultRefuelService implements RefuelService {
   public List<Refuel> myCostAvg(int no) {
     return refuelDao.selectMemberCostAvg(no);
   }
+
+  @Override
+  public int carDelete(int no) {
+    return refuelDao.delete(no);
+  }
 	
 	
 }

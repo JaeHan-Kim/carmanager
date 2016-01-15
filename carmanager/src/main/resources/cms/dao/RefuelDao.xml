@@ -38,6 +38,10 @@
     order by DATE_FORMAT(ref_dt, '%Y-%m') desc
   </select>
   
+  <delete id="delete" parameterType="int">
+    delete from refuel
+    where grno=#{no}
+  </delete>
   
   
 </mapper>

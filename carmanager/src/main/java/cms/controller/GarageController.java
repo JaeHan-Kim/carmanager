@@ -56,7 +56,7 @@ public class GarageController {
   
   @RequestMapping(value="delete", method=RequestMethod.POST)
   public Object deleteCar(int no) throws Exception {
-    
+    refuelService.carDelete(no);
     garageService.carDelete(no);
     return new AjaxResult("success", null);
   }

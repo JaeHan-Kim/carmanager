@@ -10,4 +10,6 @@ public interface RefuelService {
   List<Refuel> costAvg();
   
   List<Refuel> myCostAvg(int no);
+  
+  int carDelete(int no);
 }

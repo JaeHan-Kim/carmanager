@@ -160,32 +160,32 @@ window.scrollTo(0,1); }
             <ul id="detail"></ul>
           </div>
 
-           <button id='btn_delete' type="submit" class="btn btn-info col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button>
-          <!--<div id="btn_msg" class="chat-grid widget-shadow">
-          </div>-->
+          <div id="btn_msg" class="chat-grid widget-shadow">
+           <button id='btn_delete' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button>
+          </div>
          <!-- 리스트 출력을 위한 스크립트 -->
           <script type="text/javascript">
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-       		    $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'></i>" + garage.nickName + "</a></li>").appendTo(myList)
+              $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'></i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
               $("a.detailLink").click(clickDetailLink);
             });
             
            function clickDetailLink(event) {
-           	 event.preventDefault(); 
-           	 $(detail).empty();
-           	 $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
-           	  var ajaxResult = resultObj.ajaxResult;
+             event.preventDefault(); 
+             $(detail).empty();
+             $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
+              var ajaxResult = resultObj.ajaxResult;
               if (ajaxResult.status == "success") {
-           	     $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
-     	         $("<li id='deleteNo' value='" + ajaxResult.data.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + ajaxResult.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+                 $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
+               $("<li id='deleteNo' value='" + ajaxResult.data.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + ajaxResult.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + ajaxResult.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
                  $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + ajaxResult.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
-                 $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + ajaxResult.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)	
+                 $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + ajaxResult.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail) 
               }
-           	 });
+             });
            }
            
             $('#btn_delete').click(function(resultObj) {
@@ -234,7 +234,7 @@ window.scrollTo(0,1); }
                   <select id="sel_list" class="form-control1 control3"></select>
                 </div>
                 <div id ="div_modelinput" class="col-md-13">
-               		<label>&nbsp;&nbsp;&nbsp;&nbsp;차량모델명</label>
+                  <label>&nbsp;&nbsp;&nbsp;&nbsp;차량모델명</label>
                   <div class="col-md-12 grid_box1">
                     <input id="txt_modellist" type="text" class="form-control1 control3">
                   </div>
@@ -249,7 +249,7 @@ window.scrollTo(0,1); }
                  <label>세부 모델명</label> 
                  <input id="txt_trim" type="text" class="form-control1 control3"> 
                 </div>
-								<div class="col-md-12">
+                <div class="col-md-12">
                  <label  for="txt_mile">주행거리</label> 
                  <input id="txt_mile" type="text" class="form-control1 control3"> 
                 </div>
@@ -257,18 +257,18 @@ window.scrollTo(0,1); }
                  <label  for="txt_effi">공인연비</label> 
                  <input id="txt_effi" type="text" class="form-control1 control3"> 
                 </div>
-									<label class="col-sm-2 control-label">연료종류</label>
-									<div class="col-md-12">
-										<div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="휘발유">휘발유</label></div>
-										<div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="경유">경유</label></div>
-										<div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="LPG">LPG</label></div>
-									</div>
+                  <label class="col-sm-2 control-label">연료종류</label>
+                  <div class="col-md-12">
+                    <div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="휘발유">휘발유</label></div>
+                    <div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="경유">경유</label></div>
+                    <div class="radio-inline col-md-3"><label><input type="radio" name="refuelType" value="LPG">LPG</label></div>
+                  </div>
               </form>
             </div>
-									<div class="panel-footer">
-									<input id="btn_reg" type="submit" value="등록"> 
-					  			<input id="btn_reset" type="submit" value="리셋">
-									</div>
+                  <div class="panel-footer">
+                  <input id="btn_reg" type="submit" value="등록"> 
+                  <input id="btn_reset" type="submit" value="리셋">
+                  </div>
           </div>
         </div>
         <script type="text/javascript">
@@ -277,35 +277,35 @@ window.scrollTo(0,1); }
         var carList = $("#sel_modellist");
         
         $('#div_modellist').css('display', 'none');
-      	$('#div_modelinput').css('display', 'none');
-      	
+        $('#div_modelinput').css('display', 'none');
+        
         $.getJSON('makerlist.do', function(resultObj) {
         $("<option value='0'>제조사를 선택해 주세요.</option>").appendTo(makerList);
         $("<option value='0'>모델을 선택해 주세요.</option>").appendTo(carList);
- 					for(var maker of resultObj.makers) {
- 					  $("<option value='"+ maker.makerNo + "'>"+maker.makerName+"</option>").appendTo(makerList);
- 					}
+          for(var maker of resultObj.makers) {
+            $("<option value='"+ maker.makerNo + "'>"+maker.makerName+"</option>").appendTo(makerList);
+          }
         });
         
         $("#sel_list").change(function(event){
           
           if ($("#sel_list").val() >= 1 && $("#sel_list").val() < 6) {
-        		$('#div_modellist').css('display', '');
-        		$('#div_modelinput').css('display', 'none');
+            $('#div_modellist').css('display', '');
+            $('#div_modelinput').css('display', 'none');
           } else if ($("#sel_list").val() == 6) {
             $('#div_modellist').css('display', 'none');
-        		$('#div_modelinput').css('display', '');
+            $('#div_modelinput').css('display', '');
           } else {
             $('#div_modellist').css('display', 'none');
-        		$('#div_modelinput').css('display', 'none');
+            $('#div_modelinput').css('display', 'none');
           }
-         	$('#sel_modellist').empty();
+          $('#sel_modellist').empty();
          $("<option value='0'>모델을 선택해 주세요.</option>").appendTo('#sel_modellist');
-					$.getJSON('modelsearch.do?no='+$("#sel_list").val(), function(resultObj) {
-						for(var model of resultObj.datas) {
-	 						$("<option value='"+ model.modelNo + "'>"+model.modelName+"</option>").appendTo(sel_modellist);
-	 					}
- 					}); 
+          $.getJSON('modelsearch.do?no='+$("#sel_list").val(), function(resultObj) {
+            for(var model of resultObj.datas) {
+              $("<option value='"+ model.modelNo + "'>"+model.modelName+"</option>").appendTo(sel_modellist);
+            }
+          }); 
         });
         $("#sel_modellist").change(function(event){
           $.getJSON('refuellist.do?no='+$("#sel_modellist").val(), function(resultObj) {
@@ -318,8 +318,8 @@ window.scrollTo(0,1); }
            else {
              $('input:radio[name=refuelType]')[2].checked = true;
            }
- 					}); 
-				});
+          }); 
+        });
         $("#btn_reg").click(function(event){
           var detailModel = $('#txt_trim').val();
           var modelNo = $('#sel_modellist').val();
@@ -333,27 +333,27 @@ window.scrollTo(0,1); }
             return false;
           }
           if ($('#sel_list').val() == 6) {
-	          if ($('#txt_modellist').val().length < 1) {
-	            alert("차량 모델명(텍스트)을 입력해 주세요!");
-	            return false;
-	          }
-	          modelNo = 1;
-	          detailModel = $('#txt_modellist').val() + " " + $('#txt_trim').val();
+            if ($('#txt_modellist').val().length < 1) {
+              alert("차량 모델명(텍스트)을 입력해 주세요!");
+              return false;
+            }
+            modelNo = 1;
+            detailModel = $('#txt_modellist').val() + " " + $('#txt_trim').val();
           } else if ($('#sel_modellist').val() == 0) {
-            	alert("차량 모델명(리스트)을 입력해 주세요!");
-            	return false;
+              alert("차량 모델명(리스트)을 입력해 주세요!");
+              return false;
           }
           if ($('#txt_effi').val().length < 1) {
             alert("공인 연비를 입력해 주세요!");
-           	return false;
+            return false;
           }
           if ($('#txt_mile').val().length < 1) {
             alert("주행거리를 입력해 주세요!");
-           	return false;
+            return false;
           }
           if ($('input:radio[name=refuelType]:checked').val() == undefined) {
             alert("연료 종류 입력해 주세요!");
-           	return false;
+            return false;
           }
         $.post('addmycar.do', {
           memberNo: sessionStorage.getItem("loginUser"),
@@ -375,12 +375,12 @@ window.scrollTo(0,1); }
         
         
         $("#btn_reset").click(function(event){
-       		$("#form_carInput").each(function() {  
+          $("#form_carInput").each(function() {  
             this.reset();
             $('#div_modellist').css('display', 'none');
-        		$('#div_modelinput').css('display', 'none');
+            $('#div_modelinput').css('display', 'none');
          });  
-				});
+        });
 
         </script>
         <!-- 차량 등록폼 끝 -->
