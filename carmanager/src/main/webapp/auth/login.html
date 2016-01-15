@@ -238,22 +238,16 @@
     }, function(resultObj) {
       var ajaxResult = resultObj.ajaxResult;
       
-      if(ajaxResult.status != "notNickName") {
-	      if (ajaxResult.status == "success") {
-	        document.getElementById('checkNickname').style.color = "white";
-	        document.getElementById('checkNickname').innerHTML = "사용할 수 있는 별명입니다.";
-	      } else {
-	        document.getElementById('checkNickname').style.color = "red";
-	        document.getElementById('checkNickname').innerHTML = "이미 존재하는 별명입니다.";
-	      }
+      if (ajaxResult.status == "success") {
+        document.getElementById('checkNickname').style.color = "white";
+        document.getElementById('checkNickname').innerHTML = "사용할 수 있는 별명입니다.";
+        if ($('#jnickname').val().length < 1) {
+          document.getElementById('checkNickname').style.color = "red";
+          document.getElementById('checkNickname').innerHTML = "별명을 입력해주세요.";
+        }
       } else {
-    	  if($('#jnickname').val().length < 1) {
-          document.getElementById('checkNickname').style.color = "red";
-	        document.getElementById('checkNickname').innerHTML = "별명을 입력해주세요.";
-	      } else {
-          document.getElementById('checkNickname').style.color = "red";
-          document.getElementById('checkNickname').innerHTML = "4~10자의 영문과 숫자만 가능합니다.";
-	      }
+        document.getElementById('checkNickname').style.color = "red";
+        document.getElementById('checkNickname').innerHTML = "이미 존재하는 별명입니다.";
       }
     }, 'json');
   });
@@ -326,13 +320,11 @@
     }
     
     var emailPattern = /\w+@\w+\.\w+/;
-    var nicknamePattern = /^[a-zA-Z]{1}[a-zA-Z0-9_]{3,11}$/;
     var passwordPattern = /^[a-zA-Z]{1}[a-zA-Z0-9_]{5,13}$/;
     
     if(!emailPattern.test($('#jemail').val()) ||
-    	 !nicknamePattern.test($('#jnickname').val()) ||
     	 !passwordPattern.test($('#jpassword').val())) {
-    	alert("입력한 값이 양식에 맞는지 확인해주세요.");
+    	alert("이메일과 비밀번호가 양식에 맞는지 확인해주세요.");
     	return false;
     }
     	  
