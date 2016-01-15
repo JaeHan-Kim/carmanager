@@ -20,6 +20,7 @@ window.scrollTo(0,1); }
 
 <!-- Bootstrap Core CSS -->
 <link href="../css/main/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="../css/main/main.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
 <link href="../css/main/style.css" rel='stylesheet' type='text/css' />
 <!-- font CSS -->
@@ -228,10 +229,12 @@ window.scrollTo(0,1); }
           <div class="col-md-4 charts-grids widget">
             <h4 id="topL" class="title">월별 주유 금액 입니다.</h4>
             <canvas id="bar" height="300" width="400"> </canvas>
+            <div id="bar-legend" class="chart-legend"></div>
           </div>
           <div class="col-md-4 charts-grids widget states-mdl">
             <h4 id="topR" class="title">공인 연비 대비 연비 입니다.</h4>
             <canvas id="line" height="300" width="400"> </canvas>
+       		  <div id="line-legend" class="chart-legend"></div>
           </div>
           <div class="col-md-4 charts-grids widget">
             <h4 class="title">저번 주유 대비 연비 개선율 입니다.</h4>
@@ -315,8 +318,15 @@ window.scrollTo(0,1); }
             }
           var ctx1 = document.getElementById("line").getContext("2d");
           myLine = new Chart(ctx1).Line(lineChartData, {
-            responsive: true
+            responsive: true,
+            legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\">"+
+            "<% for (var i=0; i<datasets.length; i++){%>"+
+              "<li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span>"+
+              "<%if(datasets[i].label){%><%=datasets[i].label%><%}%>"+
+              "</li><%}%>"+
+              "</ul>"
           });
+          document.getElementById('line-legend').innerHTML = myLine.generateLegend();
           }
         function barChart(resultObj) {
            var twoago = (moment().subtract(60, 'days').months() + 1) + "월";
@@ -349,16 +359,9 @@ window.scrollTo(0,1); }
                };
              var ctx = document.getElementById("bar").getContext("2d");
             var myBar = new Chart(ctx).Bar(barChartData, {
-            'responsive' : true,
-            'datasetStroke' : true,
-            legendTemplate : 
-              "<ul class=\"<%=name.toLowerCase()%>-legend\">"+
-            		"<% for (var i=0; i<datasets.length; i++){%>"+
-            		"<li>"+
-            		 	"<span style=\"background-color:<%=datasets[i].fillColor%>\"></span>"+
-            		 	"<%if(datasets[i].label){%><%=datasets[i].label%><%}%>"+
-            		"</li><%}%>"+
-            	"</ul>"
+            responsive : true,
+            datasetStroke : true,
+            legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
             });
             document.getElementById('bar-legend').innerHTML = myBar.generateLegend();
           }
