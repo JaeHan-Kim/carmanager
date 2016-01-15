@@ -159,9 +159,8 @@ window.scrollTo(0,1); }
           <div class="chat-grid widget-shadow">
             <ul id="detail"></ul>
           </div>
-          
-           <button id='btn_delete' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button>
-          <div id="btn_msg"></div>
+
+           <button id='btn_delete' type="submit" class="btn btn-info col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button>
           <!--<div id="btn_msg" class="chat-grid widget-shadow">
           </div>-->
          <!-- 리스트 출력을 위한 스크립트 -->
@@ -370,7 +369,7 @@ window.scrollTo(0,1); }
             return false;
           }
           alert("등록 성공!");
-          location.href = "garage.html";
+          $("<li value='" + ajaxResult.data.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + ajaxResult.data.myCarNo + "'><i class='fa fa-inbox'</i>" + ajaxResult.data.nickName + "</a></li>").appendTo(myList)
         }, 'json');
         });
         
