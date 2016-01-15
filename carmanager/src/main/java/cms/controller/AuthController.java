@@ -42,7 +42,9 @@ public class AuthController {
     }
     
 //    session.setAttribute("loginUser", member);
-    
+    log.debug("------------------------");
+    log.debug(member.toString());
+    log.debug("------------------------");
     return new AjaxResult("success", member);
   }
   

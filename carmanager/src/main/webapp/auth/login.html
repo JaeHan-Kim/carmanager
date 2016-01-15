@@ -132,6 +132,7 @@
 		          sessionStorage.setItem('loginUser', ajaxResult.data.memberNo);
 		          sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
 		          sessionStorage.setItem('loginUseremail', ajaxResult.data.email);
+		          sessionStorage.setItem('loginUserNickname', ajaxResult.data.nickName);
 		          location.href = "../main/main.html";
 		        } else {
 		          alert("이메일과 패스워드가 일치하지 않습니다.");
