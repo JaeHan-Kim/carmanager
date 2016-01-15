@@ -56,9 +56,9 @@ body {
 
 .intext {
   font-size: 45px;
-  font-weight: bolder;
+  font-weight: bold;
   color: red;
-  text-shadow: white 1px 1px 1px;
+  text-shadow: gray 1px 1px 1px;
   
 }
 /* 멘트 영역 부분 끝 */
@@ -141,7 +141,7 @@ body {
 
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
     color: #fff;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 .form-4 input::-webkit-input-placeholder {
@@ -272,7 +272,7 @@ A:hover {
 
 /* 모달 영역 처리 끝 */
 
-/* 로그인 폼 CSS */
+/* 회원가입 폼 CSS */
 .input {
   width: 430px;
   position: absolute;
@@ -291,7 +291,7 @@ A:hover {
     display: block;
 }
 
-/* 로그인폼 텍스트 */
+/* 회원가입 폼 텍스트영역 */
 .input #topText {
   font-size: 25px;
   text-align: left;
@@ -389,7 +389,7 @@ A:hover {
   /* Font styles */
   font-family: 'Raleway', 'Lato', Arial, sans-serif;
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 #imgInput label:hover, 
@@ -508,8 +508,7 @@ A:hover {
 #checkNickname, 
 #checkPwd1, 
 #checkPwd2 {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 11px;
   margin-left: 170px;
   margin-top: -10px;
   margin-bottom: 5px;
