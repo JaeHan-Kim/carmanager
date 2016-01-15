@@ -32,14 +32,6 @@ window.scrollTo(0,1); }
 <!-- sweetAlert -->
 <script type="text/javascript" src="../lib/sweetalert/sweetalert.min.js"></script> 
 <link rel="stylesheet" type="text/css" href="../lib/sweetalert/sweetalert.css">
-<script>
-  $(document).ready(function(){ 
-    var useremail = sessionStorage.getItem('loginUseremail');
-    var userCarNo = sessionStorage.getItem('loginUsercarNo');
-      $("#useremail").html(useremail);
- });  
-</script>
-
 
 <script src="../js/main/modernizr.custom.js"></script>
 <!--webfonts 없어도 되는듯..? -->
@@ -53,6 +45,11 @@ window.scrollTo(0,1); }
 <script src="../js/main/wow.min.js"></script>
 <script>
   new WOW().init();
+  $(document).ready(function(){ 
+    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
+    var userCarNo = sessionStorage.getItem('loginUsercarNo');
+      $("#userNickname").html(userNickname);
+ });  
 </script>
 <!--//end-animate-->
 
@@ -140,13 +137,13 @@ window.scrollTo(0,1); }
       <!-- header-right -->
       <div class="header-right">
         <!-- 유저별 차량 리스트 -->
-        <div class="profile_details_left">
+<!--          <div class="profile_details_left">
           <ul id="myCarList" class="nofitications-dropdown">
 
           </ul>
           <div class="clearfix"></div>
         </div>
-        <!-- 유저별 차량 리스트 end -->
+ -->        <!-- 유저별 차량 리스트 end -->
 
         <!-- 로그인 유저 정보 -->
         <div class="profile_details">
@@ -158,7 +155,7 @@ window.scrollTo(0,1); }
                   <span class="prfil-img"><img
                     src="../img/main/a.png" alt=""> </span>
                   <div class="user-name">
-                    <p id="useremail"></p>
+                    <p id="userNickname"></p>
                     <span>안녕하세요.</span>
                   </div>
                   <!-- 빈칸 유지를 위한 아이콘 자리 -->
@@ -186,44 +183,23 @@ window.scrollTo(0,1); }
       <div class="main-page">
 
         <!-- 차트 위 택스트 -->
+<<<<<<< HEAD
         <!--<div class="row-one">-->
+=======
+        <div id="myCarList" class="row-one">
+>>>>>>> 5452094ec6d4490cab5dc647064b8b6b74f96572
 
-          <!--<div class="col-md-4 widget">
-            <div class="stats-left ">
-              <h5>Today</h5>
-              <h4>Sales</h4>
-            </div>
-            <div class="stats-right">
-              <label> 45</label>
-            </div>
-            <div class="clearfix"> </div> 
+          <div class="clearfix"> </div> 
           </div>
-          
-          <div class="col-md-4 widget states-mdl">
-            <div class="stats-left">
-              <h5>Today</h5>
-              <h4>Visitors</h4>
-            </div>
-            <div class="stats-right">
-              <label> 80</label>
-            </div>
-            <div class="clearfix"> </div> 
-          </div>
-          
-          <div class="col-md-4 widget states-last">
-            <div class="stats-left">
-              <h5>Today</h5>
-              <h4>Orders</h4>
-            </div>
-            <div class="stats-right">
-              <label>51</label>
-            </div>
-            <div class="clearfix"> </div> 
-          </div>
-          <div class="clearfix"> </div> -->
+          <div class="clearfix"> </div> 
 
+<<<<<<< HEAD
         <!--</div>-->
 
+=======
+        </div>
+				
+>>>>>>> 5452094ec6d4490cab5dc647064b8b6b74f96572
         <!-- 차트 시작 -->
         <div class="charts">
           <div class="col-md-4 charts-grids widget">
@@ -232,6 +208,10 @@ window.scrollTo(0,1); }
             <div id="bar-legend" class="chart-legend"></div>
           </div>
           <div class="col-md-4 charts-grids widget states-mdl">
+            <h4 class="title">저번 주유 대비 연비 개선율 입니다.</h4>
+            <canvas id="doughnut" height="300" width="400"> </canvas>
+          </div>
+          <div class="col-md-4 charts-grids widget">
             <h4 id="topR" class="title">공인 연비 대비 연비 입니다.</h4>
             <canvas id="line" height="300" width="400"> </canvas>
        		 <div id="line-legend" class="chart-legend"></div>
@@ -246,6 +226,12 @@ window.scrollTo(0,1); }
 
           <script>
           var selectcar = $("#myCarList");
+          var cnt = 0;
+          var classType = new Array();
+          classType[0] = ("col-md-4 widget list");
+          classType[1] = ("col-md-4 widget states-mdl list");
+          classType[2] =("col-md-4 widget states-last list");
+            
           function clickDetailLnk(event) {
             /* alert( $(event.target).attr("carNo")); */
           $("#line").remove();
@@ -262,10 +248,12 @@ window.scrollTo(0,1); }
           $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
            //alert(sessionStorage.getItem("loginUser"));
            for (var garage of resultObj.data) {
-           $("<li class='dropdown head-dpdn'><span class='carN' carNo='" + garage.myCarNo + "'>" 
-             + garage.nickName + "</span></li>").appendTo(selectcar)
+           $("<div class='" + classType[cnt++] + "'><p class='carN' carNo='" + garage.myCarNo + "'>" + garage.nickName + "</p><div class='clearfix'></div></div>").appendTo(selectcar)
+           
+           /* $("<li class='dropdown head-dpdn'><span class='carN' carNo='" + garage.myCarNo + "'>" 
+             + garage.nickName + "</span></li>").appendTo(selectcar) */  
            }
-          $("span.carN").click(clickDetailLnk);
+          $("p.carN").click(clickDetailLnk);
           lineChart(resultObj);
           barChart(resultObj);
          });
@@ -327,7 +315,7 @@ window.scrollTo(0,1); }
               "<li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span>"+
               "<%if(datasets[i].label){%><%=datasets[i].label%><%}%>"+
               "</li><%}%>"+
-              "</ul>"
+              "(단위: Km)</ul>"
           });
           document.getElementById('line-legend').innerHTML = myLine.generateLegend();
           }
@@ -365,10 +353,18 @@ window.scrollTo(0,1); }
             var myBar = new Chart(ctx).Bar(barChartData, {
             responsive : true,
             datasetStroke : true,
-            legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+            legendTemplate : 
+              "<ul class=\"<%=name.toLowerCase()%>-legend\">"+
+            	"<% for (var i=0; i<datasets.length; i++){%>"+
+            	"<li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span>"+
+            	"<%if(datasets[i].label){%><%=datasets[i].label%><%}%>"+
+            	"</li><%}%>"+
+            	"(단위: 천원)</ul>"
+      
             });
             document.getElementById('bar-legend').innerHTML = myBar.generateLegend();
           }
+<<<<<<< HEAD
           
          var doughnutData = [
 			{
@@ -397,6 +393,46 @@ window.scrollTo(0,1); }
           new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
  
          
+=======
+        
+        var doughnutData = [
+                    				{
+                    					value: 300,
+                    					color:"#F7464A",
+                    					highlight: "#FF5A5E",
+                    					label: "Red"
+                    				},
+                    				{
+                    					value: 50,
+                    					color: "#46BFBD",
+                    					highlight: "#5AD3D1",
+                    					label: "Green"
+                    				},
+                    				{
+                    					value: 100,
+                    					color: "#FDB45C",
+                    					highlight: "#FFC870",
+                    					label: "Yellow"
+                    				},
+                    				{
+                    					value: 40,
+                    					color: "#949FB1",
+                    					highlight: "#A8B3C5",
+                    					label: "Grey"
+                    				},
+                    				{
+                    					value: 120,
+                    					color: "#4D5360",
+                    					highlight: "#616774",
+                    					label: "Dark Grey"
+                    				}
+
+                    			];
+
+                    				var ctx3 = document.getElementById("doughnut").getContext("2d");
+                    				var myDoughnut = new Chart(ctx3).Doughnut(doughnutData, {responsive : true});
+
+>>>>>>> 5452094ec6d4490cab5dc647064b8b6b74f96572
         </script>
 
         </div>
