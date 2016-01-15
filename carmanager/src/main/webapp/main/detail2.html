@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bar Chart</title>
+		<style>
+		.chart-legend li span{
+    	display: inline-block;
+    	width: 12px;
+    	height: 12px;
+    	margin-right: 5px;
+		}
+	</style>
+	</head>
+	<body>
+		<script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../lib/Chart.js/Chart.js"></script>
+		<div style="width: 30%">
+			<canvas id="canvas" height="250" width="350"></canvas>
+		</div>
+		<div style="width: 30%">
+			<canvas id="canvas2" height="250" width="350"></canvas>
+		</div>
+<div id="js-legend" class="chart-legend"></div>
+
+	<script>
+	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+	var barChartData = {
+		labels : ["January","February","March"],
+		datasets : [
+			{
+			  label : "111",
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+			},
+			{
+			  label : "222",
+				fillColor : "rgba(0,0,0,1)",
+				strokeColor : "rgba(0,0,0,1)",
+				highlightFill : "rgba(0,0,0,1)",
+				highlightStroke : "rgba(0,0,0,1)",
+				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+			}
+		]
+
+	}
+
+		var ctx = document.getElementById("canvas").getContext("2d");
+		var myBar = new Chart(ctx).Bar(barChartData, {
+			responsive : true,
+			datasetStroke : true,
+			legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+		});
+
+	
+	document.getElementById('js-legend').innerHTML = myBar.generateLegend();
+
+	</script>
+	</body>
+</html>
