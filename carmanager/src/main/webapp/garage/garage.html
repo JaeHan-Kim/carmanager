@@ -168,8 +168,8 @@ window.scrollTo(0,1); }
           </div>
 
           <div id="btn_msg" class="chat-grid widget-shadow">
-            <button id='btn_delete' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button>
-            <button id='btn_delete2' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기2</button>
+            <!-- <button id='btn_delete' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button> -->
+            <button id='btn_delete2' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button>
           </div>
 
           <!-- 리스트 출력을 위한 스크립트 -->
@@ -197,9 +197,8 @@ window.scrollTo(0,1); }
              });
            }
            
-            $('#btn_delete').click(function(resultObj) {
+            /* $('#btn_delete').click(function(resultObj) {
               if ($('#deleteNo').val() != null) {
-            /* alert($('#deleteNo').val()) */
                 $.post('delete.do', {
                     no: $('#deleteNo').val()
                   }, function(resultObj) {
@@ -211,14 +210,13 @@ window.scrollTo(0,1); }
                     }
                   }, 'json');
                  } else {
-                   /* alert("하하"); */
                    $('#btn_msg').click(btnMsg);
                  }
               function btnMsg(e){
                 $("<div id='btnMsg' class='collapse'>잠깐! 차량 선택 후 삭제 가능합니다.</div>").appendTo(btn_msg)
               }
               
-            });
+            }); */
             
             $('#btn_delete2').click(function(resultObj) {
               if ($('#deleteNo').val() == null) {
