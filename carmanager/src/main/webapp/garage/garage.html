@@ -15,6 +15,7 @@ function hideURLbar(){
 window.scrollTo(0,1); } 
 
 </script>
+
 <!-- Bootstrap Core CSS -->
 <link href="../css/main/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
@@ -25,6 +26,7 @@ window.scrollTo(0,1); }
 <!-- font-awesome icons 빈칸 유지를 위해 링크를 막아둠 -->
 <!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
 <!-- //font-awesome icons -->
+
 <!-- js-->
 <script src="../js/main/jquery-1.11.1.min.js"></script>
 <script src="../js/main/modernizr.custom.js"></script>
@@ -43,6 +45,11 @@ window.scrollTo(0,1); }
 <script src="../js/main/wow.min.js"></script>
 <script>
   new WOW().init();
+  $(document).ready(function(){ 
+    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
+    var userCarNo = sessionStorage.getItem('loginUsercarNo');
+      $("#userNickname").html(userNickname);
+ });  
 </script>
 <!--//end-animate-->
 
@@ -126,7 +133,7 @@ window.scrollTo(0,1); }
                   <span class="prfil-img"><img
                     src="../img/main/a.png" alt=""> </span>
                   <div class="user-name">
-                    <p id="useremail"></p>
+                    <p id="userNickname"></p>
                     <span>안녕하세요.</span>
                   </div>
                   <!-- 빈칸 유지를 위한 아이콘 자리 -->
@@ -239,8 +246,15 @@ window.scrollTo(0,1); }
                     }, function(resultObj) {
                       var ajaxResult = resultObj.ajaxResult;
                       if (ajaxResult.status == "success") {
-                        swal("삭제하였습니다!", "차량 등록 후 이용 가능합니다.", "success");   
-                        location.href = "garage.html";
+                        swal({   
+                          title: "등록 성공!",   
+                          text: "차량 등록 후 이용 가능합니다.",
+                          type: "success",   
+                          confirmButtonText: "확인" }, function() {
+                            location.href = "garage.html";
+                          });
+                        /* swal("삭제하였습니다!", "차량 등록 후 이용 가능합니다.", "success");   
+                        location.href = "garage.html"; */
                       } }, 'json');
                   } else {    
                       swal("취소하였습니다.", "기존 차량을 계속 이용합니다. : )", "error"); }
@@ -259,6 +273,8 @@ window.scrollTo(0,1); }
           <div class="panel-default">
             <div class="panel-heading">
             차고에 차량을 추가해 보세요.
+            </div>
+             <div class="clearfix"></div>
             <span class="btn_set">
             <button id="btn_reg" type="submit" class="btn_color btn btn-default">등록</button>
               <button id="btn_reset" type="submit" class="btn_color btn btn-default">리셋</button>
@@ -269,9 +285,10 @@ window.scrollTo(0,1); }
             <div class="panel-body">
               <form id="form_carInput" class="com-mail">
                 <div class="col-md-12">
-                  <label>애칭</label> <input id="txt_nickname" type="text"
-                    class="form-control1 control3"> <label>제조사</label>
-                  <select id="sel_list" class="form-control1 control3"></select>
+                  <label>애칭</label> 
+                  <input id="txt_nickname" type="text" class="form-control1 control3">
+                  <label>제조사</label>
+                  <select id="sel_list" class="form-control control3"></select>
                 </div>
                 <div id="div_modelinput" class="col-md-13">
                   <label>&nbsp;&nbsp;&nbsp;&nbsp;차량모델명</label>
@@ -283,8 +300,7 @@ window.scrollTo(0,1); }
                 <div id="div_modellist" class="col-md-13">
                   <label>&nbsp;&nbsp;&nbsp;&nbsp;차량모델명</label>
                   <div class="col-md-12 grid_box1">
-                    <select id="sel_modellist"
-                      class="form-control1 control3"></select>
+                    <select id="sel_modellist" class="form-control control3"></select>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -377,7 +393,7 @@ window.scrollTo(0,1); }
           if ($('#txt_nickname').val().length < 1) {
             swal({   
               title: "Error!",   
-              text: "닉네임을 입력해 주세요!",   
+              text: "닉네임을 입력해 주세요!", 
               type: "error",   
               confirmButtonText: "확인" });
             return false;
@@ -447,13 +463,13 @@ window.scrollTo(0,1); }
               title: "Error!",   
               text: "차량은 최대 3대까지 등록 가능합니다.",   
               type: "error",   
-              confirmButtonText: "확인" });
+              confirmButtonText: "확인 ;(" });
             return false;
           }
           swal({   
               title: "등록 성공!",   
               type: "success",   
-              confirmButtonText: "확인" }, function() {   
+              confirmButtonText: "확인 :)" }, function() {   
                 location.href = "garage.html";
               });
         }, 'json');

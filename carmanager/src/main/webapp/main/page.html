@@ -34,6 +34,11 @@
 	<script src="../js/main/wow.min.js"></script>
 	<script>
 	  new WOW().init();
+	  $(document).ready(function(){ 
+	    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
+	    var userCarNo = sessionStorage.getItem('loginUsercarNo');
+	      $("#userNickname").html(userNickname);
+	 });  
 	</script>
 	<!--//end-animate-->
 	
@@ -127,7 +132,7 @@
 	                  <img src="../img/main/a.png" alt=""> 
 	                </span>
 	                <div class="user-name">
-	                  <p>ooo님</p>
+	                  <p id="userNickname"></p>
 	                  <span>안녕하세요.</span>
 	                </div>
 	                <!-- 빈칸 유지를 위한 아이콘 자리 -->
