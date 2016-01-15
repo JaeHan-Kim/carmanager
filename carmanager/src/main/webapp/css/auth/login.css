@@ -56,9 +56,9 @@ body {
 
 .intext {
   font-size: 45px;
-  font-weight: bolder;
+  font-weight: bold;
   color: red;
-  text-shadow: white 1px 1px 1px;
+  text-shadow: gray 1px 1px 1px;
   
 }
 /* 멘트 영역 부분 끝 */
@@ -130,9 +130,6 @@ body {
     border: 1px solid rgba(78,48,67, 0.8);
     background: rgba(0,0,0,0.5);
     border-radius: 2px;
-    box-shadow: 
-        0 1px 0 rgba(255,255,255,0.2), 
-        inset 0 1px 1px rgba(0,0,0,0.1);
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;
     -ms-transition: all 0.3s ease-out;
@@ -141,7 +138,7 @@ body {
 
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
     color: #fff;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 .form-4 input::-webkit-input-placeholder {
@@ -166,10 +163,6 @@ body {
 
 .form-4 input[type=text]:focus,
 .form-4 input[type=password]:focus {
-    box-shadow: 
-        0 1px 0 rgba(255,255,255,0.2), 
-        inset 0 1px 1px rgba(0,0,0,0.1),
-        0 0 0 3px rgba(255,255,255,0.15);
     outline: none;
 }
 
@@ -186,7 +179,6 @@ body {
     background: darkred;
     border-radius: 5px;
     border: 1px solid #4e3043;
-    box-shadow: inset 0 1px rgba(255,255,255,0.4), 0 2px 1px rgba(0,0,0,0.1);
     cursor: pointer;
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;
@@ -203,7 +195,6 @@ body {
 
 .form-4 input[type=button]:hover {
     background: red;
-    border: 1px solid white;
 }
 
 .form-4 label {
@@ -235,6 +226,10 @@ A:hover {
 	background-color: Highlight;
 	color: HighlightText; 
 	text-decoration:underline;
+}
+
+.sweet .confirm:hover {
+	background-color:red;
 }
 
 /* 로그인 영역 설정 끝 */
@@ -272,7 +267,7 @@ A:hover {
 
 /* 모달 영역 처리 끝 */
 
-/* 로그인 폼 CSS */
+/* 회원가입 폼 CSS */
 .input {
   width: 430px;
   position: absolute;
@@ -291,7 +286,7 @@ A:hover {
     display: block;
 }
 
-/* 로그인폼 텍스트 */
+/* 회원가입 폼 텍스트영역 */
 .input #topText {
   font-size: 25px;
   text-align: left;
@@ -340,7 +335,6 @@ A:hover {
   background: darkred;
   border-radius: 5px;
   border: 1px solid #4e3043;
-  box-shadow: inset 0 1px rgba(255,255,255,0.4), 0 2px 1px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: all 0.3s ease-out;
   
@@ -377,9 +371,6 @@ A:hover {
   border: 1px solid rgba(78,48,67, 0.8);
   background: rgba(0,0,0,0.5);
   border-radius: 2px;
-  box-shadow: 
-      0 1px 0 rgba(255,255,255,0.2), 
-      inset 0 1px 1px rgba(0,0,0,0.1);
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -ms-transition: all 0.3s ease-out;
@@ -389,7 +380,7 @@ A:hover {
   /* Font styles */
   font-family: 'Raleway', 'Lato', Arial, sans-serif;
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 #imgInput label:hover, 
@@ -398,7 +389,6 @@ A:hover {
 #button input[type=submit]:hover,
 #button input[type=reset]:hover {
     background: red;
-    border: 1px solid white;
     
     /*box-shadow: 
         inset 0 1px rgba(255,255,255,0.5), 
@@ -420,25 +410,10 @@ A:hover {
     text-shadow: 0 1px 0 rgba(255,255,255,0.15);
 }
 
-.input #textInput input:hover, 
-#imgInput label:hover, 
-#button input:hover,
-#button button:hover {
-    border-color: white;
-}
-
 .input #textInput input:focus, 
 #imgInput label:focus, 
 #button input:focus {
-    box-shadow: 
-        0 1px 0 rgba(255,255,255,0.2), 
-        inset 0 1px 1px rgba(0,0,0,0.1),
-        0 0 0 3px rgba(255,255,255,0.15);
     outline: none;
-}
-
-.input #textInput input:focus {
-    outline: 1px solid white;
 }
 
 .input #textInput label {
@@ -470,7 +445,6 @@ A:hover {
     background: darkred; /* linear-gradient(rgba(0,0,0,0.5), rgba(255,255,255,0.7));    */
     border-radius: 5px;
     border: 1px solid #4e3043;
-    box-shadow: inset 0 1px rgba(255,255,255,0.4), 0 2px 1px rgba(0,0,0,0.1);
     cursor: pointer;
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;
@@ -508,8 +482,7 @@ A:hover {
 #checkNickname, 
 #checkPwd1, 
 #checkPwd2 {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 11px;
   margin-left: 170px;
   margin-top: -10px;
   margin-bottom: 5px;

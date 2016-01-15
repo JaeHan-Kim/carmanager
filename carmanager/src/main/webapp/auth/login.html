@@ -4,19 +4,18 @@
   <meta charset="UTF-8">
   <title>내 차를 부탁해</title>
   <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/auth/sweetalert.css">
   <link rel="stylesheet" href="../css/auth/login.css">
-  <link rel="stylesheet" type="text/css" href="../lib/sweetalert/sweetalert.css">
   
   <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/bootstrap/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../js/auth/jquery.cookie.js"></script>  
-  <script type="text/javascript" src="../js/auth/jquery.placeholder.min.js"></script>
   <script type="text/javascript" src="../js/auth/cycle2.js"></script>
-  <script type="text/javascript" src="../js/auth/modernizr.custom.63321.js"></script>
-  <script type="text/javascript" src="../js/auth/jquery.leanModal.min.js"></script>
   <script type="text/javascript" src="../js/auth/httpRequest.js"></script>
-  <script type="text/javascript" src="../lib/sweetalert/sweetalert.min.js"></script> 
-  <link rel="stylesheet" type="text/css" href="../lib/sweetalert/sweetalert.css">
+  <script type="text/javascript" src="../js/auth/jquery.cookie.js"></script>  
+  <script type="text/javascript" src="../js/auth/jquery.leanModal.min.js"></script>
+  <script type="text/javascript" src="../js/auth/jquery.placeholder.min.js"></script>
+  <script type="text/javascript" src="../js/auth/modernizr.custom.63321.js"></script>
+  <script type="text/javascript" src="../js/auth/sweetalert.min.js"></script> 
 
   <script>
     /* 입력한 이메일을 쿠키에 저장하기 위한 스크립트 */
@@ -27,7 +26,10 @@
 		    $("#saveEmail").attr("checked", "checked");		// 체크박스에 체크
 	    }
 	  });
-
+	  
+	  swal.setDefaults({    
+      type: "error" 
+    });
   </script>
 
 </head>
@@ -115,11 +117,18 @@
 	      }   
 	
 	      if ($('#femail').val().length < 1 || $('#fpassword').val().length < 1) {
-          alert("이메일과 패스워드를 모두 입력해주세요.");
           if ($('#femail').val().length < 1) {
-        	  $('#femail').focus();
+        	  swal({    
+              title: "로그인 실패!",   
+              text: "이메일을 입력해주세요!", 
+              confirmButtonText: "확인"
+            });
           } else {
-        	  $('#fpassword').focus();
+        	  swal({    
+              title: "로그인 실패!",   
+              text: "비밀번호를 입력해주세요!", 
+              confirmButtonText: "확인"
+            });
           }
         } else {
 		      /* 로그인 버튼을 눌렀을 때 일어나는 이벤트. */
@@ -135,7 +144,11 @@
 		          sessionStorage.setItem('loginUserNickname', ajaxResult.data.nickName);
 		          location.href = "../main/main.html";
 		        } else {
-		          alert("이메일과 패스워드가 일치하지 않습니다.");
+		        	swal({    
+                title: "로그인 실패!",   
+                text: "이메일과 비밀번호를 확인하세요!", 
+                confirmButtonText: "확인"
+              });
 		        }
 		      }, 'json');
 			  }
@@ -304,28 +317,43 @@
   /* 빈 칸이 있을 경우 alert 창을 띄운다. */
   $('#joinBtn').click(function(event) {
     if($('#jemail').val().length < 1) {
-      alert("이메일을 입력해주세요!");
-      $('#jemail').focus();
+    	swal({    
+        title: "회원가입 실패!",   
+        text: "이메일을 입력해주세요!", 
+        confirmButtonText: "확인"
+      });
       return false;
     }
     if($('#jnickname').val().length < 1) {
-      alert("별명을 입력해주세요!");
-      $('#jnickname').focus();
+      swal({    
+        title: "회원가입 실패!",   
+        text: "별명을 입력해주세요!", 
+        confirmButtonText: "확인"
+      });
       return false;
     }
     if($('#jpassword').val().length < 1) {
-      alert("비밀번호를 입력해주세요!");
-      $('#jpassword').focus();
+      swal({    
+        title: "회원가입 실패!",   
+        text: "비밀번호를 입력해주세요!", 
+        confirmButtonText: "확인"
+      });
       return false;
     }
     if($('#jpassword_confirm').val().length < 1) {
-      alert("비밀번호 확인을 해주세요!");
-      $('#jpassword_confirm').focus();
+      swal({    
+        title: "회원가입 실패!",   
+        text: "비밀번호 확인을 해주세요!", 
+        confirmButtonText: "확인"
+      });
       return false;
     }
     if($('#jpassword').val() != $('#jpassword_confirm').val()) {
-      alert("비밀번호가 일치하지 않습니다!");
-      $('#jpassword_confirm').focus();
+      swal({    
+        title: "회원가입 실패!",   
+        text: "비밀번호가 일치하지 않습니다!", 
+        confirmButtonText: "확인"
+      });
       return false;
     }
     
@@ -336,7 +364,11 @@
     	 $('#jnickname').val().length > 10 ||
     	 $('#jnickname').val().length < 0  ||
     	 !passwordPattern.test($('#jpassword').val())) {
-    	alert("입력한 값이 양식에 맞는지 확인해주세요.");
+        swal({    
+            title: "회원가입 실패!",   
+            text: "양식에 맞춰 입력해주세요!", 
+            confirmButtonText: "확인"
+          });
     	return false;
     }
     	  
@@ -350,7 +382,11 @@
       if (ajaxResult.status == "success") {
         location.href = "login.html";
       } else {
-        alert("회원가입에 실패했습니다.");
+        swal({    
+          title: "회원가입 실패!",   
+          text: "회원가입에 실패했습니다!", 
+          confirmButtonText: "확인"
+        });
       }
     }, 'json');
   });
