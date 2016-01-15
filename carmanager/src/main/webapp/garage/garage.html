@@ -246,8 +246,15 @@ window.scrollTo(0,1); }
                     }, function(resultObj) {
                       var ajaxResult = resultObj.ajaxResult;
                       if (ajaxResult.status == "success") {
-                        swal("삭제하였습니다!", "차량 등록 후 이용 가능합니다.", "success");   
-                        location.href = "garage.html";
+                        swal({   
+                          title: "등록 성공!",   
+                          text: "차량 등록 후 이용 가능합니다.",
+                          type: "success",   
+                          confirmButtonText: "확인" }, function() {
+                            location.href = "garage.html";
+                          });
+                        /* swal("삭제하였습니다!", "차량 등록 후 이용 가능합니다.", "success");   
+                        location.href = "garage.html"; */
                       } }, 'json');
                   } else {    
                       swal("취소하였습니다.", "기존 차량을 계속 이용합니다. : )", "error"); }
@@ -456,13 +463,13 @@ window.scrollTo(0,1); }
               title: "Error!",   
               text: "차량은 최대 3대까지 등록 가능합니다.",   
               type: "error",   
-              confirmButtonText: "확인" });
+              confirmButtonText: "확인 ;(" });
             return false;
           }
           swal({   
               title: "등록 성공!",   
               type: "success",   
-              confirmButtonText: "확인" }, function() {   
+              confirmButtonText: "확인 :)" }, function() {   
                 location.href = "garage.html";
               });
         }, 'json');
