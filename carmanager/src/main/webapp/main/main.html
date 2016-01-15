@@ -224,11 +224,11 @@ window.scrollTo(0,1); }
         <!-- 차트 시작 -->
         <div class="charts">
           <div class="col-md-4 charts-grids widget">
-            <h4 class="title">월별 주유 금액 입니다.</h4>
+            <h4 id="topL" class="title">월별 주유 금액 입니다.</h4>
             <canvas id="bar" height="300" width="400"> </canvas>
           </div>
           <div class="col-md-4 charts-grids widget states-mdl">
-            <h4 class="title">공인 연비 대비 연비 입니다.</h4>
+            <h4 id="topR" class="title">공인 연비 대비 연비 입니다.</h4>
             <canvas id="line" height="300" width="400"> </canvas>
           </div>
           <div class="col-md-4 charts-grids widget">
@@ -238,31 +238,41 @@ window.scrollTo(0,1); }
           <div class="clearfix"></div>
 
           <script>
-          var twoago = (moment().subtract(60, 'days').months() + 1) + "월";
-          var oneago = (moment().subtract(30, 'days').months() + 1) + "월";
-          var present = moment().format('MM')  + "월";
           var selectcar = $("#myCarList");
 		   		function clickDetailLnk(event) {
 		   		 	alert( $(event.target).attr("carNo"));
+		   		$("#line").remove();
+		   		$("#bar").remove();
+		   		 $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+$(event.target).attr("carNo"), 
+		   		    function(resultObj) {
+		   					$("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
+		   					$("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
+		   					lineChart(resultObj);
+		  		   		barChart(resultObj);
+		   		    });
 		   		}
           
          	$.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
            //alert(sessionStorage.getItem("loginUser"));
-           var effic = new Array();
-           var driveDt = new Array();
-           
-           if (resultObj.refuelList != "") {
-          	 	for (var i = 0; i < 7; i++) {
-             	effic[i] = (resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter;
-             	driveDt[i] = resultObj.refuelList[i].group_date
-             	//driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
-           	 }
-           }
 		   		 for (var garage of resultObj.data) {
 		     	 $("<li class='dropdown head-dpdn'><span class='carN' carNo='" + garage.myCarNo + "'>" 
 		         + garage.nickName + "</span></li>").appendTo(selectcar)
 		   		 }
-		   		 $("span.carN").click(clickDetailLnk);
+		      $("span.carN").click(clickDetailLnk);
+		   		lineChart(resultObj);
+		   		barChart(resultObj);
+         });
+        function lineChart(resultObj) {
+          var effic = new Array();
+          var driveDt = new Array();
+          
+          if (resultObj.refuelList != "") {
+         	 	for (var i = 0; i < 7; i++) {
+            	effic[i] = (resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter;
+            	driveDt[i] = resultObj.refuelList[i].group_date
+            	//driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
+          	 }
+          }
             var lineChartData = {
         			labels : [driveDt[6],driveDt[5],driveDt[4],driveDt[3],driveDt[2],driveDt[1],driveDt[0]],
         			datasets : [
@@ -305,88 +315,42 @@ window.scrollTo(0,1); }
         	myLine = new Chart(ctx1).Line(lineChartData, {
         		responsive: true
         	});
-            
-                var barChartData = {
-                  labels : [twoago, oneago, present],
-                  datasets : [
-                    {
-                      label: "회원평균",
-                      fillColor : "rgba(233, 78, 2, 0.9)",
-                      strokeColor : "rgba(233, 78, 2, 0.9)",
-                      highlightFill: "#e94e02",
-                      highlightStroke: "#e94e02",
-                      data : [(resultObj.memCostAvg[2].cost/=1000), 
-            	   			        (resultObj.memCostAvg[1].cost/=1000), 
-            	   			        (resultObj.memCostAvg[0].cost/=1000)]
-                    },
-                    {
-                      label: "개인평균",
-                      fillColor : "rgba(79, 82, 186, 0.9)",
-                      strokeColor : "rgba(79, 82, 186, 0.9)",
-                      highlightFill: "#4F52BA",
-                      highlightStroke: "#4F52BA",
-                      data : [(resultObj.myCostAvg[2].cost/=1000), 
-            	   			        (resultObj.myCostAvg[1].cost/=1000),
-            	   			        (resultObj.myCostAvg[0].cost/=1000)]
-                    }
-                  ]
-                };
-              var ctx = document.getElementById("bar").getContext("2d");
-          		var myBar = new Chart(ctx).Bar(barChartData, {
-          		'responsive' : true,
-          		'datasetStroke' : true,
-          		});
-         });
-         
-         
-              
-              /* var lineChartData = {
-                  labels : ["Jan","Feb","March","April","May","June","July"],
-                  datasets : [
-                    {
-                      fillColor : "rgba(242, 179, 63, 1)",
-                      strokeColor : "#F2B33F",
-                      pointColor : "rgba(242, 179, 63, 1)",
-                      pointStrokeColor : "#fff",
-                      data : [70,60,72,61,75,59,80]
-                    },
-                    {
-                      fillColor : "rgba(97, 100, 193, 1)",
-                      strokeColor : "#6164C1",
-                      pointColor : "rgba(97, 100, 193,1)",
-                      pointStrokeColor : "#9358ac",
-                      data : [50,65,51,67,52,64,50]
-                    }
-                  ]
-                };
-              new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData); */
-
-              var pieData = [
-                    {
-                      value: 90,
-                      color:"rgba(233, 78, 2, 1)",
-                      label: "Product 1"
-                    },
-                    {
-                      value : 50,
-                      color : "rgba(242, 179, 63, 1)",
-                      label: "Product 2"
-                    },
-                    {
-                      value : 60,
-                      color : "rgba(88, 88, 88,1)",
-                      label: "Product 3"
-                    },
-                    {
-                      value : 40,
-                      color : "rgba(79, 82, 186, 1)",
-                      label: "Product 4"
-                    }
-                  ];
-              new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
-        //function barChart(effic, driveDt) {}
-          
-          
+		   		}
+        function barChart(resultObj) {
+		   		 var twoago = (moment().subtract(60, 'days').months() + 1) + "월";
+	          var oneago = (moment().subtract(30, 'days').months() + 1) + "월";
+	          var present = moment().format('MM')  + "월";
+               var barChartData = {
+                 labels : [twoago, oneago, present],
+                 datasets : [
+                   {
+                     label: "회원평균",
+                     fillColor : "rgba(233, 78, 2, 0.9)",
+                     strokeColor : "rgba(233, 78, 2, 0.9)",
+                     highlightFill: "#e94e02",
+                     highlightStroke: "#e94e02",
+                     data : [(resultObj.memCostAvg[2].cost/=1000), 
+           	   			        (resultObj.memCostAvg[1].cost/=1000), 
+           	   			        (resultObj.memCostAvg[0].cost/=1000)]
+                   },
+                   {
+                     label: "개인평균",
+                     fillColor : "rgba(79, 82, 186, 0.9)",
+                     strokeColor : "rgba(79, 82, 186, 0.9)",
+                     highlightFill: "#4F52BA",
+                     highlightStroke: "#4F52BA",
+                     data : [(resultObj.myCostAvg[2].cost/=1000), 
+           	   			        (resultObj.myCostAvg[1].cost/=1000),
+           	   			        (resultObj.myCostAvg[0].cost/=1000)]
+                   }
+                 ]
+               };
+             var ctx = document.getElementById("bar").getContext("2d");
+         		var myBar = new Chart(ctx).Bar(barChartData, {
+         		'responsive' : true,
+         		'datasetStroke' : true,
+         		});
+		   		}
         </script>
 
         </div>

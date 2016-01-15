@@ -37,7 +37,13 @@ public class MainController {
     List<Refuel> refuels = refuelService.listAll(carNo);
     List<Refuel> costAvg = refuelService.costAvg();
     List<Refuel> myCostAvg = refuelService.myCostAvg(carNo);
-    
+    log.debug("-------------------");
+    log.debug("회원번호" + no);
+    log.debug("차량번호" + carNo);
+    for(Refuel refuel : refuels) {
+    	log.debug(refuel.toString());
+    }
+    log.debug("-------------------");
     
     
     HashMap<String, Object> resultMap = new HashMap<>();
