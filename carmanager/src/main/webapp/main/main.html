@@ -242,7 +242,7 @@ window.scrollTo(0,1); }
           <script>
           var selectcar = $("#myCarList");
           function clickDetailLnk(event) {
-            alert( $(event.target).attr("carNo"));
+            /* alert( $(event.target).attr("carNo")); */
           $("#line").remove();
           $("#bar").remove();
            $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+$(event.target).attr("carNo"), 
