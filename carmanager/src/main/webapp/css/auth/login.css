@@ -46,14 +46,20 @@ body {
   font-weight: lighter;
   font-size: 40px;
   color: antiquewhite;
-  text-shadow: darkgray 1px 1px 1px;
   font-family: sans-serif;
   /*border: 1px solid red;*/
 }
 
+.outtext {
+	text-shadow: darkgray 1px 1px 1px;
+}
+
 .intext {
-    font-size: 45px;
-    font-weight: bolder;
+  font-size: 45px;
+  font-weight: bolder;
+  color: red;
+  text-shadow: white 1px 1px 1px;
+  
 }
 /* 멘트 영역 부분 끝 */
 
