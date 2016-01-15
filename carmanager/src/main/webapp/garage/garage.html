@@ -24,7 +24,7 @@ window.scrollTo(0,1); }
 <!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
 <!-- //font-awesome icons -->
 <!-- js-->
-<script src="../js/main/jquery.js"></script>
+<script src="../js/main/jquery-1.11.1.min.js"></script>
 <script src="../js/main/modernizr.custom.js"></script>
 <!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
 <link
@@ -160,18 +160,15 @@ window.scrollTo(0,1); }
             <ul id="detail"></ul>
           </div>
 
-          <div class="chat-grid widget-shadow">
-            <button id='btn_delete' type="submit" class="btn btn-primary col-md-6" data-toggle="collapse" data-target="#btn_msg">차고에서 삭제하기</button>
-            <div id="#btn_msg" class="collapse">
-              잠깐! 차량 선택 후 삭제해 주세요.
-            </div>
-          </div>
+           <button id='btn_delete' type="submit" class="btn btn-info col-md-6" data-toggle="collapse" data-target="#btnMsg">차고에서 삭제하기</button>
+          <!--<div id="btn_msg" class="chat-grid widget-shadow">
+          </div>-->
          <!-- 리스트 출력을 위한 스크립트 -->
           <script type="text/javascript">
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-       		    $("<li><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'></i>" + garage.nickName + "</a></li>").appendTo(myList)
+       		    $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'></i>" + garage.nickName + "</a></li>").appendTo(myList)
               }
               $("a.detailLink").click(clickDetailLink);
             });
@@ -179,7 +176,6 @@ window.scrollTo(0,1); }
            function clickDetailLink(event) {
            	 event.preventDefault(); 
            	 $(detail).empty();
-           	 alert($(event.target).attr("myCarNo"));
            	 $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
            	  var ajaxResult = resultObj.ajaxResult;
               if (ajaxResult.status == "success") {
@@ -192,21 +188,32 @@ window.scrollTo(0,1); }
            	 });
            }
            
-           if ($('#deleteNo').val() != null) {
             $('#btn_delete').click(function(resultObj) {
+              if ($('#deleteNo').val() != null) {
             /* alert($('#deleteNo').val()) */
-              $.post('delete.do', {
-                  no: $('#deleteNo').val()
-                }, function(resultObj) {
-                  var ajaxResult = resultObj.ajaxResult;
-                  if (ajaxResult.status == "success") {
-                    location.href = "garage.html";
-                  } else {
-                    alert("차량 삭제에 실패하였습니다.");
-                  }
-              }, 'json');
+                $.post('delete.do', {
+                    no: $('#deleteNo').val()
+                  }, function(resultObj) {
+                    var ajaxResult = resultObj.ajaxResult;
+                    if (ajaxResult.status == "success") {
+                      location.href = "garage.html";
+                    } else {
+                      alert("차량 삭제에 실패하였습니다.");
+                    }
+                  }, 'json');
+                 } else {
+                   /* alert("하하"); */
+                   $('#btn_msg').click(btnMsg);
+                 }
+              function btnMsg(e){
+                $("<div id='btnMsg' class='collapse'>잠깐! 차량 선택 후 삭제해 주세요.</div>").appendTo(btn_msg)
+              }
+              
             });
-           } 
+                
+           
+             
+            
          /*  $.getJSON('delete.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
           location.href = "garage.html";
           }); */
@@ -362,7 +369,7 @@ window.scrollTo(0,1); }
             return false;
           }
           alert("등록 성공!");
-          location.href = "garage.html";
+          $("<li value='" + ajaxResult.data.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + ajaxResult.data.myCarNo + "'><i class='fa fa-inbox'</i>" + ajaxResult.data.nickName + "</a></li>").appendTo(myList)
         }, 'json');
         });
         
