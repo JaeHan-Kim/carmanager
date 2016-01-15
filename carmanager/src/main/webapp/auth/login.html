@@ -378,15 +378,22 @@
       password: $('#jpassword').val()
     }, function(resultObj) {
       var ajaxResult = resultObj.ajaxResult;
-      if (ajaxResult.status == "success") {
-        location.href = "login.html";
-      } else {
-        swal({    
+      if (ajaxResult.status == "failure") {
+    	  swal({    
           title: "회원가입 실패!",   
           text: "회원가입에 실패했습니다!", 
           confirmButtonText: "확인"
         });
+    	  return false;
       }
+      swal({    
+        title: "회원가입 성공!",   
+        text: "환영합니다!", 
+        type: "succcess",
+        confirmButtonText: "확인"
+      }, function() {
+        location.href = "login.html";
+      });
     }, 'json');
   });
   
