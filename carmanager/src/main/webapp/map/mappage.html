@@ -15,15 +15,15 @@
 	</script>
 
 	<!-- Bootstrap Core CSS -->
-	<link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
+	<link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
 	<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
-	<link type='text/css' rel='stylesheet' href="../css/main/style.css" />
+	<link type='text/css' rel='stylesheet' href="../css/map/style.css" />
 	<!-- font CSS -->
 	<!-- font-awesome icons 빈칸 유지를 위해 링크를 막아둠 -->
 	<!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
 	<!-- //font-awesome icons -->
 	<!-- js-->
-	<script src="../js/main/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
 	<script src="../js/main/modernizr.custom.js"></script>
 	<!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
 	<link type='text/css' rel='stylesheet'
@@ -53,6 +53,9 @@
 	<script src="../js/main/custom.js"></script>
 	<link rel="stylesheet" href="../css/main/custom.css">
 	<!--//Metis Menu -->
+	   <script type="text/javascript" 
+      src="//apis.daum.net/maps/maps3.js?apikey=8464e7c331667dafe0527c44bddc93ad">
+	   </script>
 </head>
 
 <body class="cbp-spmenu-push">
@@ -108,7 +111,7 @@
         <!--toggle button end-->
         <!--logo -->
         <div class="logo">
-          <a href="main.html">
+          <a href="../main/main.html">
             <h1>내 차를 부탁해</h1>
             <span>간편, 쉽고, 재밌는 시작!</span>
           </a>
@@ -166,13 +169,46 @@
     </script>
     <!-- main content start-->
     <div id="page-wrapper">
-      <div class="main-page">
+      <div class="main-page compose">
 
     <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
+        <div class="col-md-8 compose-left">
+              <div class="panel-default">
+            <div class="panel-heading">
+              지도
+            </div>
+            <div id="map" style="height:400px;"class="panel-body" >
 
-
-  
-
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 compose-right widget-shadow">
+            <div class="activity_box activity_box2">
+              <h4 class="title3">검색 결과</h4>
+              <div class="scrollbar scrollbar1">
+                <div class="single-bottom">
+                  <ul>
+                    <li>
+                      <input type="checkbox" id="brand" value="">
+                      <label for="brand"><span></span> Sunt in culpa qui officia.</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="brand1" value="">
+                      <label for="brand1"><span></span> Fugiat quo voluptas nulla.</label>
+                    </li>
+                    <li>
+                      <input type="checkbox" id="brand2" value="">
+                      <label for="brand2"><span></span> Dolorem eum.</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="chat-bottom">
+              </div>
+            </div>
+          <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div> 
       </div>
     </div>
     <!--footer-->
@@ -181,6 +217,17 @@
         &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
       </p>
     </div>
+    <script>
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+      center: new daum.maps.LatLng(37.566826, 126.9786567), //지도의 중심좌표.
+      level: 6 //지도의 레벨(확대, 축소 정도)
+    };
+
+    var map = new daum.maps.Map(container, options);
+    
+    
+    </script>
     <!--//footer-->
   </div>
 

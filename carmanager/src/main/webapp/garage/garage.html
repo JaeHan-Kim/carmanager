@@ -144,7 +144,7 @@ window.scrollTo(0,1); }
             </a>
               <ul class="dropdown-menu drp-mnu">
                 <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
-                <li><a href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
+                <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
               </ul></li>
           </ul>
         </div>
@@ -155,7 +155,15 @@ window.scrollTo(0,1); }
       <div class="clearfix"></div>
     </div>
     <!-- //header-ends -->
-
+    <!--   로그 아웃 클릭 이벤트 -->
+    <script>
+    $('#Logout').click(function(event){
+        event.preventDefault();
+        sessionStorage.removeItem('loginUserNickname');
+        sessionStorage.removeItem('loginUsercarNo');
+        location.href = "../auth/login.html";
+      });
+    </script>
     <!-- main content start-->
     <div id="page-wrapper">
       <div class="main-page">
@@ -198,7 +206,7 @@ window.scrollTo(0,1); }
                  $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)
                  $("<li id='deleteNo' value='" + ajaxResult.data.myCarNo + "'><a href='#'><div class='chat-left'><label>애칭</label></div><div class='chat-right'><p>" + ajaxResult.data.nickName + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>제조사</label></div><div class='chat-right'><p>" + ajaxResult.data.maker + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)  
-                 $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + ajaxResult.data.model + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
+                 $("<li><a href='#'><div class='chat-left'><label>모델명</label></div><div class='chat-right'><p>" + ajaxResult.data.model + " " +  ajaxResult.data.deailModel +"</p></div><div class='clearfix'></div></a></li>").appendTo(detail)
                  $("<li><a href='#'><div class='chat-left'><label>주행거리</label></div><div class='chat-right'><p>" + ajaxResult.data.mile + "</p></div><div class='clearfix'></div></a></li>").appendTo(detail) 
               }
              });
@@ -273,14 +281,14 @@ window.scrollTo(0,1); }
           <div class="panel-default">
             <div class="panel-heading">
             차고에 차량을 추가해 보세요.
-            </div>
+            
              <div class="clearfix"></div>
             <span class="btn_set">
             <button id="btn_reg" type="submit" class="btn_color btn btn-default">등록</button>
               <button id="btn_reset" type="submit" class="btn_color btn btn-default">리셋</button>
-            <div class="clearfix"></div>
             </span>
-            
+            <div class="clearfix"></div>
+            </div>
             </div>
             <div class="panel-body">
               <form id="form_carInput" class="com-mail">
