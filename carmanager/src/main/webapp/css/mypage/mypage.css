@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+#bottom_span {
+	display:block;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+	position: relative;
+	top: 8px;
+	z-index: 10;
+}
+
+#stamp_img {
+	text-align: center;
+	top: -23px;
+	margin-left: 248px;
+	position: relative;
+}
+
+#stamp {
+	width: 5%;
+}

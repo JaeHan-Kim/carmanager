@@ -64,7 +64,7 @@
           id="cbp-spmenu-s1">
           <ul class="nav" id="side-menu">
             <li>
-              <a href="main.html" class="">
+              <a href="../main/main.html" class="">
               <i class="fa fa-home nav_icon"></i>Dashboard</a>
             </li>
             <li>
@@ -108,7 +108,7 @@
         <!--toggle button end-->
         <!--logo -->
         <div class="logo">
-          <a href="main.html">
+          <a href="../main/main.html">
             <h1>내 차를 부탁해</h1>
             <span>간편, 쉽고, 재밌는 시작!</span>
           </a>
@@ -142,7 +142,7 @@
 	              </div>
 	            </a>
 	            <ul class="dropdown-menu drp-mnu">
-	              <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
+	              <li><a id="Mypage" href="#"><i class="fa fa-cog"></i>Mypage</a></li>
 	              <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
 	            </ul>
 	          </li>
@@ -157,6 +157,10 @@
     <!-- //header-ends -->
      <!--   로그 아웃 클릭 이벤트 -->
     <script>
+    $('#Mypage').click(function(event){
+        location.href = "../mypage/mypage.html";
+    });
+    
     $('#Logout').click(function(event){
         event.preventDefault();
         sessionStorage.removeItem('loginUserNickname');

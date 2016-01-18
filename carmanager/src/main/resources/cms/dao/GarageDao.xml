@@ -52,5 +52,11 @@
     delete from garage
     where grno=#{no}
   </delete>
-
+	
+	<select id="selectFirstCar" resultMap="garageMap" parameterType="int">
+		select grno, mdno, c_nick from garage 
+		where mno = #{no}
+		order by grno asc
+		limit 1;
+  </select>
   </mapper>
