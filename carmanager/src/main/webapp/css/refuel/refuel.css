@@ -20,9 +20,9 @@ h2 {
 }
 
 h3 {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 24px;
-    margin: 5px 0;
+    margin: 5px 5px;
 }
 
 table {
@@ -62,6 +62,10 @@ table {
 
 .calendar tbody td:hover {
     border: 2px solid #c0392b;
+    border-radius: 60%;
+    position: absolute;
+    height: 60px;
+    width: 60px;
 }
 
 .calendar tbody td.active {
@@ -71,11 +75,11 @@ table {
 .calendar td {
     border: 2px solid transparent;
     border-radius: 50%;
-    display: inline-block;
     height: 64px;
     line-height: 64px;
     text-align: center;
     width: 64px;
+    padding: 2px;
 }
 
 .current-day {
@@ -99,6 +103,14 @@ table {
     margin: -4px 0 0 -4px;
     position: absolute;
     width: 8px;
+}
+
+.event.green-event:after {
+    background: #009E82;
+}
+
+.event.blue-event:after {
+    background: #0078AB;
 }
 
 .event.current-day:after {
@@ -150,7 +162,7 @@ table {
     padding-top: 20px;
     padding-bottom: 0px;
     margin-bottom: 50px;
-    display:none;
+    /*display:none;*/
 
 }
 
@@ -160,7 +172,7 @@ table {
     padding-bottom: 20px;
 }
 
-.day-event span{
+.day-event .dspan{
     font-size: 12px;
 }
 
@@ -216,7 +228,7 @@ input[type=checkbox] {display:none;}
     background-color:#c0392b;
 }
 
-input[type=checkbox]:checked + .dspan {
+input[type=checkbox]:checked + span {
     background-color:#9C2E23;
     text-decoration:none;
     -webkit-border-radius:4px;
@@ -226,7 +238,7 @@ input[type=checkbox]:checked + .dspan {
     background-size:15px 13px;
 }
 
-input[type=checkbox]:checked:hover + .dspan {
+input[type=checkbox]:checked:hover + span {
     background-color:#9C2E23;
     color:rgba(255,255,255,0.5);
     text-decoration:none;
@@ -247,26 +259,26 @@ and (min-device-width : 320px)
 and (max-device-width : 480px) {
 /* STYLES GO HERE */
 }
- 
+
 /* Smartphones (landscape) ----------- */
 @media only screen
 and (min-width : 321px) {
 /* STYLES GO HERE */
 }
- 
+
 /* Smartphones (portrait) ----------- */
 @media only screen
 and (max-width : 320px) {
 /* STYLES GO HERE */
 }
- 
+
 /* iPads (portrait and landscape) ----------- */
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
 /* STYLES GO HERE */
 }
- 
+
 /* iPads (landscape) ----------- */
 @media only screen
 and (min-device-width : 768px)
@@ -274,7 +286,7 @@ and (max-device-width : 1024px)
 and (orientation : landscape) {
 /* STYLES GO HERE */
 }
- 
+
 /* iPads (portrait) ----------- */
 @media only screen
 and (min-device-width : 768px)
@@ -282,26 +294,26 @@ and (max-device-width : 1024px)
 and (orientation : portrait) {
 /* STYLES GO HERE */
 }
- 
+
 /* Desktops and laptops ----------- */
 @media only screen
 and (min-width : 1224px) {
 /* STYLES GO HERE */
 }
- 
+
 /* Large screens ----------- */
 @media only screen
 and (min-width : 1824px) {
 /* STYLES GO HERE */
 }
- 
+
 /* iPhone 5 (portrait & landscape)----------- */
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 568px) {
 /* STYLES GO HERE */
 }
- 
+
 /* iPhone 5 (landscape)----------- */
 @media only screen
 and (min-device-width : 320px)
@@ -309,7 +321,7 @@ and (max-device-width : 568px)
 and (orientation : landscape) {
 /* STYLES GO HERE */
 }
- 
+
 /* iPhone 5 (portrait)----------- */
 @media only screen
 and (min-device-width : 320px)
