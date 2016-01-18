@@ -1062,6 +1062,11 @@ h2.title1 {
     color:dimgray;
     margin-bottom: 0.8em;
 }
+h3.title1 {
+    font-size: 2em;
+    color:dimgray;
+    margin-bottom: 0.8em;
+}
 .bs-example5{
    background:#fff;
    padding:2em;
@@ -1501,7 +1506,7 @@ button.note-color-btn {
 /*--grids--*/
 .grids {
     padding: 2em 1em;
-	margin-bottom: 2em;
+	  margin-bottom: 2em;
 }
 .grids .form-group {
     margin: 0;
@@ -2481,11 +2486,11 @@ i.fa.fa-facebook.profile-icon {
 }
 /*--//circle-charts--*/
 .widget_1_box {
-    width: 32%;
+    width: 40%;
     padding: 0;
 }
 .widget_1_box.widget-mdl-grid{
-    margin: 0 2%;
+    margin: 0 5%;
 }
 .widget_1_box.widget-mdl-grid2{
     margin-right: 2%;
@@ -2498,10 +2503,11 @@ i.fa.fa-facebook.profile-icon {
     background-color: #6164C1;
 }
 .widget_1_box .bg-success {
-    background-color: #F2B33F;
+    /*background-color: #F2B33F;*/
+    background-color: rgba(101, 124, 153, 0.93);
 }
 .widget_1_box  .bg-danger {
-    background-color: rgba(233, 78, 2, 0.88);
+    background-color: rgb(79, 82, 186);
 }
 .tile-progress h4 {
     color: #fff;
