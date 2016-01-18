@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-  <link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
+  <link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" />
   <link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
-  <link type="text/css" rel="stylesheet" href="../css/main/custom.css">
+  <link type="text/css" rel="stylesheet" href="../css/main/custom.css" />
   <link type='text/css' rel='stylesheet' href="../css/main/style.css" />
   <link type='text/css' rel='stylesheet'
-        href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'>
+        href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' />
+  <link type='text/css' rel='stylesheet' href="../css/mypage/mypage.css" />
   
   <script src="../lib/Chart.js/Chart.js"></script>
   <script src="../lib/jquery/jquery.min.js"></script>
@@ -34,10 +35,13 @@
   <script>
     new WOW().init();
     $(document).ready(function(){ 
+      var userEmail = sessionStorage.getItem('loginUseremail');
       var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
-      var userCarNo = sessionStorage.getItem('loginUsercarNo');
-        $("#userNickname").html(userNickname);
-   });  
+      var userNickname2 = sessionStorage.getItem('loginUserNickname')
+      $("#txt_email").html(userEmail);
+      $(".nickname").html(userNickname);
+      $(".nickname2").html(userNickname2);
+    });  
   </script>
   
 </head>
@@ -108,7 +112,7 @@
                     <img src="../img/main/a.png" alt=""> 
                   </span>
                   <div class="user-name">
-                    <p id="userNickname"></p>
+                    <p id="userNickname" class="nickname"></p>
                     <span>안녕하세요.</span>
                   </div>
                   <i class="fa fa-angle-down lnr"></i> 
@@ -144,64 +148,56 @@
     <div id="page-wrapper">
       <div class="main-page">
 
-       <!-- 차량 등록폼 시작-->
+        <!-- 마이페이지 폼 시작-->
         <div class="col-md-8 compose-right widget-shadow">
           <div class="panel-default">
             <div class="panel-heading">
-            차고에 차량을 추가해 보세요.
-            
-             <div class="clearfix"></div>
-           
-            </div>
-            </div>
-            <div class="panel-body">
-              <form id="form_carInput" class="com-mail">
-                <div class="col-md-12">
-                  <label>애칭</label> 
-                  <input id="txt_nickname" type="text" class="form-control1 control3">
-                </div>
-                <div id="div_modelinput" class="col-md-13">
-                  <label>&nbsp;&nbsp;&nbsp;&nbsp;차량모델명</label>
-                  <div class="col-md-12 grid_box1">
-                    <input id="txt_modellist" type="text"
-                      class="form-control1 control3">
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <label>세부 모델명</label> <input id="txt_trim" type="text"
-                    class="form-control1 control3">
-                </div>
-                <div class="col-md-12">
-                  <label for="txt_mile">주행거리</label> <input
-                    id="txt_mile" type="text"
-                    class="form-control1 control3">
-                </div>
-                <div class="col-md-12">
-                  <label for="txt_effi">공인연비</label> <input
-                    id="txt_effi" type="text"
-                    class="form-control1 control3">
-                </div>
-              </form>
-            </div>
-            <div class="panel-footer">
-              <span class="btn_set">
-                <button id="btn_reg" type="submit" class="btn_color btn btn-default">등록</button>
-                <button id="btn_reset" type="submit" class="btn_color btn btn-default">리셋</button>
-              </span>
-            <div class="clearfix"></div>
+              <span class="nickname"></span>의 회원증입니다.
+              <div class="clearfix"></div>
             </div>
           </div>
+          <div class="panel-body">
+            <form id="form_mypage" class="com-mail">
+              <div class="col-md-12">
+                <label>이메일</label> 
+                <span id="txt_email"></span>
+              </div>
+              <div id="div_nickname" class="col-md-13">
+                <label>별명</label>
+                <span class="nickname2"></span>
+              </div>
+              <div class="col-md-12">
+                <label for="txt_password">비밀번호</label> 
+                <input id="txt_password" type="password" class="form-control1 control3">
+              </div>
+              <div class="col-md-12">
+                <label for="txt_pwd_confirm">비밀번호 확인</label> 
+                <input id="txt_pwd_confirm" type="password" class="form-control1 control3">
+              </div>
+            </form>
+            <div id="bottm_div">
+              <span id="bottom_span">내 차를 부탁해 대표이사 윤태웅</span>
+            </div>
+            <div id="stamp_img">
+              <img id="stamp" src="../img/mypage/stamp.png">
+            </div>
+          </div>
+          <div class="panel-footer">
+            <span class="btn_set">
+              <button id="btn_update" type="submit" class="btn_color btn btn-default">수정</button>
+              <button id="btn_reset" type="submit" class="btn_color btn btn-default">리셋</button>
+            </span>
+          <div class="clearfix"></div>
+          </div>
         </div>
-
       </div>
     </div>
-    <div class="footer">
-      <p>
-        &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
-      </p>
-    </div>
   </div>
-
+  <div class="footer">
+    <p>
+      &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
+    </p>
+  </div>
 
   <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'), 
@@ -220,6 +216,19 @@
         classie.toggle(showLeftPush, 'disabled');
       }
     }
+    
+    $("#btn_reset").click(function(event){
+        $("#form_mypage").each(function() {  
+          this.reset();
+      });  
+    });
+    
+    /* 
+    function resetAll() {
+      document.getElementById('txt_password').innerHTML = "";
+      document.getElementById('txt_pwd_confirm').innerHTML = "";
+    } 
+    */
   </script>
 
 </body>
