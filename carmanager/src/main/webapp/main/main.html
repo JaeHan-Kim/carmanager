@@ -183,23 +183,15 @@ window.scrollTo(0,1); }
       <div class="main-page">
 
         <!-- 차트 위 택스트 -->
-<<<<<<< HEAD
         <!--<div class="row-one">-->
-=======
         <div id="myCarList" class="row-one">
->>>>>>> 5452094ec6d4490cab5dc647064b8b6b74f96572
-
           <div class="clearfix"> </div> 
           </div>
           <div class="clearfix"> </div> 
 
-<<<<<<< HEAD
         <!--</div>-->
 
-=======
         </div>
-				
->>>>>>> 5452094ec6d4490cab5dc647064b8b6b74f96572
         <!-- 차트 시작 -->
         <div class="charts">
           <div class="col-md-4 charts-grids widget">
@@ -215,12 +207,6 @@ window.scrollTo(0,1); }
             <h4 id="topR" class="title">공인 연비 대비 연비 입니다.</h4>
             <canvas id="line" height="300" width="400"> </canvas>
        		 <div id="line-legend" class="chart-legend"></div>
-          </div>
-          <div class="col-md-4 charts-grids widget">
-            <h4 class="title">저번 주유 대비 개선율 입니다.</h4>
-            <div class="doughnut-grid">
-              <canvas id="doughnut" height="300" width="400"></canvas>
-            </div>
           </div>
           <div class="clearfix"></div>
 
@@ -364,75 +350,44 @@ window.scrollTo(0,1); }
             });
             document.getElementById('bar-legend').innerHTML = myBar.generateLegend();
           }
-<<<<<<< HEAD
-          
-         var doughnutData = [
-			{
-				value: 30,
-				color:"#4F52BA"
-			},
-			{
-				value : 50,
-				color : "#F2B33F"
-			},
-			{
-				value : 100,
-				color : "#585858"
-			},
-			{
-				value : 40,
-				color : "#e94e02"
-			},
-			{
-				value : 120,
-				color : "#9358ac"
-			}
-		
-		];
-      
-          new Chart(document.getElementById("doughnut").getContext("2d")).Doughnut(doughnutData);
- 
-         
-=======
         
         var doughnutData = [
-                    				{
-                    					value: 300,
-                    					color:"#F7464A",
-                    					highlight: "#FF5A5E",
-                    					label: "Red"
-                    				},
-                    				{
-                    					value: 50,
-                    					color: "#46BFBD",
-                    					highlight: "#5AD3D1",
-                    					label: "Green"
-                    				},
-                    				{
-                    					value: 100,
-                    					color: "#FDB45C",
-                    					highlight: "#FFC870",
-                    					label: "Yellow"
-                    				},
-                    				{
-                    					value: 40,
-                    					color: "#949FB1",
-                    					highlight: "#A8B3C5",
-                    					label: "Grey"
-                    				},
-                    				{
-                    					value: 120,
-                    					color: "#4D5360",
-                    					highlight: "#616774",
-                    					label: "Dark Grey"
-                    				}
+  			{
+  				value: 300,
+  				color:"#F7464A",
+  				highlight: "#FF5A5E",
+  				label: "Red"
+  			},
+  			{
+  				value: 50,
+  				color: "#46BFBD",
+  				highlight: "#5AD3D1",
+  				label: "Green"
+  			},
+  			{
+  				value: 100,
+  				color: "#FDB45C",
+  				highlight: "#FFC870",
+  				label: "Yellow"
+  			},
+  			{
+  				value: 40,
+  				color: "#949FB1",
+  				highlight: "#A8B3C5",
+  				label: "Grey"
+  			},
+  			{
+  				value: 120,
+  				color: "#4D5360",
+  				highlight: "#616774",
+  				label: "Dark Grey"
+  			}
+  
+  		];
+  
+  			var ctx3 = document.getElementById("doughnut").getContext("2d");
+  			var myDoughnut = new Chart(ctx3).Doughnut(doughnutData, {responsive : true});
 
-                    			];
-
-                    				var ctx3 = document.getElementById("doughnut").getContext("2d");
-                    				var myDoughnut = new Chart(ctx3).Doughnut(doughnutData, {responsive : true});
-
->>>>>>> 5452094ec6d4490cab5dc647064b8b6b74f96572
         </script>
 
         </div>

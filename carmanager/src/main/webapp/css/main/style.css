@@ -1057,14 +1057,15 @@ h5.title {
 /*--//calender --*/
 /*---//main-content---*/
 /*-- media --*/
-h3.title1 {
+h2.title1 {
     font-size: 2em;
-    color: #e94e02;
+    color:dimgray;
     margin-bottom: 0.8em;
 }
 .bs-example5{
    background:#fff;
    padding:2em;
+   border-bottom: 1px solid lightgray;
 }
 .media-heading {
   color: #000;
@@ -3644,6 +3645,7 @@ ul.nav.nav-second-level li a {
 }
 .bs-example5 {
     padding: 1em;
+    border-bottom: 1px solid #999;
 }
 .panel-info.widget-shadow {
     padding: 1.5em 0em 0.5em;
