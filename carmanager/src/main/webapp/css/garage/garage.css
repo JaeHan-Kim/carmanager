@@ -1,8 +1,5 @@
 .btn_set {
-	position: absolute;
- 	top: 7px;
   right: 47px;
- /* background-color:rgb(97,100,193); */
 }
 .btn_color:hover {
 	background-color:rgb(163, 163, 220);

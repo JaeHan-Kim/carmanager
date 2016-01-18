@@ -218,9 +218,9 @@ window.scrollTo(0,1); }
           var selectcar = $("#myCarList");
           var cnt = 0;
           var classType = new Array();
-          classType[0] = ("col-md-4 widget list");
-          classType[1] = ("col-md-4 widget states-mdl list");
-          classType[2] =("col-md-4 widget states-last list");
+          classType[0] = ("col-md-4 widget");
+          classType[1] = ("col-md-4 widget states-mdl");
+          classType[2] =("col-md-4 widget states-last");
           function clickDetailLnk(event) {
             /* alert( $(event.target).attr("carNo")); */
           $("#line").remove();
@@ -237,7 +237,7 @@ window.scrollTo(0,1); }
           $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
            //alert(sessionStorage.getItem("loginUser"));
            for (var garage of resultObj.data) {
-           $("<div class='" + classType[cnt++] + "'><p class='carN' carNo='" + garage.myCarNo + "'>" + garage.nickName + "</p><div class='clearfix'></div></div>").appendTo(selectcar)
+             $("<div class='" + classType[cnt++] + "'><p class='list carN' carNo='" + garage.myCarNo + "'>" + garage.nickName + "</p><div class='clearfix'></div></div>").appendTo(selectcar)
            
            /* $("<li class='dropdown head-dpdn'><span class='carN' carNo='" + garage.myCarNo + "'>" 
              + garage.nickName + "</span></li>").appendTo(selectcar) */  
