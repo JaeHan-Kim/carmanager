@@ -143,7 +143,7 @@ window.scrollTo(0,1); }
                 </div>
             </a>
               <ul class="dropdown-menu drp-mnu">
-                <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
+                <li><a id="Mypage" href="#"><i class="fa fa-cog"></i>Mypage</a></li>
                 <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
               </ul></li>
           </ul>
@@ -157,6 +157,10 @@ window.scrollTo(0,1); }
     <!-- //header-ends -->
     <!--   로그 아웃 클릭 이벤트 -->
     <script>
+    $('#Mypage').click(function(event){
+        location.href = "../mypage/mypage.html";
+    });
+    
     $('#Logout').click(function(event){
         event.preventDefault();
         sessionStorage.removeItem('loginUserNickname');
