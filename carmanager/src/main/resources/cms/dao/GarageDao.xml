@@ -25,7 +25,7 @@
   
   <select id="selectDetail" resultMap="garageMap" parameterType="int">
     select
-      g.grno, g.c_nick, k.maker, m.model, g.mile 
+      g.grno, g.c_nick, g.trim, k.maker, m.model, g.mile 
     from garage g
     left outer join model m on g.mdno = m.mdno
     left outer join makers k on k.mkno = m.mkno

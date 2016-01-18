@@ -166,7 +166,7 @@ window.scrollTo(0,1); }
             </a>
               <ul class="dropdown-menu drp-mnu">
                 <li><a href="#"><i class="fa fa-cog"></i>My page</a></li>
-                <li><a href="../auth/login.html"><i class="fa fa-sign-out"></i>Logout</a></li>
+                <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
               </ul></li>
           </ul>
         </div>
@@ -177,21 +177,25 @@ window.scrollTo(0,1); }
       <div class="clearfix"></div>
     </div>
     <!-- //header-ends -->
-
+    <!--   로그 아웃 클릭 이벤트 -->
+    <script>
+    $('#Logout').click(function(event){
+        event.preventDefault();
+        sessionStorage.removeItem('loginUserNickname');
+        sessionStorage.removeItem('loginUsercarNo');
+        location.href = "../auth/login.html";
+      });
+    </script>
     <!-- main content start-->
     <div id="page-wrapper">
       <div class="main-page">
 
         <!-- 차트 위 택스트 -->
-        <!--<div class="row-one">-->
         <div id="myCarList" class="row-one">
           <div class="clearfix"> </div> 
-          </div>
-          <div class="clearfix"> </div> 
-
-        <!--</div>-->
-
         </div>
+          <div class="clearfix"> </div> 
+        
         <!-- 차트 시작 -->
         <div class="charts">
           <div class="col-md-4 charts-grids widget">
@@ -217,12 +221,11 @@ window.scrollTo(0,1); }
           classType[0] = ("col-md-4 widget list");
           classType[1] = ("col-md-4 widget states-mdl list");
           classType[2] =("col-md-4 widget states-last list");
-            
           function clickDetailLnk(event) {
             /* alert( $(event.target).attr("carNo")); */
           $("#line").remove();
           $("#bar").remove();
-           $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+$(event.target).attr("carNo"), 
+          $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+$(event.target).attr("carNo"), 
               function(resultObj) {
                 $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
                 $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
@@ -250,7 +253,7 @@ window.scrollTo(0,1); }
           
           if (resultObj.refuelList != "") {
             for (var i = 0; i < 7; i++) {
-              effic[i] = (resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter;
+              effic[i] = ((resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter).toFixed(2);
               driveDt[i] = resultObj.refuelList[i].group_date
               //driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
              }
@@ -319,9 +322,9 @@ window.scrollTo(0,1); }
                      strokeColor : "rgba(233, 78, 2, 0.9)",
                      highlightFill: "#e94e02",
                      highlightStroke: "#e94e02",
-                     data : [(resultObj.memCostAvg[2].cost/=1000), 
-                            (resultObj.memCostAvg[1].cost/=1000), 
-                            (resultObj.memCostAvg[0].cost/=1000)]
+                     data : [(resultObj.memCostAvg[2].cost/=1000).toFixed(2), 
+                            (resultObj.memCostAvg[1].cost/=1000).toFixed(2), 
+                            (resultObj.memCostAvg[0].cost/=1000).toFixed(2)]
                    },
                    {
                      label: "개인평균",
@@ -329,9 +332,9 @@ window.scrollTo(0,1); }
                      strokeColor : "rgba(79, 82, 186, 0.9)",
                      highlightFill: "#4F52BA",
                      highlightStroke: "#4F52BA",
-                     data : [(resultObj.myCostAvg[2].cost/=1000), 
-                            (resultObj.myCostAvg[1].cost/=1000),
-                            (resultObj.myCostAvg[0].cost/=1000)]
+                     data : [(resultObj.myCostAvg[2].cost/=1000).toFixed(2), 
+                            (resultObj.myCostAvg[1].cost/=1000).toFixed(2),
+                            (resultObj.myCostAvg[0].cost/=1000).toFixed(2)]
                    }
                  ]
                };
@@ -350,7 +353,6 @@ window.scrollTo(0,1); }
             });
             document.getElementById('bar-legend').innerHTML = myBar.generateLegend();
           }
-        
         var doughnutData = [
   			{
   				value: 300,
