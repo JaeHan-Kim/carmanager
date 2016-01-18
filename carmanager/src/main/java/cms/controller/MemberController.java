@@ -1,7 +1,5 @@
 package cms.controller;
 
-import java.io.File;
-
 import javax.servlet.ServletContext;
 
 import org.apache.log4j.Logger;
@@ -9,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 
 import cms.dao.MemberDao;
 import cms.domain.AjaxResult;
 import cms.domain.Member;
-import cms.util.MultipartHelper;
 
 @Controller("ajax.MemberController")
 @RequestMapping("/mypage/ajax/*")
@@ -45,17 +41,17 @@ public class MemberController {
   
   @RequestMapping(value="update", method=RequestMethod.POST)
   public AjaxResult update(
-		  MultipartFile photofile,
 		  String memberNo,
 		  String nickName,
 		  String password
 		  ) throws Exception {
-    String fileName = MultipartHelper.generateFilename(photofile.getOriginalFilename());
-    
-    File attachFile = new File(servletContext.getRealPath("/img") 
-        + "/member/" + fileName);
 
-    photofile.transferTo(attachFile);
+//    String fileName = MultipartHelper.generateFilename(photofile.getOriginalFilename());
+//    
+//    File attachFile = new File(servletContext.getRealPath("/img") 
+//        + "/member/" + fileName);
+//
+//    photofile.transferTo(attachFile);
 	
 //	String newFileName = null;
 //    
@@ -71,7 +67,7 @@ public class MemberController {
     member.setPassword(password);
     
 //    if (newFileName != null) {
-      member.setMemberPhoto(fileName);
+//      member.setMemberPhoto(fileName);
 //    } else if (newFileName == null && photo.length() > 0) {
 //      member.setMemberPhoto(photo);
 //    }
