@@ -15,7 +15,9 @@ public class Garage {
   public Garage() {
    
   }
-  
+  public Garage(int myCarNo) {
+  	this.myCarNo = myCarNo;
+  }
   
 
   @Override

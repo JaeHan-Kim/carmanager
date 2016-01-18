@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<!-- 현재 스크립트나 CSS 임포트는 각 기능이 있는 위치에 쓰여있기 때문에 
+     실제로 사용할 때 정리해서 사용할 것을 권장합니다. -->
+<html>
+<head>
+<title>new 내 차를 부탁해</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<script type="application/x-javascript">
+	  addEventListener("load", function() { 
+	  setTimeout(hideURLbar, 0); }, false); 
+	  function hideURLbar(){ 
+	  window.scrollTo(0,1); } 
+	</script>
+
+	<!-- Bootstrap Core CSS -->
+	<link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
+	<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
+	<link type='text/css' rel='stylesheet' href="../css/main/style.css" />
+	<!-- font CSS -->
+	<!-- font-awesome icons 빈칸 유지를 위해 링크를 막아둠 -->
+	<!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
+	<!-- //font-awesome icons -->
+	<!-- js-->
+	<script src="../js/main/jquery-1.11.1.min.js"></script>
+	<script src="../js/main/modernizr.custom.js"></script>
+	<!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
+	<link type='text/css' rel='stylesheet'
+	      href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'>
+	<!--//webfonts-->
+	<!--animate-->
+	<link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
+	<script src="../js/main/wow.min.js"></script>
+	<script>
+	  new WOW().init();
+	  $(document).ready(function(){ 
+	    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
+	    var userCarNo = sessionStorage.getItem('loginUsercarNo');
+	      $("#userNickname").html(userNickname);
+	 });  
+	</script>
+	<!--//end-animate-->
+	
+	<!-- chart 챠트 -->
+	<script src="../lib/Chart.js/Chart.js"></script>
+	<!-- 차트에 날짜 데이터 이용하기 -->
+	<script type="text/javascript" src="../js/main/moment_local.js"></script>
+	<!-- //chart -->
+	
+	<!-- Metis Menu -->
+	<script src="../js/main/metisMenu.min.js"></script>
+	<script src="../js/main/custom.js"></script>
+	<link rel="stylesheet" href="../css/main/custom.css">
+	<!--//Metis Menu -->
+</head>
+
+<body class="cbp-spmenu-push">
+  <div class="main-content">
+    <!--left-fixed -navigation-->
+    <div class=" sidebar" role="navigation">
+      <div class="navbar-collapse">
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
+          id="cbp-spmenu-s1">
+          <ul class="nav" id="side-menu">
+            <li>
+              <a href="main.html" class="">
+              <i class="fa fa-home nav_icon"></i>Dashboard</a>
+            </li>
+            <li>
+              <a href="../mypage/mypage.html" class="">
+              <i class="fa fa-home nav_icon"></i>My page</a>
+            </li>
+            <li>
+              <a href="../garage/garage.html" class="">
+              <i class="fa fa-home nav_icon"></i>차량 등록</a>
+            </li>
+            <li>
+              <a href="../refuel/refuel.html" class="">
+              <i class="fa fa-home nav_icon"></i>차량 관리</a>
+            </li>
+            <li>
+              <a href="../center/center.html" class="">
+              <i class="fa fa-home nav_icon"></i>정 비 소</a>
+            </li>
+            <li>
+              <a href="../goods/goods.html" class="">
+              <i class="fa fa-home nav_icon"></i>맞춤 서비스</a>
+            </li>
+            <li>
+              <a href="../comunity/comunity.html" class="">
+              <i class="fa fa-home nav_icon"></i>커뮤니티</a>
+            </li>
+          </ul>
+          <!-- //sidebar-collapse -->
+        </nav>
+      </div>
+    </div>
+    <!--left-fixed -navigation-->
+
+    <!-- header-starts -->
+    <div class="sticky-header header-section ">
+      <div class="header-left">
+        <!--toggle button start-->
+        <button id="showLeftPush">
+          <img src="../img/main/menu.png">
+        </button>
+        <!--toggle button end-->
+        <!--logo -->
+        <div class="logo">
+          <a href="main.html">
+            <h1>내 차를 부탁해</h1>
+            <span>간편, 쉽고, 재밌는 시작!</span>
+          </a>
+        </div>
+        <!--//logo-->
+
+        <!--<div class="clearfix"> </div>-->
+      </div>
+      <!-- header-left end-->
+
+      <!-- header-right -->
+      <div class="header-right">
+        <!-- 로그인 유저 정보 -->
+        <div class="profile_details">
+          <ul>
+	          <li class="dropdown profile_details_drop">
+	            <a href="#" class="dropdown-toggle" 
+	               data-toggle="dropdown" aria-expanded="false">
+	              <div class="profile_img">
+	                <span class="prfil-img">
+	                  <img src="../img/main/a.png" alt=""> 
+	                </span>
+	                <div class="user-name">
+	                  <p id="userNickname"></p>
+	                  <span>안녕하세요.</span>
+	                </div>
+	                <!-- 빈칸 유지를 위한 아이콘 자리 -->
+	                <i class="fa fa-angle-down lnr"></i> 
+	                <i class="fa fa-angle-up lnr"></i>
+	                <div class="clearfix"></div>
+	              </div>
+	            </a>
+	            <ul class="dropdown-menu drp-mnu">
+	              <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
+	              <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
+	            </ul>
+	          </li>
+          </ul>
+        </div>
+        <!-- 로그인 유저 정보 end -->
+        <div class="clearfix"></div>
+      </div>
+      <!-- header-right -->
+      <div class="clearfix"></div>
+    </div>
+    <!-- //header-ends -->
+     <!--   로그 아웃 클릭 이벤트 -->
+    <script>
+    $('#Logout').click(function(event){
+        event.preventDefault();
+        sessionStorage.removeItem('loginUserNickname');
+        sessionStorage.removeItem('loginUsercarNo');
+        location.href = "../auth/login.html";
+      });
+    </script>
+    <!-- main content start-->
+    <div id="page-wrapper">
+      <div class="main-page">
+
+    <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
+    	<!-- 상단 표시 폼 시작 -->
+	  	<div class="forms">
+	  		<!-- <h3 class="title1">Forms</h3> -->
+				<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+				<div class="form-title">
+					<h4>Basic Form :</h4>
+				</div>
+					<div class="form-body">
+						<form> 
+							<div class="form-group"> 
+								<label for="exampleInputEmail1">Email address</label> 
+								<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"> 
+							</div> 
+							<div class="form-group"> 
+								<label for="exampleInputPassword1">Password</label> 
+								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
+							</div> 
+							<div class="form-group"> 
+								<label for="exampleInputFile">File input</label> 
+								<input type="file" id="exampleInputFile">
+								<p class="help-block">Example block-level help text here.</p>
+							</div> 
+							<div class="checkbox"> 
+								<label> <input type="checkbox"> Check me out </label> 
+							</div> 
+							<button type="submit" class="btn btn-default">Submit</button> 
+						</form> 
+					</div>
+				</div>
+				<!-- 상단 표시 폼 끝 -->
+				<!-- 하단 제품 표시 폼 시작 -->
+				<div class=" form-grids row form-grids-right">
+					<div class="widget-shadow " data-example-id="basic-forms"> 
+						<div class="form-body">
+							<form class="form-horizontal"> 
+								<div class="form-group"> 
+									<div class="col-sm-9"> 
+									</div> 
+								</div>
+							</form> 
+						</div>
+					</div>
+				</div>
+				<!-- 하단 제품 표시 폼 끝 -->
+	  	</div>
+		<!-- 페이지 끝 -->>
+    	</div>
+    </div>
+    <!--footer-->
+    <div class="footer">
+      <p>
+        &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
+      </p>
+    </div>
+    <!--//footer-->
+  </div>
+	<!-- 자바 스크립트 -->
+	<script>
+	
+	var url = 'http://api.danawa.com/api/main/category/product/list?'
+	var apikey = 'a3429f13a0dd94edafa8f0a1e1694004'
+	var option = "sadadsd";
+	$.ajax({
+    url : "http://api.danawa.com/api/main/category/product/list?charset=euckr&key=a3429f13a0dd94edafa8f0a1e1694004&cate1=861&cate2=873&orderBy=productNameDESC&limit=10&offset=0",
+    type : "GET",
+    success : function(r){
+      alert("하");
+    }
+});
+	</script>
+  <!-- Classie 메뉴 접히고 펼쳐지는 부분` -->
+  <script src="../js/main/classie.js"></script>
+  <script>
+    var menuLeft = document.getElementById('cbp-spmenu-s1'), 
+        showLeftPush = document.getElementById('showLeftPush'), 
+        body = document.body;
+
+    showLeftPush.onclick = function() {
+      classie.toggle(this, 'active');
+      classie.toggle(body, 'cbp-spmenu-push-toright');
+      classie.toggle(menuLeft, 'cbp-spmenu-open');
+      disableOther('showLeftPush');
+    };
+
+    function disableOther(button) {
+      if (button !== 'showLeftPush') {
+        classie.toggle(showLeftPush, 'disabled');
+      }
+    }
+  </script>
+  <!--scrolling js 스크롤바 조정-->
+  <script src="../js/main/jquery.nicescroll.js"></script>
+  <script src="../js/main/scripts.js"></script>
+  <!--//scrolling js-->
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../js/main/bootstrap.js"></script>
+</body>
+</html>

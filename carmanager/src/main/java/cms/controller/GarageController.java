@@ -60,7 +60,12 @@ public class GarageController {
     refuelService.carDelete(no);
     garageService.carDelete(no);
     Garage garage = garageService.searchFirstCar(userNo);
-    log.debug(garage);
+    if (garage == null) {
+    	log.debug("null");
+    	return new AjaxResult("success", new Garage(0));
+    	//garage.setMyCarNo(0);
+    }
+    //log.debug(garage.toString());
     return new AjaxResult("success", garage);
   }
   
@@ -112,7 +117,7 @@ public class GarageController {
   	}
   	garageService.addMyCar(garage);
   	
-  	garage = garageService.lastAddCar(garage.getMemberNo());
+  	garage = garageService.searchFirstCar(garage.getMemberNo());
   	log.debug(garage.toString());
   	return new AjaxResult("success", garage);
   }

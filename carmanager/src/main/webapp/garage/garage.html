@@ -264,7 +264,7 @@ window.scrollTo(0,1); }
                           text: "차량 등록 후 이용 가능합니다.",
                           type: "success",   
                           confirmButtonText: "확인" }, function() {
-                            sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
+	                          sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
                             location.href = "garage.html";
                           });
                       } }, 'json');
@@ -484,6 +484,7 @@ window.scrollTo(0,1); }
               title: "등록 성공!",   
               type: "success",   
               confirmButtonText: "확인 :)" }, function() {   
+                sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
                 location.href = "garage.html";
               });
         }, 'json');
