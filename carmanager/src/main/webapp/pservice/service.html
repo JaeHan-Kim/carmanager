@@ -227,17 +227,36 @@
   </div>
 	<!-- 자바 스크립트 -->
 	<script>
+	// header("Access-Control-Allow-Origin", "*");  
 	
+	$.ajax({
+    type : 'get',
+    url : 'http://api.danawa.com/api/main/category/product/list?charset=euckr&key=a3429f13a0dd94edafa8f0a1e1694004&cate1=861&cate2=873&orderBy=productNameDESC&limit=10&offset=0',
+    dataType : "jsonp",
+    jsonp : "callback",
+    beforeSend : function(xhr){
+        xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+    },
+    error: function(xhr, status, error){ 
+        alert(error); 
+    },
+    success : function(callback){
+        alert("asdads");
+    }
+});
 	var url = 'http://api.danawa.com/api/main/category/product/list?'
 	var apikey = 'a3429f13a0dd94edafa8f0a1e1694004'
 	var option = "sadadsd";
-	$.ajax({
-    url : "http://api.danawa.com/api/main/category/product/list?charset=euckr&key=a3429f13a0dd94edafa8f0a1e1694004&cate1=861&cate2=873&orderBy=productNameDESC&limit=10&offset=0",
-    type : "GET",
-    success : function(r){
-      alert("하");
-    }
-});
+/* 	$.ajax({
+	  method: "GET",
+	  url: "garage/list.do"
+	  dataType: "jsonp",
+	  jsonp : "callback",
+	  success : function(data){
+	    
+	  }
+	});
+ */
 	</script>
   <!-- Classie 메뉴 접히고 펼쳐지는 부분` -->
   <script src="../js/main/classie.js"></script>
