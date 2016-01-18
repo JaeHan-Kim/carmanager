@@ -55,10 +55,13 @@ public class GarageController {
   }
   
   @RequestMapping(value="delete", method=RequestMethod.POST)
-  public Object deleteCar(int no) throws Exception {
+  public Object deleteCar(int no, int userNo) throws Exception {
+  	log.debug("삭제할 차량 : " + no + "접속한 유저 : " + userNo);
     refuelService.carDelete(no);
     garageService.carDelete(no);
-    return new AjaxResult("success", null);
+    Garage garage = garageService.searchFirstCar(userNo);
+    log.debug(garage);
+    return new AjaxResult("success", garage);
   }
   
   

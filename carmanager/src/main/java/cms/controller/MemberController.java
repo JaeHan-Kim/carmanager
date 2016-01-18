@@ -31,6 +31,14 @@ public class MemberController {
     return new AjaxResult("success", member);
   }
   
+  @RequestMapping(value="upadd", method=RequestMethod.POST) 
+  public AjaxResult upadd(MultipartFile uploadfile){
+  	log.debug(uploadfile.getOriginalFilename());
+  	log.debug("들어왔다");
+  	
+  	return new AjaxResult("success", null);
+  }
+  
   @RequestMapping(value="update", method=RequestMethod.POST)
   public AjaxResult update(
 		  String memberNo,

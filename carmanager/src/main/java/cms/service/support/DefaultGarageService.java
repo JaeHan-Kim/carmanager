@@ -42,5 +42,10 @@ public class DefaultGarageService implements GarageService {
   public int carDelete(int no) {
     return garageDao.delete(no);
   }
+
+	@Override
+	public Garage searchFirstCar(int no) {
+		return garageDao.selectFirstCar(no);
+	}
  
 }

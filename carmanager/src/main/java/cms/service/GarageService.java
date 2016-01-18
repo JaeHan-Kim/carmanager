@@ -17,4 +17,6 @@ public interface GarageService {
   
   Garage lastAddCar (int no);
   
+  Garage searchFirstCar (int no);
+  
 }
