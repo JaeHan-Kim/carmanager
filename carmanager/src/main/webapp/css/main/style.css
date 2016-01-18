@@ -1327,11 +1327,13 @@ section#tables  p {
 }
 .forms h4 {
     font-size: 1.3em;
-    color: #6F6F6F;
+    /*color: #6F6F6F;*/
+    color: #E8E6E6;
 }
 .form-title {
     padding: 1em 2em;
-    background-color: #EAEAEA;
+    /*background-color: #EAEAEA;*/
+    background-color: rgba(101, 124, 153, 0.93);
     border-bottom: 1px solid #D6D5D5;
 }
 .form-body {
@@ -2507,7 +2509,7 @@ i.fa.fa-facebook.profile-icon {
     background-color: rgba(101, 124, 153, 0.93);
 }
 .widget_1_box  .bg-danger {
-    background-color: rgb(79, 82, 186);
+    background-color: #6A6A6A;
 }
 .tile-progress h4 {
     color: #fff;
