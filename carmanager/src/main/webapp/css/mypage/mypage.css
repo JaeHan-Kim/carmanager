@@ -1,22 +1,91 @@
 @CHARSET "UTF-8";
 
+#div_myinfo {
+	margin-top: 50px;
+	left: 6.5%;
+	width: 800px;
+}
+
+#imgInput {
+	width: 215px;
+	float: left;
+	position: relative;
+}
+
+#myImg {
+	margin-top: 30px;
+	width: 202px;
+}
+
+#imgInput input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip:rect(0,0,0,0);
+  border: 0;
+}
+
+#imgInput label {
+  display: inline-block;
+  margin-left: 54px;
+  padding: .5em .75em;
+  
+  border-radius: 5px;
+  border: 1px solid gray;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  
+  font-size: 16px;
+  font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+
+#textInput {
+	width : 500px;
+	left: 70%;
+	top: 20%;
+	float: right;
+	font-size: 25px;
+}
+
+.text_div {
+  margin-bottom: 15px;	
+}
+
+#txt_email {
+	padding-left: 9px;
+}
+
+#div_password label {
+	margin-right: 4px;
+}
+
+#bottom {
+	margin-top: 17px;
+	margin-right: 50px;
+	width: 400px;
+	float: right;
+}
+
 #bottom_span {
 	display:block;
 	text-align: center;
 	font-weight: bold;
 	font-size: 20px;
 	position: relative;
-	top: 8px;
+	top: 26px;
 	z-index: 10;
 }
 
-#stamp_img {
+#bottom_img {
 	text-align: center;
 	top: -23px;
-	margin-left: 248px;
+	margin-left: 230px;
 	position: relative;
-}
+} 
 
 #stamp {
-	width: 5%;
+	width: 45px;
 }
