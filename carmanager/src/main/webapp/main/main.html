@@ -45,7 +45,9 @@ window.scrollTo(0,1); }
 <script src="../js/main/wow.min.js"></script>
 <script>
   new WOW().init();
-  $(document).ready(function(){ 
+  $(document).ready(function(){
+    $('#blank').css('display', 'none')
+    $('#exCar').css('display', 'none')
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
     var userCarNo = sessionStorage.getItem('loginUsercarNo');
       $("#userNickname").html(userNickname);
@@ -306,6 +308,7 @@ window.scrollTo(0,1); }
           <div class="clearfix"></div>
 
           <script>
+          
           var selectcar = $("#myCarList");
           var cnt = 0;
           var classType = new Array();
