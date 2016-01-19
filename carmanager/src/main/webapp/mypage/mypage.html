@@ -149,13 +149,14 @@
 
         <div class="forms">
           <h3 class="title1">Forms</h3>
-          <div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
+          <div id="null"></div>
+          <div class="sign-up-row widget-shadow"> 
             <div class="form-title">
               <h4>:
                 <span class="nickname"></span>의 회원증입니다.
               </h4>
             </div>
-            <div class="form-body">
+            <div class="panel-body">
               <form id="form_mypage">
                 <div id="div_imgInput" class="form-group">
                   <img src="../img/auth/exam.png">
@@ -179,10 +180,11 @@
 	                  <label for="exampleInputPassword2">비밀번호 확인</label> 
 	                  <input type="password" class="form-control" id="exampleInputPassword2" placeholder="비밀번호 확인">
 	                </div>
+		              <div class="form-group form-footer">
+		                <span class="footer_text">내 차를 부탁해 대표이사 인</span>
+		                <img id="stamp" src="../img/mypage/stamp.png">
+		              </div>
                 </div>
-	              <div class="form-group form-footer">
-	                <span class="footer_text">내 차를 부탁해 대표이사 윤태웅</span><img id="stamp" src="../img/mypage/stamp.png">
-	              </div>
               </form>
             </div>
             <div class="panel-footer">
@@ -225,12 +227,6 @@
 	      });  
 	    });
 	    
-	    /* 
-	    function resetAll() {
-	      document.getElementById('txt_password').innerHTML = "";
-	      document.getElementById('txt_pwd_confirm').innerHTML = "";
-	    } 
-      */
     </script>
 
 </body>
