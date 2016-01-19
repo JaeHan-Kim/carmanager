@@ -14,6 +14,8 @@
 	  window.scrollTo(0,1); } 
 	</script>
 
+	<link type='text/css' rel='stylesheet' href="../lib/slick-carousel/slick.css" />
+	<link type='text/css' rel='stylesheet' href="../lib/slick-carousel/slick-theme.css" />
 	<!-- Bootstrap Core CSS -->
 	<link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
 	<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
@@ -25,6 +27,7 @@
 	<!-- js-->
 	<script src="../js/main/jquery-1.11.1.min.js"></script>
 	<script src="../js/main/modernizr.custom.js"></script>
+	<script src="../lib/slick-carousel/slick.min.js"></script>
 	<!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
 	<link type='text/css' rel='stylesheet'
 	      href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'>
@@ -171,7 +174,7 @@
     <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
     	<!-- 상단 표시 폼 시작 -->
 	  	<div class="forms">
-	  		<!-- <h3 class="title1">Forms</h3> -->
+	  		<h3 class="title1">Forms</h3>
 				<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 				<div class="form-title">
 					<h4>Basic Form :</h4>
@@ -206,6 +209,14 @@
 							<form class="form-horizontal"> 
 								<div class="form-group"> 
 									<div class="col-sm-9"> 
+									<div data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
+  										<div><h3>1</h3></div>
+  										<div><h3>2</h3></div>
+  										<div><h3>3</h3></div>
+  										<div><h3>4</h3></div>
+  										<div><h3>5</h3></div>
+  										<div><h3>6</h3></div>
+										</div>
 									</div> 
 								</div>
 							</form> 
@@ -214,7 +225,7 @@
 				</div>
 				<!-- 하단 제품 표시 폼 끝 -->
 	  	</div>
-		<!-- 페이지 끝 -->>
+		<!-- 페이지 끝 -->
     	</div>
     </div>
     <!--footer-->
@@ -227,26 +238,22 @@
   </div>
 	<!-- 자바 스크립트 -->
 	<script>
-	// header("Access-Control-Allow-Origin", "*");  
-	
-	$.ajax({
-    type : 'get',
-    url : 'http://api.danawa.com/api/main/category/product/list?charset=euckr&key=a3429f13a0dd94edafa8f0a1e1694004&cate1=861&cate2=873&orderBy=productNameDESC&limit=10&offset=0',
-    dataType : "jsonp",
-    jsonp : "callback",
-    beforeSend : function(xhr){
-        xhr.setRequestHeader("Access-Control-Allow-Origin","*");
-    },
-    error: function(xhr, status, error){ 
-        alert(error); 
-    },
-    success : function(callback){
-        alert("asdads");
-    }
-});
+	$.ajax({type:"get", 
 	var url = 'http://api.danawa.com/api/main/category/product/list?'
 	var apikey = 'a3429f13a0dd94edafa8f0a1e1694004'
-	var option = "sadadsd";
+	var option = "sadadsd"; */
+	  url:"http://api.danawa.com/api/search/product/info?key=f6dd9c299a5a21e60f2642f95293d23b&keyword=%ED%98%84%EB%8C%80%20%EC%99%80%EC%9D%B4%ED%8D%BC&mediatype=json&charset=utf8",
+	  dataType: "jsonp",
+	  	success:function(data) {
+	  		alert("성공");
+	  		for (var i = 0; i <= 5; i++) {
+	  			alert(data.productList[i].prod_name);
+	  		}
+	  	},
+	  	error:function(request, status, error) {
+	  		alert("실패");
+	  	}
+	  })
 /* 	$.ajax({
 	  method: "GET",
 	  url: "garage/list.do"
@@ -257,6 +264,7 @@
 	  }
 	});
  */
+
 	</script>
   <!-- Classie 메뉴 접히고 펼쳐지는 부분` -->
   <script src="../js/main/classie.js"></script>

@@ -94,7 +94,8 @@ CREATE TABLE refuel (
 	ref_dt DATE    NOT NULL COMMENT '주유날짜', -- 주유날짜
 	mile   INTEGER NOT NULL COMMENT '주행거리', -- 주행거리
 	cost   INTEGER NOT NULL COMMENT '주유금액', -- 주유금액
-	liter  FLOAT   NULL     COMMENT '주유량' -- 주유량
+	liter  FLOAT   NULL     COMMENT '주유량', -- 주유량
+	lcost  INTEGER NOT NULL COMMENT '단가' -- 단가
 )
 COMMENT '주유기록';
 
