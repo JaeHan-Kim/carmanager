@@ -71,6 +71,10 @@
 	z-index: 1;
 }
 
+.panel-footer {
+	border: 0px;
+}
+
 .btn_set button {
 	border-radius: 2px !important;
 }
