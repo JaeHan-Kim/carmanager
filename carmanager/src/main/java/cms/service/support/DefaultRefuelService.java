@@ -32,6 +32,11 @@ public class DefaultRefuelService implements RefuelService {
   public int carDelete(int no) {
     return refuelDao.delete(no);
   }
+
+  @Override
+  public Refuel oilList(int no) {
+    return refuelDao.selectOilList(no);
+  }
 	
 	
 }

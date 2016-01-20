@@ -12,57 +12,50 @@ public class Refuel {
   protected String group_date;
   protected String nickName;
   protected float effi;
+  protected int literCost;
   
   public Refuel() {
    
   }
-  
- 
 
   @Override
   public String toString() {
     return "Refuel [refuelNo=" + refuelNo + ", myCarNo=" + myCarNo + ", refuelDate=" + refuelDate + ", mile=" + mile
         + ", cost=" + cost + ", liter=" + liter + ", group_date=" + group_date + ", nickName=" + nickName + ", effi="
-        + effi + "]";
+        + effi + ", literCost=" + literCost + "]";
   }
 
+  public int getLiterCost() {
+    return literCost;
+  }
 
+  public void setLiterCost(int literCost) {
+    this.literCost = literCost;
+  }
 
   public String getGroup_date() {
     return group_date;
   }
 
-
-
   public void setGroup_date(String group_date) {
     this.group_date = group_date;
   }
-
-
 
   public String getNickName() {
     return nickName;
   }
 
-
-
   public void setNickName(String nickName) {
     this.nickName = nickName;
   }
-
-
 
   public float getEffi() {
     return effi;
   }
 
-
-
   public void setEffi(float effi) {
     this.effi = effi;
   }
-
-
 
   public int getRefuelNo() {
     return refuelNo;
