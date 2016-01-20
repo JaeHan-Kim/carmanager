@@ -26,10 +26,6 @@
 		    $("#saveEmail").attr("checked", "checked");		// 체크박스에 체크
 	    }
 	  });
-	  
-	  swal.setDefaults({    
-      type: "error" 
-    });
   </script>
 
 </head>
@@ -120,13 +116,15 @@
           if ($('#femail').val().length < 1) {
         	  swal({    
               title: "로그인 실패!",   
-              text: "이메일을 입력해주세요!", 
+              text: "이메일을 입력해주세요!",
+              type: "error",
               confirmButtonText: "확인"
             });
           } else {
         	  swal({    
               title: "로그인 실패!",   
               text: "비밀번호를 입력해주세요!", 
+              type: "error",
               confirmButtonText: "확인"
             });
           }
@@ -147,6 +145,7 @@
 		        	swal({    
                 title: "로그인 실패!",   
                 text: "이메일과 비밀번호를 확인하세요!", 
+                type: "error",
                 confirmButtonText: "확인"
               });
 		        }
@@ -320,6 +319,7 @@
     	swal({    
         title: "회원가입 실패!",   
         text: "이메일을 입력해주세요!", 
+        type: "error",
         confirmButtonText: "확인"
       });
       return false;
@@ -328,6 +328,7 @@
       swal({    
         title: "회원가입 실패!",   
         text: "별명을 입력해주세요!", 
+        type: "error",
         confirmButtonText: "확인"
       });
       return false;
@@ -336,6 +337,7 @@
       swal({    
         title: "회원가입 실패!",   
         text: "비밀번호를 입력해주세요!", 
+        type: "error",
         confirmButtonText: "확인"
       });
       return false;
@@ -344,6 +346,7 @@
       swal({    
         title: "회원가입 실패!",   
         text: "비밀번호 확인을 해주세요!", 
+        type: "error",
         confirmButtonText: "확인"
       });
       return false;
@@ -352,6 +355,7 @@
       swal({    
         title: "회원가입 실패!",   
         text: "비밀번호가 일치하지 않습니다!", 
+        type: "error",
         confirmButtonText: "확인"
       });
       return false;
@@ -367,6 +371,7 @@
         swal({    
             title: "회원가입 실패!",   
             text: "양식에 맞춰 입력해주세요!", 
+            type: "error",
             confirmButtonText: "확인"
           });
     	return false;
@@ -383,16 +388,15 @@
     	  swal({    
           title: "회원가입 실패!",   
           text: "회원가입에 실패했습니다!", 
+          type: "error",
           confirmButtonText: "확인"
         });
     	  return false;
       }
-      swal({    
+      swal({   
         title: "회원가입 성공!",   
-        text: "환영합니다!", 
-        type: "succcess",
-        confirmButtonText: "확인"
-      }, function() {
+        type: "success",   
+        confirmButtonText: "확인 :)" }, function() {   
         location.href = "login.html";
       });
     }, 'json');

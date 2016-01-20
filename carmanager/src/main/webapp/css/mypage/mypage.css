@@ -1,12 +1,17 @@
 @CHARSET "UTF-8";
 
+#myInfo {
+	margin-left: 100px;
+}
+
 #div_imgInput {
 	width: 300px;
 	float: left;
 }
 
 #div_imgInput img {
-	width: 250px;
+	margin-top: 20px;
+	width: 200px;
 }
 
 #div_imgInput label {
@@ -20,7 +25,7 @@
   font-size: 16px;
   font-weight: bold;
   font-family: 'Raleway', 'Lato', Arial, sans-serif;
-  margin-left: 78px;  
+  margin-left: 55px;  
 }
 
 #imgInput {
@@ -43,6 +48,8 @@
 }
 
 .div_textInput {
+	margin-top: 10px;
+	margin-left: -20px;
 	font-size: 20px;
 	float: left;
 }
@@ -53,6 +60,10 @@
 
 .nickname2 {
 	margin-left: 40px;
+}
+
+#checkPwd1, #checkPwd2 {
+	font-size: 12px;
 }
 
 .form-footer {

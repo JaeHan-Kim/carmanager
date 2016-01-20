@@ -8,13 +8,15 @@
   <link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" />
   <link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
   <link type="text/css" rel="stylesheet" href="../css/main/custom.css" />
+  <link type='text/css' rel='stylesheet' href="../css/mypage/mypage.css" />
   <link type='text/css' rel='stylesheet' href="../css/main/style.css" />
+  <link type='text/css' rel="stylesheet" href="../lib/sweetalert/sweetalert.css">
   <link type='text/css' rel='stylesheet'
         href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' />
-  <link type='text/css' rel='stylesheet' href="../css/mypage/mypage.css" />
   
   <script src="../lib/Chart.js/Chart.js"></script>
   <script src="../lib/jquery/jquery.min.js"></script>
+  <script src="../lib/sweetalert/sweetalert.min.js"></script>
   <script src="../js/main/bootstrap.js"></script>
   <script src="../js/main/classie.js"></script>
   <script src="../js/main/custom.js"></script>
@@ -149,7 +151,6 @@
 
         <div class="forms">
           <h3 class="title1">Forms</h3>
-          <div id="null"></div>
           <div class="sign-up-row widget-shadow"> 
             <div class="form-title">
               <h4>:
@@ -173,12 +174,14 @@
 	                  <span class="nickname2"></span>
 	                </div> 
 	                <div class="form-group"> 
-	                  <label for="exampleInputPassword1">비밀번호</label> 
-	                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호">
+	                  <label for="pwd">비밀번호</label> 
+	                  <input id="pwd" class="form-control" type="password" placeholder="비밀번호">
+	                  <div id="checkPwd1"></div>
 	                </div>
 	                <div class="form-group"> 
-	                  <label for="exampleInputPassword2">비밀번호 확인</label> 
-	                  <input type="password" class="form-control" id="exampleInputPassword2" placeholder="비밀번호 확인">
+	                  <label for="pwd_confirm">비밀번호 확인</label> 
+	                  <input id="pwd_confirm" class="form-control" type="password" placeholder="비밀번호 확인" onkeyup="checkPwd()">
+	                  <div id="checkPwd2"></div>
 	                </div>
 		              <div class="form-group form-footer">
 		                <span class="footer_text">내 차를 부탁해 대표이사 인</span>
@@ -220,10 +223,88 @@
 	        classie.toggle(showLeftPush, 'disabled');
 	      }
 	    }
-    
+	    
+	    $('#pwd').blur(function() {
+        $.post('ajax/checkPassword.do', {
+          password: $('#pwd').val()
+        }, function(resultObj) {
+          var ajaxResult = resultObj.ajaxResult;
+          
+          if(ajaxResult.status != "notPassword") {
+            if (ajaxResult.status == "success") {
+              document.getElementById('checkPwd1').style.color = "black";
+              document.getElementById('checkPwd1').innerHTML = "사용할 수 있는 비밀번호입니다.";
+            }
+          } else {
+            if($('#pwd').val().length < 1) {
+              document.getElementById('checkPwd1').style.color = "red";
+              document.getElementById('checkPwd1').innerHTML = "비밀번호를 입력해주세요.";
+            } else {
+              document.getElementById('checkPwd1').style.color = "red";
+              document.getElementById('checkPwd1').innerHTML = "6~12자의 영문과 숫자만 가능합니다.";
+            }
+          }
+        }, 'json');
+      });
+	    
+	    function checkPwd() {
+        var form = document.forms[0];
+        var pw1 = form.pwd.value;
+        var pw2 = form.pwd_confirm.value;
+
+        if(pw1!=pw2){
+          document.getElementById('checkPwd2').style.color = "red";
+          document.getElementById('checkPwd2').innerHTML = "비밀번호가 일치하지 않습니다."; 
+        }else{
+          document.getElementById('checkPwd2').style.color = "black";
+          document.getElementById('checkPwd2').innerHTML = "비밀번호가 확인 되었습니다."; 
+        }
+      }
+	    
+	    /* 입력된 값(email, nickName, password를 넘긴다.) */
+	    $('#btn_update').click(function(event) {
+	    	var passwordPattern = /^[a-zA-Z]{1}[a-zA-Z0-9_]{5,13}$/;
+	    	
+	    	if(!passwordPattern.test($('#pwd').val())||
+	    			$('#pwd').val().length < 6 ||
+	    			$('#pwd').val().length > 12) {
+	        swal({    
+	          title: "정보수정 실패!",   
+	          text: "비밀번호 형식에 맞게 입력해주세요!",
+	          type: "error",
+	          confirmButtonText: "확인"
+	        });
+	        return false;
+	      }
+	
+		    $.post('ajax/update.do', {
+		      email: sessionStorage.getItem('loginUseremail'),
+		      password: $('#pwd').val()
+		    }, function(resultObj) {
+		      var ajaxResult = resultObj.ajaxResult;
+		      if (ajaxResult.status == "failure") {
+		        swal({    
+		          title: "정보수정 실패!",   
+		          text: "회원정보 수정에 실패했습니다!",
+		          type: "error",
+		          confirmButtonText: "확인"
+		        });
+		        return false;
+		      }
+		      swal({   
+            title: "정보 수정 성공!",   
+	          type: "success",   
+	          confirmButtonText: "확인 :)" }, function() {   
+            location.href = "mypage.html";
+          });
+		    }, 'json');
+		  });
+	    
 	    $("#btn_reset").click(function(event){
 	        $("#form_mypage").each(function() {  
 	        	this.reset();
+	        	document.getElementById('checkPwd1').innerHTML = "";
+	        	document.getElementById('checkPwd2').innerHTML = "";
 	      });  
 	    });
 	    
