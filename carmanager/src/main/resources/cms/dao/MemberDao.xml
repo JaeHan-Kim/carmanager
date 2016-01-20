@@ -25,7 +25,7 @@
     where email=#{email} and pwd=sha1(#{password})
     order by g.grno limit 1
   </select>
-  
+
   <select id="checkEmail" resultType="int" parameterType="member">
     select count(mno) from members where email=#{email}
   </select>
@@ -33,7 +33,7 @@
   <select id="checkNickname" resultType="int" parameterType="member">
     select count(mno) from members where nick=#{nickName}
   </select>
-  
+
   <select id="selectOne" resultMap="memberMap" parameterType="map">
     select 
       email, 
