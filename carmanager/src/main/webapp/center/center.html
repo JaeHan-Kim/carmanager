@@ -15,15 +15,15 @@
 	</script>
 
 	<!-- Bootstrap Core CSS -->
-	<link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+	<link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
 	<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
-	<link type='text/css' rel='stylesheet' href="../css/map/style.css" />
+	<link type='text/css' rel='stylesheet' href="../css/main/style.css" />
 	<!-- font CSS -->
 	<!-- font-awesome icons 빈칸 유지를 위해 링크를 막아둠 -->
 	<!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
 	<!-- //font-awesome icons -->
 	<!-- js-->
-	<script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+	<script src="../js/main/jquery-1.11.1.min.js"></script>
 	<script src="../js/main/modernizr.custom.js"></script>
 	<!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
 	<link type='text/css' rel='stylesheet'
@@ -53,9 +53,6 @@
 	<script src="../js/main/custom.js"></script>
 	<link rel="stylesheet" href="../css/main/custom.css">
 	<!--//Metis Menu -->
-	   <script type="text/javascript" 
-      src="//apis.daum.net/maps/maps3.js?apikey=8464e7c331667dafe0527c44bddc93ad">
-	   </script>
 </head>
 
 <body class="cbp-spmenu-push">
@@ -67,7 +64,7 @@
           id="cbp-spmenu-s1">
           <ul class="nav" id="side-menu">
             <li>
-              <a href="main.html" class="">
+              <a href="../main/main.html" class="">
               <i class="fa fa-home nav_icon"></i>Dashboard</a>
             </li>
             <li>
@@ -145,7 +142,7 @@
 	              </div>
 	            </a>
 	            <ul class="dropdown-menu drp-mnu">
-	              <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
+	              <li><a id="Mypage" href="#"><i class="fa fa-cog"></i>Mypage</a></li>
 	              <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
 	            </ul>
 	          </li>
@@ -160,6 +157,10 @@
     <!-- //header-ends -->
      <!--   로그 아웃 클릭 이벤트 -->
     <script>
+    $('#Mypage').click(function(event){
+        location.href = "../mypage/mypage.html";
+    });
+    
     $('#Logout').click(function(event){
         event.preventDefault();
         sessionStorage.removeItem('loginUserNickname');
@@ -167,114 +168,41 @@
         location.href = "../auth/login.html";
       });
     </script>
+    
     <!-- main content start-->
-    <div id="page-wrapper">
-      <div class="main-page compose">
+		<div id="page-wrapper">
+			<div class="main-page charts-page">
+				<h3 class="title1">정 비 소</h3>
+				<div class="charts">
+			    <!-- 지도 관련 영역 -->
+					<div class="col-md-6 chrt-page-grids" id="map"></div>
+			    
+			    <!-- 정비소 리스트 관련 영역 -->
+				  <div class="col-md-4 profile widget-shadow" >
+					  <div class="activity_box activity_box2" style="font-size: 12px;">
+						  <h4 class="title3">주변 정비소 리스트</h4>
+							<div class="scrollbar scrollbar1">
+							  <div class="single-bottom">
+									<ul id="centerList"></ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"> </div>	
+			 </div>
+     
+       <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=cf28d7e7b1ba95c790014d72c0c90d07&libraries=services"></script>				
+       <script type="text/javascript" src="../js/center/center.js"></script>				
+			
+		  </div>
+		</div>
 
-    <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
-        <div class="col-md-8 compose-left">
-              <div class="panel-default">
-            <div class="panel-heading">
-              지도
-            </div>
-            <div id="map" style="height:400px;"class="panel-body" >
-
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 compose-right widget-shadow">
-            <div class="activity_box activity_box2">
-              <h4 class="title3">검색 결과</h4>
-              <div class="scrollbar scrollbar1">
-                <div class="single-bottom">
-                  <ul>
-                    <li>
-                      <input type="checkbox" id="brand" value="">
-                      <label for="brand"><span></span> Sunt in culpa qui officia.</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="brand1" value="">
-                      <label for="brand1"><span></span> Fugiat quo voluptas nulla.</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="brand2" value="">
-                      <label for="brand2"><span></span> Dolorem eum.</label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="chat-bottom">
-              </div>
-            </div>
-          <div class="clearfix"> </div>
-        </div>
-        <div class="clearfix"> </div> 
-      </div>
-    </div>
     <!--footer-->
     <div class="footer">
       <p>
         &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
       </p>
     </div>
-    <script>
-    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-    var options = { //지도를 생성할 때 필요한 기본 옵션
-      center: new daum.maps.LatLng(37.566826, 126.9786567), //지도의 중심좌표.
-      level: 6 //지도의 레벨(확대, 축소 정도)
-    };
-
-    var map = new daum.maps.Map(container, options);
-    if (navigator.geolocation) {
-      
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-      navigator.geolocation.getCurrentPosition(function(position) {
-          
-          var lat = position.coords.latitude, // 위도
-              lon = position.coords.longitude; // 경도
-          
-          var locPosition = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-              message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
-          
-          // 마커와 인포윈도우를 표시합니다
-          displayMarker(locPosition, message);
-              
-        });
-      
-  } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-      
-      var locPosition = new daum.maps.LatLng(33.450701, 126.570667),    
-          message = 'geolocation을 사용할수 없어요..'
-          
-      displayMarker(locPosition, message);
-  }
-
-  // 지도에 마커와 인포윈도우를 표시하는 함수입니다
-  function displayMarker(locPosition, message) {
-
-      // 마커를 생성합니다
-      var marker = new daum.maps.Marker({  
-          map: map, 
-          position: locPosition
-      }); 
-      
-      var iwContent = message, // 인포윈도우에 표시할 내용
-          iwRemoveable = true;
-
-      // 인포윈도우를 생성합니다
-      var infowindow = new daum.maps.InfoWindow({
-          content : iwContent,
-          removable : iwRemoveable
-      });
-      
-      // 인포윈도우를 마커위에 표시합니다 
-      infowindow.open(map, marker);
-      
-      // 지도 중심좌표를 접속위치로 변경합니다
-      map.setCenter(locPosition);      
-  }
-    
-    </script>
     <!--//footer-->
   </div>
 
@@ -298,6 +226,7 @@
       }
     }
   </script>
+  
   <!--scrolling js 스크롤바 조정-->
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>
