@@ -4,6 +4,7 @@
 <html>
 <head>
 <title>new 내 차를 부탁해</title>
+	
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -14,8 +15,6 @@
 	  window.scrollTo(0,1); } 
 	</script>
 
-	<link type='text/css' rel='stylesheet' href="../lib/slick-carousel/slick.css" />
-	<link type='text/css' rel='stylesheet' href="../lib/slick-carousel/slick-theme.css" />
 	<!-- Bootstrap Core CSS -->
 	<link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
 	<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
@@ -27,7 +26,6 @@
 	<!-- js-->
 	<script src="../js/main/jquery-1.11.1.min.js"></script>
 	<script src="../js/main/modernizr.custom.js"></script>
-	<script src="../lib/slick-carousel/slick.min.js"></script>
 	<!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
 	<link type='text/css' rel='stylesheet'
 	      href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'>
@@ -35,6 +33,12 @@
 	<!--animate-->
 	<link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
 	<script src="../js/main/wow.min.js"></script>
+	<!-- --- -->
+	<link rel="stylesheet" type="text/css" href="../css/pservice/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/pservice/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/pservice/pservice.css"/>
+  <script type="text/javascript" src="../js/pservice/slick.min.js"></script>
+	<!-- --- -->
 	<script>
 	  new WOW().init();
 	  $(document).ready(function(){ 
@@ -205,20 +209,20 @@
 				<!-- 하단 제품 표시 폼 시작 -->
 				<div class=" form-grids row form-grids-right">
 					<div class="widget-shadow " data-example-id="basic-forms"> 
-						<div class="form-body">
+						<div id="bline" class="form-body">
 							<form class="form-horizontal"> 
-								<div class="form-group"> 
-									<div class="col-sm-9"> 
-									<div data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-  										<div><h3>1</h3></div>
-  										<div><h3>2</h3></div>
-  										<div><h3>3</h3></div>
-  										<div><h3>4</h3></div>
-  										<div><h3>5</h3></div>
-  										<div><h3>6</h3></div>
-										</div>
-									</div> 
-								</div>
+								
+									<div class="slider">
+   									<div class="col-sm-9 partN"><h3 class="temp">와이퍼</h3></div>
+   									<div class="col-sm-9 partN"><h3 class="temp">에어콘필터</h3></div>
+   									<div class="col-sm-9 partN"><h3 class="temp">브레이크패드</h3></div>
+										<div class="col-sm-9 partN"><h3 class="temp">브레이크오일</h3></div>
+   									<div class="col-sm-9 partN"><h3 class="temp">부동액</h3></div>
+ 										<div class="col-sm-9 partN"><h3 class="temp">미션오일</h3></div>
+										<div class="col-sm-9 partN"><h3 class="temp">타이어</h3></div>
+ 				 						<div class="col-sm-9 partN"><h3 class="temp">베터리</h3></div>
+ 									</div>
+			
 							</form> 
 						</div>
 					</div>
@@ -228,6 +232,46 @@
 		<!-- 페이지 끝 -->
     	</div>
     </div>
+    <script type="text/javascript">
+    $("div.partN").click(clickDetailLnk);
+    function clickDetailLnk(event) {
+      alert("출력!");
+    }
+    $(document).ready(function(){
+      $('.slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      });
+    });
+  </script>
     <!--footer-->
     <div class="footer">
       <p>
@@ -237,12 +281,13 @@
     <!--//footer-->
   </div>
 	<!-- 자바 스크립트 -->
-	<script>
+	<script> 
+	/* var url = "http://api.danawa.com/api/search/product/info?key="; // 상품 검색 URL 
+	var key = "f6dd9c299a5a21e60f2642f95293d23b" // 상품요청 api key
+	var maker = "현대"
+	var keyword = " 와이퍼";
 	$.ajax({type:"get", 
-	var url = 'http://api.danawa.com/api/main/category/product/list?'
-	var apikey = 'a3429f13a0dd94edafa8f0a1e1694004'
-	var option = "sadadsd"; */
-	  url:"http://api.danawa.com/api/search/product/info?key=f6dd9c299a5a21e60f2642f95293d23b&keyword=%ED%98%84%EB%8C%80%20%EC%99%80%EC%9D%B4%ED%8D%BC&mediatype=json&charset=utf8",
+	  url: url + key + "&keyword=" + maker + keyword +"&mediatype=json&charset=utf8",
 	  dataType: "jsonp",
 	  	success:function(data) {
 	  		alert("성공");
@@ -253,7 +298,7 @@
 	  	error:function(request, status, error) {
 	  		alert("실패");
 	  	}
-	  })
+	  }) */
 /* 	$.ajax({
 	  method: "GET",
 	  url: "garage/list.do"
