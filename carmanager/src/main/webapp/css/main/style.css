@@ -2350,6 +2350,8 @@ i.fa.fa-facebook.profile-icon {
 /*--//chat--*/
 /*--todo--*/
 .single-bottom ul li {
+	  width: 100%;
+	  color: #999;
     list-style: none;
     padding: 0px 10px 18px;
 }
