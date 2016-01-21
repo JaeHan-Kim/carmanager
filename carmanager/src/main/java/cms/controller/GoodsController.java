@@ -13,9 +13,9 @@ import cms.domain.Garage;
 import cms.service.GarageService;
 
 @Controller
-@RequestMapping("/pservice/*")
-public class PserviceController {
-  public static final Logger log = Logger.getLogger(PserviceController.class);
+@RequestMapping("/goods/*")
+public class GoodsController {
+  public static final Logger log = Logger.getLogger(GoodsController.class);
   
   @Autowired GarageService garageService;
   @Autowired ServletContext servletContext;
@@ -24,8 +24,6 @@ public class PserviceController {
   @RequestMapping(value="carInfo", method=RequestMethod.GET)
   public AjaxResult addMyCar(int no) {
   
-  	// log.debug("푸헬헬헬 !!" + no);
-  	
   	Garage garage = garageService.carDetail(no);
   	
   	log.debug(garage.toString());
