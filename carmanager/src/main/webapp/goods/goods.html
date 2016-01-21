@@ -34,10 +34,10 @@
 	<link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
 	<script src="../js/main/wow.min.js"></script>
 	<!-- --- -->
-	<link rel="stylesheet" type="text/css" href="../css/pservice/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/pservice/slick-theme.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/pservice/pservice.css"/>
-  <script type="text/javascript" src="../js/pservice/slick.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/goods/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/goods/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/goods/goods.css"/>
+  <script type="text/javascript" src="../js/goods/slick.min.js"></script>
 	<!-- --- -->
 	<script>
 	  new WOW().init();
@@ -164,12 +164,16 @@
     <!-- //header-ends -->
      <!--   로그 아웃 클릭 이벤트 -->
     <script>
-    $('#Logout').click(function(event){
-        event.preventDefault();
-        sessionStorage.removeItem('loginUserNickname');
-        sessionStorage.removeItem('loginUsercarNo');
-        location.href = "../auth/login.html";
-      });
+     	$('#Mypage').click(function(event){
+        location.href = "../mypage/mypage.html";
+ 		 	});
+  
+		  $('#Logout').click(function(event){
+      	event.preventDefault();
+      	sessionStorage.removeItem('loginUserNickname');
+      	sessionStorage.removeItem('loginUsercarNo');
+      	location.href = "../auth/login.html";
+    	});
     </script>
     <!-- main content start-->
     <div id="page-wrapper">
@@ -181,10 +185,21 @@
 	  		<h3 class="title1">Forms</h3>
 				<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 				<div class="form-title">
-					<h4 id="productName">상품 정보</h4>
+					<h4 id="productName"></h4>
 				</div>
 					<div class="form-body">
 						<div class="media">
+							<div class="media-left">
+							<img id="productimg0" class="media-object" src="" style="width: 140px; height: 140px;">
+							</div>
+							<div class="media-body">
+							<a id="linkDanawa0" href="#"><h4 id="detailModel0" class="media-heading"></h4></a>
+							<p id="detailSummary0"></p>
+							<p id="mprice0"></p>
+							</div>
+							<hr>
+							<div class="clearfix"> </div>
+							<!-- -------------------- -->
 							<div class="media-left">
 							<img id="productimg1" class="media-object" src="" style="width: 140px; height: 140px;">
 							</div>
@@ -204,17 +219,6 @@
 							<p id="detailSummary2"></p>
 							<p id="mprice2"></p>
 							</div>
-							<hr>
-							<div class="clearfix"> </div>
-							<!-- -------------------- -->
-							<div class="media-left">
-							<img id="productimg3" class="media-object" src="" style="width: 140px; height: 140px;">
-							</div>
-							<div class="media-body">
-							<a id="linkDanawa3" href="#"><h4 id="detailModel3" class="media-heading"></h4></a>
-							<p id="detailSummary3"></p>
-							<p id="mprice3"></p>
-							</div>
 							<div class="clearfix"> </div>
 					</div>
 					</div>
@@ -225,17 +229,50 @@
 					<div class="widget-shadow " data-example-id="basic-forms"> 
 						<div id="bline" class="form-body">
 							<form class="form-horizontal"> 
-								
 									<div class="slider">
+										<div class="col-sm-9">
+											<img class="temp partN" no="0" src="../img/goods/wiper.png">
+											<p>와이퍼</p>
+										</div>
+										<div class="col-sm-9">
+											<img class="partN temp" no="1" src="../img/goods/filter.png">
+											<p>에어콘필터</p>
+										</div>
+										<div class="col-sm-9">
+											<img class="partN temp" no="2" src="../img/goods/pad2.png">
+											<p>브레이크패드</p>
+										</div>
+										<div class="col-sm-9">
+											<img class="partN temp" no="3"  src="../img/goods/tire.png">
+											<p>타이어</p></div>
+										<div class="col-sm-9">
+											<img class="partN temp" no="4"  src="../img/goods/oil.png">
+											<p>엔진오일</p></div>
+										<div class="col-sm-9">
+											<img class="partN temp" no="5"  src="../img/goods/oil2.png">
+											<p>미션오일</p></div>
+										<div class="col-sm-9">
+											<img class="partN temp" no="6"  src="../img/goods/breakoil.png">
+											<p>브레이크오일</p></div>
+										<div class="col-sm-9">
+											<img class="partN temp" no="7"  src="../img/goods/oil3.png">
+											<p>부동액</p></div>
+										<div class="col-sm-9">
+											<img class="partN temp" no="8"  src="../img/goods/battery.png">
+											<p>베터리</p>
+										</div>
+										
+   								<!-- 	
    									<div class="col-sm-9"><h3 class="temp" ><a class="partN" no="0">와이퍼</a></h3></div>
    									<div class="col-sm-9 partN" ><h3 class="temp"><a class="partN" no="1">에어콘필터</a></h3></div>
    									<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="2">브레이크패드</a></h3></div>
 										<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="3">타이어</a></h3></div>
-										<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="4">미션오일</a></h3></div>
+										<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="4">엔진오일</a></h3></div>
  										<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="5">미션오일</a></h3></div>
 										<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="6">브레이크오일</a></h3></div>
    									<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="7">부동액</a></h3></div>
- 				 						<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="8">베터리</a></h3></div>
+ 				 						<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="8">베터리</a></h3></div> 
+ 				 					-->
  									</div>
 							</form> 
 						</div>
@@ -249,67 +286,74 @@
     <script type="text/javascript">
     var url = "https://apis.daum.net/shopping/search"; // 상품 검색 URL 
   	var key = "8464e7c331667dafe0527c44bddc93ad" // 상품요청 api key
-  	var maker = "현대차"
-  	var keyword;
-  	
-    var partName = ["와이퍼", "에어콘필터", "브레이크패드", "브레이크오일", "부동액", "미션오일", "타이어", "베터리"];
-/*   	  url: "https://apis.daum.net/shopping/search?apikey=8464e7c331667dafe0527c44bddc93ad&q=그랜드 카니발 와이퍼&result=3&pageno=1&sort=pop&output=json", */
+  	var keyword ;
+  	var partName = ["와이퍼", "에어콘필터", "브레이크패드", "타이어", "엔진오일", "미션오일", "브레이크오일", "부동액", "베터리"];
 		
-    $.ajax({type:"get", 
-      url: url + "?apikey=" + key + "&q=그랜드 카니발 와이퍼&result=3&pageno=1&sort=pop&output=json",
-  	  dataType: "jsonp",
-  	  	success:function(data) {
-  	  	console.log(data.channel.item[0].link);
-  	  	console.log(data.channel.item[1].link);
-				console.log(data.channel.item[2].link);
-  	  	document.getElementById("detailModel1").innerHTML = data.channel.item[0].title;
-    	  document.getElementById("detailSummary1").innerHTML = data.channel.item[0].category_name;
-    	  document.getElementById("mprice1").innerHTML = data.channel.item[0].price_min;
-    	  $('#linkDanawa1').prop('href', data.channel.item[0].link);
-				$("#productimg1").attr("src",data.channel.item[0].image_url);
-						
-				document.getElementById("detailModel2").innerHTML = data.channel.item[1].title;
-    	 	document.getElementById("detailSummary2").innerHTML = data.channel.item[1].category_name;
-    	 	document.getElementById("mprice2").innerHTML = data.channel.item[1].price_min;
-    	  $('#linkDanawa2').prop('href', data.channel.item[0].link);
-				$("#productimg2").attr("src",data.channel.item[1].image_url);
-						
-				document.getElementById("detailModel3").innerHTML = data.channel.item[2].title;
-    	  document.getElementById("detailSummary3").innerHTML = data.channel.item[2].category_name;
-    	  document.getElementById("mprice3").innerHTML = data.channel.item[2].price_min;
-    	  $('#linkDanawa3').prop('href', data.channel.item[0].link);
-				$("#productimg3").attr("src",data.channel.item[2].image_url);
-  	  	},
-  	  	error:function(request, status, error) {
-  	  		alert("실패");
-  	  	}
-  	  });
-    $("a.partN").click(clickDetailLnk);
+  	$("img.partN").click(clickDetailLnk);
+    /* $("a.partN").click(clickDetailLnk); */
     function clickDetailLnk(event) {
-      //alert(partName[$(event.target).attr("no")]);
-      //alert(sessionStorage.getItem("loginUsercarNo"));
-      $.getJSON('carInfo.do?no=' + sessionStorage.getItem("loginUsercarNo"), function(resultObj) {
-				alert("성공!");       
-      }); 
-      keyword = partName[$(event.target).attr("no")];
       event.preventDefault(); 
-      document.getElementById("productName").innerHTML = keyword;
+      displayItem($(event.target).attr("no"));
+    }
+    function displayItem(no) {
+      document.getElementById("productName").innerHTML = partName[no] + "  입니다.";
+      var keyword;
+      $.getJSON('carInfo.do?no=' + sessionStorage.getItem("loginUsercarNo"), function(resultObj) {
+				var ajaxResult = resultObj.ajaxResult;
+        if (ajaxResult.status == "success") {
+          var model = ajaxResult.data.model.split(" ")
+          if (no < 4) {
+        	  keyword = model[0] + " " + partName[no];
+          }
+          else {
+            keyword = partName[no];
+          }
+          
+          $.ajax({type:"get", 
+            url: url + "?apikey=" + key + "&q=" + keyword + "&result=3&pageno=1&sort=pop&output=json",
+        	  dataType: "jsonp",
+        	  	success:function(data) {
+        	  	document.getElementById("detailModel0").innerHTML = data.channel.item[0].title;
+          	  document.getElementById("detailSummary0").innerHTML = data.channel.item[0].category_name;
+          	  document.getElementById("mprice0").innerHTML = "가격 : " + data.channel.item[0].price_min + "원";
+          	  $('#linkDanawa0').prop('href', data.channel.item[0].link);
+      				$("#productimg0").attr("src",data.channel.item[0].image_url);
+      						
+      				document.getElementById("detailModel1").innerHTML = data.channel.item[1].title;
+          	 	document.getElementById("detailSummary1").innerHTML = data.channel.item[1].category_name;
+          	 	document.getElementById("mprice1").innerHTML = "가격 : " + data.channel.item[1].price_min + "원";
+          	  $('#linkDanawa1').prop('href', data.channel.item[1].link);
+      				$("#productimg1").attr("src",data.channel.item[1].image_url);
+      						
+      				document.getElementById("detailModel2").innerHTML = data.channel.item[2].title;
+          	  document.getElementById("detailSummary2").innerHTML = data.channel.item[2].category_name;
+          	  document.getElementById("mprice2").innerHTML = "가격 : " + data.channel.item[2].price_min + "원";
+          	  $('#linkDanawa2').prop('href', data.channel.item[0].link);
+      				$("#productimg2").attr("src",data.channel.item[2].image_url);
+        	  	},
+        	  	error:function(request, status, error) {
+        	  		alert("실패");
+        	  	}
+        	  });
+        }
+      }); 
     }
     $(document).ready(function(){
+      displayItem(0);
       $('.slider').slick({
-        dots: true,
+        dots: false,
         infinite: true,
+        prevArrow: '<img src="../img/goods/preview.png" width = "70px" height = "70px" class="slick-prev">',
+        nextArrow: '<img src="../img/goods/next.png"  width = "70px" height = "70px" class="slick-next">',
         speed: 300,
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 3,
         responsive: [
           {
             breakpoint: 1024,
             settings: {
               slidesToShow: 3,
               slidesToScroll: 3,
-              infinite: true,
-              dots: true
             }
           },
           {
@@ -338,19 +382,8 @@
     </div>
     <!--//footer-->
   </div>
-	<!-- 자바 스크립트 -->
-	<script> 
-/* 	$.ajax({
-	  method: "GET",
-	  url: "garage/list.do"
-	  dataType: "jsonp",
-	  jsonp : "callback",
-	  success : function(data){
-	    
-	  }
-	});
- */
-	</script>
+
+
   <!-- Classie 메뉴 접히고 펼쳐지는 부분` -->
   <script src="../js/main/classie.js"></script>
   <script>
