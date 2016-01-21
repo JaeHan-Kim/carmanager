@@ -49,7 +49,7 @@
       r.grno, r.rno, g.mno, Round((r.mile + r.cost/r.lcost * g.effi)) as mile, r.ref_dt, g.effi
     from refuel r
     left outer join garage g on r.grno = g.grno
-    where r.grno = 1
+    where r.grno = #{no}
     order by ref_dt desc
     limit 1
   </select>

@@ -14,19 +14,20 @@ import cms.service.RefuelService;
 @RequestMapping("/refuel/*")
 public class RefuelController {
   public static final Logger log = Logger.getLogger(RefuelController.class);
-  
+
   @Autowired GarageService garageService;
   @Autowired RefuelService refuelService;
-  
-  
+
   @RequestMapping("list")
   public Object oilList(int no) throws Exception {
-    
-    Refuel refuels = refuelService.oilList(no);
-    log.debug(refuels.toString());
 
-    return new AjaxResult("success", refuels);
+    Refuel refuel = refuelService.oilList(no);
+    if (refuel == null) {
+      return new AjaxResult("failure", null);
+    }
+    //log.debug(refuel.toString());
+    return new AjaxResult("success", refuel);
+    
   }
-  
-  
+
 }

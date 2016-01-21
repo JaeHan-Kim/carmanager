@@ -50,5 +50,5 @@ insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(5, '2016-01-01
 insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(5, '2016-01-06', 2400, 30000, 19.99, 1380);
 insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(5, '2016-01-13', 2800, 60000, 19.50, 1380);
 
-
+insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(3, '2015-11-12', 1221, 12000, 20.13, 1380);
 
