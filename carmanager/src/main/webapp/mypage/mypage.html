@@ -263,7 +263,7 @@
 	    
 	    /* 입력된 값(email, nickName, password를 넘긴다.) */
 	    $('#btn_update').click(function(event) {
-	    	var passwordPattern = /^[a-zA-Z]{1}[a-zA-Z0-9_]{5,13}$/;
+	    	var passwordPattern = /^[a-zA-Z0-9_]{5,13}$/;
 	    	
 	    	if(!passwordPattern.test($('#pwd').val())||
 	    			$('#pwd').val().length < 6 ||
