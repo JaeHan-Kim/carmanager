@@ -362,7 +362,7 @@
     }
     
     var emailPattern = /\w+@\w+\.\w+/;
-    var passwordPattern = /^[a-zA-Z0-9_]{5,13}$/;
+    var passwordPattern = /^[a-zA-Z0-9_]{6,12}$/;
     
     if(!emailPattern.test($('#jemail').val()) ||
     	 $('#jnickname').val().length > 10 ||
