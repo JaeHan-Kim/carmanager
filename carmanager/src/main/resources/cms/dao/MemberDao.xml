@@ -44,10 +44,8 @@
   </select>
   
   <update id="update" parameterType="member">
-    update members set 
-      nick=#{nickName}, 
-      pwd=sha1(#{password}) 
-    where mno=#{memberNo} 
+    update members set pwd=sha1(#{password}) 
+    where email=#{email} 
   </update>
   
 </mapper>

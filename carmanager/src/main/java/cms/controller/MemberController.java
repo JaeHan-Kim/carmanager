@@ -1,5 +1,7 @@
 package cms.controller;
 
+import java.util.regex.Pattern;
+
 import javax.servlet.ServletContext;
 
 import org.apache.log4j.Logger;
@@ -42,11 +44,7 @@ public class MemberController {
 */
   
   @RequestMapping(value="update", method=RequestMethod.POST)
-  public AjaxResult update(
-		  String memberNo,
-		  String nickName,
-		  String password
-		  ) throws Exception {
+  public AjaxResult update(Member member) throws Exception {
 
 //    String fileName = MultipartHelper.generateFilename(photofile.getOriginalFilename());
 //    
@@ -62,12 +60,6 @@ public class MemberController {
 //      File attachfile = new File(servletContext.getRealPath(SAVED_DIR) + "/" + newFileName);
 //      photofile.transferTo(attachfile);
 //    }
-    
-    Member member = new Member();
-    member.setMemberNo(Integer.parseInt(memberNo));
-    member.setNickName(nickName);
-    member.setPassword(password);
-    
 //    if (newFileName != null) {
 //      member.setMemberPhoto(fileName);
 //    } else if (newFileName == null && photo.length() > 0) {
@@ -79,5 +71,22 @@ public class MemberController {
     }
     
     return new AjaxResult("success", null);
+  }
+  
+  /* 패스워드 정규표현식에 대한 검사 */
+  @RequestMapping(value="checkPassword", method=RequestMethod.POST)
+  public AjaxResult checkPassword(Member member) throws Exception {
+    
+    String password = member.getPassword();
+    String regex = "^[a-zA-Z0-9_]{6,12}$";
+    
+    boolean passwordCheck = Pattern.matches(regex, password);
+    
+    if(passwordCheck == true) {
+  
+      return new AjaxResult("success", member);
+    }
+    
+    return new AjaxResult("notPassword", null);
   }
 }

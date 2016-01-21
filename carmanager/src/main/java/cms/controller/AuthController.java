@@ -101,7 +101,7 @@ public class AuthController {
   public AjaxResult checkPassword(Member member) throws Exception {
     
     String password = member.getPassword();
-    String regex = "^[a-zA-Z]{1}[a-zA-Z0-9_]{5,13}$";
+    String regex = "^[a-zA-Z0-9_]{6,12}$";
     
     boolean passwordCheck = Pattern.matches(regex, password);
     
