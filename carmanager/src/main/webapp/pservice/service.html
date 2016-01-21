@@ -115,7 +115,7 @@
         <!--toggle button end-->
         <!--logo -->
         <div class="logo">
-          <a href="main.html">
+          <a href="../main/main.html">
             <h1>내 차를 부탁해</h1>
             <span>간편, 쉽고, 재밌는 시작!</span>
           </a>
@@ -181,28 +181,42 @@
 	  		<h3 class="title1">Forms</h3>
 				<div class="form-grids row widget-shadow" data-example-id="basic-forms"> 
 				<div class="form-title">
-					<h4>Basic Form :</h4>
+					<h4 id="productName">상품 정보</h4>
 				</div>
 					<div class="form-body">
-						<form> 
-							<div class="form-group"> 
-								<label for="exampleInputEmail1">Email address</label> 
-								<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"> 
-							</div> 
-							<div class="form-group"> 
-								<label for="exampleInputPassword1">Password</label> 
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> 
-							</div> 
-							<div class="form-group"> 
-								<label for="exampleInputFile">File input</label> 
-								<input type="file" id="exampleInputFile">
-								<p class="help-block">Example block-level help text here.</p>
-							</div> 
-							<div class="checkbox"> 
-								<label> <input type="checkbox"> Check me out </label> 
-							</div> 
-							<button type="submit" class="btn btn-default">Submit</button> 
-						</form> 
+						<div class="media">
+							<div class="media-left">
+							<img id="productimg1" class="media-object" src="" style="width: 140px; height: 140px;">
+							</div>
+							<div class="media-body">
+							<a id="linkDanawa1" href="#"><h4 id="detailModel1" class="media-heading"></h4></a>
+							<p id="detailSummary1"></p>
+							<p id="mprice1"></p>
+							</div>
+							<hr>
+							<div class="clearfix"> </div>
+							<!-- -------------------- -->
+							<div class="media-left">
+							<img id="productimg2" class="media-object" src="" style="width: 140px; height: 140px;">
+							</div>
+							<div class="media-body">
+							<a id="linkDanawa2" href="#"><h4 id="detailModel2" class="media-heading"></h4></a>
+							<p id="detailSummary2"></p>
+							<p id="mprice2"></p>
+							</div>
+							<hr>
+							<div class="clearfix"> </div>
+							<!-- -------------------- -->
+							<div class="media-left">
+							<img id="productimg3" class="media-object" src="" style="width: 140px; height: 140px;">
+							</div>
+							<div class="media-body">
+							<a id="linkDanawa3" href="#"><h4 id="detailModel3" class="media-heading"></h4></a>
+							<p id="detailSummary3"></p>
+							<p id="mprice3"></p>
+							</div>
+							<div class="clearfix"> </div>
+					</div>
 					</div>
 				</div>
 				<!-- 상단 표시 폼 끝 -->
@@ -213,16 +227,16 @@
 							<form class="form-horizontal"> 
 								
 									<div class="slider">
-   									<div class="col-sm-9 partN"><h3 class="temp">와이퍼</h3></div>
-   									<div class="col-sm-9 partN"><h3 class="temp">에어콘필터</h3></div>
-   									<div class="col-sm-9 partN"><h3 class="temp">브레이크패드</h3></div>
-										<div class="col-sm-9 partN"><h3 class="temp">브레이크오일</h3></div>
-   									<div class="col-sm-9 partN"><h3 class="temp">부동액</h3></div>
- 										<div class="col-sm-9 partN"><h3 class="temp">미션오일</h3></div>
-										<div class="col-sm-9 partN"><h3 class="temp">타이어</h3></div>
- 				 						<div class="col-sm-9 partN"><h3 class="temp">베터리</h3></div>
+   									<div class="col-sm-9"><h3 class="temp" ><a class="partN" no="0">와이퍼</a></h3></div>
+   									<div class="col-sm-9 partN" ><h3 class="temp"><a class="partN" no="1">에어콘필터</a></h3></div>
+   									<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="2">브레이크패드</a></h3></div>
+										<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="3">타이어</a></h3></div>
+										<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="4">미션오일</a></h3></div>
+ 										<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="5">미션오일</a></h3></div>
+										<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="6">브레이크오일</a></h3></div>
+   									<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="7">부동액</a></h3></div>
+ 				 						<div class="col-sm-9 partN"><h3 class="temp"><a class="partN" no="8">베터리</a></h3></div>
  									</div>
-			
 							</form> 
 						</div>
 					</div>
@@ -233,9 +247,53 @@
     	</div>
     </div>
     <script type="text/javascript">
-    $("div.partN").click(clickDetailLnk);
+    var url = "https://apis.daum.net/shopping/search"; // 상품 검색 URL 
+  	var key = "8464e7c331667dafe0527c44bddc93ad" // 상품요청 api key
+  	var maker = "현대차"
+  	var keyword;
+  	
+    var partName = ["와이퍼", "에어콘필터", "브레이크패드", "브레이크오일", "부동액", "미션오일", "타이어", "베터리"];
+/*   	  url: "https://apis.daum.net/shopping/search?apikey=8464e7c331667dafe0527c44bddc93ad&q=그랜드 카니발 와이퍼&result=3&pageno=1&sort=pop&output=json", */
+		
+    $.ajax({type:"get", 
+      url: url + "?apikey=" + key + "&q=그랜드 카니발 와이퍼&result=3&pageno=1&sort=pop&output=json",
+  	  dataType: "jsonp",
+  	  	success:function(data) {
+  	  	console.log(data.channel.item[0].link);
+  	  	console.log(data.channel.item[1].link);
+				console.log(data.channel.item[2].link);
+  	  	document.getElementById("detailModel1").innerHTML = data.channel.item[0].title;
+    	  document.getElementById("detailSummary1").innerHTML = data.channel.item[0].category_name;
+    	  document.getElementById("mprice1").innerHTML = data.channel.item[0].price_min;
+    	  $('#linkDanawa1').prop('href', data.channel.item[0].link);
+				$("#productimg1").attr("src",data.channel.item[0].image_url);
+						
+				document.getElementById("detailModel2").innerHTML = data.channel.item[1].title;
+    	 	document.getElementById("detailSummary2").innerHTML = data.channel.item[1].category_name;
+    	 	document.getElementById("mprice2").innerHTML = data.channel.item[1].price_min;
+    	  $('#linkDanawa2').prop('href', data.channel.item[0].link);
+				$("#productimg2").attr("src",data.channel.item[1].image_url);
+						
+				document.getElementById("detailModel3").innerHTML = data.channel.item[2].title;
+    	  document.getElementById("detailSummary3").innerHTML = data.channel.item[2].category_name;
+    	  document.getElementById("mprice3").innerHTML = data.channel.item[2].price_min;
+    	  $('#linkDanawa3').prop('href', data.channel.item[0].link);
+				$("#productimg3").attr("src",data.channel.item[2].image_url);
+  	  	},
+  	  	error:function(request, status, error) {
+  	  		alert("실패");
+  	  	}
+  	  });
+    $("a.partN").click(clickDetailLnk);
     function clickDetailLnk(event) {
-      alert("출력!");
+      //alert(partName[$(event.target).attr("no")]);
+      //alert(sessionStorage.getItem("loginUsercarNo"));
+      $.getJSON('carInfo.do?no=' + sessionStorage.getItem("loginUsercarNo"), function(resultObj) {
+				alert("성공!");       
+      }); 
+      keyword = partName[$(event.target).attr("no")];
+      event.preventDefault(); 
+      document.getElementById("productName").innerHTML = keyword;
     }
     $(document).ready(function(){
       $('.slider').slick({
@@ -282,23 +340,6 @@
   </div>
 	<!-- 자바 스크립트 -->
 	<script> 
-	/* var url = "http://api.danawa.com/api/search/product/info?key="; // 상품 검색 URL 
-	var key = "f6dd9c299a5a21e60f2642f95293d23b" // 상품요청 api key
-	var maker = "현대"
-	var keyword = " 와이퍼";
-	$.ajax({type:"get", 
-	  url: url + key + "&keyword=" + maker + keyword +"&mediatype=json&charset=utf8",
-	  dataType: "jsonp",
-	  	success:function(data) {
-	  		alert("성공");
-	  		for (var i = 0; i <= 5; i++) {
-	  			alert(data.productList[i].prod_name);
-	  		}
-	  	},
-	  	error:function(request, status, error) {
-	  		alert("실패");
-	  	}
-	  }) */
 /* 	$.ajax({
 	  method: "GET",
 	  url: "garage/list.do"
@@ -309,7 +350,6 @@
 	  }
 	});
  */
-
 	</script>
   <!-- Classie 메뉴 접히고 펼쳐지는 부분` -->
   <script src="../js/main/classie.js"></script>
