@@ -46,9 +46,10 @@
   
   <select id="selectOilList" resultMap="refuelMap" parameterType="int">
     select
-      r.grno, r.rno, g.mno, Round((r.mile + r.cost/r.lcost * g.effi)) as mile, r.ref_dt, g.effi
+      r.grno, r.rno, g.mno, Round((r.mile + r.cost/r.lcost * g.effi)) as mile, r.ref_dt, g.effi, o.fuel
     from refuel r
     left outer join garage g on r.grno = g.grno
+    left outer join official o on o.mdno = g.mdno
     where r.grno = #{no}
     order by ref_dt desc
     limit 1

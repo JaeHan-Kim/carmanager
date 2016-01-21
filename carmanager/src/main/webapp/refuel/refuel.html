@@ -200,7 +200,7 @@
                     <h4>
                       <i class="fa fa-dashboard icon-sm"></i> 주유 기록 등록하기
                     </h4>
-                    <span>:&nbsp;&nbsp;자세한 분석을 원하시면 주행거리, 리터당 단가를 입력하세요.</span>
+                    <span>:&nbsp;&nbsp;자세한 분석을 원하시면 주행거리, 단가를 입력하세요.</span>
                   </div>
                 </div>
               </a>
@@ -302,7 +302,10 @@
             <!-- 주유 단가 불러오기 스크립트 -->
             <script type="text/javascript">
               $.getJSON('http://localhost:8989/oil', function(resultObj) {
-            	alert(resultObj.result.Oil[1].PRICE);
+            	alert("휘발유 : " + Math.round(resultObj.result.Oil[1].PRICE));
+            	alert("경유 : " + Math.round(resultObj.result.Oil[2].PRICE));
+            	alert("LGP : " + Math.round(resultObj.result.Oil[4].PRICE));
+            	$("#literCost").val()
               });
             </script>
             
