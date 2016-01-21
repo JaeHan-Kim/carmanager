@@ -1,8 +1,12 @@
 package cms.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -11,17 +15,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cms.dao.MemberDao;
 import cms.domain.AjaxResult;
 import cms.domain.Member;
+import cms.util.MultipartHelper;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller("ajax.AuthController")
 @RequestMapping("/auth/ajax/*")
 public class AuthController {   
   static public Logger log = Logger.getLogger(AuthController.class);
 
+  public static final String SAVED_DIR = "/img/member";
+  
   @Autowired MemberDao memberDao;
+  @Autowired ServletContext servletContext;
   
   @RequestMapping(value="login", method=RequestMethod.POST)
   public AjaxResult login(
@@ -41,10 +52,6 @@ public class AuthController {
       return new AjaxResult("failure", null);
     }
     
-   // session.setAttribute("loginUser", member);
-   // log.debug("------------------------");
-   // log.debug(member.toString());
-   // log.debug("------------------------");
     return new AjaxResult("success", member);
   }
   
@@ -54,9 +61,31 @@ public class AuthController {
   }
   
   @RequestMapping(value="join", method=RequestMethod.POST)
-  public AjaxResult join(Member member) throws Exception {
+  public AjaxResult join(Member member, MultipartHttpServletRequest request, 
+      HttpServletResponse response) throws Exception {
+
+    Iterator<String> itr =  request.getFileNames();
+    MultipartFile mpf = request.getFile(itr.next());
+ 
+    String newFileName = null;
     
+    if (mpf.getSize() > 0) {
+      newFileName = MultipartHelper.generateFilename(mpf.getOriginalFilename());  
+      File attachfile = new File(servletContext.getRealPath(SAVED_DIR) 
+                                  + "/" + newFileName);
+      mpf.transferTo(attachfile);
+      
+      makeThumbnailImage(
+          servletContext.getRealPath(SAVED_DIR) + "/" + newFileName, 
+          servletContext.getRealPath(SAVED_DIR) + "/m-" + newFileName + ".png");
+    }    
+
+    member.setMemberPhoto(newFileName);
+    
+    System.out.println(member);
+
     memberDao.insert(member);
+
     
     return new AjaxResult("success", member);
   }
@@ -111,6 +140,15 @@ public class AuthController {
     }
     
     return new AjaxResult("notPassword", null);
+  }
+  
+  private void makeThumbnailImage(String originPath, String thumbPath) 
+      throws IOException {
+    Thumbnails.of(new File(originPath))
+    .size(60,44)
+    .outputFormat("png")
+    .outputQuality(1.0)
+    .toFile(new File(thumbPath));
   }
   
 }

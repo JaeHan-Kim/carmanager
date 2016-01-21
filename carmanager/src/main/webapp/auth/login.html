@@ -12,6 +12,7 @@
   <script type="text/javascript" src="../js/auth/cycle2.js"></script>
   <script type="text/javascript" src="../js/auth/httpRequest.js"></script>
   <script type="text/javascript" src="../js/auth/jquery.cookie.js"></script>  
+  <script type="text/javascript" src="../js/auth/jquery.form.js"></script>
   <script type="text/javascript" src="../js/auth/jquery.leanModal.min.js"></script>
   <script type="text/javascript" src="../js/auth/jquery.placeholder.min.js"></script>
   <script type="text/javascript" src="../js/auth/modernizr.custom.63321.js"></script>
@@ -140,7 +141,9 @@
 		          sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
 		          sessionStorage.setItem('loginUseremail', ajaxResult.data.email);
 		          sessionStorage.setItem('loginUserNickname', ajaxResult.data.nickName);
-		          location.href = "../main/main.html";
+		          sessionStorage.setItem('loginUserPhoto', ajaxResult.data.memberPhoto);
+		          /* location.href = "../main/main.html"; */
+		          location.href = "../test/upload.html";
 		        } else {
 		        	swal({    
                 title: "로그인 실패!",   
@@ -168,7 +171,7 @@
 
 <!-- 모달로 띄우는 부분: 회원가입 양식 --> 
 <div id="loginmodal" style="display:none;">
-  <form class="input" method='post'>
+  <form id="joinForm" class="input" method='post' enctype="multipart/form-data">
 	  <div id="closeButton">
 	    <button id="closeModal" type="reset" onclick="$('#lean_overlay').click(); resetAll()">X</button>
 	  </div>
@@ -179,12 +182,10 @@
 	    
 	    <p>다른 정보는 받지 않습니다. 부담 없이 이용하세요.</p>  
 	    <div id="imgInput">
-	      <img src="../img/auth/exam.png" class="img-thumbnail"><br>
-	      <label for="fileInput">사진 등록</label>
-	      <input type="file" id="fileInput">
+	      <img id="myImg" src="../img/member/exam.png" class="img-thumbnail"><br>
+	      <label for="imgInp">사진 등록</label>
+	      <input type="file" id="imgInp" name="imgInp">
 	    </div>
-	    <!-- input file의 multiple 부분은 다중 파일 업로드 실험. 파일을 여러개 선택할 수 있다.
-	         단, 다중 파일을 지정한 경로와 DB에 저장하는 것은 좀더 조사가 필요. -->
 	    
 	    <div id="textInput" class="form-group">
 	      <div id="email">
@@ -221,6 +222,28 @@
 
 <!-- 회원가입 양식 검증 스크립트 -->
 <script>
+  
+  $(document).ready(function(){
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+        reader.onload = function (e) { 
+          //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+          $('#myImg').attr('src', e.target.result);
+          //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
+          //(아래 코드에서 읽어들인 dataURL형식)
+        }                    
+        reader.readAsDataURL(input.files[0]);
+        //File내용을 읽어 dataURL형식의 문자열로 저장
+      } 
+    }//readURL()--
+    
+    //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
+    $("#imgInp").change(function(){
+      readURL(this);
+    });
+  });
+  
   /* 각 입력 항목에서 포커스가 사라졌을 때 지정된 검증을 하는 기능 */
   $('#jemail').blur(function() {
 	  $.post('ajax/checkEmail.do', {
@@ -312,7 +335,6 @@
     }
   }
   
-  
   /* 빈 칸이 있을 경우 alert 창을 띄운다. */
   $('#joinBtn').click(function(event) {
     if($('#jemail').val().length < 1) {
@@ -376,12 +398,26 @@
           });
     	return false;
     }
-    	  
+    	
+    var data = new FormData();
+    $.each($('#imgInp')[0].files, function(i, file) {          
+        data.append('file-' + i, file);
+    });
+    
    	/* 입력된 값(email, nickName, password를 넘긴다.) */
-    $.post('ajax/join.do', {
+    $.ajax({
+    	url: 'ajax/join.do',
+    	type: 'post',
       email: $('#jemail').val(),
       nickName: $('#jnickname').val(),
-      password: $('#jpassword').val()
+      password: $('#jpassword').val(),
+      dataType: "text",
+      data: data,
+      processData: false,
+      contentType: false,
+      success: function(data, textStatus, jqXHR) {
+          alert(data);
+      }, error: function(jqXHR, textStatus, errorThrown) {}
     }, function(resultObj) {
       var ajaxResult = resultObj.ajaxResult;
       if (ajaxResult.status == "failure") {
@@ -393,6 +429,7 @@
         });
     	  return false;
       }
+   
       swal({   
         title: "회원가입 성공!",   
         type: "success",   

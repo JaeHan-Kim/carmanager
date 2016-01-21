@@ -10,6 +10,8 @@ public interface MemberDao {
 
   int update(Member member);
   
+  int imgUpdate(Member member);
+  
   Member selectOne(int no);
 
   Member selectOneByEmailPassword(Map<String,Object> paramMap);

@@ -40,9 +40,12 @@
       var userEmail = sessionStorage.getItem('loginUseremail');
       var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
       var userNickname2 = sessionStorage.getItem('loginUserNickname')
+      var userPhoto = sessionStorage.getItem('loginUserPhoto')
       $("#txt_email").html(userEmail);
       $(".nickname").html(userNickname);
       $(".nickname2").html(userNickname2);
+      $("#memberImg").attr("src", userPhoto);
+
     });  
   </script>
   
@@ -160,7 +163,7 @@
             <div class="panel-body">
               <form id="form_mypage">
                 <div id="div_imgInput" class="form-group">
-                  <img src="../img/auth/exam.png">
+                  <img id="memberImg" src="">
                   <label class="btn_color" for="imgInput">사진 갱신</label>
                   <input type="file" id="imgInput">
                 </div>

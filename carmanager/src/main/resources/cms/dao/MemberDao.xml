@@ -14,8 +14,8 @@
   </resultMap>
   
   <insert id="insert" parameterType="member">
-    insert into members(email, nick, pwd)
-    values(#{email}, #{nickName}, sha1(#{password}))
+    insert into members(email, nick, photo, pwd)
+    values(#{email}, #{nickName}, #{memberPhoto}, sha1(#{password}))
   </insert> 
   
   <select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">
@@ -47,5 +47,5 @@
     update members set pwd=sha1(#{password}) 
     where email=#{email} 
   </update>
-  
+ 
 </mapper>
