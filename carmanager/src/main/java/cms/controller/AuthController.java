@@ -84,8 +84,7 @@ public class AuthController {
     
     System.out.println(member);
 
-    memberDao.insert(member);
-
+    /*memberDao.insert(member);*/
     
     return new AjaxResult("success", member);
   }
@@ -109,7 +108,7 @@ public class AuthController {
     return new AjaxResult("notEmail", null);
   }
   
-  /* 닉네임 정규표현식에 대한 검사 및 중복검사 */
+  /* 닉네임 중복검사 */
   @RequestMapping(value="checkNickname", method=RequestMethod.POST)
   public AjaxResult checkNickname(Member member) throws Exception {
     
