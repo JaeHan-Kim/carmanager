@@ -61,8 +61,7 @@ public class AuthController {
   }
   
   @RequestMapping(value="join", method=RequestMethod.POST)
-  public AjaxResult join(Member member, MultipartHttpServletRequest request, 
-      HttpServletResponse response) throws Exception {
+  public AjaxResult join(MultipartHttpServletRequest request) throws Exception {
 
     Iterator<String> itr =  request.getFileNames();
     MultipartFile mpf = request.getFile(itr.next());
@@ -80,11 +79,15 @@ public class AuthController {
           servletContext.getRealPath(SAVED_DIR) + "/m-" + newFileName + ".png");
     }    
 
+    Member member = new Member();
+    member.setEmail(request.getParameter("email"));
+    member.setNickName(request.getParameter("nickName"));
+    member.setPassword(request.getParameter("password"));
     member.setMemberPhoto(newFileName);
-    
+
     System.out.println(member);
 
-    /*memberDao.insert(member);*/
+    memberDao.insert(member);
     
     return new AjaxResult("success", member);
   }

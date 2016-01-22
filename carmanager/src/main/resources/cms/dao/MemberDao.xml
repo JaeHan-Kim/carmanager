@@ -44,7 +44,7 @@
   </select>
   
   <update id="update" parameterType="member">
-    update members set pwd=sha1(#{password}) 
+    update members set photo=#{memberPhoto}, pwd=sha1(#{password}) 
     where email=#{email} 
   </update>
  

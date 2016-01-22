@@ -171,7 +171,7 @@
 
 <!-- 모달로 띄우는 부분: 회원가입 양식 --> 
 <div id="loginmodal" style="display:none;">
-  <form id="joinForm" class="input" method='post' enctype="multipart/form-data">
+  <form id="joinForm" class="input" method='post'>
 	  <div id="closeButton">
 	    <button id="closeModal" type="reset" onclick="$('#lean_overlay').click(); resetAll()">X</button>
 	  </div>
@@ -402,47 +402,45 @@
           });
     	return false;
     }
-    	
+    
+    /* 입력된 값(email, nickName, password를 넘긴다.) */
+     	
     var data = new FormData();
-    $.each($('#imgInp')[0].files, function(i, file) {          
+    $.each($('#imgInp')[0].files, function(i, file) {
         data.append('file-' + i, file);
     });
-    
-   	/* 입력된 값(email, nickName, password를 넘긴다.) */
+    data.append("email", $('#jemail').val());
+    data.append("nickName", $('#jnickname').val());
+    data.append("password", $('#jpassword').val());
+   	
     $.ajax({
     	url: 'ajax/join.do',
     	type: 'post',
-      email: $('#jemail').val(),
-      nickName: $('#jnickname').val(),
-      password: $('#jpassword').val(),
       dataType: "text",
       data: data,
       processData: false,
       contentType: false,
-      success: function(data, textStatus, jqXHR) {
-          alert(data);
-      }, error: function(jqXHR, textStatus, errorThrown) {}
     }, function(resultObj) {
-      var ajaxResult = resultObj.ajaxResult;
-      if (ajaxResult.status == "failure") {
-    	  swal({    
-          title: "회원가입 실패!",   
-          text: "회원가입에 실패했습니다!", 
-          type: "error",
-          confirmButtonText: "확인"
+        var ajaxResult = resultObj.ajaxResult;
+        if (ajaxResult.status == "failure") {
+          swal({    
+            title: "회원가입 실패!",   
+            text: "회원가입에 실패했습니다!", 
+            type: "error",
+            confirmButtonText: "확인"
+          });
+          return false;
+        }
+      
+        swal({   
+          title: "회원가입 성공!",   
+          type: "success",   
+          confirmButtonText: "확인 :)" }, function() {   
+          location.href = "login.html";
         });
-    	  return false;
-      }
-   
-      swal({   
-        title: "회원가입 성공!",   
-        type: "success",   
-        confirmButtonText: "확인 :)" }, function() {   
-        location.href = "login.html";
-      });
-    }, 'json');
-  });
-  
+      }, 'json');
+    });
+    
   function resetAll() {
 	  document.getElementById('checkEmail').innerHTML = "";
 	  document.getElementById('checkNickname').innerHTML = "";

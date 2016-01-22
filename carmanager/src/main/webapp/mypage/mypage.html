@@ -44,7 +44,7 @@
       $("#txt_email").html(userEmail);
       $(".nickname").html(userNickname);
       $(".nickname2").html(userNickname2);
-      $("#memberImg").attr("src", userPhoto);
+      $("#memberImg").attr("src", "../img/member/" + userPhoto);
 
     });  
   </script>
@@ -161,7 +161,7 @@
               </h4>
             </div>
             <div class="panel-body">
-              <form id="form_mypage">
+              <form id="form_mypage" method='post'>
                 <div id="div_imgInput" class="form-group">
                   <img id="memberImg" src="">
                   <label class="btn_color" for="imgInput">사진 갱신</label>
@@ -227,6 +227,27 @@
 	      }
 	    }
 	    
+	    $(document).ready(function(){
+	        function readURL(input) {
+	          if (input.files && input.files[0]) {
+	            var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	            reader.onload = function (e) { 
+	              //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	              $('#memberImg').attr('src', e.target.result);
+	              //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
+	              //(아래 코드에서 읽어들인 dataURL형식)
+	            }                    
+	            reader.readAsDataURL(input.files[0]);
+	            //File내용을 읽어 dataURL형식의 문자열로 저장
+	          } 
+	        }//readURL()--
+	        
+	        //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하는 코드
+	        $("#imgInput").change(function(){
+	          readURL(this);
+	        });
+	      });
+	    
 	    $('#pwd').blur(function() {
         $.post('ajax/checkPassword.do', {
           password: $('#pwd').val()
@@ -278,10 +299,21 @@
 	        return false;
 	      }
 	
-		    $.post('ajax/update.do', {
-		      email: sessionStorage.getItem('loginUseremail'),
-		      password: $('#pwd').val()
-		    }, function(resultObj) {
+	    	var data = new FormData();
+	        $.each($('#imgInput')[0].files, function(i, file) {
+	            data.append('file-' + i, file);
+	      });
+	      data.append("email", sessionStorage.getItem('loginUseremail'));
+	      data.append("password", $('#pwd').val());
+	    	
+	      $.ajax({
+	          url: 'ajax/update.do',
+	          type: 'post',
+	          dataType: "text",
+	          data: data,
+	          processData: false,
+	          contentType: false,
+	        }, function(resultObj) {
 		      var ajaxResult = resultObj.ajaxResult;
 		      if (ajaxResult.status == "failure") {
 		        swal({    
