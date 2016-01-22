@@ -11,6 +11,7 @@
     <result column="grno" property="myCarNo"/>
     <result column="ref_dt" property="refuelDate"/>
     <result column="lcost" property="literCost"/>
+    <result column="fuel" property="fuelName"/>
   </resultMap>
 
   <select id="selectRefuelList" resultMap="refuelMap" parameterType="int">

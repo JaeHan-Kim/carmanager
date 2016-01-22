@@ -13,6 +13,7 @@ public class Refuel {
   protected String nickName;
   protected float effi;
   protected int literCost;
+  protected String fuelName;
   
   public Refuel() {
    
@@ -22,7 +23,15 @@ public class Refuel {
   public String toString() {
     return "Refuel [refuelNo=" + refuelNo + ", myCarNo=" + myCarNo + ", refuelDate=" + refuelDate + ", mile=" + mile
         + ", cost=" + cost + ", liter=" + liter + ", group_date=" + group_date + ", nickName=" + nickName + ", effi="
-        + effi + ", literCost=" + literCost + "]";
+        + effi + ", literCost=" + literCost + ", fuelName=" + fuelName + "]";
+  }
+
+  public String getFuelName() {
+    return fuelName;
+  }
+
+  public void setFuelName(String fuelName) {
+    this.fuelName = fuelName;
   }
 
   public int getLiterCost() {
