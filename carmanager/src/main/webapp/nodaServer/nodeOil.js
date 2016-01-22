@@ -1,3 +1,13 @@
+<<<<<<< HEAD:carmanager/src/main/webapp/refuel/nodeOil.js
+=======
+// 유가 정보 불러오기 위한 라이브러리 설치 경로 
+// -> 각자의 camanager 프로젝트 밑에 설치
+// 설치 : npm install unirest 
+// node.js 실행 위한 js 파일 주소 경로
+// cd 자신의 주소를 입력/git/carmanager/carmanager/src/main/webapp/nodeServer
+// url : http://localhost:8989/oil
+
+>>>>>>> 8f18c84efff478c3ae56fe0794a3f7078eff47f4:carmanager/src/main/webapp/nodaServer/nodeOil.js
 var http = require('http');
 var url = require('url'); 
 var unirest = require('unirest');
@@ -10,7 +20,7 @@ var httpServer = http.createServer(function(request, response){
     Request.header("x-waple-authorization", "Mzc0NC0xNDUzMTY3OTQzMjQwLTljMDZhN2JkLWQ0NjUtNDE2Yy04NmE3LWJkZDQ2NTQxNmM4Zg==")
     .end(function (result) {
       
-      response.write(result.body);
+      response.end(result.body);
       console.log(result.body);
     });
     return;
