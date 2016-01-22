@@ -221,33 +221,37 @@
 
 <!-- 회원가입 양식 검증 스크립트 -->
 <script>
+  /* 중복 확인 */
   /* 각 입력 항목에서 포커스가 사라졌을 때 지정된 검증을 하는 기능 */
   $('#jemail').blur(function() {
-	  $.post('ajax/checkEmail.do', {
-		  email: $('#jemail').val()
-	  }, function(resultObj) {
-		  var ajaxResult = resultObj.ajaxResult;
-		  
-		  if(ajaxResult.status != "notEmail") { /* 규칙에 맞는 이메일일 경우 할 검사 */
-		    if (ajaxResult.status == "success") { /* 규칙에 맞는 이메일일 경우 */
-			    document.getElementById('checkEmail').style.color = "white";
-		      document.getElementById('checkEmail').innerHTML = "사용할 수 있는 이메일입니다.";
-		    } else { /* 이미 존재하는 이메일일 경우 */
-			    document.getElementById('checkEmail').style.color = "red";
-		      document.getElementById('checkEmail').innerHTML = "이미 가입된 이메일입니다.";
-		    }
-		  } else { /* 규칙에 맞지 않는 이메일일 경우 할 검사 */
-			  if($('#jemail').val().length < 1) { /* 이메일을 입력하지 않았을 경우 */
-          document.getElementById('checkEmail').style.color = "red";
-		      document.getElementById('checkEmail').innerHTML = "이메일을 입력해주세요.";
-        } else { /* 규칙에 맞지 않는 이메일일 경우 */
-          document.getElementById('checkEmail').style.color = "red";
-	        document.getElementById('checkEmail').innerHTML = "올바른 이메일 형식이 아닙니다.";
-        }
-		  }
-	  }, 'json');
+    $.getJSON('http://localhost:8989/checkEmail?email='+$('#jemail').val(), function(resultObj) {
+    	alert(resultObj.channel.status);
+      console.log("!!");
+    });
+//	  $.post('ajax/checkEmail.do', {
+//		  email: $('#jemail').val()
+//	  }, function(resultObj) {
+//		  var ajaxResult = resultObj.ajaxResult;
+//		  
+//		  if(ajaxResult.status != "notEmail") { /* 규칙에 맞는 이메일일 경우 할 검사 */
+//		    if (ajaxResult.status == "success") { /* 규칙에 맞는 이메일일 경우 */
+//			    document.getElementById('checkEmail').style.color = "white";
+//		      document.getElementById('checkEmail').innerHTML = "사용할 수 있는 이메일입니다.";
+//		    } else { /* 이미 존재하는 이메일일 경우 */
+//			    document.getElementById('checkEmail').style.color = "red";
+//		      document.getElementById('checkEmail').innerHTML = "이미 가입된 이메일입니다.";
+//		    }
+//		  } else { /* 규칙에 맞지 않는 이메일일 경우 할 검사 */
+//			  if($('#jemail').val().length < 1) { /* 이메일을 입력하지 않았을 경우 */
+//        document.getElementById('checkEmail').style.color = "red";
+//      document.getElementById('checkEmail').innerHTML = "이메일을 입력해주세요.";
+//     } else { /* 규칙에 맞지 않는 이메일일 경우 */
+//      document.getElementById('checkEmail').style.color = "red";
+	 //      document.getElementById('checkEmail').innerHTML = "올바른 이메일 형식이 아닙니다.";
+//       }
+//		  }
+//	  }, 'json'); 
   });
-  
   $('#jnickname').blur(function() {
     $.post('ajax/checkNickname.do', {
       nickName: $('#jnickname').val()
