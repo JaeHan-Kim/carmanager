@@ -1,8 +1,8 @@
-// 유가 정보 불러오기 위한 라이브러리 경로 
-// cd /Users/yuntaeung/git/carmanager/carmanager
+// 유가 정보 불러오기 위한 라이브러리 설치 경로 
+// -> 각자의 camanager 프로젝트 밑에 설치
 // 설치 : npm install unirest 
 // node.js 실행 위한 js 파일 주소 경로
-// cd /Users/yuntaeung/git/carmanager/carmanager/src/main/webapp/nodeServer
+// cd 자신의 주소를 입력/git/carmanager/carmanager/src/main/webapp/nodeServer
 // url : http://localhost:8989/oil
 
 var http = require('http');
