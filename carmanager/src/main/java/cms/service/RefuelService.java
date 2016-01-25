@@ -15,5 +15,6 @@ public interface RefuelService {
   
   Refuel oilList(int no);
   
-  Refuel addRefuel(int no);
+  int addRefuel(Refuel refuel);
+
 }

@@ -35,10 +35,10 @@ public class RefuelController {
   }
   
   @RequestMapping(value="addRefuel", method=RequestMethod.POST)
-  public Object addRefuel(int no) throws Exception {
+  public AjaxResult addRefuel(Refuel refuel) throws Exception {
     
-    Refuel refuel = refuelService.addRefuel(no);
-    log.debug(refuel.toString());
+    refuelService.addRefuel(refuel);
+    //log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
   }
   
