@@ -196,7 +196,7 @@
 	      </div>
 	      <div id="nickName">
 	        <label for="nickname">NickName</label>
-	        <input id="jnickname" type="text" name="jnickname" placeholder="별명">
+	        <input id="jnickname" type="text" name="jnickname" placeholder="별명" onkeyup="checkNick()">
 	        <div id="checkNickname"></div>
 	      </div>
 	      <div id="password">
@@ -223,6 +223,8 @@
 
 <!-- 회원가입 양식 검증 스크립트 -->
 <script>
+  var duple_email;
+  var duple_nick;
   
   $(document).ready(function(){
     function readURL(input) {
@@ -256,6 +258,7 @@
         } else { /* 이미 존재하는 이메일일 경우 */
           document.getElementById('checkEmail').style.color = "red";
           document.getElementById('checkEmail').innerHTML = "이미 가입된 이메일입니다.";
+          duple_email = 1;
         }
       } else { /* 규칙에 맞지 않는 이메일일 경우 할 검사 */
         if($('#jemail').val().length < 1) { /* 이메일을 입력하지 않았을 경우 */
@@ -268,15 +271,17 @@
       }
     });
   });
-  $('#jnickname').blur(function() {
-    $.getJSON('http://localhost:8989/checkNickname?nickname='+$('#jnickname').val(), function(resultObj) {
-      if(resultObj.channel.status != "notNickname") {
-        if (resultObj.channel.status == "success") {
+  
+  function checkNick() {
+	  $.getJSON('http://localhost:8989/checkNickname?nickname='+$('#jnickname').val(), function(resultObj) {
+	    if(resultObj.channel.status != "notNickname") {
+	      if (resultObj.channel.status == "success") {
           document.getElementById('checkNickname').style.color = "white";
           document.getElementById('checkNickname').innerHTML = "사용할 수 있는 별명입니다.";
         } else {
           document.getElementById('checkNickname').style.color = "red";
           document.getElementById('checkNickname').innerHTML = "이미 존재하는 별명입니다.";
+          duple_nick = 1;
         }
       } else {
         if($('#jnickname').val().length < 1) {
@@ -288,7 +293,8 @@
         }
       }
     });
-  });
+  }
+ 
   $('#jpassword').blur(function() {
     $.post('ajax/checkPassword.do', {
       password: $('#jpassword').val()
@@ -369,6 +375,24 @@
       swal({    
         title: "회원가입 실패!",   
         text: "비밀번호가 일치하지 않습니다!", 
+        type: "error",
+        confirmButtonText: "확인"
+      });
+      return false;
+    }
+    if(duple_email == 1) {
+    	swal({    
+        title: "회원가입 실패!",   
+        text: "중복된 이메일입니다!", 
+        type: "error",
+        confirmButtonText: "확인"
+      });
+    	return false;
+    }
+    if(duple_nick == 1) {
+        swal({    
+        title: "회원가입 실패!",   
+        text: "중복된 별명입니다!", 
         type: "error",
         confirmButtonText: "확인"
       });

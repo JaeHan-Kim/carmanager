@@ -14,4 +14,6 @@ public interface RefuelDao {
 	int delete(int no);
 	
 	public Refuel selectOilList(int no);
+
+  public int addRefuelCost(Refuel refuel);
 }
