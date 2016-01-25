@@ -17,3 +17,8 @@
 .media-heading {
 	color: black !important; 
 }
+
+#goodsTitle{
+  font-size: 20px;
+  color: DimGray;
+}

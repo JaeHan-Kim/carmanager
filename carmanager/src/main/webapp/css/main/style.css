@@ -374,7 +374,8 @@ li.dropdown.head-dpdn {
     display: inline-block;
     padding: 1.7em 0;
     border-left: 1px solid #E0E0E0;
-	float: left;
+    border-right: 1px solid #E0E0E0;
+	  float: left;
 }
 li.dropdown.head-dpdn:nth-child(3) {
     border-right: 1px solid #E0E0E0;

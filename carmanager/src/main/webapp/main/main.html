@@ -81,6 +81,10 @@ window.scrollTo(0,1); }
 <script src="../js/main/custom.js"></script>
 <link href="../css/main/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
+<!-- 차량 선택 라이브러리 -->
+<link rel="stylesheet" href="../css/main/stb.dropdown.css">
+<script src="../js/main/stb.dropdown.min.js"></script>
+<!-- // 차량 선택 라이브러리 -->
 </head>
 <body class="cbp-spmenu-push">
   <div class="main-content">
@@ -147,13 +151,21 @@ window.scrollTo(0,1); }
       <!-- header-right -->
       <div class="header-right">
         <!-- 유저별 차량 리스트 -->
-<!--          <div class="profile_details_left">
-          <ul id="myCarList" class="nofitications-dropdown">
-
-          </ul>
+       <div class="profile_details_left">
+         <p id="selectCarTitle">&nbsp;&nbsp;&nbsp;현재 선택된 차량입니다 :</p>
+            <select class="selectCar"> 
+              <option value="1" selected>차량1</option>
+              <option value="2">차량2</option>
+              <option value="3">차량3</option>
+            </select>
           <div class="clearfix"></div>
-        </div>
- -->        <!-- 유저별 차량 리스트 end -->
+          <div class="clearfix"></div>
+       </div>
+       <!-- selectBox 호출 스크립트 -->
+       <script>
+         $('select').stbDropdown();
+       </script>
+        <!-- 유저별 차량 리스트 end -->
 
         <!-- 로그인 유저 정보 -->
         <div class="profile_details">
