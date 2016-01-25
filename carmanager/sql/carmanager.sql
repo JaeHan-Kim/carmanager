@@ -37,7 +37,7 @@ CREATE TABLE members (
 	email VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
 	nick  VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
 	pwd   VARCHAR(255) NOT NULL COMMENT '패스워드', -- 패스워드
-	photo VARCHAR(255) NULL     COMMENT '사진', -- 사진
+	photo VARCHAR(255) NULL     DEFAULT 'exam.png' COMMENT '사진', -- 사진
 	grade INTEGER      NOT NULL DEFAULT 0 COMMENT '회원등급' -- 회원등급
 )
 COMMENT '회원';

@@ -58,7 +58,6 @@ window.scrollTo(0,1); }
       $('#exCar').css('display', '')
       $('#blank').css('display', 'none')
     }
-
  });  
 </script>
 <!--//end-animate-->
@@ -82,8 +81,8 @@ window.scrollTo(0,1); }
 <link href="../css/main/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
 <!-- 차량 선택 라이브러리 -->
-<link rel="stylesheet" href="../css/main/stb.dropdown.css">
-<script src="../js/main/stb.dropdown.min.js"></script>
+<link rel="stylesheet" href="../css/main/default.css">
+<script src="../js/main/jquery.selecty.js"></script>
 <!-- // 차량 선택 라이브러리 -->
 </head>
 <body class="cbp-spmenu-push">
@@ -153,18 +152,16 @@ window.scrollTo(0,1); }
         <!-- 유저별 차량 리스트 -->
        <div class="profile_details_left">
          <p id="selectCarTitle">&nbsp;&nbsp;&nbsp;현재 선택된 차량입니다 :</p>
-            <select class="selectCar"> 
-              <option value="1" selected>차량1</option>
-              <option value="2">차량2</option>
-              <option value="3">차량3</option>
+            <select id="myCarList" class="selecty s2" data-width="200px" data-max-height="1500px" name="town" id="town"> 
+             <div class="clearfix"></div>
             </select>
-          <div class="clearfix"></div>
+           
           <div class="clearfix"></div>
        </div>
        <!-- selectBox 호출 스크립트 -->
-       <script>
+      <!--  <script>
          $('select').stbDropdown();
-       </script>
+       </script> -->
         <!-- 유저별 차량 리스트 end -->
 
         <!-- 로그인 유저 정보 -->
@@ -296,10 +293,6 @@ window.scrollTo(0,1); }
 
         <!-- 차트 위 택스트 차량 정보 있을 때 -->
        <div id="exCar">
-        <div id="myCarList" class="row-one">
-          <div class="clearfix"> </div> 
-        </div>
-          <div class="clearfix"> </div> 
         
         <!-- 차트 시작 -->
         <div class="charts">
@@ -320,39 +313,34 @@ window.scrollTo(0,1); }
           <div class="clearfix"></div>
 
           <script>
-          
           var selectcar = $("#myCarList");
           var cnt = 0;
-          var classType = new Array();
-          classType[0] = ("col-md-4 widget");
-          classType[1] = ("col-md-4 widget states-mdl");
-          classType[2] =("col-md-4 widget states-last");
-          function clickDetailLnk(event) {
-            /* alert( $(event.target).attr("carNo")); */
-          $("#line").remove();
-          $("#bar").remove();
-          $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+$(event.target).attr("carNo"), 
-              function(resultObj) {
-                $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
-                $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
-                lineChart(resultObj);
-                barChart(resultObj);
-              });
-          }
           
-          $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
-           //alert(sessionStorage.getItem("loginUser"));
-           for (var garage of resultObj.data) {
-             $("<div class='" + classType[cnt++] + "'><p class='list carN' carNo='" + garage.myCarNo + "'>" + garage.nickName + "</p><div class='clearfix'></div></div>").appendTo(selectcar)
-           
-           /* $("<li class='dropdown head-dpdn'><span class='carN' carNo='" + garage.myCarNo + "'>" 
-             + garage.nickName + "</span></li>").appendTo(selectcar) */  
-           }
-          $("p.carN").click(clickDetailLnk);
-          lineChart(resultObj);
+          $('#myCarList').change(function(){
+            /* alert($("#myCarList").val()); */
+            sessionStorage.setItem('selectCarNo', $("#myCarList").val());
+            /* alert(sessionStorage.getItem("selectCarNo")); */
+            $("#line").remove();
+            $("#bar").remove();
+            $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+$("#myCarList").val(), 
+                function(resultObj) {
+                  $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
+                  $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
+                  lineChart(resultObj);
+                  barChart(resultObj);
+                });
+          });
+          $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+            /* alert(sessionStorage.getItem('loginUsercarNo')); */
+            for (var garage of resultObj.data) {
+              $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList');
+           	} 
+            /* alert(sessionStorage.getItem("selectCarNo")); */
+           $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
+            $('.selecty').selecty();
+           lineChart(resultObj);
           barChart(resultObj);
          });
-          
         function lineChart(resultObj) {
           var effic = new Array();
           var driveDt = new Array();

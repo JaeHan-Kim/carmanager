@@ -139,6 +139,7 @@
 		        if (ajaxResult.status == "success") {
 		          sessionStorage.setItem('loginUser', ajaxResult.data.memberNo);
 		          sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
+		          sessionStorage.setItem('selectCarNo', ajaxResult.data.myCarNo);
 		          sessionStorage.setItem('loginUseremail', ajaxResult.data.email);
 		          sessionStorage.setItem('loginUserNickname', ajaxResult.data.nickName);
 		          sessionStorage.setItem('loginUserPhoto', ajaxResult.data.memberPhoto);
