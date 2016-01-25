@@ -58,12 +58,19 @@
   
   <insert id="addRefuelCost" parameterType="refuel">
     insert into refuel(grno, ref_dt, mile, cost, liter, lcost)
-    values(#{myCarNo}, #{refuelDate}, #{mile}, #{literCost}, #{cost}, #{liter})
-    
-    
-    insert into refuel(grno, ref_dt, mile, cost, liter, lcost) 
-    values(1, '2016-01-22', 3300, 30000, (30000/1380), 1380)
+    values(#{myCarNo}, #{refuelDate}, #{mile}, #{cost}, #{cost/liter}, #{literCost})
   </insert>  
   
   
 </mapper>
+
+
+
+
+
+
+
+
+
+
+

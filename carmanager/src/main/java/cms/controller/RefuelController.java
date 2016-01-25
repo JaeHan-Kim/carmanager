@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cms.domain.AjaxResult;
 import cms.domain.Refuel;
@@ -28,21 +29,18 @@ public class RefuelController {
     if (refuel == null) {
       return new AjaxResult("failure", null);
     }
-    log.debug(refuel.toString());
+    //log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
     
   }
-  /*
-  @RequestMapping(value="refuellist", method=RequestMethod.GET)
-  public Object refuelList(int no) {
+  
+  @RequestMapping(value="addRefuel", method=RequestMethod.POST)
+  public Object addRefuel(int no) throws Exception {
     
-    Official model = officialService.effiSearch(no);
-    
-    HashMap<String, Object> resultMap = new HashMap<>();
-    resultMap.put("data", model);
-    return resultMap;
-
-  }*/
+    Refuel refuel = refuelService.addRefuel(no);
+    log.debug(refuel.toString());
+    return new AjaxResult("success", refuel);
+  }
   
   
 }

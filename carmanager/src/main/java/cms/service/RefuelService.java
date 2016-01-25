@@ -14,4 +14,6 @@ public interface RefuelService {
   int carDelete(int no);
   
   Refuel oilList(int no);
+  
+  Refuel addRefuel(int no);
 }
