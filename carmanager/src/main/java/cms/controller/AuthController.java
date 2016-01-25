@@ -79,13 +79,24 @@ public class AuthController {
       }    
     }
 
+    
     Member member = new Member();
     member.setEmail(request.getParameter("email"));
     member.setNickName(request.getParameter("nickName"));
     member.setPassword(request.getParameter("password"));
+    
+    if (newFileName == null) {
+      if(memberDao.insertNotPhoto(member) <= 0) {
+        return "failure";
+      } 
+      
+      String msg = "success";
+      return msg;
+    }
+    
     member.setMemberPhoto(newFileName);
-
-    if(memberDao.insert(member) <= 0) {
+    
+    if(memberDao.insertAll(member) <= 0) {
       return "failure";
     }
     

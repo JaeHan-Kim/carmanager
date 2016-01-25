@@ -13,10 +13,17 @@
     <result column="grno" property="myCarNo"/>
   </resultMap>
   
-  <insert id="insert" parameterType="member">
-    insert into members(email, nick, photo, pwd)
+  <insert id="insertAll" parameterType="member">
+    insert into 
+    members(email, nick, photo, pwd)
     values(#{email}, #{nickName}, #{memberPhoto}, sha1(#{password}))
-  </insert> 
+  </insert>
+  
+  <insert id="insertNotPhoto" parameterType="member">
+    insert into 
+    members(email, nick, pwd)
+    values(#{email}, #{nickName}, sha1(#{password}))
+  </insert>  
   
   <select id="selectOneByEmailPassword" resultMap="memberMap" parameterType="map">
     select m.mno, m.email, m.nick, m.photo, m.grade, g.grno

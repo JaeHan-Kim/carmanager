@@ -6,7 +6,9 @@ import cms.domain.Member;
 
 public interface MemberDao {
   
-  int insert(Member member);
+  int insertAll(Member member);
+  
+  int insertNotPhoto(Member member);
 
   int updateBoth(Member member);
   
