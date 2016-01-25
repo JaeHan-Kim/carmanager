@@ -58,7 +58,9 @@
   
   <insert id="addRefuelCost" parameterType="refuel">
     insert into refuel(grno, ref_dt, mile, cost, liter, lcost)
-    values(#{myCarNo}, #{refuelDate}, #{mile}, #{cost}, #{cost/liter}, #{literCost})
+    values(#{myCarNo}, #{refuelDate}, #{mile}, #{cost}, #{liter}, #{literCost})
+    <!-- insert into refuel(grno, ref_dt, mile, cost, liter, lcost)
+    values(1, '2016-01-10', 3500, 30000, (30000/1375), 1375) -->
   </insert>  
   
   
