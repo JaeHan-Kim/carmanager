@@ -33,7 +33,7 @@
   <select id="checkNickname" resultType="int" parameterType="member">
     select count(mno) from members where nick=#{nickName}
   </select>
-
+  
   <select id="selectOne" resultMap="memberMap" parameterType="map">
     select 
       email, 
@@ -43,8 +43,25 @@
     where mno=#{memberNo}
   </select>
   
-  <update id="update" parameterType="member">
+  <select id="selectPhoto" resultType="String" parameterType="map">
+    select 
+      photo
+    from members
+    where email=#{email}
+  </select>
+  
+  <update id="updateBoth" parameterType="member">
     update members set photo=#{memberPhoto}, pwd=sha1(#{password}) 
+    where email=#{email} 
+  </update>
+  
+  <update id="updatePhoto" parameterType="member">
+    update members set photo=#{memberPhoto} 
+    where email=#{email} 
+  </update>
+  
+  <update id="updatePwd" parameterType="member">
+    update members set pwd=sha1(#{password}) 
     where email=#{email} 
   </update>
  

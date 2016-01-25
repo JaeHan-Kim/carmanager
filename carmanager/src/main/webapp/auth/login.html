@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
   <title>내 차를 부탁해 - 간편, 쉽고, 재밌는 차량 관리의 시작!</title>
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/auth/sweetalert.css">
   <link rel="stylesheet" href="../css/auth/login.css">
@@ -212,7 +212,7 @@
 	    </div>
 	  
 	    <div id="button">
-	      <input id="joinBtn" type="submit" class="btn btn-default" value="가입">
+	      <button id="joinBtn" type="button" class="btn btn-default">가입</button>
 	      <input type="reset" class="btn btn-default" value="리셋" onclick="resetAll()">
 	    </div>
     </div>
@@ -254,6 +254,7 @@
         if (resultObj.channel.status == "success") { /* 규칙에 맞는 이메일일 경우 */
           document.getElementById('checkEmail').style.color = "white";
           document.getElementById('checkEmail').innerHTML = "사용할 수 있는 이메일입니다.";
+          duple_email = 0;
         } else { /* 이미 존재하는 이메일일 경우 */
           document.getElementById('checkEmail').style.color = "red";
           document.getElementById('checkEmail').innerHTML = "이미 가입된 이메일입니다.";
@@ -277,6 +278,7 @@
 	      if (resultObj.channel.status == "success") {
           document.getElementById('checkNickname').style.color = "white";
           document.getElementById('checkNickname').innerHTML = "사용할 수 있는 별명입니다.";
+          duple_nick = 0;
         } else {
           document.getElementById('checkNickname').style.color = "red";
           document.getElementById('checkNickname').innerHTML = "이미 존재하는 별명입니다.";
@@ -425,32 +427,22 @@
     data.append("password", $('#jpassword').val());
    	
     $.ajax({
-    	url: 'ajax/join.do',
-    	type: 'post',
+      url: 'ajax/join.do',
+      type: 'POST',
       dataType: "text",
       data: data,
       processData: false,
       contentType: false,
-    }, function(resultObj) {
-        var ajaxResult = resultObj.ajaxResult;
-        if (ajaxResult.status == "failure") {
-          swal({    
-            title: "회원가입 실패!",   
-            text: "회원가입에 실패했습니다!", 
-            type: "error",
-            confirmButtonText: "확인"
-          });
-          return false;
-        }
-      
+      success: function(msg) { 
         swal({   
-          title: "회원가입 성공!",   
+          title: "회원 가입 성공!",
           type: "success",   
-          confirmButtonText: "확인 :)" }, function() {   
-          location.href = "login.html";
+          confirmButtonText: "확인 :)" }, function() {
+            location.href = "login.html";
         });
-      }, 'json');
+      }
     });
+  });
     
   function resetAll() {
 	  document.getElementById('checkEmail').innerHTML = "";

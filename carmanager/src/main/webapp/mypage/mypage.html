@@ -39,12 +39,13 @@
     $(document).ready(function(){ 
       var userEmail = sessionStorage.getItem('loginUseremail');
       var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
-      var userNickname2 = sessionStorage.getItem('loginUserNickname')
-      var userPhoto = sessionStorage.getItem('loginUserPhoto')
+      var userNickname2 = sessionStorage.getItem('loginUserNickname');
+      var userPhoto = sessionStorage.getItem('loginUserPhoto');
       $("#txt_email").html(userEmail);
       $(".nickname").html(userNickname);
       $(".nickname2").html(userNickname2);
       $("#memberImg").attr("src", "../img/member/" + userPhoto);
+      $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
 
     });  
   </script>
@@ -114,7 +115,7 @@
                  data-toggle="dropdown" aria-expanded="false">
                 <div class="profile_img">
                   <span class="prfil-img">
-                    <img src="../img/main/a.png" alt=""> 
+                    <img id ="thumbnail" src="" alt=""> 
                   </span>
                   <div class="user-name">
                     <p id="userNickname" class="nickname"></p>
@@ -287,59 +288,79 @@
         }
       }
 	    
-	    /* 입력된 값(email, nickName, password를 넘긴다.) */
 	    $('#btn_update').click(function(event) {
-	    	var passwordPattern = /^[a-zA-Z0-9_]{6,12}$/;
-	    	
-	    	if(!passwordPattern.test($('#pwd').val())) {
-	        swal({    
-	          title: "정보수정 실패!",   
-	          text: "비밀번호 형식에 맞게 입력해주세요!",
-	          type: "error",
-	          confirmButtonText: "확인"
-	        });
-	        return false;
-	      }
-	
-	    	var data = new FormData();
-	        $.each($('#imgInput')[0].files, function(i, file) {
-	            data.append('file-' + i, file);
-	      });
-	      data.append("email", sessionStorage.getItem('loginUseremail'));
-	      data.append("password", $('#pwd').val());
-	    	
-	      $.ajax({
+	    	if ($('#pwd').val().length > 0 || 
+	    			document.getElementById('imgInput').value.length > 0) {
+	    		var passwordPattern = /^[a-zA-Z0-9_]{6,12}$/;
+	    		var data = new FormData();
+	    		data.append("email", sessionStorage.getItem('loginUseremail'));
+	    		
+		    	if ($('#pwd').val().length < 1) {
+	            $.each($('#imgInput')[0].files, function(i, file) {
+	              data.append('file-' + i, file);
+	          });
+		    	} else if (document.getElementById('imgInput').value.length < 1) {
+	          if(!passwordPattern.test($('#pwd').val())) {
+	            swal({    
+	              title: "정보수정 실패!",   
+	              text: "비밀번호 형식에 맞게 입력해주세요!",
+	              type: "error",
+	              confirmButtonText: "확인"
+	            });
+	            return false;
+	          }
+		        data.append("password", $('#pwd').val());
+		    	} else {
+		    		if(!passwordPattern.test($('#pwd').val())) {
+	            swal({    
+	              title: "정보수정 실패!",   
+	              text: "비밀번호 형식에 맞게 입력해주세요!",
+	              type: "error",
+	              confirmButtonText: "확인"
+	            });
+	            return false;
+	          }
+	          $.each($('#imgInput')[0].files, function(i, file) {
+	              data.append('file-' + i, file);
+	          });
+	          data.append("password", $('#pwd').val());
+		    	}
+		    	
+		      $.ajax({
 	          url: 'ajax/update.do',
-	          type: 'post',
+	          type: 'POST',
 	          dataType: "text",
 	          data: data,
 	          processData: false,
 	          contentType: false,
-	        }, function(resultObj) {
-		      var ajaxResult = resultObj.ajaxResult;
-		      if (ajaxResult.status == "failure") {
-		        swal({    
-		          title: "정보수정 실패!",   
-		          text: "회원정보 수정에 실패했습니다!",
-		          type: "error",
-		          confirmButtonText: "확인"
-		        });
-		        return false;
-		      }
-		      swal({   
-            title: "정보 수정 성공!",   
-	          type: "success",   
-	          confirmButtonText: "확인 :)" }, function() {   
-            location.href = "mypage.html";
+	          success: function(photo) { 
+	        	  swal({   
+	              title: "정보 수정 성공!",
+	              type: "success",   
+	              confirmButtonText: "확인 :)" }, function() {
+	                sessionStorage.setItem('loginUserPhoto', photo);
+	                location.href = "mypage.html";
+	            });
+	          }
+	        });
+	    	
+	    	} else if ($('#pwd').val().length < 1 && 
+	    			       document.getElementById('imgInput').value.length < 1) {
+	    		swal({    
+            title: "정보수정 실패!",   
+            text: "사진이나 비밀번호 중 하나는 입력해주세요!",
+            type: "error",
+            confirmButtonText: "확인"
           });
-		    }, 'json');
+          return false;
+	    	}
 		  });
 	    
 	    $("#btn_reset").click(function(event){
 	        $("#form_mypage").each(function() {  
 	        	this.reset();
-	        	document.getElementById('checkPwd1').innerHTML = "";
-	        	document.getElementById('checkPwd2').innerHTML = "";
+	       	document.getElementById('checkPwd1').innerHTML = "";
+	       	document.getElementById('checkPwd2').innerHTML = "";
 	      });  
 	    });
 	    

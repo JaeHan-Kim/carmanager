@@ -41,10 +41,11 @@
 	  $(document).ready(function(){ 
 	    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
 	    var userCarNo = sessionStorage.getItem('loginUsercarNo');
+	    var userPhoto = sessionStorage.getItem('loginUserPhoto');
 	    $("#userNickname").html(userNickname);
-	   
-     $('#liter').css('display', 'none')
-     $('#money').css('display', 'none')
+      $('#liter').css('display', 'none')
+      $('#money').css('display', 'none')
+      $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
 	 });  
 	</script>
 	<!--//end-animate-->
@@ -143,7 +144,7 @@
 	               data-toggle="dropdown" aria-expanded="false">
 	              <div class="profile_img">
 	                <span class="prfil-img">
-	                  <img src="../img/main/a.png" alt=""> 
+	                  <img id ="thumbnail" src="" alt=""> 
 	                </span>
 	                <div class="user-name">
 	                  <p id="userNickname"></p>
@@ -333,7 +334,6 @@
                 }
                   location.href = "refuel.html";
               }, 'json');
-              });
               
               
             });

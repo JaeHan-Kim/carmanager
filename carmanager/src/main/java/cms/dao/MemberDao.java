@@ -8,11 +8,17 @@ public interface MemberDao {
   
   int insert(Member member);
 
-  int update(Member member);
+  int updateBoth(Member member);
+  
+  int updatePhoto(Member member);
+  
+  int updatePwd(Member member);
   
   int imgUpdate(Member member);
   
   Member selectOne(int no);
+  
+  String selectPhoto(String email);
 
   Member selectOneByEmailPassword(Map<String,Object> paramMap);
   

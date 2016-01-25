@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -55,29 +56,28 @@ public class AuthController {
     return new AjaxResult("success", member);
   }
   
-  @RequestMapping(value="join", method=RequestMethod.GET)
-  public String form() {
-    return "login";
-  }
-  
   @RequestMapping(value="join", method=RequestMethod.POST)
-  public AjaxResult join(MultipartHttpServletRequest request) throws Exception {
+  @ResponseBody
+  public String join(MultipartHttpServletRequest request) throws Exception {
 
-    Iterator<String> itr =  request.getFileNames();
-    MultipartFile mpf = request.getFile(itr.next());
- 
     String newFileName = null;
+
+    if (request.getFileMap().size() != 0) { 
     
-    if (mpf.getSize() > 0) {
-      newFileName = MultipartHelper.generateFilename(mpf.getOriginalFilename());  
-      File attachfile = new File(servletContext.getRealPath(SAVED_DIR) 
-                                  + "/" + newFileName);
-      mpf.transferTo(attachfile);
-      
-      makeThumbnailImage(
-          servletContext.getRealPath(SAVED_DIR) + "/" + newFileName, 
-          servletContext.getRealPath(SAVED_DIR) + "/m-" + newFileName + ".png");
-    }    
+      Iterator<String> itr =  request.getFileNames();
+      MultipartFile mpf = request.getFile(itr.next());
+   
+      if (mpf.getSize() > 0) {
+        newFileName = MultipartHelper.generateFilename(mpf.getOriginalFilename());  
+        File attachfile = new File(servletContext.getRealPath(SAVED_DIR) 
+                                    + "/" + newFileName);
+        mpf.transferTo(attachfile);
+        
+        makeThumbnailImage(
+            servletContext.getRealPath(SAVED_DIR) + "/" + newFileName, 
+            servletContext.getRealPath(SAVED_DIR) + "/m-" + newFileName + ".png");
+      }    
+    }
 
     Member member = new Member();
     member.setEmail(request.getParameter("email"));
@@ -85,11 +85,12 @@ public class AuthController {
     member.setPassword(request.getParameter("password"));
     member.setMemberPhoto(newFileName);
 
-    System.out.println(member);
-
-    memberDao.insert(member);
+    if(memberDao.insert(member) <= 0) {
+      return "failure";
+    }
     
-    return new AjaxResult("success", member);
+    String msg = "success";
+    return msg;
   }
   
   /* 패스워드 정규표현식에 대한 검사 */

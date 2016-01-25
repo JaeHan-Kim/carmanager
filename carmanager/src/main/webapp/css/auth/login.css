@@ -387,7 +387,8 @@ A:hover {
 .input #textInput input[type=button]:hover, 
 #button input[type=button]:hover,
 #button input[type=submit]:hover,
-#button input[type=reset]:hover {
+#button input[type=reset]:hover,
+#button button[type=button]:hover {
     background: red;
     
     /*box-shadow: 

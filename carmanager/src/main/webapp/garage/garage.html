@@ -48,7 +48,9 @@ window.scrollTo(0,1); }
   $(document).ready(function(){ 
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
     var userCarNo = sessionStorage.getItem('loginUsercarNo');
+    var userPhoto = sessionStorage.getItem('loginUserPhoto');
     $("#userNickname").html(userNickname);
+    $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
  });  
 </script>
 <!--//end-animate-->
@@ -130,8 +132,8 @@ window.scrollTo(0,1); }
               class="dropdown-toggle" data-toggle="dropdown"
               aria-expanded="false">
                 <div class="profile_img">
-                  <span class="prfil-img"><img
-                    src="../img/main/a.png" alt=""> </span>
+                  <span class="prfil-img">
+                  <img id ="thumbnail" src="" alt=""> </span>
                   <div class="user-name">
                     <p id="userNickname"></p>
                     <span>안녕하세요.</span>
