@@ -102,7 +102,7 @@
               <i class="fa fa-home nav_icon"></i>맞춤 서비스</a>
             </li>
             <li>
-              <a href="../comunity/comunity.html" class="">
+              <a href="../community/community.html" class="">
               <i class="fa fa-home nav_icon"></i>커뮤니티</a>
             </li>
           </ul>
@@ -179,6 +179,7 @@
         event.preventDefault();
         sessionStorage.removeItem('loginUserNickname');
         sessionStorage.removeItem('loginUsercarNo');
+        sessionStorage.removeItem('loginUserPhoto');
         location.href = "../auth/login.html";
       });
     </script>

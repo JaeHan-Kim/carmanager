@@ -5,7 +5,7 @@
 <head>
 <title>new 내 차를 부탁해</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset=utf-8" />
 
 	<script type="application/x-javascript">
 	  addEventListener("load", function() { 
@@ -90,7 +90,7 @@
               <i class="fa fa-home nav_icon"></i>맞춤 서비스</a>
             </li>
             <li>
-              <a href="../comunity/comunity.html" class="">
+              <a href="../community/community.html" class="">
               <i class="fa fa-home nav_icon"></i>커뮤니티</a>
             </li>
           </ul>
@@ -167,6 +167,7 @@
         event.preventDefault();
         sessionStorage.removeItem('loginUserNickname');
         sessionStorage.removeItem('loginUsercarNo');
+        sessionStorage.removeItem('loginUserPhoto');
         location.href = "../auth/login.html";
       });
     </script>

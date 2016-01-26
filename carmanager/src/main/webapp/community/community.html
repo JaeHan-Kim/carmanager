@@ -5,7 +5,10 @@
 <head>
 <title>new 내 차를 부탁해</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta charset=utf-8" />
+
+  <link type='text/css' rel='stylesheet' href="../lib/bootstrap/css/bootstrap.css" />
+  <link type='text/css' rel='stylesheet' href="../css/main/style.css" />
 
 	<script type="application/x-javascript">
 	  addEventListener("load", function() { 
@@ -14,22 +17,11 @@
 	  window.scrollTo(0,1); } 
 	</script>
 
-	<!-- Bootstrap Core CSS -->
-	<link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
-	<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
-	<link type='text/css' rel='stylesheet' href="../css/main/style.css" />
-	<!-- font CSS -->
-	<!-- font-awesome icons 빈칸 유지를 위해 링크를 막아둠 -->
-	<!--<link href="../css/main/test/font-awesome.css" rel="stylesheet"> -->
-	<!-- //font-awesome icons -->
-	<!-- js-->
-	<script src="../js/main/jquery-1.11.1.min.js"></script>
+
+	<script src="../lib/jquery/jquery.min.js"></script>
 	<script src="../js/main/modernizr.custom.js"></script>
-	<!--webfonts 없어도 되는듯.. 하지만 삭제 금지-->
 	<link type='text/css' rel='stylesheet'
 	      href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'>
-	<!--//webfonts-->
-	<!--animate-->
 	<link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
 	<script src="../js/main/wow.min.js"></script>
 	<script>
@@ -39,24 +31,17 @@
 	    var userCarNo = sessionStorage.getItem('loginUsercarNo');
 	    var userPhoto = sessionStorage.getItem('loginUserPhoto');
       $("#userNickname").html(userNickname);
-	    $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
+      $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
 	 });  
 	</script>
 	<!--//end-animate-->
 	
-	<!-- chart 챠트 -->
 	<script src="../lib/Chart.js/Chart.js"></script>
-	<!-- 차트에 날짜 데이터 이용하기 -->
 	<script type="text/javascript" src="../js/main/moment_local.js"></script>
-	<!-- //chart -->
 	
-	<!-- Metis Menu -->
 	<script src="../js/main/metisMenu.min.js"></script>
 	<script src="../js/main/custom.js"></script>
 	<link rel="stylesheet" href="../css/main/custom.css">
-	<!--//Metis Menu -->
-	
-	<link rel="stylesheet" href="../css/center/center.css">
 </head>
 
 <body class="cbp-spmenu-push">
@@ -133,7 +118,7 @@
 	               data-toggle="dropdown" aria-expanded="false">
 	              <div class="profile_img">
 	                <span class="prfil-img">
-	                  <img id ="thumbnail" src="" alt=""> 
+	                  <img id="thumbnail" src="" alt=""> 
 	                </span>
 	                <div class="user-name">
 	                  <p id="userNickname"></p>
@@ -173,37 +158,17 @@
         location.href = "../auth/login.html";
       });
     </script>
-    
     <!-- main content start-->
-		<div id="page-wrapper">
-			<div class="main-page charts-page">
-				<h3 class="title1">정비소에 오신걸 환영합니다 :</h3>
-        <h4>접속하신 위치를 기준으로 1km이내의 AS센터를 표시합니다.</h4>
-				<div id="null"></div>
-				<div class="charts">
-			    <!-- 지도 관련 영역 -->
-					<div class="col-md-6 chrt-page-grids" id="map"></div>
-			    
-			    <!-- 정비소 리스트 관련 영역 -->
-				  <div class="col-md-4 profile widget-shadow" >
-					  <div class="activity_box activity_box2" style="font-size: 12px;">
-						  <h4 class="title3">주변 정비소 리스트</h4>
-							<div class="scrollbar scrollbar1">
-							  <div class="single-bottom">
-									<ul id="centerList"></ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="clearfix"> </div>	
-			 </div>
-     
-       <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=4f59fd0c2fd3f6bffe4e55d3d14523a1&libraries=services"></script>				
-       <script type="text/javascript" src="../js/center/center.js"></script>				
-			
-		  </div>
-		</div>
+    <div id="page-wrapper">
+      <div class="main-page">
 
+    <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
+
+
+  
+
+      </div>
+    </div>
     <!--footer-->
     <div class="footer">
       <p>
@@ -233,7 +198,6 @@
       }
     }
   </script>
-  
   <!--scrolling js 스크롤바 조정-->
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>
