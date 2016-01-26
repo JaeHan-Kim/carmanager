@@ -77,4 +77,113 @@ insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(5, '2016-01-01
 insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(5, '2016-01-06', 2400, 30000, 19.99, 1380);
 insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(5, '2016-01-13', 2800, 60000, 19.50, 1380);
 
+-- 게시판 더미 데이터 
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
 
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하하하', '1등', now(), 0);
+
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하하하', '1등', now(), 0);
+
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하하하하1', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하하하하1', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(4, '하하', '1등', now(), 0);
+
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);

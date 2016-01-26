@@ -11,7 +11,7 @@
 <body onload="goIntro()">
 <div id="sample">
   <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; width: 700px; height: 400px"></div>
-</div>
+	</div>
 <script id="code">
 	function goIntro() {
 	  var $ = go.GraphObject.make;
@@ -19,39 +19,42 @@
 	  var diagram = new go.Diagram("myDiagramDiv");
 	  diagram.initialContentAlignment = go.Spot.Center;
 
+	  diagram.nodeTemplate =
+	    $(go.Node, "Auto",
+	      new go.Binding("location", "loc", go.Point.parse),
+	      $(go.Shape, "RoundedRectangle", { fill: "lightgray" }),
+	      $(go.TextBlock, { margin: 5 },
+	        new go.Binding("text", "key"))
+	    );
+
+	  diagram.linkTemplate =
+	    $(go.Link,       // the whole link panel
+	      $(go.Shape));  // the link shape, default black stroke
+
+	  var nodeDataArray = [
+	    { key: "A", loc: "0 0" },
+	    { key: "B", loc:  "-150 -75" },
+	    { key: "C", loc:  "150 -75" },
+	    { key: "D", loc:  "0 -110" },
+	    { key: "E", loc:  "-75 -100" },
+	    { key: "F", loc:  "70 -100" }
+	  ];
 	  diagram.add(
-	      $(go.Part, "Vertical",
-	        $(go.Picture, { desiredSize: new go.Size(300, 300), source: "car.png" })
+	      $(go.Part, "Auto",
+	        { position: new go.Point(0, -150), background: "lightgray" },
+	        $(go.Shape, "Rectangle", { fill: "lightgreen" }),
+	        $(go.TextBlock, "Z", { margin: 2, background: "yellow" })
 	      ));
-	    diagram.scale = 0.5;
-	    diagram.add(
-	        $(go.Node, go.Panel.Auto,
-	          $(go.Shape,
-	            { figure: "RoundedRectangle",
-	              fill: "lightblue" }),
-	          $(go.TextBlock,
-	            { text: "Hello!",
-	              margin: 5 })
-	        ));
-	    diagram.add(
-	        $(go.Node, go.Panel.Auto,
-	          $(go.Shape,
-	            { figure: "RoundedRectangle",
-	              fill: "green" }),
-	          $(go.TextBlock,
-	            { text: "Hello!",
-	              margin: 5 })
-	        ));
-	    diagram.add(
-	        $(go.Node, go.Panel.Auto,
-	          $(go.Shape,
-	            { figure: "RoundedRectangle",
-	              fill: "yellow",
-	              }),
-	          $(go.TextBlock,
-	            { text: "Hello!",
-	              margin: 5 })
-	        ));
+	  var linkDataArray = [
+	    { from: "A", to: "B" },
+	    { from: "A", to: "C" },
+	    { from: "A", to: "D" },
+	    { from: "A", to: "E" },
+	    { from: "A", to: "F" },
+	    { from: "A", to: "Z" }
+	  ];
+	  diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+
 	}
 </script>
 </body>
