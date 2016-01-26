@@ -3,6 +3,8 @@ var mysql = require('mysql');
 var url = require('url'); 
 var unirest = require('unirest');
 var querystring = require('querystring');
+var express = require('express');
+var app = express();
 
 var pool  = mysql.createPool({
   connectionLimit : 10,
@@ -20,8 +22,7 @@ var resultR =
   }
 };
 var handlerMap = {};
-
-handlerMap['/oil'] = function(requset, response) {
+app.get('/oil', function(requset, response) {
   console.log("주유 단가 ! ");
   response.setHeader("Content-Type", "text/json");
   response.setHeader("Access-Control-Allow-Origin", "*");
@@ -35,9 +36,9 @@ handlerMap['/oil'] = function(requset, response) {
   return;
 
   response.end();
-};
+});
 
-handlerMap['/checkEmail'] = function(request, response) {
+app.get('/checkEmail', function(request, response) {
   var urlInfo = url.parse(request.url, true);
   var emailPattern = /\w+@\w+\.\w+/;
   
@@ -66,9 +67,8 @@ handlerMap['/checkEmail'] = function(request, response) {
     response.write(JSON.stringify(resultR));
     response.end();
   }
-};
-
-handlerMap['/checkNickname'] = function(request, response) {
+});
+app.get('/checkNickname', function(request, response) {
   var urlInfo = url.parse(request.url, true);
   console.log("닉네임 중복 체크!");
   console.log(urlInfo.query.nickname);
@@ -95,19 +95,7 @@ handlerMap['/checkNickname'] = function(request, response) {
     response.write(JSON.stringify(resultR));
     response.end();
   }
-};
-var httpServer = http.createServer(function(request, response){
-  var urlInfo = url.parse(request.url);
-  
-  var handler = handlerMap[urlInfo.pathname];
-  
-  if(handler) {
-    handler(request, response);
-  } else {
-    console.log("없네...");
-    response.end();
-  }
 });
-
-httpServer.listen(8989);
-console.log("서버 실행 중...");
+app.listen(8989, function() {
+  console.log("서버 실행 중...");
+});

@@ -135,8 +135,8 @@ CREATE TABLE boards (
 	content TEXT         NOT NULL COMMENT '내용', -- 내용
 	cre_dt  DATETIME     NOT NULL COMMENT '작성일시', -- 작성일시
 	cate    VARCHAR(255) NOT NULL COMMENT '카테고리', -- 카테고리
-	likes   INTEGER      NOT NULL COMMENT '추천수', -- 추천수
-	views   INTEGER      NOT NULL COMMENT '조회수' -- 조회수
+	likes   INTEGER      NOT NULL DEFAULT 0 COMMENT '추천수', -- 추천수
+	views   INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수' -- 조회수
 )
 COMMENT '게시물';
 
