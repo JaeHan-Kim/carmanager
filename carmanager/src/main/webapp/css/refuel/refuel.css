@@ -5,7 +5,7 @@
 body {
     background: #f9f9f9;
     color: #0e171c;
-    /* font: 300 100%/1.5em 'Lato', sans-serif; */
+    /*font: 300 100%/1.5em 'Lato', sans-serif;*/
     margin: 0;
 }
 
@@ -16,13 +16,13 @@ a {
 h2 {
     font-size: 22px;
     line-height: 20px;
-    margin: 4px 0;
+    margin: 2px 0;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 24px;
     line-height: 24px;
-    margin: 5px 5px;
+    margin: 2px 2px;
 }
 
 table {
@@ -41,6 +41,9 @@ table {
 
 .calendar {
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
 }
 
 .calendar header {
@@ -61,6 +64,14 @@ table {
 }
 
 .calendar tbody td:hover {
+    /*border: 2px solid #c0392b;
+    border-radius: 60%;
+    position: absolute;
+    height: 60px;
+    width: 60px;*/
+}
+
+.calendar tbody td.active {
     border: 2px solid #c0392b;
     border-radius: 60%;
     position: absolute;
@@ -68,23 +79,20 @@ table {
     width: 60px;
 }
 
-.calendar tbody td.active {
-    border: 2px solid #c0392b;
-}
-
 .calendar td {
     border: 2px solid transparent;
     border-radius: 50%;
-    height: 64px;
+    height: 60px;
+    width: 60px;
     line-height: 64px;
     text-align: center;
-    width: 64px;
     padding: 2px;
 }
 
 .current-day {
     background: #c0392b;
     color: #f9f9f9;
+    border-radius: 50%;
 }
 
 .event {
@@ -103,14 +111,6 @@ table {
     margin: -4px 0 0 -4px;
     position: absolute;
     width: 8px;
-}
-
-.event.green-event:after {
-    background: #009E82;
-}
-
-.event.blue-event:after {
-    background: #0078AB;
 }
 
 .event.current-day:after {
@@ -162,7 +162,7 @@ table {
     padding-top: 20px;
     padding-bottom: 0px;
     margin-bottom: 50px;
-    /*display:none;*/
+    display:none;
 
 }
 
@@ -172,7 +172,7 @@ table {
     padding-bottom: 20px;
 }
 
-.day-event .dspan{
+.day-event dspan{
     font-size: 12px;
 }
 
@@ -199,7 +199,7 @@ table {
 }
 input[type=checkbox] {display:none;}
 
-.dspan {
+dspan {
     background-color:#373740;
     -webkit-border-radius:4px;
     -moz-border-radius:4px;
@@ -209,7 +209,7 @@ input[type=checkbox] {display:none;}
     font-size:.85em;
     letter-spacing:2px;
     text-decoration:none;
-    /* font-family:'PT Sans', sans-serif; */
+    font-family:'PT Sans', sans-serif;
     text-align:center;
     width:100%;
     height:50px;
@@ -224,11 +224,11 @@ input[type=checkbox] {display:none;}
     transition:background-color 150ms ease-in;
 }
 
-.dspan:hover {
+dspan:hover {
     background-color:#c0392b;
 }
 
-input[type=checkbox]:checked + span {
+input[type=checkbox]:checked + dspan {
     background-color:#9C2E23;
     text-decoration:none;
     -webkit-border-radius:4px;
@@ -238,7 +238,7 @@ input[type=checkbox]:checked + span {
     background-size:15px 13px;
 }
 
-input[type=checkbox]:checked:hover + span {
+input[type=checkbox]:checked:hover + dspan {
     background-color:#9C2E23;
     color:rgba(255,255,255,0.5);
     text-decoration:none;
