@@ -1,14 +1,35 @@
 <!DOCTYPE HTML>
 <!-- 현재 스크립트나 CSS 임포트는 각 기능이 있는 위치에 쓰여있기 때문에 
      실제로 사용할 때 정리해서 사용할 것을 권장합니다. -->
-<html>
+<html class="no-js">
 <head>
 <title>new 내 차를 부탁해</title>
+  <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset=utf-8" />
 
   <link type='text/css' rel='stylesheet' href="../lib/bootstrap/css/bootstrap.css" />
+  <link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
+  <link type='text/css' rel="stylesheet" href="../css/community/style.css">
+  <link type="text/css" rel="stylesheet" href="../css/main/custom.css">
   <link type='text/css' rel='stylesheet' href="../css/main/style.css" />
+  <link type='text/css' rel='stylesheet' 
+        href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+  <link type='text/css' rel='stylesheet'
+        href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'>
+
+	<script src="../lib/jquery/jquery.min.js"></script>
+  <script src="../js/community/main.js"></script>
+  <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../js/main/classie.js"></script>
+  <script src="../js/main/custom.js"></script>
+  <script src="../js/main/jquery.nicescroll.js"></script>
+  <script src="../js/main/metisMenu.min.js"></script>
+	<script src="../js/main/modernizr.custom.js"></script>
+  <script src="../js/main/moment_local.js"></script>
+  <script src="../js/main/scripts.js"></script>
+	<script src="../js/main/wow.min.js"></script>
+	<script src="../js/community/modernizr.js"></script>
+	<script src="../js/community/jquery.mobile.min.js"></script>
 
 	<script type="application/x-javascript">
 	  addEventListener("load", function() { 
@@ -17,13 +38,6 @@
 	  window.scrollTo(0,1); } 
 	</script>
 
-
-	<script src="../lib/jquery/jquery.min.js"></script>
-	<script src="../js/main/modernizr.custom.js"></script>
-	<link type='text/css' rel='stylesheet'
-	      href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'>
-	<link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
-	<script src="../js/main/wow.min.js"></script>
 	<script>
 	  new WOW().init();
 	  $(document).ready(function(){ 
@@ -34,19 +48,11 @@
       $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
 	 });  
 	</script>
-	<!--//end-animate-->
 	
-	<script src="../lib/Chart.js/Chart.js"></script>
-	<script type="text/javascript" src="../js/main/moment_local.js"></script>
-	
-	<script src="../js/main/metisMenu.min.js"></script>
-	<script src="../js/main/custom.js"></script>
-	<link rel="stylesheet" href="../css/main/custom.css">
 </head>
 
 <body class="cbp-spmenu-push">
   <div class="main-content">
-    <!--left-fixed -navigation-->
     <div class=" sidebar" role="navigation">
       <div class="navbar-collapse">
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
@@ -81,13 +87,10 @@
               <i class="fa fa-home nav_icon"></i>커뮤니티</a>
             </li>
           </ul>
-          <!-- //sidebar-collapse -->
         </nav>
       </div>
     </div>
-    <!--left-fixed -navigation-->
 
-    <!-- header-starts -->
     <div class="sticky-header header-section ">
       <div class="header-left">
         <!--toggle button start-->
@@ -102,13 +105,8 @@
             <span>간편, 쉽고, 재밌는 시작!</span>
           </a>
         </div>
-        <!--//logo-->
-
-        <!--<div class="clearfix"> </div>-->
       </div>
-      <!-- header-left end-->
 
-      <!-- header-right -->
       <div class="header-right">
         <!-- 로그인 유저 정보 -->
         <div class="profile_details">
@@ -137,14 +135,11 @@
 	          </li>
           </ul>
         </div>
-        <!-- 로그인 유저 정보 end -->
         <div class="clearfix"></div>
       </div>
-      <!-- header-right -->
       <div class="clearfix"></div>
     </div>
     <!-- //header-ends -->
-     <!--   로그 아웃 클릭 이벤트 -->
     <script>
     $('#Mypage').click(function(event){
         location.href = "../mypage/mypage.html";
@@ -158,28 +153,21 @@
         location.href = "../auth/login.html";
       });
     </script>
-    <!-- main content start-->
+
     <div id="page-wrapper">
       <div class="main-page">
-
-    <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
-
-
-  
-
+        <ul id="listUl" class="cd-gallery">
+        </ul>
       </div>
     </div>
-    <!--footer-->
+    
     <div class="footer">
       <p>
         &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
       </p>
     </div>
-    <!--//footer-->
   </div>
 
-  <!-- Classie 메뉴 접히고 펼쳐지는 부분` -->
-  <script src="../js/main/classie.js"></script>
   <script>
     var menuLeft = document.getElementById('cbp-spmenu-s1'), 
         showLeftPush = document.getElementById('showLeftPush'), 
@@ -197,12 +185,45 @@
         classie.toggle(showLeftPush, 'disabled');
       }
     }
+    
+    $.getJSON('../community/ajax/list.do', function(resultObj) {
+    	  var listUl = $("#listUl");
+    	  for (var board of resultObj.data) {
+    	    $("<li>")
+    	      .html("<a href='" + board.boardNo + "'>" +
+    	    		      "<ul class='cd-item-wrapper'>" + 
+    	    		        "<li class='selected'>" + 
+    	    		          "<img src='../img/community/ugmonk-bag-1.jpg'>" + 
+    	    		        "</li>" +
+    	    		        "<li class='move-right'>" + 
+                        "<img src='../img/community/ugmonk-bag-2.jpg'>" + 
+                      "</li>" +
+                      "<li>" + 
+                        "<img src='../img/community/ugmonk-bag-3.jpg'>" + 
+                      "</li>" +
+                    "</ul>" +
+                  "</a>" +
+                  "<div class='cd-item-info'>" +
+                    "<b><a href=''>" + board.title + "</a></b>" +
+                    "<em class='cd-price'>" + board.memberNo + "</em></div>")
+    	      .appendTo(listUl);
+    	  }
+    	  
+    	  // 제목 링크에 클릭 이벤트 리스너를 등록한다.
+    	  /* $("a.detailLnk").click(clickDetailLnk); */
+    	});
+    
+/* 
+    	$('#newBtn').click(function(event){
+    	  location.href = "form.html?no=-1";
+    	});
+
+    	// 게시물 제목을 클릭했을 때 호출될 함수
+    	function clickDetailLnk(event) {
+    	  event.preventDefault(); 
+    	  location.href = "form.html?no=" + $(event.target).attr("boardNo");
+    	}
+ */    	
   </script>
-  <!--scrolling js 스크롤바 조정-->
-  <script src="../js/main/jquery.nicescroll.js"></script>
-  <script src="../js/main/scripts.js"></script>
-  <!--//scrolling js-->
-  <!-- Bootstrap Core JavaScript -->
-  <script src="../js/main/bootstrap.js"></script>
 </body>
 </html>

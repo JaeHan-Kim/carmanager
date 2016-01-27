@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cms.dao.BoardDao">
+  
+  <resultMap type="board" id="boardMap">
+    <id column="bno" property="boardNo"/>
+    <result column="mno" property="memberNo"/>
+    <result column="cre_dt" property="createdDate"/>
+    <result column="cate" property="category"/>
+  </resultMap>
+  
+  <select id="selectList" resultMap="boardMap" parameterType="map">
+    select 
+    bno, mno, title, cre_dt, cate, likes, views 
+    from boards order by bno desc 
+    limit #{startIndex}, #{length}
+  </select>
+ 
+</mapper>
