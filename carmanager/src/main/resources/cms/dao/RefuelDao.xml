@@ -61,13 +61,14 @@
     values(#{myCarNo}, #{refuelDate}, #{mile}, #{cost}, #{liter}, #{literCost})
     <!-- insert into refuel(grno, ref_dt, mile, cost, liter, lcost)
     values(1, '2016-01-10', 3500, 30000, (30000/1375), 1375) -->
-  </insert>  
+  </insert>
   
   <select id="selectRefuel" resultMap="refuelMap" parameterType="int">
     select * from refuel where grno = #{no}
     order by ref_dt desc
     limit 1
   </select>
+  
   
 </mapper>
 
