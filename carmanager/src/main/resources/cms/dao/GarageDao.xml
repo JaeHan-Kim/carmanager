@@ -53,14 +53,22 @@
     where grno=#{no}
   </delete>
 	
-	<select id="selectFirstCar" resultMap="garageMap" parameterType="int">
-		select grno, mdno, c_nick from garage 
-		where mno = #{no}
-		order by grno asc
-		limit 1;
+  <select id="selectFirstCar" resultMap="garageMap" parameterType="int">
+	select grno, mdno, c_nick from garage 
+	where mno = #{no}
+	order by grno asc
+	limit 1;
   </select>
   
   <select id="selectGarage" resultMap="garageMap" parameterType="int">
     select * from garage where grno=#{no}
   </select>
-  </mapper>
+
+  <update id="updateMile" parameterType="map">
+    update garage set mile=#{mile}
+    where grno=#{grno}
+  </update>
+  
+  
+  
+</mapper>

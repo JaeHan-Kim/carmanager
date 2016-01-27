@@ -20,4 +20,7 @@ public interface GarageService {
   Garage searchFirstCar (int no);
   
   Garage retrieve(int no);
+
+  int updateMile(int mile, int myCarNo);
+
 }

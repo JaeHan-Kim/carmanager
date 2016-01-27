@@ -1,6 +1,7 @@
 package cms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import cms.domain.Garage;
 
@@ -20,4 +21,6 @@ public interface GarageDao {
   public Garage selectFirstCar(int no);
   
   public Garage selectGarage(int no);
+
+  public int updateMile(Map<String, Object> resultMap);
 }

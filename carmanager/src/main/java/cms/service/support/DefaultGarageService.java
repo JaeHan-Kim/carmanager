@@ -1,5 +1,6 @@
 package cms.service.support;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,16 @@ public class DefaultGarageService implements GarageService {
 		return garageDao.selectFirstCar(no);
 	}
 	
-    @Override
-    public Garage retrieve(int no) {
-      return garageDao.selectGarage(no);
-    }
+  @Override
+  public Garage retrieve(int no) {
+    return garageDao.selectGarage(no);
+  }
+
+  @Override
+  public int updateMile(int mile, int myCarNo) {
+    HashMap<String, Object> resultMap = new HashMap<>();
+    resultMap.put("mile", mile);
+    resultMap.put("grno", myCarNo);
+    return garageDao.updateMile(resultMap);
+  }
 }
