@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+
+/* form 관련 css */
+.form-title2 {
+  padding: 1em 2em;
+  background-color: #6A6A6A;
+  border-bottom: 1px solid #D6D5D5;
+}
+
+.form-title2 h4 {
+    font-size: 1.3em;
+    /*color: #6F6F6F;*/
+    color: #E8E6E6;
+}
+
+/* 상품 관련 css */
+.lbl_goods {
+  font-size: 18px;
+}
+
+.img_goods {
+	float: left; 
+	width: 20px;
+}
+
+.lbl_lifemile {
+  font-size: 12px; 
+}
+
+.lbl_txt12px {
+  font-size: 12px; 
+}
+
+.lbl_txt14px {
+	font-size:14px;
+}
+
+
+/* 버튼 관련 css */
+.btn_reset{
+    background: #6164C1 !important;
+    color: #FFF;
+    border: none;
+    font-size: 0.9em;
+    float: right;
+    display: block;
+}
+
+.btn_reset:hover{
+	 background: rgba(79, 82, 186, 0.81) !important;
+}
+
+
+/*progress bar 부분 css*/
+.progress {
+  margin: 0 auto;
+  float: left;
+  width: 92%;
+  height: 20px;
+  padding: 4px;
+  background: whitesmoke;
+  border-radius: 6px;
+}
+
+.progress-bar {
+  position: relative;
+  height: 12px;
+  border-radius: 4px;
+/*   webkit-transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  -o-transition: 0.4s linear;
+  transition: 0.4s linear; */
+}
+
+.percent {
+  font-size: 13px;
+}
+
+/* .progress-bar:before, .progress-bar:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.progress-bar:before {
+  bottom: 0;
+  background: url("../img/refuel/refuel_goods/stripes.png") 0 0 repeat;
+  border-radius: 4px 4px 0 0;
+}
+.progress-bar:after {
+  z-index: 2;
+  bottom: 45%;
+  border-radius: 4px;
+}
+ */

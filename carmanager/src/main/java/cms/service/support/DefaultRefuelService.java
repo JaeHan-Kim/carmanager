@@ -43,5 +43,8 @@ public class DefaultRefuelService implements RefuelService {
     return refuelDao.addRefuelCost(refuel);
   }
 	
-	
+  @Override
+  public Refuel retrieve(int no) {
+    return refuelDao.selectRefuel(no);
+  }	
 }

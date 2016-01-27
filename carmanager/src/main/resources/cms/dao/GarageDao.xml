@@ -59,4 +59,8 @@
 		order by grno asc
 		limit 1;
   </select>
+  
+  <select id="selectGarage" resultMap="garageMap" parameterType="int">
+    select * from garage where grno=#{no}
+  </select>
   </mapper>

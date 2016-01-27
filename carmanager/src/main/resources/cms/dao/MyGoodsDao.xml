@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cms.dao.MyGoodsDao">
+  <resultMap type="mygoods" id="MyGoodsMap">
+    <id column="mgno" property="mygoodsNo"/>
+    <result column="grno" property="garageNo"/>
+    <result column="gno" property="goodsNo"/>
+    <result column="c_mile" property="changeMile"/> 
+    <result column="chn_dt" property="changeDate"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="mygoods">
+    insert into mygoods(grno, gno, c_mile, chn_dt) 
+    values (#{garageNo}, #{goodsNo}, #{changeMile}, now())
+  </insert>
+  
+  <update id="update" parameterType="mygoods">
+    update mygoods set
+      c_mile = #{changeMile}, 
+      chn_dt = now()
+    where grno = #{garageNo} and gno = #{goodsNo}
+  </update>
+
+  <select id="selectMygoods" resultMap="MyGoodsMap" parameterType="int">
+    select * from mygoods 
+    where grno=#{no}
+    order by chn_dt desc
+    limit 1
+  </select>
+
+  <select id="selectChangeMygoods" resultMap="MyGoodsMap" parameterType="mygoods">
+    select * from mygoods
+    where grno=#{garageNo} and gno=#{goodsNo}
+    order by chn_dt desc
+    limit 1
+  </select>
+  
+</mapper>

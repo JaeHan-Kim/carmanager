@@ -187,3 +187,14 @@ insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하
 insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
 insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
 insert into boards(mno, title, content, cre_dt, cate) values(1, '하하하하하', '1등', now(), 0);
+
+--소모품 등록
+insert into goods(gname, l_mile) values('와이퍼 블레이드', 8000);
+insert into goods(gname, l_mile) values('에어컨필터', 5000);
+insert into goods(gname, l_mile) values('브레이크 패드', 30000);
+insert into goods(gname, l_mile) values('브레이크 오일', 45000);
+insert into goods(gname, l_mile) values('부동액', 40000);
+insert into goods(gname, l_mile) values('엔진 오일', 10000);
+insert into goods(gname, l_mile) values('미션 오일', 50000);
+insert into goods(gname, l_mile) values('타이어', 60000);
+insert into goods(gname, l_mile) values('배터리', 60000);
