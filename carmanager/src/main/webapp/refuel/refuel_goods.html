@@ -3,7 +3,7 @@
      실제로 사용할 때 정리해서 사용할 것을 권장합니다. -->
 <html>
 <head>
-<title>new 내 차를 부탁해</title>
+<title>new 내 차를 부탁해 - 차량 관리입니다.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -29,6 +29,9 @@
 	<link type='text/css' rel='stylesheet'
 	      href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic'>
 	<!--//webfonts-->
+  <!-- sweetAlert -->
+  <script type="text/javascript" src="../lib/sweetalert/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../lib/sweetalert/sweetalert.css">
 	<!--animate-->
 	<link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
 	<script src="../js/main/wow.min.js"></script>
@@ -37,14 +40,64 @@
 	  $(document).ready(function(){ 
 	    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
 	    var userCarNo = sessionStorage.getItem('loginUsercarNo');
-	      $("#userNickname").html(userNickname);
+	    var userPhoto = sessionStorage.getItem('loginUserPhoto');
+	    $("#userNickname").html(userNickname);
+      $('#liter').css('display', 'none')
+      $('#money').css('display', 'none')
+      $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
+	    
+	    $.post('../mygoods/selectCurrentMile.do', {
+	      no: userCarNo
+	    }, function(resultObj) {
+	      if (resultObj.status == "success") {
+	    	  for (var i=1; i <= 9; i++) {
+	    	    var lifemile = $(".lbl_lifemile").eq(i-1).text();
+	    	    var per = ((lifemile - resultObj.data[i]) / lifemile) * 100;
+	    	    
+		      	$(".percent").eq(i - 1).text(parseInt(per) + '%');
+ 		    	  $(".progress-bar").eq(i - 1).css('width', per + '%');
+	    	    $(".lbl_restmile").eq(i - 1).text(resultObj.data[i]);
+	    	    
+            switch (true) {
+              case per < 1 :
+            	  $(".percent").eq(i - 1).text('0%');
+                break;
+              case per < 21 :
+            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #86e01e');
+            	  break;
+              case per < 41 : 
+            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f2d31b');
+            	  break;
+              case per < 61 : 
+            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f2b01e');
+    		    	  break;
+              case per < 81 : 
+            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f27011');
+    		    	  break;            	  
+              case per < 101 :
+            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f63a0f');
+            	  break;
+              default : 
+            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f63a0f');
+                $(".percent").eq(i - 1).text('100%');
+     		    	  $(".progress-bar").eq(i - 1).css('width', '100%');
+     		    	  $(".lbl_restmile").eq(i - 1).text("");
+     		    	  $(".lbl_txt14px").eq(i - 1).text("점검이 필요한 소모품입니다.");
+    		    	  break;   
+            }
+	    	  }
+	    	  
+	      }
+	    }, 'json')
+	      
 	 });  
+	  
 	</script>
 	<!--//end-animate-->
 	
 	<!-- chart 챠트 -->
 	<script src="../lib/Chart.js/Chart.js"></script>
-	<!-- 차트에 날짜 데이터 이용하기 -->
+	<!-- 차트에 날짜 데이터 이용하기 & 주유날짜 등록시 사용 -->
 	<script type="text/javascript" src="../js/main/moment_local.js"></script>
 	<!-- //chart -->
 	
@@ -64,7 +117,7 @@
           id="cbp-spmenu-s1">
           <ul class="nav" id="side-menu">
             <li>
-              <a href="main.html" class="">
+              <a href="../main/main.html" class="">
               <i class="fa fa-home nav_icon"></i>Dashboard</a>
             </li>
             <li>
@@ -76,7 +129,7 @@
               <i class="fa fa-home nav_icon"></i>차량 등록</a>
             </li>
             <li>
-              <a href="../refuel/refuel.html" class="">
+              <a href="../refuel/refuel.html" class="" style="color: #F2B33F;">
               <i class="fa fa-home nav_icon"></i>차량 관리</a>
             </li>
             <li>
@@ -88,7 +141,7 @@
               <i class="fa fa-home nav_icon"></i>맞춤 서비스</a>
             </li>
             <li>
-              <a href="../comunity/comunity.html" class="">
+              <a href="../community/community.html" class="">
               <i class="fa fa-home nav_icon"></i>커뮤니티</a>
             </li>
           </ul>
@@ -108,7 +161,7 @@
         <!--toggle button end-->
         <!--logo -->
         <div class="logo">
-          <a href="main.html">
+          <a href="../main/main.html">
             <h1>내 차를 부탁해</h1>
             <span>간편, 쉽고, 재밌는 시작!</span>
           </a>
@@ -129,7 +182,7 @@
 	               data-toggle="dropdown" aria-expanded="false">
 	              <div class="profile_img">
 	                <span class="prfil-img">
-	                  <img src="../img/main/a.png" alt=""> 
+	                  <img id ="thumbnail" src="" alt=""> 
 	                </span>
 	                <div class="user-name">
 	                  <p id="userNickname"></p>
@@ -142,7 +195,7 @@
 	              </div>
 	            </a>
 	            <ul class="dropdown-menu drp-mnu">
-	              <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
+	              <li><a id="Mypage" href="#"><i class="fa fa-cog"></i>Mypage</a></li>
 	              <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
 	            </ul>
 	          </li>
@@ -155,12 +208,17 @@
       <div class="clearfix"></div>
     </div>
     <!-- //header-ends -->
-     <!--   로그 아웃 클릭 이벤트 -->
+     <!-- 로그 아웃 클릭 이벤트 -->
     <script>
+    $('#Mypage').click(function(event){
+      location.href = "../mypage/mypage.html";
+ 		});
+    
     $('#Logout').click(function(event){
         event.preventDefault();
         sessionStorage.removeItem('loginUserNickname');
         sessionStorage.removeItem('loginUsercarNo');
+        sessionStorage.removeItem('loginUserPhoto');
         location.href = "../auth/login.html";
       });
     </script>
@@ -168,42 +226,208 @@
     <div id="page-wrapper">
       <div class="main-page">
 
-    <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
-     <div class="forms validation">
-			  <h3 class="title1">차량 관리를 시작하세요 :</h3>
-     
-        <div class="widget_1 row elements">
-					<div class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
-						<a href="refuel.html">
-            <div class="tile-progress bg-success">
-							<div class="content">
-								<h4><i class="fa fa-dashboard icon-sm"></i> 주유 기록 등록하기</h4>
-								<span>: 자세한 분석을 원하시면 주행거리, 리터당 단가를 입력하세요.</span>
-							</div>
-						</div>
-						</a>
-					</div>
-					
-          <div class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
-					   <a href="refuel_goods.html">
-             <div class="tile-progress bg-danger">
-							<div class="content">
-								<h4><i class="fa fa-dashboard icon-sm"></i> 소모품 관리하기</h4>
-								<span>: 주행거리 대비 소모품들 교체 시기를 볼 수 있습니다.</span>
-							</div>
-						</div>
-					   </a>
-					</div>
-					<div class="clearfix"> </div>
-			 </div>
-       
-     </div>
+	    <!-- 각 페이지 안 컨텐츠 시작 부분(붙여 넣기할 때 div 묶인거 주의) -->
+	      <div class="forms validation">
+				  <h3 class="title1">차량 관리를 시작하세요 :</h3>
+	        <div class="widget_1 row elements">
+
+            <div
+              class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
+              <a href="refuel.html">
+                <div class="tile-progress bg-success">
+                  <div class="content">
+                    <h4>
+                      <i class="fa fa-dashboard icon-sm"></i> 주유 기록 등록하기
+                    </h4>
+                    <span>:&nbsp;&nbsp;자세한 분석을 원하시면 주행거리, 단가를 입력하세요.</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div
+              class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
+              <a href="refuel_goods.html">
+                <div class="tile-progress bg-danger">
+                  <div class="content">
+                    <h4>
+                      <i class="fa fa-dashboard icon-sm"></i> 소모품 관리하기
+                    </h4>
+                    <span>:&nbsp;&nbsp;주행거리 대비 소모품들 교체 시기를 볼 수 있습니다.</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+	     
+	   <link rel="stylesheet" href="../css/refuel/refuel_goods.css">	   
      <!--소모품 프로그래스바 시작 -->
+        <div class=" form-grids row">
+						<div class="widget-shadow " data-example-id="basic-forms"> 
+							<div class="form-title2">
+								<h4>: 소모품 상태를 확인하세요.</h4>
+							</div>
+							<div class="form-body">
 
-  
-
+							  <div class="tab-pane active" id="domprogress">
+							    <div class="single-bottom">
+									
+									  <ul id="goodsList">
+										  <li>
+										    <img class="img_goods" src="../img/refuel/refuel_goods/wiper.png"/>&nbsp;
+										    <label class="lbl_goods">와이퍼 블레이드</label><br>
+										    <label class="lbl_lifemile">8000</label><label class="lbl_txt12px"> km 주기</label><br>
+										    
+										    <div class="progress">
+											    <div class="progress-bar"></div> &nbsp;
+											    <label class="percent"></label>
+										    </div>
+										    
+										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+									      <label class="lbl_txt14px">다음 정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
+								      </li>
+	                  
+										  <li>
+										    <img class="img_goods" src="../img/refuel/refuel_goods/filter.png"/>&nbsp;
+										    <label class="lbl_goods">에어컨필터</label><br>
+										    <label class="lbl_lifemile">5000</label><label class="lbl_txt12px"> km 주기</label><br>
+										    
+										    <div class="progress">
+											    <div class="progress-bar"></div> &nbsp;
+											    <label class="percent"></label>
+										    </div>
+										    
+										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+									      <label class="lbl_txt14px">다음 정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
+								      </li>
+	                  
+										  <li>
+										    <img class="img_goods" src="../img/refuel/refuel_goods/breakpad.png"/>&nbsp;
+										    <label class="lbl_goods">브레이크 패드</label><br>
+										    <label class="lbl_lifemile">30000</label><label class="lbl_txt12px"> km 주기</label><br>
+										    
+										    <div class="progress">
+											    <div class="progress-bar"></div> &nbsp;
+											    <label class="percent"></label> 
+										    </div>
+										    
+										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+									      <label class="lbl_txt14px">다음 정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
+								      </li>
+	                  
+										  <li>
+										    <img class="img_goods" src="../img/refuel/refuel_goods/breakoil.png"/>&nbsp;
+										    <label class="lbl_goods">브레이크 오일</label><br>
+										    <label class="lbl_lifemile">45000</label><label class="lbl_txt12px"> km 주기</label><br>
+										    
+										    <div class="progress">
+											    <div class="progress-bar"></div> &nbsp;
+											    <label class="percent"></label>
+										    </div>
+										    
+										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+									      <label class="lbl_txt14px">다음 정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
+								      </li>
+	                  
+										  <li>
+										    <img class="img_goods" src="../img/refuel/refuel_goods/coolant.png"/>&nbsp;
+										    <label class="lbl_goods">부동액</label><br>
+										    <label class="lbl_lifemile">40000</label><label class="lbl_txt12px"> km 주기</label><br>
+										    
+										    <div class="progress">
+											    <div class="progress-bar"></div> &nbsp;
+											    <label class="percent"></label> 
+										    </div>
+										    
+										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+									      <label class="lbl_txt14px">다음 정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
+								      </li>
+	                  
+										  <li>
+										    <img class="img_goods" src="../img/refuel/refuel_goods/engine.png"/>&nbsp;
+										    <label class="lbl_goods">엔진 오일</label><br>
+										    <label class="lbl_lifemile">10000</label><label class="lbl_txt12px"> km 주기</label><br>
+										    
+										    <div class="progress">
+											    <div class="progress-bar"></div> &nbsp;
+											    <label class="percent"></label> 
+										    </div>
+										    
+										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+									      <label class="lbl_txt14px">다음정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
+								      </li>
+	                  
+										  <li>
+										    <img class="img_goods" src="../img/refuel/refuel_goods/missionoil.png"/>&nbsp;
+										    <label class="lbl_goods">미션 오일</label><br>
+										    <label class="lbl_lifemile">50000</label><label class="lbl_txt12px"> km 주기</label><br>
+										    
+										    <div class="progress">
+											    <div class="progress-bar"></div> &nbsp;
+											    <label class="percent"></label> 
+										    </div>
+										    
+										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+									      <label class="lbl_txt14px">다음 정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
+								      </li>
+	                  
+										  <li>
+										    <img class="img_goods" src="../img/refuel/refuel_goods/tire.png"/>&nbsp;
+										    <label class="lbl_goods">타이어</label><br>
+										    <label class="lbl_lifemile">60000</label><label class="lbl_txt12px"> km 주기</label><br>
+										  
+										    <div class="progress">
+											    <div class="progress-bar"></div> &nbsp;
+											    <label class="percent"></label> 
+										    </div>
+										   
+										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+									      <label class="lbl_txt14px">다음 정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
+								      </li>
+	                  
+										  <li>
+										    <img class="img_goods" src="../img/refuel/refuel_goods/battery.png"/>&nbsp;
+										    <label class="lbl_goods">배터리</label><br>
+										    <label class="lbl_lifemile">60000</label><label class="lbl_txt12px"> km 주기</label><br>
+										    
+										    <div class="progress">
+											    <div class="progress-bar"></div> &nbsp;
+											    <label class="percent"></label> 
+										    </div>
+										    
+										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+									      <label class="lbl_txt14px">다음 정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
+								      </li>
+							      </ul>
+                  </div>							  
+								</div>
+							</div>
+						</div>
+					</div>
+   
       </div>
     </div>
+    
+    <script>
+      $("#goodsList").on("click",".btn_reset", function(e) {
+      	$(".percent").eq($(this).parent().index()).text('0%');
+    	  $(".progress-bar").eq($(this).parent().index()).css('width', '0%');
+				$(".lbl_restmile").eq($(this).parent().index()).text($(".lbl_lifemile").eq($(this).parent().index()).text());
+
+    	  $.post('../mygoods/update.do', {
+				  garageNo: sessionStorage.getItem('loginUsercarNo'),
+				  goodsNo: $(this).parent().index() + 1		
+			  }, function(resultObj){
+				  var ajaxResult = resultObj.ajaxResult;
+				  if (ajaxResult.status == "success") {
+				    console.log("교체 기록에 추가 되었습니다.");
+				  }
+			  }, 'json');
+    	  
+      }); 
+    </script>
+     
     <!--footer-->
     <div class="footer">
       <p>

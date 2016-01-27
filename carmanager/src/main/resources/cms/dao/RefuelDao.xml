@@ -64,6 +64,12 @@
   </insert>  
   
   
+  <select id="selectRefuel" resultMap="refuelMap" parameterType="int">
+    select * from refuel where grno = #{no}
+    order by ref_dt desc
+    limit 1
+  </select>
+  
 </mapper>
 
 

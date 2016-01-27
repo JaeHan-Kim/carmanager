@@ -19,4 +19,5 @@ public interface GarageDao {
   
   public Garage selectFirstCar(int no);
   
+  public Garage selectGarage(int no);
 }
