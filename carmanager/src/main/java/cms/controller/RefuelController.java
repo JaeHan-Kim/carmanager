@@ -37,6 +37,7 @@ public class RefuelController {
   @RequestMapping(value="addRefuel", method=RequestMethod.POST)
   public AjaxResult addRefuel(Refuel refuel) throws Exception {
     
+    //garageService.updateMile(refuel);
     refuelService.addRefuel(refuel);
     //log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
