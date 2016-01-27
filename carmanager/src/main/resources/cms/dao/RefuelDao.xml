@@ -63,6 +63,7 @@
     values(1, '2016-01-10', 3500, 30000, (30000/1375), 1375) -->
   </insert>  
   
+  
   <select id="selectRefuel" resultMap="refuelMap" parameterType="int">
     select * from refuel where grno = #{no}
     order by ref_dt desc
