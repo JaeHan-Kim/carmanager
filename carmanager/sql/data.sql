@@ -16,8 +16,8 @@ update members set pwd=sha1(1111);
 
 
 -- 내차등록
-insert into garage(mdno, mno, c_nick, mile, effi, trim) values(1, 1, '붕붕이', 10000, 14.1,''); 
-insert into garage(mdno, mno, c_nick, mile, effi, trim) values(4, 1, '날썐돌이', 75000, 14.1,''); 
+insert into garage(mdno, mno, c_nick, mile, effi, trim) values(92, 1, '붕붕이', 12770, 14.5,''); 
+insert into garage(mdno, mno, c_nick, mile, effi, trim) values(5, 1, '날썐돌이', 77979, 15.5,''); 
 insert into garage(mdno, mno, c_nick, mile, effi, trim) values(20, 2, '엄마차', 2800, 14.1,''); 
 insert into garage(mdno, mno, c_nick, mile, effi, trim) values(71, 2, '태웅차', 2800, 11.3,''); 
 insert into garage(mdno, mno, c_nick, mile, effi, trim) values(200, 3, '재한차', 2800, 18.5,'');
