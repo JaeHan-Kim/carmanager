@@ -49,7 +49,7 @@ window.scrollTo(0,1); }
     $('#blank').css('display', 'none')
     $('#exCar').css('display', 'none')
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
-    var userCarNo = sessionStorage.getItem('loginUsercarNo');
+    var userCarNo = sessionStorage.getItem('selectCarNo');
     var userPhoto = sessionStorage.getItem('loginUserPhoto');
     $("#userNickname").html(userNickname);
     $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
@@ -199,8 +199,9 @@ window.scrollTo(0,1); }
     $('#Logout').click(function(event){
         event.preventDefault();
         sessionStorage.removeItem('loginUserNickname');
-        sessionStorage.removeItem('loginUsercarNo');
+       /*  sessionStorage.removeItem('loginUsercarNo'); */
         sessionStorage.removeItem('loginUserPhoto');
+        sessionStorage.removeItem('selectCarNo');
         location.href = "../auth/login.html";
       });
     </script>
