@@ -67,6 +67,10 @@
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
   <link rel="stylesheet" href="http://weloveiconfonts.com/api/?family=fontawesome">
   <!-- //달력 선택 -->
+  <!-- 차량 선택 라이브러리 -->
+	<link rel="stylesheet" href="../css/main/default.css">
+	<script src="../js/main/jquery.selecty.js"></script>
+	<!-- // 차량 선택 라이브러리 -->
 </head>
 
 <body class="cbp-spmenu-push">
@@ -129,12 +133,20 @@
         </div>
         <!--//logo-->
 
-        <!--<div class="clearfix"> </div>-->
+        <div class="clearfix"> </div>
       </div>
       <!-- header-left end-->
 
       <!-- header-right -->
       <div class="header-right">
+        <!-- 유저별 차량 리스트 -->
+          <div class="profile_details_left">
+            <label id="selectCarTitle">&nbsp;&nbsp;* 현재 선택된 차량입니다 :&nbsp;</label>
+            <div class="clearfix"></div>
+              <select id="myCarList" class="selecty s2 selectCar" name="town" id="town">
+              </select>
+         </div>
+        <!-- 유저별 차량 리스트 end -->
         <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
@@ -171,6 +183,18 @@
     <!-- //header-ends -->
      <!-- 로그 아웃 클릭 이벤트 -->
     <script>
+    $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+      /* alert(sessionStorage.getItem('loginUsercarNo')); */
+      for (var garage of resultObj.data) {
+        $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList');
+    	} 
+    	$('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
+    	$('.selecty').selecty();
+   	});
+    $('#myCarList').change(function(){
+     	sessionStorage.setItem('selectCarNo', $("#myCarList").val());
+    	displayItem(0);
+    });
     $('#Mypage').click(function(event){
       location.href = "../mypage/mypage.html";
  		});

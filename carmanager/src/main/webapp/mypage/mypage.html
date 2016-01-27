@@ -11,6 +11,7 @@
   <link type="text/css" rel="stylesheet" href="../css/main/custom.css" />
   <link type='text/css' rel='stylesheet' href="../css/mypage/mypage.css" />
   <link type='text/css' rel='stylesheet' href="../css/main/style.css" />
+	<link type='text/css' rel="stylesheet" href="../css/main/default.css">
   <link type='text/css' rel='stylesheet'
         href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' />
   
@@ -26,6 +27,7 @@
   <script src="../js/main/moment_local.js"></script>
   <script src="../js/main/scripts.js"></script>
   <script src="../js/main/wow.min.js"></script>
+	<script src="../js/main/jquery.selecty.js"></script>
   
   <script type="application/x-javascript">
     addEventListener("load", function() { 
@@ -103,9 +105,18 @@
             <span>간편, 쉽고, 재밌는 시작!</span>
           </a>
         </div>
+           <div class="clearfix"> </div>
       </div>
 
       <div class="header-right">
+       <!-- 유저별 차량 리스트 -->
+          <div class="profile_details_left">
+            <label id="selectCarTitle">&nbsp;&nbsp;* 현재 선택된 차량입니다 :&nbsp;</label>
+            <div class="clearfix"></div>
+              <select id="myCarList" class="selecty s2 selectCar" name="town" id="town">
+              </select>
+         </div>
+        <!-- 유저별 차량 리스트 end -->
         <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
@@ -138,6 +149,18 @@
     </div>
 
     <script>
+    $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+      /* alert(sessionStorage.getItem('loginUsercarNo')); */
+      for (var garage of resultObj.data) {
+        $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList');
+     	} 
+    	 $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
+     	 $('.selecty').selecty();
+   		});
+    	$('#myCarList').change(function(){
+      	sessionStorage.setItem('selectCarNo', $("#myCarList").val());
+      	displayItem(0);
+    	});
     $('#Mypage').click(function(event){
     	location.href = "../mypage/mypage.html";
     });
