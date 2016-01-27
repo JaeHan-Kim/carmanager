@@ -7,7 +7,7 @@ $.fn.selecty = function(options) {
 	var self = this;
 	self.options = $.extend({}, {
 		animationSpeed: 200,
-		width: '300px',
+		width: '165px',
 		maxHeight: '200px'
 	}, options);
 

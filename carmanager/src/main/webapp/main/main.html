@@ -143,35 +143,26 @@ window.scrollTo(0,1); }
           </form>
         </div>
         <!-- end-search-box-->
-
-        <!--<div class="clearfix"> </div>-->
-
+        <div class="clearfix"> </div>
       </div>
       <!-- header-left end-->
 
       <!-- header-right -->
       <div class="header-right">
         <!-- 유저별 차량 리스트 -->
-       <div class="profile_details_left">
-         <p id="selectCarTitle">&nbsp;&nbsp;&nbsp;현재 선택된 차량입니다 :</p>
-            <select id="myCarList" class="selecty s2" data-width="200px" data-max-height="1500px" name="town" id="town"> 
-             <div class="clearfix"></div>
-            </select>
-           
-          <div class="clearfix"></div>
-       </div>
-       <!-- selectBox 호출 스크립트 -->
-      <!--  <script>
-         $('select').stbDropdown();
-       </script> -->
+          <div class="profile_details_left">
+            <label id="selectCarTitle">&nbsp;&nbsp;* 현재 선택된 차량입니다 :&nbsp;</label>
+            <div class="clearfix"></div>
+              <select id="myCarList" class="selecty s2 selectCar" name="town" id="town">
+              </select>
+         </div>
         <!-- 유저별 차량 리스트 end -->
 
         <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
-            <li class="dropdown profile_details_drop"><a href="#"
-              class="dropdown-toggle" data-toggle="dropdown"
-              aria-expanded="false">
+            <li class="dropdown profile_details_drop">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <div class="profile_img">
                   <span class="prfil-img">
                   <img id ="thumbnail" src="" alt=""> </span>
@@ -180,17 +171,18 @@ window.scrollTo(0,1); }
                     <span>안녕하세요.</span>
                   </div>
                   <!-- 빈칸 유지를 위한 아이콘 자리 -->
-                  <i class="fa fa-angle-down lnr"></i> <i
-                    class="fa fa-angle-up lnr"></i>
+                  <i class="fa fa-angle-down lnr"></i>
+                  <i class="fa fa-angle-up lnr"></i>
                   <div class="clearfix"></div>
                 </div>
             </a>
               <ul class="dropdown-menu drp-mnu">
                 <li><a id="Mypage" href="#"><i class="fa fa-cog"></i>My page</a></li>
                 <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
-              </ul></li>
+              </ul>
+            </li>
           </ul>
-        </div>
+       </div>
         <!-- 로그인 유저 정보 end -->
         <div class="clearfix"></div>
       </div>
