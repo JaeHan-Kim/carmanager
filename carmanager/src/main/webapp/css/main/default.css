@@ -1,6 +1,6 @@
 .selecty-container {
 	display: inline-block;
-	width: 300px;
+	width: 100px;
 }
 .selecty-container:hover .selecty-select,
 .selecty-select.open {
@@ -8,12 +8,12 @@
 }
 .selecty-select {
 	overflow: hidden;
-	border: 1px solid #CCC;
+	border: 1px solid #ccc;
 	padding: 5px 10px;
 	background-image: linear-gradient(to bottom, #FAFAFA, #EEE);
 	cursor: pointer;
 	overflow: hidden;
-	box-sizing: border-box;
+	box-sizing: content-box;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
