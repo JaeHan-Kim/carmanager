@@ -222,27 +222,6 @@ window.scrollTo(0,1); }
              });
            }
            
-            /* $('#btn_delete').click(function(resultObj) {
-              if ($('#deleteNo').val() != null) {
-                $.post('delete.do', {
-                    no: $('#deleteNo').val()
-                  }, function(resultObj) {
-                    var ajaxResult = resultObj.ajaxResult;
-                    if (ajaxResult.status == "success") {
-                      location.href = "garage.html";
-                    } else {
-                      alert("차량 삭제에 실패하였습니다.");
-                    }
-                  }, 'json');
-                 } else {
-                   $('#btn_msg').click(btnMsg);
-                 }
-              function btnMsg(e){
-                $("<div id='btnMsg' class='collapse'>잠깐! 차량 선택 후 삭제 가능합니다.</div>").appendTo(btn_msg)
-              }
-              
-            }); */
-            
             $('#btn_delete2').click(function(resultObj) {
               if ($('#deleteNo').val() == null) {
                 swal("차량 선택 후 삭제하세요 ; (")
