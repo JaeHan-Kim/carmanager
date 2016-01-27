@@ -50,7 +50,7 @@
 	      no: userCarNo
 	    }, function(resultObj) {
 	      if (resultObj.status == "success") {
-	    	  for (var i=0; i <= 9; i++) {
+	    	  for (var i=1; i <= 9; i++) {
 	    	    var lifemile = $(".lbl_lifemile").eq(i-1).text();
 	    	    var per = ((lifemile - resultObj.data[i]) / lifemile) * 100;
 	    	    
@@ -59,9 +59,10 @@
 	    	    $(".lbl_restmile").eq(i - 1).text(resultObj.data[i]);
 	    	    
             switch (true) {
-              case per = 0 :
+              case per < 1 :
             	  $(".percent").eq(i - 1).text('0%');
-              case per < 21 : 
+                break;
+              case per < 21 :
             	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #86e01e');
             	  break;
               case per < 41 : 
