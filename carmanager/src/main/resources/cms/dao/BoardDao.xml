@@ -18,5 +18,9 @@
     from boards order by bno desc 
     limit #{startIndex}, #{length}
   </select>
+  
+  <select id="countAll" resultType="int">
+    select count(*) from boards
+  </select>
  
 </mapper>

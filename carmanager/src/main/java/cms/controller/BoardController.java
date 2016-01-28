@@ -22,18 +22,28 @@ public class BoardController {
   
   @RequestMapping("list")
   public Object list(
-      @RequestParam(defaultValue="1") int pageNo,
+      @RequestParam(defaultValue="1") int page,
       @RequestParam(defaultValue="6") int pageSize) throws Exception {
     
     HashMap<String,Object> paramMap = new HashMap<>();
-    paramMap.put("startIndex", (pageNo - 1) * pageSize);
+    paramMap.put("startIndex", (page - 1) * pageSize);
     paramMap.put("length", pageSize);
     
     List<Board> boards = boardDao.selectList(paramMap);
     
+    int count = boardDao.countAll();
+    int page_link = 10;
+    
+    HashMap<String, Object> selectMap = new HashMap<>();
+    selectMap.put("count", count);
+    selectMap.put("pageSize", pageSize);
+    selectMap.put("page_link", page_link);
+    
     HashMap<String,Object> resultMap = new HashMap<>();
     resultMap.put("status", "success");
     resultMap.put("data", boards);
+    resultMap.put("pageAttribute", selectMap);
+    
     
     return resultMap;
   }
