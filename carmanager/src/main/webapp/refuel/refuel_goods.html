@@ -45,68 +45,15 @@
       $('#liter').css('display', 'none')
       $('#money').css('display', 'none')
       $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
-	    
-	    $.post('../mygoods/selectCurrentMile.do', {
-	      no: userCarNo
-	    }, function(resultObj) {
-	      if (resultObj.status == "success") {
-	    	  for (var i=1; i <= 9; i++) {
-	    		  var restmile = resultObj.data[i];
-	    	    var lifemile = $(".lbl_lifemile").eq(i-1).text();
-	    	    var per = ((lifemile - restmile) / lifemile) * 100;
-	    	    
-	    	    $(".lbl_restmile").eq(i - 1).text(restmile);
-		      	$(".percent").eq(i - 1).text(parseInt(per) + '%');
- 		    	  $(".progress-bar").eq(i - 1).css('width', per + '%');
-	    	    
-            switch (true) {
-              case per < 1 :
-            	  console.log("1이하" + restmile);
-                console.log(i-1);
-            	  $(".percent").eq(i - 1).text('0%');
-                break;
-              case per < 21 && 1 < per:
-            	  console.log("21이하" + restmile);
-                console.log(i-1);
-            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #86e01e');
-            	  break;
-              case per < 41 && 21 < per: 
-            	  console.log("41이하" + restmile);
-                console.log(i-1);
-            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f2d31b');
-            	  break;
-              case per < 61 && 41 < per: 
-            	  console.log("61이하" + restmile);
-                console.log(i-1);
-            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f2b01e');
-    		    	  break;
-              case per < 81 && 60 < per: 
-            	  console.log("81이하" +restmile);
-                console.log(i-1);
-            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f27011');
-    		    	  break;            	  
-              case per < 100 && 81 < per:
-            	  console.log("100이하" + restmile);
-                console.log(i-1);
-            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f63a0f');
-            	  break;
-              default :
-            	  console.log("나머지" + restmile);
-                console.log(i-1);
-     		    	  $(".lbl_txt14px").eq(i - 1).hide();
-     		    	  $(".lbl_sign").eq(i-1).show();
-            	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f63a0f');
-                $(".percent").eq(i - 1).text('100%');
-     		    	  $(".progress-bar").eq(i - 1).css('width', '100%');
-            }
-            
-	    	  }
-	    	  
-	      }
-	    }, 'json')
-	      
-	 });  
-	  
+      
+      var selectCarNo = sessionStorage.getItem('selectCarNo');
+      if (userCarNo == null) {  
+        displayStatus(userCarNo);
+      } else { 
+        displayStatus(selectCarNo);    	  
+      }
+
+	  });
 	</script>
 	<!--//end-animate-->
 	
@@ -121,6 +68,11 @@
 	<script src="../js/main/custom.js"></script>
 	<link rel="stylesheet" href="../css/main/custom.css">
 	<!--//Metis Menu -->
+	
+	<!-- 차량 선택 라이브러리 -->
+	<link rel="stylesheet" href="../css/main/default.css">
+	<script src="../js/main/jquery.selecty.js"></script>
+	<!-- // 차량 선택 라이브러리 -->
 </head>
 
 <body class="cbp-spmenu-push">
@@ -183,12 +135,21 @@
         </div>
         <!--//logo-->
 
-        <!--<div class="clearfix"> </div>-->
+        <div class="clearfix"> </div>
       </div>
       <!-- header-left end-->
 
       <!-- header-right -->
       <div class="header-right">
+        <!-- 유저별 차량 리스트 -->
+          <div class="profile_details_left">
+            <label id="selectCarTitle">&nbsp;&nbsp;* 현재 선택된 차량입니다 :&nbsp;</label>
+            <div class="clearfix"></div>
+             <select id="myCarList" class="selecty s2 selectCar" name="town" id="town">
+             </select>
+         </div>
+        <!-- 유저별 차량 리스트 end -->
+        
         <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
@@ -225,6 +186,15 @@
     <!-- //header-ends -->
      <!-- 로그 아웃 클릭 이벤트 -->
     <script>
+    $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+      for (var garage of resultObj.data) {
+        $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList');
+     	}  
+     
+      $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
+      $('.selecty').selecty();
+    });
+    
     $('#Mypage').click(function(event){
       location.href = "../mypage/mypage.html";
  		});
@@ -237,6 +207,65 @@
         location.href = "../auth/login.html";
       });
     </script>
+    
+    <script>
+    $('#myCarList').change(function(){
+      sessionStorage.setItem('selectCarNo', $("#myCarList").val());
+
+      var userCarNo = sessionStorage.getItem('selectCarNo');
+    
+    	displayStatus(userCarNo);
+    });
+    
+    function displayStatus(userCarNo) {
+	    $.post('../mygoods/selectCurrentMile.do', {
+	      no: userCarNo
+	    }, function(resultObj) {
+	      if (resultObj.status == "success") {
+	    	  for (var i=1; i <= 9; i++) {
+	    		  var restmile = resultObj.data[i];
+	    	    var lifemile = $(".lbl_lifemile").eq(i-1).text();
+	    	    var per = ((lifemile - restmile) / lifemile) * 100;
+	    	    
+	    	    $(".lbl_restmile").eq(i - 1).text(restmile);
+		      	$(".percent").eq(i - 1).text(parseInt(per) + '%');
+		    	  $(".progress-bar").eq(i - 1).css('width', per + '%');
+	    	  
+          switch (true) {
+            case per < 1 :
+          	  $(".percent").eq(i - 1).text('0%');
+              break;
+            case per < 21 && 1 <= per:
+          	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #86e01e');
+          	  break;
+            case per < 41 && 21 <= per: 
+          	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f2d31b');
+          	  break;
+            case per < 61 && 41 <= per: 
+          	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f2b01e');
+  		    	  break;
+            case per < 81 && 61 <= per: 
+          	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f27011');
+  		    	  break;            	  
+            case per < 100 && 81 <= per:
+          	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f63a0f');
+          	  break;
+            default :
+   		    	  $(".lbl_txt14px").eq(i - 1).hide();
+   		    	  $(".lbl_sign").eq(i-1).show();
+          	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #f63a0f');
+              $(".percent").eq(i - 1).text('');
+   		    	  $(".progress-bar").eq(i - 1).css('width', '100%');
+            }
+          
+	    	  }
+	    	  
+	      }
+	    }, 'json')
+	      
+	  };  
+    </script>
+    
     <!-- main content start-->
     <div id="page-wrapper">
       <div class="main-page">
@@ -295,7 +324,7 @@
 										    <label class="lbl_lifemile">8000</label><label class="lbl_txt12px"> km 주기</label><br>
 										    
 										    <div class="progress">
-											    <div class="progress-bar"></div> &nbsp;
+											    <div class="progress-bar"></div>
 											    <label class="percent"></label>
 										    </div>
 										    
@@ -310,7 +339,7 @@
 										    <label class="lbl_lifemile">5000</label><label class="lbl_txt12px"> km 주기</label><br>
 										    
 										    <div class="progress">
-											    <div class="progress-bar"></div> &nbsp;
+											    <div class="progress-bar"></div>
 											    <label class="percent"></label>
 										    </div>
 										    
@@ -325,7 +354,7 @@
 										    <label class="lbl_lifemile">30000</label><label class="lbl_txt12px"> km 주기</label><br>
 										    
 										    <div class="progress">
-											    <div class="progress-bar"></div> &nbsp;
+											    <div class="progress-bar"></div>
 											    <label class="percent"></label> 
 										    </div>
 										    
@@ -340,7 +369,7 @@
 										    <label class="lbl_lifemile">45000</label><label class="lbl_txt12px"> km 주기</label><br>
 										    
 										    <div class="progress">
-											    <div class="progress-bar"></div> &nbsp;
+											    <div class="progress-bar"></div>
 											    <label class="percent"></label>
 										    </div>
 										    
@@ -355,7 +384,7 @@
 										    <label class="lbl_lifemile">40000</label><label class="lbl_txt12px"> km 주기</label><br>
 										    
 										    <div class="progress">
-											    <div class="progress-bar"></div> &nbsp;
+											    <div class="progress-bar"></div>
 											    <label class="percent"></label> 
 										    </div>
 										    
@@ -370,7 +399,7 @@
 										    <label class="lbl_lifemile">10000</label><label class="lbl_txt12px"> km 주기</label><br>
 										    
 										    <div class="progress">
-											    <div class="progress-bar"></div> &nbsp;
+											    <div class="progress-bar"></div>
 											    <label class="percent"></label> 
 										    </div>
 										    
@@ -385,7 +414,7 @@
 										    <label class="lbl_lifemile">50000</label><label class="lbl_txt12px"> km 주기</label><br>
 										    
 										    <div class="progress">
-											    <div class="progress-bar"></div> &nbsp;
+											    <div class="progress-bar"></div>
 											    <label class="percent"></label> 
 										    </div>
 										    
@@ -400,7 +429,7 @@
 										    <label class="lbl_lifemile">60000</label><label class="lbl_txt12px"> km 주기</label><br>
 										  
 										    <div class="progress">
-											    <div class="progress-bar"></div> &nbsp;
+											    <div class="progress-bar"></div>
 											    <label class="percent"></label> 
 										    </div>
 										   
@@ -415,7 +444,7 @@
 										    <label class="lbl_lifemile">60000</label><label class="lbl_txt12px"> km 주기</label><br>
 										    
 										    <div class="progress">
-											    <div class="progress-bar"></div> &nbsp;
+											    <div class="progress-bar"></div>
 											    <label class="percent"></label> 
 										    </div>
 										    
@@ -440,7 +469,7 @@
 				$(".lbl_restmile").eq($(this).parent().index()).text($(".lbl_lifemile").eq($(this).parent().index()).text());
 
     	  $.post('../mygoods/update.do', {
-				  garageNo: sessionStorage.getItem('loginUsercarNo'),
+				  garageNo: sessionStorage.getItem('selectCarNo'),
 				  goodsNo: $(this).parent().index() + 1		
 			  }, function(resultObj){
 				  var ajaxResult = resultObj.ajaxResult;
