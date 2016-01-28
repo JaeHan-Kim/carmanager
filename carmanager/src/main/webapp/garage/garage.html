@@ -264,7 +264,7 @@ window.scrollTo(0,1); }
                   if (isConfirm) {
                     $.post('delete.do', {
                       no: $('#deleteNo').val(),
-                     	userNo: sessionStorage.getItem('loginUser')
+                      userNo: sessionStorage.getItem('loginUser')
                     }, function(resultObj) {
                       var ajaxResult = resultObj.ajaxResult;
                       if (ajaxResult.status == "success") {
