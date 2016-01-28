@@ -42,22 +42,12 @@ public class MyGoodsController {
 	  if (garage == null) {
 	    return new AjaxResult("failure", null);
 	  } 
-	
-	  Refuel refuel = refuelService.retrieve(no);
-	  
-	  for (int i = 1; i <=9; i++) {	
-        MyGoods addmygoods = new MyGoods();
-	    addmygoods.setGarageNo(no);
-	    addmygoods.setGoodsNo(i);
-	    addmygoods.setChangeMile(garage.getMile());
-	    mygoodsService.addMygoods(addmygoods);	
-	  }
-	  		  
+		  
 	  List<Goods> goods = goodsService.getGoodsList();		  
     
 	  HashMap<Integer, Integer> restmiles = new HashMap<>();
 	  for(Goods good : goods) {
-	    int restmile = garage.getMile() + good.getLifeMile() - (garage.getMile() + (refuel.getMile() - garage.getMile()));
+	    int restmile = good.getLifeMile() - garage.getMile();
         restmiles.put(good.getGoodsNo(), restmile); 
 	  }
 	  
@@ -68,7 +58,8 @@ public class MyGoodsController {
     }
 	
 	//소모품 교체 기록 있을때,
-	Refuel refuel = refuelService.retrieve(no);
+	//Refuel refuel = refuelService.retrieve(no);
+    Garage garage = garageService.retrieve(no);
 	List<Goods> goods = goodsService.getGoodsList();		  
 	
 	HashMap<Integer, Integer> restmiles = new HashMap<>();
@@ -79,16 +70,14 @@ public class MyGoodsController {
 	  
 	  MyGoods resultmygoods = mygoodsService.searchMygoods(inputmygoods);
 
-	  int refuelmile;
-	  if (refuel == null) {
-	    refuelmile = resultmygoods.getChangeMile();
+	  if (resultmygoods == null) {
+	    int restMile = good.getLifeMile() - garage.getMile();
+	    restmiles.put(good.getGoodsNo(), restMile); 
 	  } else {
-		refuelmile = resultmygoods.getChangeMile() + (refuel.getMile() - resultmygoods.getChangeMile());
+      	int changeMile = resultmygoods.getChangeMile() + (garage.getMile() - resultmygoods.getChangeMile());
+	    int restMile = (resultmygoods.getChangeMile() + good.getLifeMile()) - changeMile;
+	    restmiles.put(good.getGoodsNo(), restMile); 
 	  }
-		
-	  int restMile = (resultmygoods.getChangeMile() + good.getLifeMile()) - refuelmile;
-	  
-	  restmiles.put(good.getGoodsNo(), restMile); 
     }
 		  
 	HashMap<String,Object> resultMap = new HashMap<>();
@@ -99,13 +88,17 @@ public class MyGoodsController {
   
   @RequestMapping("update")
   public AjaxResult update(MyGoods mygoods) throws Exception {
-    Refuel refuel = refuelService.retrieve(mygoods.getGarageNo());
-	  
-	mygoods.setChangeMile(refuel.getMile());
-
-	mygoodsService.updateMygoods(mygoods);
-	  
-	return new AjaxResult("success", null);
+    if (mygoodsService.searchMygoods(mygoods) == null) {
+  	  Garage garage = garageService.retrieve(mygoods.getGarageNo());
+  	  mygoods.setChangeMile(garage.getMile());
+  	  mygoodsService.addMygoods(mygoods);
+  	  return new AjaxResult("success", null);
+    } else {
+  	  Garage garage = garageService.retrieve(mygoods.getGarageNo());
+  	  mygoods.setChangeMile(garage.getMile());
+  	  mygoodsService.updateMygoods(mygoods);
+	  return new AjaxResult("success", null);
+    }
   }
   
 }
