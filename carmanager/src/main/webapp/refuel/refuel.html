@@ -193,7 +193,6 @@
    	});
     $('#myCarList').change(function(){
      	sessionStorage.setItem('selectCarNo', $("#myCarList").val());
-    	displayItem(0);
     });
     $('#Mypage').click(function(event){
       location.href = "../mypage/mypage.html";
@@ -202,7 +201,7 @@
     $('#Logout').click(function(event){
         event.preventDefault();
         sessionStorage.removeItem('loginUserNickname');
-        sessionStorage.removeItem('loginUsercarNo');
+        sessionStorage.removeItem('selectCarNo');
         sessionStorage.removeItem('loginUserPhoto');
         location.href = "../auth/login.html";
       });

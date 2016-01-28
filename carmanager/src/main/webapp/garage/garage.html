@@ -190,7 +190,7 @@ window.scrollTo(0,1); }
     $('#Logout').click(function(event){
         event.preventDefault();
         sessionStorage.removeItem('loginUserNickname');
-        sessionStorage.removeItem('loginUsercarNo');
+        sessionStorage.removeItem('selectCarNo');
         sessionStorage.removeItem('loginUserPhoto');
         location.href = "../auth/login.html";
       });
