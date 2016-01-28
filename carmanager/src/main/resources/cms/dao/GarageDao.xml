@@ -12,6 +12,7 @@
     <result column="mno" property="memberNo"/>
     <result column="trim" property="deailModel"/>
     <result column="c_nick" property="nickName"/>
+    <result column="fuel" property="fuelName"/>
   </resultMap>
 
   <select id="selectList" resultMap="garageMap" parameterType="int">
@@ -25,10 +26,11 @@
   
   <select id="selectDetail" resultMap="garageMap" parameterType="int">
     select
-      g.grno, g.c_nick, g.trim, k.maker, m.model, g.mile 
+      g.grno, g.c_nick, g.trim, k.maker, m.model, g.mile, o.fuel 
     from garage g
     left outer join model m on g.mdno = m.mdno
     left outer join makers k on k.mkno = m.mkno
+    left outer join official o on o.mdno = m.mkno
     where grno = #{no}
   </select>
 

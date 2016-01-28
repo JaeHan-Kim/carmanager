@@ -27,7 +27,7 @@ public class RefuelController {
     Refuel refuel = refuelService.oilList(no);
     
     if (refuel == null) {
-      return new AjaxResult("failure", null);
+      return new AjaxResult("failure", new Refuel(garageService.carDetail(no).getFuelName()));
     }
     //log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
@@ -37,6 +37,10 @@ public class RefuelController {
   @RequestMapping(value="addRefuel", method=RequestMethod.POST)
   public AjaxResult addRefuel(Refuel refuel) throws Exception {
     
+    if (garageService.carDetail(refuel.getMyCarNo()).getMile() > refuel.getMile()) {
+      return new AjaxResult("failure", null);
+    }
+
     garageService.updateMile(refuel.getMile(), refuel.getMyCarNo());
     refuelService.addRefuel(refuel);
     

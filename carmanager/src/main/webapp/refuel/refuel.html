@@ -225,7 +225,7 @@
                     <h4>
                       <i class="fa fa-dashboard icon-sm"></i> 주유 기록 등록하기
                     </h4>
-                    <span>:&nbsp;&nbsp;자세한 분석을 원하시면 주행거리, 단가를 입력하세요.</span>
+                    <span>:&nbsp;&nbsp;자세한 분석을 원하시면 주행거리,<br> 단가를 입력하세요.</span>
                   </div>
                 </div>
               </a>
@@ -239,7 +239,7 @@
                     <h4>
                       <i class="fa fa-dashboard icon-sm"></i> 소모품 관리하기
                     </h4>
-                    <span>:&nbsp;&nbsp;주행거리 대비 소모품들 교체 시기를 볼 수 있습니다.</span>
+                    <span>:&nbsp;&nbsp;거리 대비 소모품 교체 시기를 보여 드립니다.<br>교체하셨다면 교체 확인을 하세요.</span>
                   </div>
                 </div>
               </a>
@@ -260,14 +260,14 @@
                 
                 <form method="post" name="addRefuel" data-toggle="validator" novalidate>
                   <div class="form-group">
-                    주유 날짜 : <input type="date" name="refuelDate" id="date_refuelDate" class="form-control" placeholder="">
+                    &nbsp;&nbsp;주유 날짜 : <input type="date" name="refuelDate" id="date_refuelDate" class="form-control" placeholder="">
                   </div>
                   <div class="form-group has-feedback">
-                   예상 주행거리 : 
+                   &nbsp;&nbsp;예상 주행거리 : 
                      <input class="form-control" id="num_driveMile" readonly>
-                     <input type="number" name="mile" id="num_userMile" class="form-control">
                     <span class="help-block with-errors">
-                    현재 주행거리를 입력하세요. 잊으셨다면 저번 주유량을 바탕으로 한 추정 주행거리를 입력합니다.</span>
+                    현재 주행거리를 입력하세요.<br>잊으셨다면 저번 주유량을 바탕으로 한 예상 주행거리를 입력합니다.</span>
+                     <input type="number" name="mile" id="num_userMile" class="form-control" placeholder="주행 거리를 입력하세요.">
                   </div>
                   <div class="form-group">
                     <div id="sMoney" class="radio">
@@ -277,14 +277,14 @@
                       <label> <input type="radio" name="gender" required>단가 + 주유량 기록</label>
                     </div>
                     <p>&nbsp;&nbsp;</p>
-                      단가 : <input id="num_literCost" name="literCost" type="number" class="form-control" id="inputName" required>
+                      &nbsp;&nbsp;단가 : (원)<input id="num_literCost" name="literCost" type="number" class="form-control" id="inputName" required>
                       <span class="help-block with-errors">
                       단가를 잊으셨나요? 현재 전국평균 가격을 넣어드립니다. 자세한 분석을 원하시면 정확한 가격을 입력하세요.</span>
                     <div id="money" class="form-group">
-                      금액 : <input id="num_cost" name="cost" type="number" class="form-control" id="inputName" required>
+                      &nbsp;&nbsp;금액 : <input id="num_cost" name="cost" type="number" class="form-control" id="inputName" placeholder="주유한 금액을 입력하세요. (원)" required>
                     </div>
                     <div id="liter" class="form-group">
-                      주유량 : <input id="num_liter" name="liter" type="number" class="form-control" id="inputName" required>
+                      &nbsp;&nbsp;주유량 : <input id="num_liter" name="liter" type="number" class="form-control" id="inputName" placeholder="주유한 양을 입력하세요. (리터)" required>
                     </div>
                   </div>
 
@@ -306,22 +306,27 @@
                 $('#liter').css('display', '')
               });
             </script>
-            <!-- 주유기록 등록 스크립트 -->
+            <!-- 주유기록 리스트 스크립트 -->
             <script type="text/javascript">
               var today = moment().format('YYYY-MM-DD');
               var userCarNo = sessionStorage.getItem('loginUsercarNo');
+              var predictMile = null;
              //  alert(userCarNo); 
               $.getJSON('list.do?no=' + userCarNo, function(resultObj) {
                 var ajaxResult = resultObj.ajaxResult;
-                var fuelName = ajaxResult.data.fuelName;
+                var refuel = ajaxResult.data;
+                var fuelName = refuel.fuelName;
+               //alert(fuelName);
                // alert(ajaxResult.data.refuelNo);
                  if (ajaxResult.status == "success") {
                   $("#date_refuelDate").val(today);
-                  $("#num_driveMile").val(ajaxResult.data.mile);
-                } else {
+                  predictMile = Math.round(refuel.mile + ((refuel.cost/refuel.literCost) * refuel.effi))
+                  $("#num_driveMile").val(predictMile);
+                } else if (ajaxResult.status == "failure") {
                   swal("첫 주유 기록이시군요?", "첫 주유기록 이후부터는 편리하게 입력하실 수 있습니다.")
                   $("#date_refuelDate").val(today);
                 }
+                 
                   $.getJSON('http://localhost:8989/oil', function(resultObj) {
                 	/* alert("휘발유 : " + Math.round(resultObj.result.Oil[1].PRICE));
                 	alert("경유 : " + Math.round(resultObj.result.Oil[2].PRICE));
@@ -337,7 +342,7 @@
               });
             
             </script>
-            <!-- 주유 기록 등록 -->
+            <!-- 주유기록 등록 -->
             <script>
             var liter = null;
             var cost = null;
@@ -376,20 +381,23 @@
                       confirmButtonText: "확인 : )" }, function() {
                          location.href = "refuel.html";
                       });
+                   } else {
+                     swal("주행기록은 조작할 수 없습니다 ; (", "등록되어 있는 주행거리 보다 높은 기록을 입력하세요.");
                    }
                 }, 'json');
+                
+                //$('#date_refuelDate').val().split('-')
+                 
               });
             </script>
             
             <!-- 달력 폼 시작-->
-            <div
-              class="col-md-6 validation-grids validation-grids-right">
+            <div class="col-md-6 validation-grids validation-grids-right">
               <div class="widget-shadow" data-example-id="basic-forms">
                 <div class="form-title">
                   <h4>: 주유했던 날을 보여드립니다.</h4>
                 </div>
                 <div class="form-body">
-
 
                   <div class="calendar">
                     <header>
@@ -412,15 +420,15 @@
                       </tbody>
                     </table>
                     
-                    <div class="list">
+                    <!-- 주유날짜 달력 표시 부분 -->                    
+                    <div id="monthList" class="list">
                       <div class="day-event" date-month="1" date-day="25" date-year="2016"  data-number="2"></div>
-                      <!-- <h2 class="title">데이터2</h2>
-                      <p class="date">2014-12-13</p>
-                      <p>Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare tog att antal bokstäver och blandade dem för att göra ett provexemplar av en bok.</p>
-                      <label class="check-btn">
-                      <input type="checkbox" class="save" id="save" name="" value=""/>
-                      <span>Save to personal list!</span>
-                      </label> -->
+                    </div>
+                      <!-- 월 주유금액 표시부분 -->
+                    <div>
+                      <h4 id="moneyTitle">이번달 총 주유 금액 입니다.</h4>
+                      <dspan id="span_monMoney">00000원</dspan>
+                      <h5 id="moneyTitle">DashBoard에서 회원 평균과 비교 하세요!</h5>
                     </div>
 
                   </div>
