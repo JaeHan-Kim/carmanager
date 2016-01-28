@@ -23,7 +23,7 @@ public class BoardController {
   @RequestMapping("list")
   public Object list(
       @RequestParam(defaultValue="1") int pageNo,
-      @RequestParam(defaultValue="8") int pageSize) throws Exception {
+      @RequestParam(defaultValue="6") int pageSize) throws Exception {
     
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("startIndex", (pageNo - 1) * pageSize);
