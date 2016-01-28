@@ -64,16 +64,14 @@
 
 .progress-bar {
   position: relative;
+  float: left;
   height: 12px;
   border-radius: 4px;
-/*   webkit-transition: 0.4s linear;
-  -moz-transition: 0.4s linear;
-  -o-transition: 0.4s linear;
-  transition: 0.4s linear; */
 }
 
 .percent {
-  font-size: 13px;
+	float: left;
+  font-size: 12px;
 }
 
 /* .progress-bar:before, .progress-bar:after {
