@@ -42,6 +42,8 @@ window.scrollTo(0,1); }
 <!--animate-->
 <link href="../css/main/animate.css" rel="stylesheet" type="text/css"
   media="all">
+<!-- Go.js -->
+<script src="../js/main/go.js"></script>
 <script src="../js/main/wow.min.js"></script>
 <script>
   new WOW().init();
@@ -87,7 +89,7 @@ window.scrollTo(0,1); }
 <script src="../js/main/jquery.selecty.js"></script>
 <!-- // 차량 선택 라이브러리 -->
 </head>
-<body class="cbp-spmenu-push">
+<body class="cbp-spmenu-push" onload="goIntro()">
   <div class="main-content">
     <!--left-fixed -navigation-->
     <div class=" sidebar" role="navigation">
@@ -489,7 +491,9 @@ window.scrollTo(0,1); }
         <div class="row calender widget-shadow">
           <h4 class="title">교체 시기가 다가오는 소모품을 확인하세요.</h4>
           <div class="cal1">
-            <img src="../img/main/car_condition.png">
+						<div id="myDiagramDiv" class="well" style="width: auto; height: 400px;"></div>
+        	  <span id="diagramEventsMsg" style="color: red">(message)</span>
+          	<div class="clearfix"></div>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -499,6 +503,75 @@ window.scrollTo(0,1); }
 
       </div>
     </div>
+    <script id="code">
+  	function goIntro() {
+  	  var $ = go.GraphObject.make;
+  	  
+  	  var diagram = $(go.Diagram, "myDiagramDiv",
+  	    {
+  	    	autoScale: go.Diagram.Uniform,
+  	    	allowSelect: true,
+  	    	allowCopy: false,
+  	    	allowDelete: false,
+  	    	allowMove: false,
+  	    	contentAlignment: go.Spot.Center,
+  	    	allowVerticalScroll: false
+  	  	});
+  	  function showMessage(s) {
+  	    document.getElementById("diagramEventsMsg").textContent = s;
+  	  }
+
+  	  diagram.addDiagramListener("ObjectSingleClicked",
+  	      function(e) {
+  	        var part = e.subject.part;
+  	        if (!(part instanceof go.Link)) showMessage("Clicked on " + part.data.key);
+  	      });
+
+  	  diagram.addDiagramListener("BackgroundDoubleClicked",
+  	      function(e) { showMessage("Double-clicked at " + e.diagram.lastInput.documentPoint); });
+
+
+      
+      diagram.nodeTemplate =
+  	    $(go.Node, "Spot",
+  	      new go.Binding("location", "loc"),
+  	         
+  	      $(go.Picture, 
+  	          {maxSize: new go.Size(50, 50)},
+  	        new go.Binding("maxSize", "maxSize"),
+  	        new go.Binding("source", "img"),
+            new go.Binding("stroke", "color"),
+	          new go.Binding("strokeWidth", "width"),
+	          new go.Binding("strokeDashArray", "dash")
+            ),
+  	      $(go.TextBlock,
+  	        { margin: new go.Margin(3, 0, 0, 0),
+  	          maxSize: new go.Size(100, 30),
+  	          isMultiline: false })
+  	    );
+      diagram.linkTemplate = $(go.Link,
+          { curve: go.Link.Bezier },
+          $(go.Shape,
+              new go.Binding("stroke", "color"),
+              new go.Binding("strokeWidth", "width"),
+              new go.Binding("strokeDashArray", "dash"))
+          );
+			
+      
+  	  var nodeDataArray = [
+  	    { maxSize: new go.Size(200, 200), key: "car", img: "car.png", loc: new go.Point(-70, 50) },
+  	    { key: "A", img: "car.png", loc: new go.Point(-300, 100)},
+  	    { key: "B", img: "car.png", loc: new go.Point(0, -100)},
+  	    { key: "C", img: "car.png", loc: new go.Point(300, 100)}
+  	  ];
+  	  var linkDataArray = [
+  	              	    	{ from: "car", to: "A", dash: [11, 10], color: "crimson", width: 2},
+  	              	    	{ from: "car", to: "B", dash: [11, 10], color: "crimson", width: 2 },
+  	                 	   	{ from: "car", to: "C", dash: [11, 10], color: "crimson", width: 2 }
+  	                 	  ];
+  		diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+  	} 
+		</script>
     <!--footer-->
     <div class="footer">
       <p>
