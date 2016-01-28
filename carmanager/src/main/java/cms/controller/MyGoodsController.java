@@ -58,7 +58,6 @@ public class MyGoodsController {
     }
 	
 	//소모품 교체 기록 있을때,
-	//Refuel refuel = refuelService.retrieve(no);
     Garage garage = garageService.retrieve(no);
 	List<Goods> goods = goodsService.getGoodsList();		  
 	
