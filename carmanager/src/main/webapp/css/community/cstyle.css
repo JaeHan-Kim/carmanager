@@ -1,6 +1,6 @@
 @import url('reset.css');
 body{
-	background:#f7f7f7 url("../../img/community/pattern.png") repeat top left !important;
+	background:#f7f7f7
 	color:#000 !important;
 	font-family:'Georgia', 'Trebuchet MS', serif;
 	font-size:12px;
@@ -186,7 +186,6 @@ p.subline{
 	position:absolute;
 	width:22px;
 	height:40px;
-	background:transparent url("../../img/community/nav.png") no-repeat top left;
 	top:50%;
 	left:5px !important;
 	margin-top:-20px;
@@ -206,7 +205,7 @@ p.subline{
 	background-position:bottom right;
 }
 .full-view-exit{
-	background:#222 url("../../img/community/cross.png") no-repeat 10px 50%;
+	background:#222
 	position:absolute;
 	top:5px;
 	right:0px;
@@ -235,7 +234,6 @@ p.subline{
 	float:left;
 	width:22px;
 	height:40px;
-	background:transparent url("../../img/community/nav.png") no-repeat bottom left;
 	cursor:pointer;
 	text-indent:-9000px;
 }
