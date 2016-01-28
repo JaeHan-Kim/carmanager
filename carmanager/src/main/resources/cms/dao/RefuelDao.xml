@@ -59,8 +59,6 @@
   <insert id="addRefuelCost" parameterType="refuel">
     insert into refuel(grno, ref_dt, mile, cost, liter, lcost)
     values(#{myCarNo}, #{refuelDate}, #{mile}, #{cost}, #{liter}, #{literCost})
-    <!-- insert into refuel(grno, ref_dt, mile, cost, liter, lcost)
-    values(1, '2016-01-10', 3500, 30000, (30000/1375), 1375) -->
   </insert>
   
   <select id="selectRefuel" resultMap="refuelMap" parameterType="int">
@@ -69,6 +67,20 @@
     limit 1
   </select>
   
+  <select id="selectMonthAvg" resultMap="refuelMap" parameterType="int">
+    select
+      grno, DATE_FORMAT(ref_dt, '%Y-%m') as group_date, sum(cost) as cost
+    from refuel where grno = 1
+    group by DATE_FORMAT(ref_dt, '%Y-%m')
+    order by DATE_FORMAT(ref_dt, '%Y-%m') desc
+  </select>
+  
+  <select id="selectMonthList" resultMap="refuelMap" parameterType="int">
+    select
+      grno, ref_dt
+    from refuel where grno = 1
+    order by DATE_FORMAT(ref_dt, '%Y-%m') desc
+  </select>
   
 </mapper>
 

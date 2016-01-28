@@ -217,8 +217,7 @@
 
           <div class="widget_1 row elements">
 
-            <div
-              class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
+            <div class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
               <a href="refuel.html">
                 <div class="tile-progress bg-success">
                   <div class="content">
@@ -340,7 +339,6 @@
                 	}
                   });
               });
-            
             </script>
             <!-- 주유기록 등록 -->
             <script>
@@ -373,7 +371,7 @@
                   literCost: $('#num_literCost').val()
                 }, function(resultObj) {
                   var ajaxResult = resultObj.ajaxResult;
-                   if (ajaxResult.status == "success") { 
+                  if (ajaxResult.status == "success") { 
                     swal({   
                       title: "주유 내역을 기록하였습니다!",   
                       text: "즐거운 이용 되세요.",   
@@ -384,10 +382,15 @@
                    } else {
                      swal("주행기록은 조작할 수 없습니다 ; (", "등록되어 있는 주행거리 보다 높은 기록을 입력하세요.");
                    }
+                  /* var refuelDate = $('#date_refuelDate').val();
+          	      var year = refuelDate.substr(0,4);
+          	      var month = refuelDate.substr(6,1);
+          	      var day = refuelDate.substr(8,2);
+                  alert(year);
+              	  alert(month);
+              	  alert(day);
+        		  $("<div class='day-event' date-month='" + month + "'date-day='" + day + "'date-year='" + year + "'data-number='2'></div>").appendTo(monthList) */
                 }, 'json');
-                
-                //$('#date_refuelDate').val().split('-')
-                 
               });
             </script>
             
@@ -422,7 +425,7 @@
                     
                     <!-- 주유날짜 달력 표시 부분 -->                    
                     <div id="monthList" class="list">
-                      <div class="day-event" date-month="1" date-day="25" date-year="2016"  data-number="2"></div>
+                      <!-- <div class="day-event" date-month="1" date-day="25" date-year="2016"  data-number="2"></div> -->
                     </div>
                       <!-- 월 주유금액 표시부분 -->
                     <div>
@@ -430,23 +433,22 @@
                       <dspan id="span_monMoney">00000원</dspan>
                       <h5 id="moneyTitle">DashBoard에서 회원 평균과 비교 하세요!</h5>
                     </div>
-
                   </div>
-
-
                 </div>
               </div>
-
             </div>
             <div class="clearfix"></div>
-
+            <!-- // 달력 폼 끝 -->
+            <script type="text/javascript">
+              $.getJSON()
+            
+            
+            </script>
+            
+            
+            
           </div>
-
         </div>
-
-
-
-
 
       </div>
     </div>

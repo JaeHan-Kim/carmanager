@@ -18,4 +18,8 @@ public interface RefuelService {
   int addRefuel(Refuel refuel);
 
   Refuel retrieve(int no);  
+  
+  Refuel monthList(int no);
+  
+  Refuel monthAvg(int no);
 }

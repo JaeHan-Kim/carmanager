@@ -46,5 +46,16 @@ public class DefaultRefuelService implements RefuelService {
   @Override
   public Refuel retrieve(int no) {
     return refuelDao.selectRefuel(no);
+  }
+
+  @Override
+  public Refuel monthAvg(int no) {
+    return refuelDao.selectMonthAvg(no);
   }	
+
+  @Override
+  public Refuel monthList(int no) {
+    return refuelDao.selectMonthList(no);
+  }
+
 }

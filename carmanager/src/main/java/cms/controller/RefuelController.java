@@ -33,6 +33,17 @@ public class RefuelController {
     return new AjaxResult("success", refuel);
     
   }
+  @RequestMapping("monthList")
+  public Object selectMonthAvg(int no) throws Exception {
+    Refuel refuel = refuelService.monthAvg(no);
+    return new AjaxResult("success", refuel);
+  }
+
+  @RequestMapping("monthCost")
+  public Object selectMonthList(int no) throws Exception {
+    Refuel refuel = refuelService.monthList(no);
+    return new AjaxResult("success", refuel);
+  }
   
   @RequestMapping(value="addRefuel", method=RequestMethod.POST)
   public AjaxResult addRefuel(Refuel refuel) throws Exception {

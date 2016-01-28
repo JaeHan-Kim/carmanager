@@ -18,4 +18,8 @@ public interface RefuelDao {
   public int addRefuelCost(Refuel refuel);
   
 	public Refuel selectRefuel(int no);
+	
+	public Refuel selectMonthAvg(int no);
+
+	public Refuel selectMonthList(int no);
 }
