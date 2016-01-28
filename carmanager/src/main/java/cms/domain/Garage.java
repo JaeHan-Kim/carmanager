@@ -10,6 +10,7 @@ public class Garage {
   protected String deailModel;
   protected float effi;
   protected int mile;
+  protected String fuelName;
   
   
   public Garage() {
@@ -19,17 +20,19 @@ public class Garage {
   	this.myCarNo = myCarNo;
   }
   
-
-  @Override
-	public String toString() {
-		return "Garage [myCarNo=" + myCarNo + ", modelNo=" + modelNo + ", maker=" + maker + ", memberNo=" + memberNo
-		    + ", nickName=" + nickName + ", model=" + model + ", deailModel=" + deailModel + ", effi=" + effi + ", mile="
-		    + mile + "]";
-	}
-
-
-
-	public String getModel() {
+	@Override
+  public String toString() {
+    return "Garage [myCarNo=" + myCarNo + ", modelNo=" + modelNo + ", maker=" + maker + ", memberNo=" + memberNo
+        + ", nickName=" + nickName + ", model=" + model + ", deailModel=" + deailModel + ", effi=" + effi + ", mile="
+        + mile + ", fuelName=" + fuelName + "]";
+  }
+  public String getFuelName() {
+    return fuelName;
+  }
+  public void setFuelName(String fuelName) {
+    this.fuelName = fuelName;
+  }
+  public String getModel() {
     return model;
   }
 

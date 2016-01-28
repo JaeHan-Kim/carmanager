@@ -175,14 +175,16 @@ var calendar = {
      * Get current day on click in calendar
      * and find day-event to display
      */
+
     function displayEvent() {
       $('tbody.event-calendar td').on('click', function(e) {
         $('.day-event').slideUp('fast');
         var monthEvent = $(this).attr('date-month');
         var dayEvent = $(this).text();
-        $('.day-event[date-month="' + monthEvent + '"][date-day="' + dayEvent + '"]').slideDown('fast');
+        //$('.day-event[date-month="' + monthEvent + '"][date-day="' + dayEvent + '"]').slideDown('fast');
       });
     };
+
 
     /**
      * Close day-event

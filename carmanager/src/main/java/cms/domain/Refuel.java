@@ -19,6 +19,11 @@ public class Refuel {
    
   }
 
+  public Refuel(String fuelName) {
+    this.fuelName = fuelName;
+  }
+  
+
   @Override
   public String toString() {
     return "Refuel [refuelNo=" + refuelNo + ", myCarNo=" + myCarNo + ", refuelDate=" + refuelDate + ", mile=" + mile
