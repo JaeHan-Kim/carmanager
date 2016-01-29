@@ -155,7 +155,7 @@ window.scrollTo(0,1); }
           <div class="profile_details_left">
             <label id="selectCarTitle">&nbsp;&nbsp;* 현재 선택된 차량입니다 :&nbsp;</label>
             <div class="clearfix"></div>
-              <select id="myCarList" class="selecty s2 selectCar" name="town">
+              <select id="myCarList1" class="selecty s2 selectCar" name="town">
               </select>
          </div>
         <!-- 유저별 차량 리스트 end -->
@@ -167,7 +167,7 @@ window.scrollTo(0,1); }
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <div class="profile_img">
                   <span class="prfil-img">
-                  <img id ="thumbnail" src="" alt=""> </span>
+                  <img id ="thumbnail" class="img-circle" src="" alt=""> </span>
                   <div class="user-name">
                     <p id="userNickname"></p>
                     <span>안녕하세요.</span>
@@ -178,9 +178,7 @@ window.scrollTo(0,1); }
                   <div class="clearfix"></div>
                 </div>
             </a>
-              <ul class="dropdown-menu drp-mnu">
-                <li><a id="Mypage" href="#"><i class="fa fa-cog"></i>My page</a></li>
-                <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
+              <ul id="myCarList" class="dropdown-menu drp-mnu">
               </ul>
             </li>
           </ul>
@@ -193,20 +191,6 @@ window.scrollTo(0,1); }
     </div>
     <!-- //header-ends -->
     <!--   로그 아웃 클릭 이벤트 -->
-    <script>
-    $('#Mypage').click(function(event){
-        location.href = "../mypage/mypage.html";
-    });
-    
-    $('#Logout').click(function(event){
-        event.preventDefault();
-        sessionStorage.removeItem('loginUserNickname');
-       /*  sessionStorage.removeItem('loginUsercarNo'); */
-        sessionStorage.removeItem('loginUserPhoto');
-        sessionStorage.removeItem('selectCarNo');
-        location.href = "../auth/login.html";
-      });
-    </script>
     <!-- main content start-->
     <div id="page-wrapper">
       <div class="main-page">
@@ -311,177 +295,6 @@ window.scrollTo(0,1); }
           <div class="clearfix"></div>
 
           <script>
-          var selectcar = $("#myCarList");
-          var cnt = 0;
-          
-          $('#myCarList').change(function(){
-            /* alert($("#myCarList").val()); */
-            sessionStorage.setItem('selectCarNo', $("#myCarList").val());
-            /* alert(sessionStorage.getItem("selectCarNo")); */
-            $("#line").remove();
-            $("#bar").remove();
-            $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+$("#myCarList").val(), 
-                function(resultObj) {
-                  $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
-                  $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
-                  lineChart(resultObj);
-                  barChart(resultObj);
-                });
-          });
-          $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
-            /* alert(sessionStorage.getItem('loginUsercarNo')); */
-            for (var garage of resultObj.data) {
-              $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList');
-           	} 
-            /* alert(sessionStorage.getItem("selectCarNo")); */
-           $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
-            $('.selecty').selecty();
-           lineChart(resultObj);
-           barChart(resultObj);
-         });
-        function lineChart(resultObj) {
-          var effic = new Array();
-          var driveDt = new Array();
-          
-          if (resultObj.refuelList != "") {
-            for (var i = 0; i < 7; i++) {
-              effic[i] = ((resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter).toFixed(2);
-              driveDt[i] = resultObj.refuelList[i].group_date
-              //driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
-             }
-          }
-            var lineChartData = {
-              labels : [driveDt[6],driveDt[5],driveDt[4],driveDt[3],driveDt[2],driveDt[1],driveDt[0]],
-              datasets : [
-                {
-                  label: "구간연비",
-                  fillColor : "rgba(220,220,220,0.2)",
-                  strokeColor : "rgba(220,220,220,1)",
-                  pointColor : "rgba(220,220,220,1)",
-                  pointStrokeColor : "#fff",
-                  pointHighlightFill : "#fff",
-                  pointHighlightStroke : "rgba(220,220,220,1)",
-                  data :  [effic[6],
-                           effic[5],
-                           effic[4],
-                           effic[3],
-                           effic[2],
-                           effic[1],
-                           effic[0]]
-                },
-                {
-                  label: "공인연비",
-                  fillColor : "rgba(151,187,205,0.2)",
-                  strokeColor : "rgba(151,187,205,1)",
-                  pointColor : "rgba(151,187,205,1)",
-                  pointStrokeColor : "#fff",
-                  pointHighlightFill : "#fff",
-                  pointHighlightStroke : "rgba(151,187,205,1)",
-                  data : [resultObj.refuelList[0].effi,
-                          resultObj.refuelList[0].effi,
-                          resultObj.refuelList[0].effi,
-                          resultObj.refuelList[0].effi,
-                          resultObj.refuelList[0].effi,
-                          resultObj.refuelList[0].effi,
-                          resultObj.refuelList[0].effi]
-                }
-              ]
-          
-            }
-          var ctx1 = document.getElementById("line").getContext("2d");
-          myLine = new Chart(ctx1).Line(lineChartData, {
-            responsive: true,
-            legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\">"+
-            "<% for (var i=0; i<datasets.length; i++){%>"+
-              "<li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span>"+
-              "<%if(datasets[i].label){%><%=datasets[i].label%><%}%>"+
-              "</li><%}%>"+
-              "(단위: Km)</ul>"
-          });
-          document.getElementById('line-legend').innerHTML = myLine.generateLegend();
-          }
-        
-        function barChart(resultObj) {
-           var twoago = (moment().subtract(60, 'days').months() + 1) + "월";
-            var oneago = (moment().subtract(30, 'days').months() + 1) + "월";
-            var present = moment().format('MM')  + "월";
-               var barChartData = {
-                 labels : [twoago, oneago, present],
-                 datasets : [
-                   {
-                     label: "회원평균",
-                     fillColor : "rgba(233, 78, 2, 0.9)",
-                     strokeColor : "rgba(233, 78, 2, 0.9)",
-                     highlightFill: "#e94e02",
-                     highlightStroke: "#e94e02",
-                     data : [(resultObj.memCostAvg[2].cost/=1000).toFixed(2), 
-                            (resultObj.memCostAvg[1].cost/=1000).toFixed(2), 
-                            (resultObj.memCostAvg[0].cost/=1000).toFixed(2)]
-                   },
-                   {
-                     label: "개인평균",
-                     fillColor : "rgba(79, 82, 186, 0.9)",
-                     strokeColor : "rgba(79, 82, 186, 0.9)",
-                     highlightFill: "#4F52BA",
-                     highlightStroke: "#4F52BA",
-                     data : [(resultObj.myCostAvg[2].cost/=1000).toFixed(2), 
-                            (resultObj.myCostAvg[1].cost/=1000).toFixed(2),
-                            (resultObj.myCostAvg[0].cost/=1000).toFixed(2)]
-                   }
-                 ]
-               };
-            var ctx = document.getElementById("bar").getContext("2d");
-            var myBar = new Chart(ctx).Bar(barChartData, {
-            responsive : true,
-            datasetStroke : true,
-            legendTemplate : 
-              "<ul class=\"<%=name.toLowerCase()%>-legend\">"+
-            	"<% for (var i=0; i<datasets.length; i++){%>"+
-            	"<li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span>"+
-            	"<%if(datasets[i].label){%><%=datasets[i].label%><%}%>"+
-            	"</li><%}%>"+
-            	"(단위: 천원)</ul>"
-      
-            });
-            document.getElementById('bar-legend').innerHTML = myBar.generateLegend();
-          }
-        var doughnutData = [
-  			{
-  				value: 300,
-  				color:"#F7464A",
-  				highlight: "#FF5A5E",
-  				label: "Red"
-  			},
-  			{
-  				value: 50,
-  				color: "#46BFBD",
-  				highlight: "#5AD3D1",
-  				label: "Green"
-  			},
-  			{
-  				value: 100,
-  				color: "#FDB45C",
-  				highlight: "#FFC870",
-  				label: "Yellow"
-  			},
-  			{
-  				value: 40,
-  				color: "#949FB1",
-  				highlight: "#A8B3C5",
-  				label: "Grey"
-  			},
-  			{
-  				value: 120,
-  				color: "#4D5360",
-  				highlight: "#616774",
-  				label: "Dark Grey"
-  			}
-  
-  		];
-  
-  			var ctx3 = document.getElementById("doughnut").getContext("2d");
-  			var myDoughnut = new Chart(ctx3).Doughnut(doughnutData, {responsive : true});
-
         </script>
 
         </div>
@@ -504,7 +317,242 @@ window.scrollTo(0,1); }
       </div>
     </div>
     <script id="code">
-  	function goIntro() {
+    var selectcar = $("#myCarList");
+    var cnt = 0;
+    var lifeTime = [0, 8000, 5000, 30000, 45000, 40000, 10000, 50000, 60000, 60000];
+    
+   /*  <div class="cal1">
+		<div id='myDiagramDiv' class='well' style='width: auto; height: 400px;'></div>
+	  <span id='diagramEventsMsg' style='color: red'>(message)</span>
+  	<div class="clearfix"></div>
+  </div> */
+    $('#myCarList').change(function(){
+      /* alert($("#myCarList").val()); */
+      sessionStorage.setItem('selectCarNo', $("#myCarList").val());
+      /* alert(sessionStorage.getItem("selectCarNo")); */
+      $("#line").remove();
+      $("#bar").remove();
+      $("#myDiagramDiv").remove();
+      $("#diagramEventsMsg").remove();
+      $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+$("#myCarList").val(), 
+          function(resultObj) {
+            $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
+            $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
+            lineChart(resultObj);
+            barChart(resultObj);
+          });
+      
+      $.post('../mygoods/selectCurrentMile.do', {
+	      no: sessionStorage.getItem("selectCarNo")
+	    }, function(resultObj) {
+	      var userRatio = new Array();
+	      if (resultObj.status == "success") {
+	        $("<div id='myDiagramDiv' class='well' style='width: auto; height: 400px;'></div>").appendTo(".cal1");
+          $("<span id='diagramEventsMsg' style='color: red'>(message)</span>").appendTo(".cal1");
+	    	  for (var i=1; i <= 9; i++) {
+	    	    userRatio.push(parseInt(((lifeTime[i]-resultObj.data[i])/lifeTime[i]) * 100));
+	    	  }
+	    	 
+	    	  goIntro(userRatio);
+	      }
+	    }, 'json')
+    });
+    $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+      /* alert(sessionStorage.getItem('loginUsercarNo')); */
+      for (var garage of resultObj.data) {
+      /*   <li><a href='#'><i class='fa fa-sign-out'></i>Logout</a></li> */
+        $("<li><a class='detailLink' href='#' carNo = '"+ garage.myCarNo +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+       /*  $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList'); */
+     	} 
+      $("<li><a class='detailLink' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
+      $("a.detailLink").click(clickDetailLink);
+      function clickDetailLink(event) {
+        alert($(event.target).attr("carNo"));
+      	alert("ASd");
+      }
+      /* alert(sessionStorage.getItem("selectCarNo")); */
+     $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
+      $('.selecty').selecty();
+     lineChart(resultObj);
+     barChart(resultObj);
+    
+   });
+    $.post('../mygoods/selectCurrentMile.do', {
+	      no: sessionStorage.getItem("selectCarNo")
+	    }, function(resultObj) {
+	      if (resultObj.status == "success") {
+	       	var userRatio = new Array();
+	    	  for (var i=1; i <= 9; i++) {
+	    	    userRatio.push(parseInt(((lifeTime[i]-resultObj.data[i])/lifeTime[i]) * 100));
+	    	  }
+	    	 
+	    	  goIntro(userRatio);
+	      }
+	    }, 'json')
+	    
+  function lineChart(resultObj) {
+    var effic = new Array();
+    var driveDt = new Array();
+    
+    if (resultObj.refuelList != "") {
+      for (var i = 0; i < 7; i++) {
+        effic[i] = ((resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter).toFixed(2);
+        driveDt[i] = resultObj.refuelList[i].group_date
+        //driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
+       }
+    }
+      var lineChartData = {
+        labels : [driveDt[6],driveDt[5],driveDt[4],driveDt[3],driveDt[2],driveDt[1],driveDt[0]],
+        datasets : [
+          {
+            label: "구간연비",
+            fillColor : "rgba(220,220,220,0.2)",
+            strokeColor : "rgba(220,220,220,1)",
+            pointColor : "rgba(220,220,220,1)",
+            pointStrokeColor : "#fff",
+            pointHighlightFill : "#fff",
+            pointHighlightStroke : "rgba(220,220,220,1)",
+            data :  [effic[6],
+                     effic[5],
+                     effic[4],
+                     effic[3],
+                     effic[2],
+                     effic[1],
+                     effic[0]]
+          },
+          {
+            label: "공인연비",
+            fillColor : "rgba(151,187,205,0.2)",
+            strokeColor : "rgba(151,187,205,1)",
+            pointColor : "rgba(151,187,205,1)",
+            pointStrokeColor : "#fff",
+            pointHighlightFill : "#fff",
+            pointHighlightStroke : "rgba(151,187,205,1)",
+            data : [resultObj.refuelList[0].effi,
+                    resultObj.refuelList[0].effi,
+                    resultObj.refuelList[0].effi,
+                    resultObj.refuelList[0].effi,
+                    resultObj.refuelList[0].effi,
+                    resultObj.refuelList[0].effi,
+                    resultObj.refuelList[0].effi]
+          }
+        ]
+    
+      }
+    var ctx1 = document.getElementById("line").getContext("2d");
+    myLine = new Chart(ctx1).Line(lineChartData, {
+      responsive: true,
+      legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\">"+
+      "<% for (var i=0; i<datasets.length; i++){%>"+
+        "<li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span>"+
+        "<%if(datasets[i].label){%><%=datasets[i].label%><%}%>"+
+        "</li><%}%>"+
+        "(단위: Km)</ul>"
+    });
+    document.getElementById('line-legend').innerHTML = myLine.generateLegend();
+    }
+  
+  function barChart(resultObj) {
+     var twoago = (moment().subtract(60, 'days').months() + 1) + "월";
+      var oneago = (moment().subtract(30, 'days').months() + 1) + "월";
+      var present = moment().format('MM')  + "월";
+         var barChartData = {
+           labels : [twoago, oneago, present],
+           datasets : [
+             {
+               label: "회원평균",
+               fillColor : "rgba(233, 78, 2, 0.9)",
+               strokeColor : "rgba(233, 78, 2, 0.9)",
+               highlightFill: "#e94e02",
+               highlightStroke: "#e94e02",
+               data : [(resultObj.memCostAvg[2].cost/=1000).toFixed(2), 
+                      (resultObj.memCostAvg[1].cost/=1000).toFixed(2), 
+                      (resultObj.memCostAvg[0].cost/=1000).toFixed(2)]
+             },
+             {
+               label: "개인평균",
+               fillColor : "rgba(79, 82, 186, 0.9)",
+               strokeColor : "rgba(79, 82, 186, 0.9)",
+               highlightFill: "#4F52BA",
+               highlightStroke: "#4F52BA",
+               data : [(resultObj.myCostAvg[2].cost/=1000).toFixed(2), 
+                      (resultObj.myCostAvg[1].cost/=1000).toFixed(2),
+                      (resultObj.myCostAvg[0].cost/=1000).toFixed(2)]
+             }
+           ]
+         };
+      var ctx = document.getElementById("bar").getContext("2d");
+      var myBar = new Chart(ctx).Bar(barChartData, {
+      responsive : true,
+      datasetStroke : true,
+      legendTemplate : 
+        "<ul class=\"<%=name.toLowerCase()%>-legend\">"+
+      	"<% for (var i=0; i<datasets.length; i++){%>"+
+      	"<li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span>"+
+      	"<%if(datasets[i].label){%><%=datasets[i].label%><%}%>"+
+      	"</li><%}%>"+
+      	"(단위: 천원)</ul>"
+
+      });
+      document.getElementById('bar-legend').innerHTML = myBar.generateLegend();
+    }
+  var doughnutData = [
+	{
+		value: 300,
+		color:"#F7464A",
+		highlight: "#FF5A5E",
+		label: "Red"
+	},
+	{
+		value: 50,
+		color: "#46BFBD",
+		highlight: "#5AD3D1",
+		label: "Green"
+	},
+	{
+		value: 100,
+		color: "#FDB45C",
+		highlight: "#FFC870",
+		label: "Yellow"
+	},
+	{
+		value: 40,
+		color: "#949FB1",
+		highlight: "#A8B3C5",
+		label: "Grey"
+	},
+	{
+		value: 120,
+		color: "#4D5360",
+		highlight: "#616774",
+		label: "Dark Grey"
+	}
+
+];
+
+	var ctx3 = document.getElementById("doughnut").getContext("2d");
+	var myDoughnut = new Chart(ctx3).Doughnut(doughnutData, {responsive : true});
+
+	
+  	function goIntro(userRatio) {
+  	  var temp, indexMin;
+  	var partName = ['와이퍼', '에어컨 필터', '브레이크 패드', '브레이크 오일', '부동액', '엔진오일', '미션오일', '타이어', '베터리'];
+
+    for (var i = 0; i < userRatio.length - 1; i++) {
+      indexMin = i;
+      for (var j = i + 1; j < userRatio.length; j++) {
+          if (userRatio[j] > userRatio[indexMin]) {
+              indexMin = j;
+          }
+      }
+      temp = userRatio[indexMin];
+      userRatio[indexMin] = userRatio[i];
+      userRatio[i] = temp;
+      temp = partName[indexMin];
+      partName[indexMin] = partName[i];
+      partName[i] = temp;
+  }
+
   	  var $ = go.GraphObject.make;
   	  
   	  var diagram = $(go.Diagram, "myDiagramDiv",
@@ -523,6 +571,7 @@ window.scrollTo(0,1); }
 
   	  diagram.addDiagramListener("ObjectSingleClicked",
   	      function(e) {
+  	    /* 	location.href = "../refuel/refuel_goods.html" */
   	        var part = e.subject.part;
   	        if (!(part instanceof go.Link)) showMessage("Clicked on " + part.data.key);
   	      });
@@ -537,7 +586,7 @@ window.scrollTo(0,1); }
   	      new go.Binding("location", "loc"),
   	         
   	      $(go.Picture, 
-  	          {maxSize: new go.Size(50, 50)},
+  	          {maxSize: new go.Size(100, 100)},
   	        new go.Binding("maxSize", "maxSize"),
   	        new go.Binding("source", "img"),
             new go.Binding("stroke", "color"),
@@ -557,21 +606,39 @@ window.scrollTo(0,1); }
               new go.Binding("strokeDashArray", "dash"))
           );
 			
-      
-  	  var nodeDataArray = [
-  	    { maxSize: new go.Size(200, 200), key: "car", img: "car.png", loc: new go.Point(-70, 50) },
-  	    { key: "A", img: "car.png", loc: new go.Point(-300, 100)},
-  	    { key: "B", img: "car.png", loc: new go.Point(0, -100)},
-  	    { key: "C", img: "car.png", loc: new go.Point(300, 100)}
-  	  ];
-  	  var linkDataArray = [
-  	              	    	{ from: "car", to: "A", dash: [11, 10], color: "crimson", width: 2},
-  	              	    	{ from: "car", to: "B", dash: [11, 10], color: "crimson", width: 2 },
-  	                 	   	{ from: "car", to: "C", dash: [11, 10], color: "crimson", width: 2 }
-  	                 	  ];
+      var text = "푸헬헬"
+        var posX = [-600, -600, -600, 600, 600, 600];
+      var posY = [200, 0, -200, 200, 0, -200];
+  
+       var nodeDataArray = [
+                     	    { "maxSize": new go.Size(300, 600), "key": "car", "img": "car.png", "loc": new go.Point(-150, 0) }];
+       var linkDataArray = new Array();
+/* 	for (var j = 0; j < 5; j++){
+		if (userRatio[j] >= 80) {
+
+			nodeDataArray.push({ "key": partName[j], "img": "car.png", "loc": new go.Point(posX[j], posY[j])});
+			linkDataArray.push({ from: 'car', to: partName[j], dash: [11, 10], color: 'crimson', width: 2});
+		} 
+	}     */
+	    	  /* alert(partName[j] + " : " + userRatio[j]); */
+        nodeDataArray.push({ "key": "0", "img": "car.png", "loc": new go.Point(posX[0], posY[0])});
+       nodeDataArray.push({ "key": "1", "img": "car.png", "loc": new go.Point(posX[1], posY[1])});
+       nodeDataArray.push({ "key": "2", "img": "car.png", "loc": new go.Point(posX[2], posY[2])});
+       nodeDataArray.push({ "key": "3", "img": "car.png", "loc": new go.Point(posX[3], posY[3])});
+       nodeDataArray.push( 	{ "key": "4", "img": "car.png", "loc": new go.Point(posX[4], posY[4])}); 
+       nodeDataArray.push( 	{ "key": "5", "img": "car.png", "loc": new go.Point(posX[5], posY[5])}); 
+   /*   nodeDataArray = [ { "maxSize": new go.Size(200, 200), "key": "car", "img": "car.png", "loc": new go.Point(-70, 50) }];
+     nodeDataArray.push({ "key": "와이퍼", "img": "car.png", "loc": new go.Point(-300, 100)}); */
+    
+      linkDataArray.push({ from: 'car', to: '0', dash: [11, 10], color: 'crimson', width: 2});
+     linkDataArray.push({ from: 'car', to: '1', dash: [11, 10], color: 'crimson', width: 2 });
+     linkDataArray.push({ from: 'car', to: '2', dash: [11, 10], color: 'crimson', width: 2 });
+     linkDataArray.push({ from: 'car', to: '3', dash: [11, 10], color: 'crimson', width: 2 });
+     linkDataArray.push(	{ from: 'car', to: '4', dash: [11, 10], color: 'crimson', width: 2 }); 
+     linkDataArray.push(	{ from: 'car', to: '5', dash: [11, 10], color: 'crimson', width: 2 }); 
   		diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
   	} 
-		</script>
+    </script>
     <!--footer-->
     <div class="footer">
       <p>
