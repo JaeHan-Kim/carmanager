@@ -247,8 +247,13 @@
             }
 	    	  
           switch (true) {
-            case per < 1 :
-          	  $(".percent").eq(i - 1).text('0%');
+            case per <= 0 :
+            	$(".percent").eq(i - 1).text('0%');
+              $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #86e01e');
+              break;
+            case per < 1  && 0 < per :
+          	  $(".percent").eq(i - 1).text('1%');
+              $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #86e01e');
               break;
             case per < 21 && 1 <= per:
           	  $(".progress-bar").eq(i - 1).css('background', 'url("../img/refuel/refuel_goods/stripes.png") #86e01e');
@@ -490,7 +495,7 @@
 		   		  $(".lbl_sign").eq(indexnum).hide();
 		      	$(".percent").eq(indexnum).text('0%');
 		    	  $(".progress-bar").eq(indexnum).css('width', '0%');
-						$(".lbl_restmile").eq(indexnum).text($(".lbl_lifemile").eq($(this).parent().index()).text());
+						$(".lbl_restmile").eq(indexnum).text($(".lbl_lifemile").eq(indexnum).text());
 				    $(".lbl_changetxt").eq(indexnum).show();
 					  $(".lbl_changemile").eq(indexnum).text(ajaxResult.data);
 				  } else {
