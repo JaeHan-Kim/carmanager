@@ -203,7 +203,7 @@ var calendar = {
         var eventMonth = $(this).closest('.day-event').attr('date-month');
         var eventDay = $(this).closest('.day-event').attr('date-day');
         var eventNumber = $(this).closest('.day-event').attr('data-number');
-        $('.person-list').append('<div class="day" date-month="' + eventMonth + '" date-day="' + eventDay + '" data-number="' + eventNumber + '" style="display:none;">' + eventHtml + '</div>');
+        $('.person-list').append('<div class="day" date-month="' + eventMonth + '" date-day="' + eventDay + '" data-number="' + eventNumber + '"style="display:none;">' + eventHtml + '</div>');
         $('.day[date-month="' + eventMonth + '"][date-day="' + eventDay + '"]').slideDown('fast');
         $('.day').find('.close').remove();
         $('.day').find('.save').removeClass('save').addClass('remove');

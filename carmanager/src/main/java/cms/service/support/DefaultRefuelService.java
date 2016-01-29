@@ -49,12 +49,12 @@ public class DefaultRefuelService implements RefuelService {
   }
 
   @Override
-  public Refuel monthAvg(int no) {
+  public List<Refuel> monthAvg(int no) {
     return refuelDao.selectMonthAvg(no);
   }	
 
   @Override
-  public Refuel monthList(int no) {
+  public List<Refuel> monthList(int no) {
     return refuelDao.selectMonthList(no);
   }
 

@@ -67,21 +67,21 @@
     limit 1
   </select>
   
+  <select id="selectMonthList" resultMap="refuelMap" parameterType="int">
+    select
+      grno, DATE_FORMAT(ref_dt, '%Y-%c-%e') as group_date
+    from refuel where grno = 1
+    order by DATE_FORMAT(ref_dt, '%Y-%c') asc
+  </select>
+  
   <select id="selectMonthAvg" resultMap="refuelMap" parameterType="int">
     select
       grno, DATE_FORMAT(ref_dt, '%Y-%m') as group_date, sum(cost) as cost
-    from refuel where grno = 1
+    from refuel where grno = #{no}
     group by DATE_FORMAT(ref_dt, '%Y-%m')
-    order by DATE_FORMAT(ref_dt, '%Y-%m') desc
+    order by DATE_FORMAT(ref_dt, '%Y-%m') asc
   </select>
-  
-  <select id="selectMonthList" resultMap="refuelMap" parameterType="int">
-    select
-      grno, ref_dt
-    from refuel where grno = 1
-    order by DATE_FORMAT(ref_dt, '%Y-%m') desc
-  </select>
-  
+
 </mapper>
 
 

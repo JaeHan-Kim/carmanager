@@ -1,5 +1,7 @@
 package cms.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,15 +37,16 @@ public class RefuelController {
   }
   @RequestMapping("monthList")
   public Object selectMonthAvg(int no) throws Exception {
-    Refuel refuel = refuelService.monthAvg(no);
-    return new AjaxResult("success", refuel);
+    List<Refuel> refuels = refuelService.monthList(no);
+    log.debug(refuels);
+    return new AjaxResult("success", refuels);
   }
 
-  @RequestMapping("monthCost")
+  /*@RequestMapping("monthCost")
   public Object selectMonthList(int no) throws Exception {
-    Refuel refuel = refuelService.monthList(no);
+    Refuel refuel = refuelService.monthAvg(no);
     return new AjaxResult("success", refuel);
-  }
+  }*/
   
   @RequestMapping(value="addRefuel", method=RequestMethod.POST)
   public AjaxResult addRefuel(Refuel refuel) throws Exception {

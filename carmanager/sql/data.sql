@@ -178,7 +178,8 @@ insert into boards(mno, title, content, cre_dt, cate) values(2, '하하하97', '
 insert into boards(mno, title, content, cre_dt, cate) values(3, '하하하98', '98', now(), '정비소');
 insert into boards(mno, title, content, cre_dt, cate) values(4, '하하하99', '99', now(), '소모품');
 insert into boards(mno, title, content, cre_dt, cate) values(5, '하하하100', '100', now(), '정비소');
---소모품 등록
+
+-- 소모품 등록
 insert into goods(gname, l_mile) values('와이퍼 블레이드', 8000);
 insert into goods(gname, l_mile) values('에어컨필터', 5000);
 insert into goods(gname, l_mile) values('브레이크 패드', 30000);

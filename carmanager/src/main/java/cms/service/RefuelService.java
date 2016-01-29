@@ -19,7 +19,7 @@ public interface RefuelService {
 
   Refuel retrieve(int no);  
   
-  Refuel monthList(int no);
+  List<Refuel> monthList(int no);
   
-  Refuel monthAvg(int no);
+  List<Refuel> monthAvg(int no);
 }
