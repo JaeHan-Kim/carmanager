@@ -1,6 +1,6 @@
 @import url('reset.css');
 body{
-	background:#f7f7f7 url("../../img/community/pattern.png") repeat top left !important;
+	background:#f7f7f7
 	color:#000 !important;
 	font-family:'Georgia', 'Trebuchet MS', serif;
 	font-size:12px;
@@ -29,7 +29,7 @@ a.more_link:hover{
 .container {
 	position:relative;
 	margin:10px;
-	width: 90% !important;
+	width: 100% !important;
 }
 h1, h2{
 	font-family:'Oswald', Arial, sans-serif;
@@ -108,10 +108,13 @@ p.subline{
 }
 .block{
 	float:left;
-	margin:5px;
-	background:#fff;
+	margin:10px;
+	background: RGB(248, 248, 248);
 	padding:20px;
 	width:260px;
+	border: 1px solid lightgray;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 1px 1px lightgray;
 }
 .block-small{
 	width:160px;
@@ -186,7 +189,6 @@ p.subline{
 	position:absolute;
 	width:22px;
 	height:40px;
-	background:transparent url("../../img/community/nav.png") no-repeat top left;
 	top:50%;
 	left:5px !important;
 	margin-top:-20px;
@@ -206,7 +208,7 @@ p.subline{
 	background-position:bottom right;
 }
 .full-view-exit{
-	background:#222 url("../../img/community/cross.png") no-repeat 10px 50%;
+	background:#222
 	position:absolute;
 	top:5px;
 	right:0px;
@@ -235,7 +237,6 @@ p.subline{
 	float:left;
 	width:22px;
 	height:40px;
-	background:transparent url("../../img/community/nav.png") no-repeat bottom left;
 	cursor:pointer;
 	text-indent:-9000px;
 }
