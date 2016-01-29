@@ -25,25 +25,17 @@
   <link type='text/css' rel='stylesheet' 
         href='http://fonts.googleapis.com/css?family=Ovo' />
 
+
 	<script src="../lib/jquery/jquery.min.js"></script>
 	<script src="../js/community/jquery.selecty.js"></script>
 	<script src="../js/community/jquery.pagenavigator.js"></script>
   <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="../js/main/classie.js"></script>
   <script src="../js/main/custom.js"></script>
-  <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/metisMenu.min.js"></script>
 	<script src="../js/main/modernizr.custom.js"></script>
   <script src="../js/main/moment_local.js"></script>
-  <script src="../js/main/scripts.js"></script>
 	<script src="../js/main/wow.min.js"></script>
-
-	<script type="application/x-javascript">
-	  addEventListener("load", function() { 
-	  setTimeout(hideURLbar, 0); }, false); 
-	  function hideURLbar(){ 
-	  window.scrollTo(0,1); } 
-	</script>
 
 	<script>
   new WOW().init();
@@ -56,6 +48,13 @@
   });  
 	
 	</script>
+	
+	<script type="application/x-javascript">
+    addEventListener("load", function() { 
+    setTimeout(hideURLbar, 0); }, false); 
+    function hideURLbar(){ 
+    window.scrollTo(0,1); } 
+  </script>
 	
 </head>
 
@@ -124,7 +123,7 @@
 	               data-toggle="dropdown" aria-expanded="false">
 	              <div class="profile_img">
 	                <span class="prfil-img">
-	                  <img id="thumbnail" src="" alt=""> 
+	                  <img id="thumbnail" class="img-circle" src="" alt=""> 
 	                </span>
 	                <div class="user-name">
 	                  <p id="userNickname"></p>
@@ -189,13 +188,10 @@
 				  <li class="next"><a href="#">&raquo;</a></li>
 				  <li class="disabled nextx"><a href="#">&raquo;</a></li>
 				</ul>
-				<div class="profile_details_left">
-				  <div class="clearfix"></div>
-				  <select id="myCarList" class="selecty s2 selectCar" name="town">
-				    <option value="title">제목</option>
-				    <option value="category">카테고리</option>
-          </select>
-        </div>
+		    <select id="searchOption" name="category">
+          <option value="title">제목</option>
+          <option value="writer">작성자</option>
+        </select>
 				<div class="search-box">
           <form class="input">
             <input class="sb-search-input input__field--madoka" placeholder="검색어를 입력해주세요." type="search" id="input-31" />
@@ -279,5 +275,7 @@
  	}
  
   </script>
+  <script src="../js/main/jquery.nicescroll.js"></script>
+  <script src="../js/main/scripts.js"></script>
 </body>
 </html>
