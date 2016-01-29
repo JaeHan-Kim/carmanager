@@ -29,7 +29,7 @@ a.more_link:hover{
 .container {
 	position:relative;
 	margin:10px;
-	width: 90% !important;
+	width: 100% !important;
 }
 h1, h2{
 	font-family:'Oswald', Arial, sans-serif;
@@ -108,10 +108,13 @@ p.subline{
 }
 .block{
 	float:left;
-	margin:5px;
-	background:#fff;
+	margin:10px;
+	background: RGB(248, 248, 248);
 	padding:20px;
 	width:260px;
+	border: 1px solid lightgray;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 1px 1px lightgray;
 }
 .block-small{
 	width:160px;

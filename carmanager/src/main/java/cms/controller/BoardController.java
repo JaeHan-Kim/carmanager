@@ -23,7 +23,7 @@ public class BoardController {
   @RequestMapping("list")
   public Object list(
       @RequestParam(defaultValue="1") int page,
-      @RequestParam(defaultValue="6") int pageSize) throws Exception {
+      @RequestParam(defaultValue="8") int pageSize) throws Exception {
     
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("startIndex", (page - 1) * pageSize);
@@ -32,7 +32,7 @@ public class BoardController {
     List<Board> boards = boardDao.selectList(paramMap);
     
     int count = boardDao.countAll();
-    int page_link = 10;
+    int page_link = 7;
     
     HashMap<String, Object> selectMap = new HashMap<>();
     selectMap.put("count", count);

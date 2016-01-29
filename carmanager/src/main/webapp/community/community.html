@@ -7,8 +7,8 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link type='text/css' rel="stylesheet" href="../css/community/community.css">
   <link type='text/css' rel="stylesheet" href="../css/community/cstyle.css">
-  <link type='text/css' rel="stylesheet" href="../css/community/paginate.css">
   <link type='text/css' rel='stylesheet' href="../lib/bootstrap/css/bootstrap.css" />
   <link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
   <link type="text/css" rel="stylesheet" href="../css/main/custom.css">
@@ -161,31 +161,27 @@
     </script>
 
     <div id="page-wrapper">
-      <div class="panel-default">
-	      <div class="main-page">
-		      <div class="container" id="container">
+      <div class="form-title">
+         Test
+      </div>
+      <div class="form-three widget-shadow">
+	      <div class="panel-default">
+		      <div class="main-page">
+			      <div class="container" id="container">
+			      </div>
 		      </div>
 	      </div>
-	      <div class="paginate_complex" id="document_navi2">
-	        <a class="direction sprev start" href="#"><span></span><span></span>&nbsp;처음</a>
-	        <a class="direction sprev startx">&nbsp;처음</a><!-- 링크가 없을 때 표시할 태그 -->
-	
-	        <a class="direction sprev prev" href="#"><span></span>&nbsp;이전</a>
-	        <a class="direction sprev prevx">&nbsp;이전</a><!-- 링크가 없을 때 표시할 태그 -->
-	
-	        <span class="pageaction"></span>
-	        <a class="num" href="">{page}</a>
-	        <strong class="now">{page}</strong>
-	        <span class="div">&nbsp;</span>
-	
-	        <a class="direction snext next" href="#">다음&nbsp;<span></span></a>
-	        <a class="direction snext nextx">다음&nbsp;</a><!-- 링크가 없을 때 표시할 태그 -->
-	
-	        <a class="direction snext end" href="#">끝&nbsp;<span></span><span></span></a>
-	        <a class="direction snext endx">끝&nbsp;</a><!-- 링크가 없을 때 표시할 태그 -->
-	
-	      </div>
-        
+      </div>
+      <div class="form-title" id="board-footer">
+        <ul class="pagination pagination-sm" id="document_navi3">
+				  <li class="prev"><a href="#">&laquo;</a></li>
+				  <li class="disabled prevx"><a href="#">&laquo;</a></li>
+				  <span class="pageaction"></span>
+				  <li class="num"><a href="#">{page}</a></li>
+				  <li class="active now"><a href="#">{page} <span class="sr-only">(current)</span></a></li>
+				  <li class="next"><a href="#">&raquo;</a></li>
+				  <li class="disabled nextx"><a href="#">&raquo;</a></li>
+				</ul>
       </div>
     </div>
     
@@ -235,7 +231,7 @@
  	  
  	  var selectMap = resultObj.pageAttribute;
  	  
- 	  jQuery('#document_navi2').jaPageNavigator({
+ 	  jQuery('#document_navi3').jaPageNavigator({
  	    page_row : selectMap.pageSize, // 보여질 게시물 목록 수
  	    page_link : selectMap.page_link, // 보여질 페이지 링크 수
  	    total_count : selectMap.count // 게시물 총 수

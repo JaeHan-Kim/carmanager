@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+.pagination {
+	margin: 5px 0px 5px 26px !important;
+}
+
+#board-footer {
+	background-color: lightgray;
+}
