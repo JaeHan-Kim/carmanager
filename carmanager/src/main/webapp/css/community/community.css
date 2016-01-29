@@ -26,21 +26,32 @@ h3.title {
   -moz-box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
 }
 
-.search-box {
-  float: right !important;
-  width: 230px !important;
-  margin: 5px 37px 5px 0  !important;
-  position: relative !important;
-  z-index: 1;
-  display: inline-block;
-  background-color: white;
-  position: relative !important;
+#document_navi3 {
+	position: relative;
+	margin-top: 15px !important;
+}
+
+.search_tool {
+	width: 300px;
+	height: 50px;
+	position: relative;
+	float: right;
+	margin-top: 15px;
+	margin-right: 35px;
 }
 
 #searchOption {
-	float: right;
-	margin-right: 100px;
-	margin-top: 5px;
-	height: 37px;
-	width: 100px;
+	width: 95px;
+	position: relative;
+}
+
+.search-box {
+  float: right !important;
+  width: 200px !important;
+  margin: -36px 0px 5px 0  !important;
+  position: relative !important;
+  z-index: 1;
+  display: inline !important;
+  background-color: white;
+  position: relative !important;
 }
