@@ -7,8 +7,9 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link type='text/css' rel="stylesheet" href="../css/community/community.css">
   <link type='text/css' rel="stylesheet" href="../css/community/cstyle.css">
-  <link type='text/css' rel="stylesheet" href="../css/community/paginate.css">
+  <link type='text/css' rel="stylesheet" href="../css/community/default.css">
   <link type='text/css' rel='stylesheet' href="../lib/bootstrap/css/bootstrap.css" />
   <link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
   <link type="text/css" rel="stylesheet" href="../css/main/custom.css">
@@ -24,24 +25,17 @@
   <link type='text/css' rel='stylesheet' 
         href='http://fonts.googleapis.com/css?family=Ovo' />
 
+
 	<script src="../lib/jquery/jquery.min.js"></script>
+	<script src="../js/community/jquery.selecty.js"></script>
 	<script src="../js/community/jquery.pagenavigator.js"></script>
   <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="../js/main/classie.js"></script>
   <script src="../js/main/custom.js"></script>
-  <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/metisMenu.min.js"></script>
 	<script src="../js/main/modernizr.custom.js"></script>
   <script src="../js/main/moment_local.js"></script>
-  <script src="../js/main/scripts.js"></script>
 	<script src="../js/main/wow.min.js"></script>
-
-	<script type="application/x-javascript">
-	  addEventListener("load", function() { 
-	  setTimeout(hideURLbar, 0); }, false); 
-	  function hideURLbar(){ 
-	  window.scrollTo(0,1); } 
-	</script>
 
 	<script>
   new WOW().init();
@@ -54,6 +48,13 @@
   });  
 	
 	</script>
+	
+	<script type="application/x-javascript">
+    addEventListener("load", function() { 
+    setTimeout(hideURLbar, 0); }, false); 
+    function hideURLbar(){ 
+    window.scrollTo(0,1); } 
+  </script>
 	
 </head>
 
@@ -122,7 +123,7 @@
 	               data-toggle="dropdown" aria-expanded="false">
 	              <div class="profile_img">
 	                <span class="prfil-img">
-	                  <img id="thumbnail" src="" alt=""> 
+	                  <img id="thumbnail" class="img-circle" src="" alt=""> 
 	                </span>
 	                <div class="user-name">
 	                  <p id="userNickname"></p>
@@ -161,31 +162,47 @@
     </script>
 
     <div id="page-wrapper">
-      <div class="panel-default">
-	      <div class="main-page">
-		      <div class="container" id="container">
+      <div>
+        <h3 class="title">여기는 게시판 입니다!</h4>
+        <h4>마음대로 떠들어보아요.</h4>
+        <p>&nbsp;</p>
+      </div>
+      <div class="form-title" id="board-header">
+         Test
+      </div>
+      <div class="form-three widget-shadow">
+	      <div class="panel-default">
+		      <div class="main-page">
+			      <div class="container" id="container">
+			      </div>
 		      </div>
 	      </div>
-	      <div class="paginate_complex" id="document_navi2">
-	        <a class="direction sprev start" href="#"><span></span><span></span>&nbsp;처음</a>
-	        <a class="direction sprev startx">&nbsp;처음</a><!-- 링크가 없을 때 표시할 태그 -->
-	
-	        <a class="direction sprev prev" href="#"><span></span>&nbsp;이전</a>
-	        <a class="direction sprev prevx">&nbsp;이전</a><!-- 링크가 없을 때 표시할 태그 -->
-	
-	        <span class="pageaction"></span>
-	        <a class="num" href="">{page}</a>
-	        <strong class="now">{page}</strong>
-	        <span class="div">&nbsp;</span>
-	
-	        <a class="direction snext next" href="#">다음&nbsp;<span></span></a>
-	        <a class="direction snext nextx">다음&nbsp;</a><!-- 링크가 없을 때 표시할 태그 -->
-	
-	        <a class="direction snext end" href="#">끝&nbsp;<span></span><span></span></a>
-	        <a class="direction snext endx">끝&nbsp;</a><!-- 링크가 없을 때 표시할 태그 -->
-	
-	      </div>
-        
+      </div>
+      <div class="form-title" id="board-footer">
+        <ul class="pagination pagination-sm" id="document_navi3">
+				  <li class="prev"><a href="#">&laquo;</a></li>
+				  <li class="disabled prevx"><a href="#">&laquo;</a></li>
+				  <span class="pageaction"></span>
+				  <li class="num"><a href="#">{page}</a></li>
+				  <li class="active now"><a href="#">{page} <span class="sr-only">(current)</span></a></li>
+				  <li class="next"><a href="#">&raquo;</a></li>
+				  <li class="disabled nextx"><a href="#">&raquo;</a></li>
+				</ul>
+		    <select id="searchOption" class="form-control" name="category">
+          <option value="title">제목</option>
+          <option value="writer">작성자</option>
+        </select>
+				<div class="search-box">
+          <form class="input">
+            <input class="sb-search-input input__field--madoka" placeholder="검색어를 입력해주세요." type="search" id="input-31" />
+            <label class="input__label" for="input-31">
+              <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
+              </svg>
+            </label>
+          </form>
+        </div><!--//end-search-box-->
+        <div class="clearfix"> </div>
       </div>
     </div>
     
@@ -235,7 +252,7 @@
  	  
  	  var selectMap = resultObj.pageAttribute;
  	  
- 	  jQuery('#document_navi2').jaPageNavigator({
+ 	  jQuery('#document_navi3').jaPageNavigator({
  	    page_row : selectMap.pageSize, // 보여질 게시물 목록 수
  	    page_link : selectMap.page_link, // 보여질 페이지 링크 수
  	    total_count : selectMap.count // 게시물 총 수
@@ -258,5 +275,7 @@
  	}
  
   </script>
+  <script src="../js/main/jquery.nicescroll.js"></script>
+  <script src="../js/main/scripts.js"></script>
 </body>
 </html>

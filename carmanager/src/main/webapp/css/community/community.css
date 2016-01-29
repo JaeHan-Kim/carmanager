@@ -34,4 +34,12 @@ h3.title {
   z-index: 1;
   display: inline-block;
   background-color: white;
+  position: relative !important;
+}
+
+#searchOption {
+	float: right;
+	margin-right: 100px;
+	margin-top: 5px;
+	height: 37px;
 }
