@@ -62,7 +62,7 @@ public class MyGoodsController {
 	List<Goods> goods = goodsService.getGoodsList();		  
 
 	HashMap<Integer, Integer> restmiles = new HashMap<>();
-	HashMap<Integer, Date> changedates = new HashMap<>();
+	HashMap<Integer, Integer> changemiles = new HashMap<>();
 	for(Goods good : goods) {
 	  MyGoods inputmygoods = new MyGoods();
 	  inputmygoods.setGarageNo(no);
@@ -77,7 +77,7 @@ public class MyGoodsController {
       	int changeMile = resultmygoods.getChangeMile() + (garage.getMile() - resultmygoods.getChangeMile());
 	    int restMile = (resultmygoods.getChangeMile() + good.getLifeMile()) - changeMile;
 	    restmiles.put(good.getGoodsNo(), restMile);
-	    changedates.put(good.getGoodsNo(), resultmygoods.getChangeDate());
+	    changemiles.put(good.getGoodsNo(), resultmygoods.getChangeMile());
 	  }
     }
 
@@ -86,23 +86,39 @@ public class MyGoodsController {
 	HashMap<String,Object> resultMap = new HashMap<>();
 	resultMap.put("status", "success");
 	resultMap.put("data", restmiles);
-	resultMap.put("datadate", changedates);
+	resultMap.put("datamile", changemiles);
 	return resultMap;
   }
   
   @RequestMapping("update")
   public AjaxResult update(MyGoods mygoods) throws Exception {
-    if (mygoodsService.searchMygoods(mygoods) == null) {
+    MyGoods mygood = mygoodsService.searchMygoods(mygoods);
+	if (mygood == null) {
   	  Garage garage = garageService.retrieve(mygoods.getGarageNo());
   	  mygoods.setChangeMile(garage.getMile());
   	  mygoodsService.addMygoods(mygoods);
-  	  return new AjaxResult("success", null);
+  	  return new AjaxResult("success", garage.getMile());
     } else {
   	  Garage garage = garageService.retrieve(mygoods.getGarageNo());
-  	  mygoods.setChangeMile(garage.getMile());
-  	  mygoodsService.updateMygoods(mygoods);
-	  return new AjaxResult("success", null);
+  	  if (mygood.getChangeMile() == garage.getMile()) {
+  	    return new AjaxResult("failure", null);
+  	  } else {
+  	    mygoods.setChangeMile(garage.getMile());
+  	    mygoodsService.updateMygoods(mygoods);
+	    return new AjaxResult("success", garage.getMile());
+  	  }
     }
   }
   
+  
+  @RequestMapping("searchMile")
+  public AjaxResult searchMile(MyGoods mygoods) throws Exception {
+	Garage garage = garageService.retrieve(mygoods.getGarageNo());
+	MyGoods mygood = mygoodsService.searchMygoods(mygoods);
+    if (mygood.getChangeMile() == garage.getMile()) {
+      return new AjaxResult("failure", null);
+    } else {
+      return new AjaxResult("success", mygood.getChangeMile());
+    }
+  }
 }
