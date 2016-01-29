@@ -1,5 +1,7 @@
 package cms.service;
 
+import java.util.List;
+
 import cms.domain.MyGoods;
 
 public interface MyGoodsService {
@@ -11,6 +13,8 @@ public interface MyGoodsService {
   MyGoods retrieve(int no);
 
   MyGoods searchMygoods(MyGoods mygoods);
+  
+  List<MyGoods> searchList(int no);
 }
 
 

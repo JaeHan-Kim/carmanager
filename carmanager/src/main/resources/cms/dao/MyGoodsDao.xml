@@ -38,4 +38,9 @@
     limit 1
   </select>
   
+  <select id="selectList" resultMap="MyGoodsMap" parameterType="int">
+    select * from mygoods
+    where grno = #{no}
+  </select>
+  
 </mapper>

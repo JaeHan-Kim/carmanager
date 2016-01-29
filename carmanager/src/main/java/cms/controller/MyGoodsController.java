@@ -1,5 +1,6 @@
 package cms.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import cms.domain.AjaxResult;
 import cms.domain.Garage;
 import cms.domain.Goods;
 import cms.domain.MyGoods;
-import cms.domain.Refuel;
 import cms.service.GarageService;
 import cms.service.GoodsService;
 import cms.service.MyGoodsService;
@@ -60,8 +60,9 @@ public class MyGoodsController {
 	//소모품 교체 기록 있을때,
     Garage garage = garageService.retrieve(no);
 	List<Goods> goods = goodsService.getGoodsList();		  
-	
+
 	HashMap<Integer, Integer> restmiles = new HashMap<>();
+	HashMap<Integer, Date> changedates = new HashMap<>();
 	for(Goods good : goods) {
 	  MyGoods inputmygoods = new MyGoods();
 	  inputmygoods.setGarageNo(no);
@@ -75,13 +76,17 @@ public class MyGoodsController {
 	  } else {
       	int changeMile = resultmygoods.getChangeMile() + (garage.getMile() - resultmygoods.getChangeMile());
 	    int restMile = (resultmygoods.getChangeMile() + good.getLifeMile()) - changeMile;
-	    restmiles.put(good.getGoodsNo(), restMile); 
+	    restmiles.put(good.getGoodsNo(), restMile);
+	    changedates.put(good.getGoodsNo(), resultmygoods.getChangeDate());
 	  }
     }
-		  
+
+	
+	
 	HashMap<String,Object> resultMap = new HashMap<>();
 	resultMap.put("status", "success");
 	resultMap.put("data", restmiles);
+	resultMap.put("datadate", changedates);
 	return resultMap;
   }
   

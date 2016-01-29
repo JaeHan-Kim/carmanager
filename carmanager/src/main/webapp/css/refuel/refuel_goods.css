@@ -31,10 +31,22 @@
   font-size: 12px; 
 }
 
-.lbl_txt14px {
-	font-size:14px;
+.lbl_changetxt {
+	float: right;
+  font-size: 13px; 
 }
 
+.lbl_changedate {
+  font-size: 13px; 
+}
+
+.lbl_txt14px {
+	font-size: 14px;
+}
+
+.lbl_sign{
+	font-size: 14px;
+}
 
 /* 버튼 관련 css */
 .btn_reset{
