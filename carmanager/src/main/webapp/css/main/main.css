@@ -25,11 +25,25 @@
 	background-color: #e94e02;
 }
 
-/* #selectCarTitle{
-  background-color: #4F52BA;
-  color: white;
+/*  #selectCarTitle{
+ position: relative;
+  color: black;
   font-size: 15px;
+     float: left;
+    width: auto;
+    background-color: #4F52BA;
+	text-align: center;
+	padding: 1em;
+} */
+#selectCarName{
+ position: relative;
+  font-size: 15px;
+ /*     float: left; */
+    width: auto;
+	text-align: center;
+	padding: 1em;
 }
+/*
 .selectCar{
   position: relative;
 } */

@@ -84,12 +84,8 @@ window.scrollTo(0,1); }
 <script src="../js/main/custom.js"></script>
 <link href="../css/main/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
-<!-- 차량 선택 라이브러리 -->
-<link rel="stylesheet" href="../css/main/default.css">
-<script src="../js/main/jquery.selecty.js"></script>
-<!-- // 차량 선택 라이브러리 -->
 </head>
-<body class="cbp-spmenu-push" onload="goIntro()">
+<body class="cbp-spmenu-push">
   <div class="main-content">
     <!--left-fixed -navigation-->
     <div class=" sidebar" role="navigation">
@@ -151,13 +147,8 @@ window.scrollTo(0,1); }
 
       <!-- header-right -->
       <div class="header-right">
-        <!-- 유저별 차량 리스트 -->
-          <div class="profile_details_left">
-            <label id="selectCarTitle">&nbsp;&nbsp;* 현재 선택된 차량입니다 :&nbsp;</label>
-            <div class="clearfix"></div>
-              <select id="myCarList1" class="selecty s2 selectCar" name="town">
-              </select>
-         </div>
+        <!-- <!-- 유저별 차량 리스트 -->
+         
         <!-- 유저별 차량 리스트 end -->
 
         <!-- 로그인 유저 정보 -->
@@ -167,7 +158,7 @@ window.scrollTo(0,1); }
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <div class="profile_img">
                   <span class="prfil-img">
-                  <img id ="thumbnail" class="img-circle" src="" alt=""> </span>
+                  <img id ="thumbnail" src="" alt=""> </span>
                   <div class="user-name">
                     <p id="userNickname"></p>
                     <span>안녕하세요.</span>
@@ -183,6 +174,16 @@ window.scrollTo(0,1); }
             </li>
           </ul>
        </div>
+       
+       
+        		<div class="profile_details_left">
+					<div id="selectCarName">
+							<h4>현재 선택된 차량은</h4>
+							<label id="selectedMyCar"></label>
+					</div>
+				  <div class="clearfix"> </div>	
+				</div>
+         
         <!-- 로그인 유저 정보 end -->
         <div class="clearfix"></div>
       </div>
@@ -320,21 +321,59 @@ window.scrollTo(0,1); }
     var selectcar = $("#myCarList");
     var cnt = 0;
     var lifeTime = [0, 8000, 5000, 30000, 45000, 40000, 10000, 50000, 60000, 60000];
+    $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+      for (var garage of resultObj.data) {
+        if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
+          /* alert(garage.nickName); */
+          $('#selectedMyCar').html(garage.nickName);
+        }
+        $("<li><a class='detailLink' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+     	} 
+      $("<li><a class='detailLink' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
+      $("a.detailLink").click(clickDetailLink);
+     lineChart(resultObj);
+     barChart(resultObj);
     
-   /*  <div class="cal1">
-		<div id='myDiagramDiv' class='well' style='width: auto; height: 400px;'></div>
-	  <span id='diagramEventsMsg' style='color: red'>(message)</span>
-  	<div class="clearfix"></div>
-  </div> */
-    $('#myCarList').change(function(){
+   });
+    
+    $.post('../mygoods/selectCurrentMile.do', {
+      no: sessionStorage.getItem("selectCarNo")
+    }, function(resultObj) {
+      if (resultObj.status == "success") {
+       	var userRatio = new Array();
+    	  for (var i=1; i <= 9; i++) {
+    	    userRatio.push(parseInt(((lifeTime[i]-resultObj.data[i])/lifeTime[i]) * 100));
+    	  }
+    	 
+    	  goIntro(userRatio);
+      }
+    }, 'json')
+    function clickDetailLink(event) {
+      event.preventDefault();
+      /* alert($(event.target).attr("carName")); */
+      if ($(event.target).attr("carNo") == 'Logout') {
+          sessionStorage.removeItem('loginUserNickname');
+      /*  sessionStorage.removeItem('loginUsercarNo'); */
+          sessionStorage.removeItem('loginUserPhoto');
+          sessionStorage.removeItem('selectCarNo');
+          location.href = "../auth/login.html";
+      } else {
+        /* alert($(event.target).attr("carNo")); */
+        $('#selectedMyCar').html($(event.target).attr("carName"));
+        changeMyCar($(event.target).attr("carNo"));
+      }
+        
+    }
+    
+    function changeMyCar(selectCarNo){
       /* alert($("#myCarList").val()); */
-      sessionStorage.setItem('selectCarNo', $("#myCarList").val());
+      sessionStorage.setItem('selectCarNo', selectCarNo);
       /* alert(sessionStorage.getItem("selectCarNo")); */
       $("#line").remove();
       $("#bar").remove();
       $("#myDiagramDiv").remove();
       $("#diagramEventsMsg").remove();
-      $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+$("#myCarList").val(), 
+      $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+selectCarNo, 
           function(resultObj) {
             $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
             $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
@@ -356,40 +395,8 @@ window.scrollTo(0,1); }
 	    	  goIntro(userRatio);
 	      }
 	    }, 'json')
-    });
-    $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
-      /* alert(sessionStorage.getItem('loginUsercarNo')); */
-      for (var garage of resultObj.data) {
-      /*   <li><a href='#'><i class='fa fa-sign-out'></i>Logout</a></li> */
-        $("<li><a class='detailLink' href='#' carNo = '"+ garage.myCarNo +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
-       /*  $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList'); */
-     	} 
-      $("<li><a class='detailLink' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
-      $("a.detailLink").click(clickDetailLink);
-      function clickDetailLink(event) {
-        alert($(event.target).attr("carNo"));
-      	alert("ASd");
-      }
-      /* alert(sessionStorage.getItem("selectCarNo")); */
-     $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
-      $('.selecty').selecty();
-     lineChart(resultObj);
-     barChart(resultObj);
-    
-   });
-    $.post('../mygoods/selectCurrentMile.do', {
-	      no: sessionStorage.getItem("selectCarNo")
-	    }, function(resultObj) {
-	      if (resultObj.status == "success") {
-	       	var userRatio = new Array();
-	    	  for (var i=1; i <= 9; i++) {
-	    	    userRatio.push(parseInt(((lifeTime[i]-resultObj.data[i])/lifeTime[i]) * 100));
-	    	  }
-	    	 
-	    	  goIntro(userRatio);
-	      }
-	    }, 'json')
-	    
+    }
+
   function lineChart(resultObj) {
     var effic = new Array();
     var driveDt = new Array();
@@ -606,37 +613,21 @@ window.scrollTo(0,1); }
               new go.Binding("strokeDashArray", "dash"))
           );
 			
-      var text = "푸헬헬"
-        var posX = [-600, -600, -600, 600, 600, 600];
+      var posX = [-600, -600, -600, 600, 600, 600];
       var posY = [200, 0, -200, 200, 0, -200];
   
        var nodeDataArray = [
-                     	    { "maxSize": new go.Size(300, 600), "key": "car", "img": "car.png", "loc": new go.Point(-150, 0) }];
+                     	    { "maxSize": new go.Size(300, 300), "key": "car", "img": "car.png", "loc": new go.Point(-150, 0) }];
        var linkDataArray = new Array();
-/* 	for (var j = 0; j < 5; j++){
+	for (var j = 0; j < 6; j++){
 		if (userRatio[j] >= 80) {
 
 			nodeDataArray.push({ "key": partName[j], "img": "car.png", "loc": new go.Point(posX[j], posY[j])});
 			linkDataArray.push({ from: 'car', to: partName[j], dash: [11, 10], color: 'crimson', width: 2});
 		} 
-	}     */
 	    	  /* alert(partName[j] + " : " + userRatio[j]); */
-        nodeDataArray.push({ "key": "0", "img": "car.png", "loc": new go.Point(posX[0], posY[0])});
-       nodeDataArray.push({ "key": "1", "img": "car.png", "loc": new go.Point(posX[1], posY[1])});
-       nodeDataArray.push({ "key": "2", "img": "car.png", "loc": new go.Point(posX[2], posY[2])});
-       nodeDataArray.push({ "key": "3", "img": "car.png", "loc": new go.Point(posX[3], posY[3])});
-       nodeDataArray.push( 	{ "key": "4", "img": "car.png", "loc": new go.Point(posX[4], posY[4])}); 
-       nodeDataArray.push( 	{ "key": "5", "img": "car.png", "loc": new go.Point(posX[5], posY[5])}); 
-   /*   nodeDataArray = [ { "maxSize": new go.Size(200, 200), "key": "car", "img": "car.png", "loc": new go.Point(-70, 50) }];
-     nodeDataArray.push({ "key": "와이퍼", "img": "car.png", "loc": new go.Point(-300, 100)}); */
-    
-      linkDataArray.push({ from: 'car', to: '0', dash: [11, 10], color: 'crimson', width: 2});
-     linkDataArray.push({ from: 'car', to: '1', dash: [11, 10], color: 'crimson', width: 2 });
-     linkDataArray.push({ from: 'car', to: '2', dash: [11, 10], color: 'crimson', width: 2 });
-     linkDataArray.push({ from: 'car', to: '3', dash: [11, 10], color: 'crimson', width: 2 });
-     linkDataArray.push(	{ from: 'car', to: '4', dash: [11, 10], color: 'crimson', width: 2 }); 
-     linkDataArray.push(	{ from: 'car', to: '5', dash: [11, 10], color: 'crimson', width: 2 }); 
-  		diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+	}    
+	diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
   	} 
     </script>
     <!--footer-->
