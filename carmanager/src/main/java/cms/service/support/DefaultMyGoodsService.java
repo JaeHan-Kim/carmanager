@@ -1,5 +1,7 @@
 package cms.service.support;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +35,10 @@ public class DefaultMyGoodsService implements MyGoodsService {
   @Override
   public MyGoods searchMygoods(MyGoods mygoods) {
 	return mygoodsDao.selectChangeMygoods(mygoods);
+  }
+  
+  @Override
+  public List<MyGoods> searchList(int no) {
+    return mygoodsDao.selectList(no);
   }
 }
