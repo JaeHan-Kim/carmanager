@@ -18,18 +18,36 @@
     b.bno, b.title, b.cre_dt, b.cate, b.likes, b.views, m.nick
     from boards b left outer join members m 
     on m.mno = b.mno
-    order by 
+    order by bno desc 
+    limit #{startIndex}, #{length}
+  </select>
+  
+  <select id="searchList" resultMap="boardMap" parameterType="map">
+    select 
+    b.bno, b.title, b.cre_dt, b.cate, b.likes, b.views, m.nick
+    from boards b left outer join members m 
+    on m.mno = b.mno
+    where 
     <choose>
-      <when test="keyword == 'title'">title </when>
-      <when test="keyword == 'views'">views </when>
-      <otherwise>bno </otherwise>
-    </choose>
-    desc 
+      <when test="keyword == 'title'">b.title like concat ('%', #{title}, '%') </when>
+      <when test="keyword == 'nickname'">m.nick=#{nickname} </when>
+    </choose> 
+    order by bno desc
     limit #{startIndex}, #{length}
   </select>
   
   <select id="countAll" resultType="int">
     select count(*) from boards
+  </select>
+  
+  <select id="countSearch" resultType="int" parameterType="map">
+    select count(*) from boards b left outer join members m
+    on m.mno = b.mno
+    where
+    <choose>
+      <when test="keyword == 'title'">b.title like concat ('%', #{title}, '%') </when>
+      <when test="keyword == 'nickname'">m.nick=#{nickname} </when>
+    </choose>
   </select>
  
 </mapper>

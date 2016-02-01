@@ -45,8 +45,8 @@
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
     var userCarNo = sessionStorage.getItem('loginUsercarNo');
     var userPhoto = sessionStorage.getItem('loginUserPhoto');
-     $("#userNickname").html(userNickname);
-     $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
+    $("#userNickname").html(userNickname);
+    $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
   });  
 	
 	</script>
@@ -170,17 +170,18 @@
 				  <li class="disabled nextx"><a href="#">&raquo;</a></li>
 				</ul>
 				<div class="search_tool">
-				  <button type="button" id="search_btn" class="btn btn-primary">검색</button>
-					<div class="search-box">
-	          <form class="input">
-	            <input class="sb-search-input input__field--madoka" placeholder="검색어를 입력해주세요." type="search" id="input-31" />
+          <form class="input">
+					  <button type="button" id="search_btn" class="btn btn-primary">검색</button>
+						<div class="search-box">
+	            <input class="sb-search-input input__field--madoka" placeholder="검색어를 입력해주세요." type="text" id="input-31" />
 	            <label class="input__label" for="input-31">
 	              <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
 	                <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
 	              </svg>
 	            </label>
-	          </form>
-	        </div>
+	            
+		        </div>
+          </form>
           <div>
             <select id="searchOption" class="form-control">
               <option value="title">제목</option>
@@ -216,25 +217,32 @@
     }
   }
   
-  $.getJSON('../community/ajax/list.do' + document.location.search, function(resultObj) {
- 	  var container = $("#container");
- 	  for (var board of resultObj.data) {
- 	    $("<div class='item block'>")
- 	      .html("<div class='thumbs-wrapper'>" +
- 	    		      "<div class='thumbs'>" +
- 	    		        "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
- 	    		          "<img src='../img/community/1.jpg'/>" +
- 	    		        "</a>" +
- 	    	        "</div>" +
- 	    	      "</div>" +
- 	    	      "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
- 	    	        "<h2 class='title'>"+ board.title + "</h2>" +
- 	    	      "</a>" +
- 	    	      "<p class='subline'>" + board.boardNo + "<span class='fancy'>&amp;</span>" + 
- 	    	      board.category + "<span class='fancy'>&amp;</span>" + board.nickname + "</p>"
- 	    	)
- 	    .appendTo(container);
- 	  }
+  var searchKeyword = sessionStorage.getItem('searchKeyword');
+  var searchWord = sessionStorage.getItem('searchWord');
+  
+  var page = document.location.search;
+  page = page.replace("?", "");
+  
+  $.getJSON('../community/ajax/search.do' + "?" + searchKeyword + "=" + searchWord + "&" + page,
+    function(resultObj) {
+    var container = $("#container");
+    for (var board of resultObj.data) {
+      $("<div class='item block'>")
+        .html("<div class='thumbs-wrapper'>" +
+	              "<div class='thumbs'>" +
+	                "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
+	                  "<img src='../img/community/1.jpg'/>" +
+	                "</a>" +
+	              "</div>" +
+	            "</div>" +
+	            "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
+	              "<h2 class='title'>"+ board.title + "</h2>" +
+	            "</a>" +
+	            "<p class='subline'>" + board.boardNo + "<span class='fancy'>&amp;</span>" + 
+	            board.category + "<span class='fancy'>&amp;</span>" + board.nickname + "</p>"
+        )
+      .appendTo(container);
+    }
  	  
  	  var selectMap = resultObj.pageAttribute;
  	  
@@ -246,6 +254,7 @@
  	  
  	  // 제목 링크에 클릭 이벤트 리스너를 등록한다.
  	  $("a.detailLnk").click(clickDetailLnk);
+ 	  
  	});
   
   /* 
@@ -254,7 +263,6 @@
     	});
 
   */    	
-  
  	// 게시물 제목을 클릭했을 때 호출될 함수
  	function clickDetailLnk(event) {
  	  event.preventDefault(); 
@@ -262,7 +270,7 @@
  	}
  
   $('#search_btn').click(searchEvent);
-  $("#input-31").keyup(function(e){
+  $('#input-31').keyup(function(e) {
       if(e.keyCode == 13) searchEvent(); 
   });
   
@@ -281,7 +289,7 @@
     sessionStorage.setItem('searchWord', $('#input-31').val());
     
     location.href = 'communitySearch.html';
-  }
+	}  
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>
