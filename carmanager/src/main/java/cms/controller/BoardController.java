@@ -53,21 +53,36 @@ public class BoardController {
   public Object search(
       @RequestParam(defaultValue="1") int page,
       @RequestParam(defaultValue="8") int pageSize,
-      String searchKeyword, String title, String nickname
+      String searchKeyword, 
+      String title, 
+      String nickname, 
+      String category
       ) throws Exception {
     
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("startIndex", (page - 1) * pageSize);
     paramMap.put("length", pageSize);
-    if (title != null) {
+    
+    System.out.println(category);
+    
+    if (category != null) {
+      paramMap.put("category", category);
+      if (title != null) {
+        searchKeyword = "title";
+        paramMap.put("title", title);
+      } else if (nickname != null) {
+        searchKeyword = "nickname";
+        paramMap.put("nickname", nickname);
+      }
+    } else if (title != null) {
       searchKeyword = "title";
       paramMap.put("title", title);
-      paramMap.put("keyword", searchKeyword);
     } else if (nickname != null) {
       searchKeyword = "nickname";
       paramMap.put("nickname", nickname);
-      paramMap.put("keyword", searchKeyword);
     }
+
+    paramMap.put("keyword", searchKeyword);
     
     List<Board> boards = boardDao.searchList(paramMap);
     

@@ -45,6 +45,10 @@
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
     var userCarNo = sessionStorage.getItem('loginUsercarNo');
     var userPhoto = sessionStorage.getItem('loginUserPhoto');
+    /* var category = sessionStorage.getItem('searchCategory'); */
+    if (sessionStorage.getItem('searchCategory') != null) {
+   	  document.getElementById('category').value = sessionStorage.getItem('searchCategory');
+    }
     $("#userNickname").html(userNickname);
     $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
   });  
@@ -144,12 +148,18 @@
 
     <div id="page-wrapper">
       <div>
-        <h3 class="title">여기는 게시판 입니다!</h4>
+        <h3 class="title">여기는 게시판 입니다!</h3>
         <h4>마음대로 떠들어보아요.</h4>
         <p>&nbsp;</p>
       </div>
       <div class="form-title" id="board-header">
-         Test
+        <div>
+           <select id="category" class="form-control" onchange="search_cate()">
+             <option value="">전체</option> 
+             <option value="소모품">소모품</option>
+             <option value="정비소">정비소</option>
+           </select>
+         </div>
       </div>
       <div class="form-three widget-shadow">
 	      <div class="panel-default">
@@ -216,16 +226,38 @@
       classie.toggle(showLeftPush, 'disabled');
     }
   }
-  
-  var searchKeyword = sessionStorage.getItem('searchKeyword');
-  var searchWord = sessionStorage.getItem('searchWord');
-  
+
   var page = document.location.search;
   page = page.replace("?", "");
+  var keyword = sessionStorage.getItem('searchKeyword');
+  var category = sessionStorage.getItem('searchCategory');
   
-  $.getJSON('../community/ajax/search.do' + "?" + searchKeyword + "=" + searchWord + "&" + page,
-    function(resultObj) {
+  if(category != null && keyword != null) {
+	  var searchWord = sessionStorage.getItem('searchWord'); 
+	  var url = '../community/ajax/search.do' + "?" + keyword + "=" + searchWord + "&category=" + category + "&" + page;
+  } else if (category != null && keyword == null) {
+		var url = '../community/ajax/search.do' + "?category=" + category + "&" + page;
+  } else {
+	  var searchKeyword = sessionStorage.getItem('searchKeyword');
+	  var searchWord = sessionStorage.getItem('searchWord');
+	  var url = '../community/ajax/search.do' + "?" + searchKeyword + "=" + searchWord + "&" + page;
+  }
+
+  $.getJSON(url, function(resultObj) {
     var container = $("#container");
+    var selectMap = resultObj.pageAttribute;
+    
+    jQuery('#document_navi3').jaPageNavigator({
+      page_row : selectMap.pageSize, // 보여질 게시물 목록 수
+      page_link : selectMap.page_link, // 보여질 페이지 링크 수
+      total_count : selectMap.count // 게시물 총 수
+    });
+    
+    if (selectMap.count == 0) {
+    	$("<ul>")
+    	  .html("<li style='list-style-type: disc'>검색 조건에 맞는 게시물이 없습니다.</li>").appendTo(container);
+    }
+    
     for (var board of resultObj.data) {
       $("<div class='item block'>")
         .html("<div class='thumbs-wrapper'>" +
@@ -243,14 +275,6 @@
         )
       .appendTo(container);
     }
- 	  
- 	  var selectMap = resultObj.pageAttribute;
- 	  
- 	  jQuery('#document_navi3').jaPageNavigator({
- 	    page_row : selectMap.pageSize, // 보여질 게시물 목록 수
- 	    page_link : selectMap.page_link, // 보여질 페이지 링크 수
- 	    total_count : selectMap.count // 게시물 총 수
- 	  });
  	  
  	  // 제목 링크에 클릭 이벤트 리스너를 등록한다.
  	  $("a.detailLnk").click(clickDetailLnk);
@@ -294,6 +318,21 @@
     
     location.href = 'communitySearch.html';
 	}  
+  
+  function search_cate() {
+    if ($('#category').val().length < 1) {
+    	sessionStorage.removeItem('searchKeyword');
+      sessionStorage.removeItem('searchWord');
+ 	    sessionStorage.removeItem('searchCategory');
+    	location.href = 'community.html';
+    	return false;
+    }
+    
+    sessionStorage.removeItem('searchKeyword');
+    sessionStorage.removeItem('searchWord');
+    sessionStorage.setItem('searchCategory', $('#category').val());
+    location.href = 'communitySearch.html';
+  }
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>

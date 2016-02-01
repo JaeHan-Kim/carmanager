@@ -42,6 +42,7 @@
 	<script>
   new WOW().init();
   $(document).ready(function(){ 
+	  sessionStorage.removeItem('searchCategory');
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
     var userCarNo = sessionStorage.getItem('loginUsercarNo');
     var userPhoto = sessionStorage.getItem('loginUserPhoto');
@@ -144,12 +145,18 @@
 
     <div id="page-wrapper">
       <div>
-        <h3 class="title">여기는 게시판 입니다!</h4>
+        <h3 class="title">여기는 게시판 입니다!</h3>
         <h4>마음대로 떠들어보아요.</h4>
         <p>&nbsp;</p>
       </div>
       <div class="form-title" id="board-header">
-         Test
+        <div>
+          <select id="category" class="form-control" onchange="search_cate()"> 
+            <option value="">전체</option> 
+            <option value="소모품">소모품</option>
+            <option value="정비소">정비소</option>
+          </select>
+        </div>
       </div>
       <div class="form-three widget-shadow">
 	      <div class="panel-default">
@@ -285,6 +292,13 @@
     sessionStorage.setItem('searchWord', $('#input-31').val());
     
     location.href = 'communitySearch.html';
+  }
+  
+  function search_cate() {
+	  sessionStorage.removeItem('searchKeyword');
+    sessionStorage.removeItem('searchWord');
+	  sessionStorage.setItem('searchCategory', $('#category').val());
+	  location.href = 'communitySearch.html';
   }
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
