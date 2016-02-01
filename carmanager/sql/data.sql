@@ -189,14 +189,3 @@ insert into goods(gname, l_mile) values('엔진 오일', 10000);
 insert into goods(gname, l_mile) values('미션 오일', 50000);
 insert into goods(gname, l_mile) values('타이어', 60000);
 insert into goods(gname, l_mile) values('배터리', 60000);
-
-
-insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(8, '2015-11-02', 30360, 40000, 28.98, 1380);
-insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(8, '2015-11-13', 30450, 40000, 28.98, 1380);
-insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(8, '2015-11-26', 30462, 40000, 28.98, 1380);
-insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(8, '2015-12-05', 30476, 40000, 28.98, 1380);
-insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(8, '2015-12-16', 30489, 40000, 28.98, 1380);
-insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(8, '2015-12-27', 30501, 40000, 28.98, 1380);
-insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(8, '2016-01-07', 30513, 40000, 28.98, 1380);
-insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(8, '2016-01-15', 30521, 40000, 28.98, 1380);
-insert into refuel(grno, ref_dt, mile, cost, liter, lcost) values(8, '2016-01-22', 30532, 40000, 28.98, 1380);
