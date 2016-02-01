@@ -189,12 +189,7 @@
 				  <li class="disabled nextx"><a href="#">&raquo;</a></li>
 				</ul>
 				<div class="search_tool">
-					<div>
-				    <select id="searchOption" class="form-control" name="category">
-		          <option value="title">제목</option>
-		          <option value="writer">작성자</option>
-		        </select>
-		      </div>
+				  <button type="button" id="search_btn" class="btn btn-primary">검색</button>
 					<div class="search-box">
 	          <form class="input">
 	            <input class="sb-search-input input__field--madoka" placeholder="검색어를 입력해주세요." type="search" id="input-31" />
@@ -205,6 +200,12 @@
 	            </label>
 	          </form>
 	        </div>
+          <div>
+            <select id="searchOption" class="form-control" name="category">
+              <option value="title">제목</option>
+              <option value="writer">작성자</option>
+            </select>
+          </div>
 	      </div>
         <div class="clearfix"> </div>
       </div>
@@ -249,7 +250,7 @@
  	    	        "<h2 class='title'>"+ board.title + "</h2>" +
  	    	      "</a>" +
  	    	      "<p class='subline'>" + board.boardNo + "<span class='fancy'>&amp;</span>" + 
- 	    	      board.category + "<span class='fancy'>&amp;</span>" + board.memberNo + "</p>"
+ 	    	      board.category + "<span class='fancy'>&amp;</span>" + board.nickname + "</p>"
  	    	)
  	    .appendTo(container);
  	  }

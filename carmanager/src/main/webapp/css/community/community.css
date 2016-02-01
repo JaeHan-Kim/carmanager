@@ -32,7 +32,7 @@ h3.title {
 }
 
 .search_tool {
-	width: 300px;
+	width: 490px;
 	height: 50px;
 	position: relative;
 	float: right;
@@ -40,18 +40,38 @@ h3.title {
 	margin-right: 35px;
 }
 
-#searchOption {
-	width: 95px;
-	position: relative;
+#search_btn {
+	float: right;
+  position: relative;
+  height: 36.5px;
+  webkit-box-sizing: border-box;
+  box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
 }
 
 .search-box {
   float: right !important;
   width: 200px !important;
-  margin: -36px 0px 5px 0  !important;
+  margin: 0 1px 0 1px !important;
   position: relative !important;
   z-index: 1;
   display: inline !important;
   background-color: white;
   position: relative !important;
+  webkit-box-sizing: border-box;
+  box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+
+#searchOption {
+	width: 95px;
+	height: 36.5px;
+	position: relative;
+	float: right;
+	webkit-box-sizing: border-box;
+  box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
 }

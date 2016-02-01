@@ -23,11 +23,14 @@ public class BoardController {
   @RequestMapping("list")
   public Object list(
       @RequestParam(defaultValue="1") int page,
-      @RequestParam(defaultValue="8") int pageSize) throws Exception {
+      @RequestParam(defaultValue="8") int pageSize,
+      @RequestParam(defaultValue="bno") String keyword
+      ) throws Exception {
     
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("startIndex", (page - 1) * pageSize);
     paramMap.put("length", pageSize);
+    paramMap.put("keyword", keyword);
     
     List<Board> boards = boardDao.selectList(paramMap);
     
