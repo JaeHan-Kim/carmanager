@@ -182,6 +182,22 @@ var calendar = {
         var monthEvent = $(this).attr('date-month');
         var dayEvent = $(this).text();
         //$('.day-event[date-month="' + monthEvent + '"][date-day="' + dayEvent + '"]').slideDown('fast');
+        //alert("변신!")
+        
+        $('#addForm').css('display', 'none')
+        $('#updateForm').css('display', '')
+        
+        $('#moneyUP').css('display', 'none')
+        $('#literUP').css('display', 'none')
+        
+        $('#sMoneyUP').click(function(event) {
+          $('#moneyUP').css('display', '')
+          $('#literUP').css('display', 'none')
+        });
+        $('#sLiterUP').click(function(event) {
+          $('#moneyUP').css('display', 'none')
+          $('#literUP').css('display', '')
+        });
       });
     };
 
