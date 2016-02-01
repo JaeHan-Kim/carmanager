@@ -44,6 +44,7 @@ var calendar = {
       } else {
         setMonth(parseInt(monthNumber) + 1, mon, tue, wed, thur, fri, sat, sund);
       };
+      
     });
 
     $('.btn-prev').on('click', function(e) {
@@ -56,6 +57,7 @@ var calendar = {
       } else {
         setMonth(parseInt(monthNumber) - 1, mon, tue, wed, thur, fri, sat, sund);
       };
+      
     });
 
     /**
@@ -131,6 +133,8 @@ var calendar = {
     /**
      * Get current day and set as '.current-day'
      */
+    
+    /* 월 이동시 해당 연도/월 추출하기 */
     function setCurrentDay(month, year) {
       var viewMonth = $('.month').attr('data-month');
       var eventYear = $('.event-days').attr('date-year');
@@ -139,6 +143,37 @@ var calendar = {
           $('tbody.event-calendar td[date-day="' + d.getDate() + '"]').addClass('current-day');
         }
       }
+      // 달력에서 연도와 월 구하기
+      var getMonth = viewMonth
+      var getYear = yearNumber
+      var getCalendarday = (getYear + '-' + getMonth);
+      
+      /* 월 이동시 평균 주유 값 출력하기 */
+      $.ajaxSetup({ async:false });
+      $.getJSON('monthCost.do?no=' + sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
+        var costArray = null;
+        var monthArray = null;
+        var ajaxResult = resultObj.ajaxResult;
+        var monthCost = ajaxResult.data;
+        var monthPlusCost = null;
+        if (ajaxResult.status == "success") {
+          for (var mCost of monthCost) {
+            costArray = mCost.cost;
+            monthArray = mCost.group_date;
+            monthPlusCost = (monthArray + '월은 ' + costArray);
+            if (getCalendarday == monthArray) {
+              $('#label_monMoney').html(monthPlusCost + '원 입니다.');
+              break;
+            } else {
+              $('#label_monMoney').html(getCalendarday + '월 기록이 없습니다.');
+            }
+            
+          }
+        } 
+
+      });
+      
+      
     };
 
     /**
@@ -176,6 +211,8 @@ var calendar = {
      * and find day-event to display
      */
 
+    
+    /* 날짜 클릭시 업데이트 폼으로 전환하기 */
     function displayEvent() {
       $('tbody.event-calendar td').on('click', function(e) {
         $('.day-event').slideUp('fast');
@@ -198,6 +235,7 @@ var calendar = {
           $('#moneyUP').css('display', 'none')
           $('#literUP').css('display', '')
         });
+        
       });
     };
 

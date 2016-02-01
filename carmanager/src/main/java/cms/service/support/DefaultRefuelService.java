@@ -58,4 +58,9 @@ public class DefaultRefuelService implements RefuelService {
     return refuelDao.selectMonthList(no);
   }
 
+  @Override
+  public Refuel refuelOne(int no) {
+    return refuelDao.selectRefuelOne(no);
+  }
+
 }

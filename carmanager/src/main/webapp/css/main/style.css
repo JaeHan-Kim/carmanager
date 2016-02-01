@@ -1336,7 +1336,7 @@ section#tables  p {
 .form-title {
     padding: 1em 2em;
     /*background-color: #EAEAEA;*/
-    background-color: rgba(101, 124, 153, 0.93);
+    background-color: rgb(65, 65, 65);
     border-bottom: 1px solid #D6D5D5;
 }
 .form-body {
@@ -2067,9 +2067,9 @@ h4.modal-title {
 .compose-left ul li.head {
     padding: 0.5em 1.0em;
     border-bottom: 1px solid #DCDCDC;
-    color: #000;
+    color: #ddd;
     font-size: 1.0em;
-    background-color: #F5F5F5;
+    background-color: rgb(65, 65, 65);
 }
 .compose-left ul li a {
     display: block;
@@ -2127,6 +2127,8 @@ h4.modal-title {
 }
 .compose-right .panel-heading {
     padding: 0.8em 2em;
+    color: #ddd;
+    background-color: rgb(65, 65, 65);
 }
 .compose-right .panel-body {
     padding: 2em;
@@ -2202,8 +2204,8 @@ h4.modal-title {
 }
 h4.title3 {
     padding: 1em;
-    background-color: rgb(79, 82, 186);
-    color: rgba(206, 207, 243, 0.9);
+    background-color: rgb(65, 65, 65);
+    color: #ddd;
 }
 .profile-text {
     padding: 1.5em 3em;
@@ -4034,4 +4036,12 @@ h4.title3 {
 
 .img_menubtn {
   width: 30px;
+}
+.img_mycar {
+  float: left; 
+  width: 20px;
+}
+.img_logout {
+  float: left;
+  width: 20px;
 }

@@ -154,7 +154,7 @@ window.scrollTo(0,1); }
                   <img id ="thumbnail" src="" alt=""> </span>
                   <div class="user-name">
                     <p id="userNickname"></p>
-                    <span>안녕하세요.</span>
+                    <!--<span>안녕하세요.</span>-->
                   </div>
                   <!-- 빈칸 유지를 위한 아이콘 자리 -->
                   <i class="fa fa-angle-down lnr"></i>
@@ -322,9 +322,9 @@ window.scrollTo(0,1); }
           /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
-        $("<li><a class='detailLink' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+        $("<li><a class='detailLink' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-      $("<li><a class='detailLink' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
+      $("<li><a class='detailLink' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
       $("a.detailLink").click(clickDetailLink);
      lineChart(resultObj);
      barChart(resultObj);

@@ -358,12 +358,20 @@
                   });
               });
             </script>
+            
+            <!-- 날짜 클릭시 주유기록 출력 리스트 -->
+            <script>
+            /* $.getJSON('refuelOne.do?no=' + userCarNo, function(resultObj) {
+              
+            }); */
+            </script>
+            
             <!-- 주유기록 등록 -->
             <script>
             var liter = null;
             var cost = null;
             var mile = null;
-            var date = null;
+            var today = moment().format('YYYY-MM-DD');
               $("#btn_addRefuel").click(function(event){
                 if ($('input:radio[name=gender]')[0].checked) {
                    liter = (Number($('#num_cost').val()) / Number($('#num_literCost').val())).toFixed(2);
@@ -381,7 +389,14 @@
                   mile = $('#num_driveMile').val();
                 }
                 
-                //if ($('#date_refuelDate').val() < )
+                if ($('#date_refuelDate').val() > today) {
+                  swal({   
+                    title: "Error!",   
+                    text: "오늘 또는 오늘 이전의 날짜를 입력하세요!",   
+                    type: "error",   
+                    confirmButtonText: "확인" });
+                  return false;
+                }
                 
               $.post('addRefuel.do', {
                   myCarNo: sessionStorage.getItem('loginUsercarNo'),
@@ -438,13 +453,12 @@
                     
                     <!-- 주유날짜 달력 표시 부분 -->                    
                     <div id="monthList" class="list">
-                      <!-- <div id="dateEvent" class="day-event" date-month="1" date-day="1" date-year="2016" data-number="2"></div> -->
                     </div>
                     
                       <!-- 월 주유금액 표시부분 -->
                     <div>
                       <h4 id="moneyTitle">이번달 총 주유 금액 입니다.</h4>
-                      <label id="label_monMoney">00000원</label>
+                      <label id="label_monMoney"></label>
                       <h5 id="moneyTitle">DashBoard에서 회원 평균과 비교 하세요!</h5>
                     </div>
                     
@@ -454,6 +468,7 @@
             </div>
             <div class="clearfix"></div>
             <!-- // 달력 폼 끝 -->
+            
             <!-- 기록 달력에 표시 하기 -->
             <script type="text/javascript">
               $.ajaxSetup({ async:false }); // ajax 동기 요청을 위한 셋팅 함수
@@ -477,19 +492,7 @@
             </script>
             <!-- 월별 주유 금액 -->
             <script type="text/javascript">
-              $.ajaxSetup({ async:false });
-              $.getJSON('monthCost.do?no=' + sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
-                var monthArray = null;
-                var thisMonth = moment().format('YYYY-MM');
-                var ajaxResult = resultObj.ajaxResult;
-                var refuelDate = ajaxResult.data;
-                if (ajaxResult.status == "success") {
-			      for (var refuel of refuelDate) {
-                    monthArray = refuel.cost.split('');
-			      }
-                }
-
-              });
+              /* 달력에서 월 이동시 해당 월 추출 문제로 simplecalendar.js 부분에 구현 */ 
             </script>
             
             

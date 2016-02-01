@@ -22,4 +22,6 @@ public interface RefuelDao {
 	public List<Refuel> selectMonthAvg(int no);
 
 	public List<Refuel> selectMonthList(int no);
+	
+	public Refuel selectRefuelOne(int no);
 }

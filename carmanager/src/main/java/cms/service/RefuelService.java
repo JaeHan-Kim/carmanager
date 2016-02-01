@@ -22,4 +22,6 @@ public interface RefuelService {
   List<Refuel> monthList(int no);
   
   List<Refuel> monthAvg(int no);
+  
+  Refuel refuelOne(int no);
 }
