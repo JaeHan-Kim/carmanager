@@ -199,7 +199,7 @@ table {
 }
 input[type=checkbox] {display:none;}
 
-dspan {
+#label_monMoney {
     background-color:#373740;
     -webkit-border-radius:4px;
     -moz-border-radius:4px;
@@ -224,7 +224,7 @@ dspan {
     transition:background-color 150ms ease-in;
 }
 
-dspan:hover {
+#label_monMoney:hover {
     background-color:#c0392b;
 }
 
