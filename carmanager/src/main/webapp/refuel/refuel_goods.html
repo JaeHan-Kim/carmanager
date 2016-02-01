@@ -214,14 +214,15 @@
 		    	  
             if (resultObj.datamile != null) {
 			    	  if (resultObj.datamile[i] == null) {
-			    		  $(".lbl_changetxt").eq(i-1).hide();
+			    		  $(".lbl_changetxt").eq(i-1).text("점검 기록이 없습니다.");
 			    		  $(".lbl_changemile").eq(i-1).text("");
 			    	  } else {
-			    		  $(".lbl_changetxt").eq(i-1).show();
-			    		  $(".lbl_changemile").eq(i-1).text(resultObj.datamile[i]);
+								$(".lbl_changetxt").eq(i-1).text("");						
+								$(".lbl_changetxt").eq(i-1).html('마지막 점검 주행거리 : ' + '<span><label class="lbl_changemile">0</label></span>' + 'km');					
+								$(".lbl_changemile").eq(i-1).text(resultObj.datamile[i]);
 			    	  }
             } else {
-            	$(".lbl_changetxt").eq(i-1).hide();
+            	$(".lbl_changetxt").eq(i-1).text("점검 기록이 없습니다.");
   	    		  $(".lbl_changemile").eq(i-1).text("");
             }
 	    	  
@@ -320,7 +321,7 @@
 										  <li>
 										    <img class="img_goods" src="../img/refuel/refuel_goods/wiper.png"/>&nbsp;
 										    <label class="lbl_goods">와이퍼 블레이드</label><br>
-										    <label class="lbl_lifemile">8000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 교체 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
+										    <label class="lbl_lifemile">8000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 점검 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
 										    
 										    <div class="progress">
 											    <div class="progress-bar"></div>
@@ -335,7 +336,7 @@
 										  <li>
 										    <img class="img_goods" src="../img/refuel/refuel_goods/filter.png"/>&nbsp;
 										    <label class="lbl_goods">에어컨필터</label><br>
-										    <label class="lbl_lifemile">5000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 교체 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
+										    <label class="lbl_lifemile">5000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 점검 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
 										    
 										    <div class="progress">
 											    <div class="progress-bar"></div>
@@ -350,7 +351,7 @@
 										  <li>
 										    <img class="img_goods" src="../img/refuel/refuel_goods/breakpad.png"/>&nbsp;
 										    <label class="lbl_goods">브레이크 패드</label><br>
-										    <label class="lbl_lifemile">30000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 교체 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
+										    <label class="lbl_lifemile">30000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 점검 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
 										    
 										    <div class="progress">
 											    <div class="progress-bar"></div>
@@ -365,7 +366,7 @@
 										  <li>
 										    <img class="img_goods" src="../img/refuel/refuel_goods/breakoil.png"/>&nbsp;
 										    <label class="lbl_goods">브레이크 오일</label><br>
-										    <label class="lbl_lifemile">45000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 교체 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
+										    <label class="lbl_lifemile">45000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 점검 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
 										    
 										    <div class="progress">
 											    <div class="progress-bar"></div>
@@ -380,7 +381,7 @@
 										  <li>
 										    <img class="img_goods" src="../img/refuel/refuel_goods/coolant.png"/>&nbsp;
 										    <label class="lbl_goods">부동액</label><br>
-										    <label class="lbl_lifemile">40000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 교체 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
+										    <label class="lbl_lifemile">40000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 점검 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
 										    
 										    <div class="progress">
 											    <div class="progress-bar"></div>
@@ -395,7 +396,7 @@
 										  <li>
 										    <img class="img_goods" src="../img/refuel/refuel_goods/engine.png"/>&nbsp;
 										    <label class="lbl_goods">엔진 오일</label><br>
-										    <label class="lbl_lifemile">10000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 교체 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
+										    <label class="lbl_lifemile">10000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 점검 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
 										    
 										    <div class="progress">
 											    <div class="progress-bar"></div>
@@ -410,7 +411,7 @@
 										  <li>
 										    <img class="img_goods" src="../img/refuel/refuel_goods/missionoil.png"/>&nbsp;
 										    <label class="lbl_goods">미션 오일</label><br>
-										    <label class="lbl_lifemile">50000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 교체 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
+										    <label class="lbl_lifemile">50000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 점검 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
 										    
 										    <div class="progress">
 											    <div class="progress-bar"></div>
@@ -425,7 +426,7 @@
 										  <li>
 										    <img class="img_goods" src="../img/refuel/refuel_goods/tire.png"/>&nbsp;
 										    <label class="lbl_goods">타이어</label><br>
-										    <label class="lbl_lifemile">60000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 교체 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
+										    <label class="lbl_lifemile">60000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 점검 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
 										  
 										    <div class="progress">
 											    <div class="progress-bar"></div>
@@ -440,7 +441,7 @@
 										  <li>
 										    <img class="img_goods" src="../img/refuel/refuel_goods/battery.png"/>&nbsp;
 										    <label class="lbl_goods">배터리</label><br>
-										    <label class="lbl_lifemile">60000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 교체 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
+										    <label class="lbl_lifemile">60000</label><label class="lbl_txt12px"> km 주기</label><label class="lbl_changetxt">마지막 점검 주행거리 : <span><label class="lbl_changemile">0</label></span>km</label><br>
 										    
 										    <div class="progress">
 											    <div class="progress-bar"></div>
@@ -475,8 +476,10 @@
 		      	$(".percent").eq(indexnum).text('0%');
 		    	  $(".progress-bar").eq(indexnum).css('width', '0%');
 						$(".lbl_restmile").eq(indexnum).text($(".lbl_lifemile").eq(indexnum).text());
-				    $(".lbl_changetxt").eq(indexnum).show();
-					  $(".lbl_changemile").eq(indexnum).text(ajaxResult.data);
+						$(".lbl_changetxt").eq(indexnum).show();
+						$(".lbl_changetxt").eq(indexnum).text("");						
+						$(".lbl_changetxt").eq(indexnum).html('마지막 점검 주행거리 : ' + '<span><label class="lbl_changemile">0</label></span>' + 'km');					
+						$(".lbl_changemile").eq(indexnum).text(ajaxResult.data);
 				  } else {
 					  console.log("실패 ");
 				  }
