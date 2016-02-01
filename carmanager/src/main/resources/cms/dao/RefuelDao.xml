@@ -79,11 +79,18 @@
   
   <select id="selectMonthAvg" resultMap="refuelMap" parameterType="int">
     select
-      grno, DATE_FORMAT(ref_dt, '%Y-%m') as group_date, sum(cost) as cost
+      grno, DATE_FORMAT(ref_dt, '%Y-%c') as group_date, sum(cost) as cost
     from refuel where grno = #{no}
-    group by DATE_FORMAT(ref_dt, '%Y-%m')
-    order by DATE_FORMAT(ref_dt, '%Y-%m') asc
+    group by DATE_FORMAT(ref_dt, '%Y-%c')
+    order by DATE_FORMAT(ref_dt, '%Y-%c') asc
   </select>
+  
+  <select id="selectRefuelOne" resultMap="refuelMap" parameterType="int">
+    select
+      grno, rno, ref_dt, mile, cost, liter, lcost
+    from refuel where rno = #{no}
+  </select>
+  
 
 </mapper>
 

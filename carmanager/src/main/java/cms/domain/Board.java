@@ -8,6 +8,7 @@ public class Board implements Serializable {
 
   protected int     boardNo;
   protected int     memberNo;
+  protected String  nickname;
   protected String  title;
   protected String  content;
   protected Date    createdDate;
@@ -19,8 +20,17 @@ public class Board implements Serializable {
 
   @Override
   public String toString() {
-    return "Board [boardNo=" + boardNo + ", memberNo=" + memberNo + ", title=" + title + ", content=" + content
-        + ", createdDate=" + createdDate + ", category=" + category + ", likes=" + likes + ", views=" + views + "]";
+    return "Board [boardNo=" + boardNo + ", memberNo=" + memberNo + ", nickname=" + nickname + ", title=" + title
+        + ", content=" + content + ", createdDate=" + createdDate + ", category=" + category + ", likes=" + likes
+        + ", views=" + views + "]";
+  }
+
+  public String getNickname() {
+    return nickname;
+  }
+
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
   }
 
   public int getBoardNo() {

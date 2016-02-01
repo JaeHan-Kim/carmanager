@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cms.dao.BoardDao;
@@ -44,6 +45,59 @@ public class BoardController {
     resultMap.put("data", boards);
     resultMap.put("pageAttribute", selectMap);
     
+    
+    return resultMap;
+  }
+  
+  @RequestMapping(value="search", method=RequestMethod.GET)
+  public Object search(
+      @RequestParam(defaultValue="1") int page,
+      @RequestParam(defaultValue="8") int pageSize,
+      String searchKeyword, 
+      String title, 
+      String nickname, 
+      String category
+      ) throws Exception {
+    
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("startIndex", (page - 1) * pageSize);
+    paramMap.put("length", pageSize);
+    
+    System.out.println(category);
+    
+    if (category != null) {
+      paramMap.put("category", category);
+      if (title != null) {
+        searchKeyword = "title";
+        paramMap.put("title", title);
+      } else if (nickname != null) {
+        searchKeyword = "nickname";
+        paramMap.put("nickname", nickname);
+      }
+    } else if (title != null) {
+      searchKeyword = "title";
+      paramMap.put("title", title);
+    } else if (nickname != null) {
+      searchKeyword = "nickname";
+      paramMap.put("nickname", nickname);
+    }
+
+    paramMap.put("keyword", searchKeyword);
+    
+    List<Board> boards = boardDao.searchList(paramMap);
+    
+    int count = boardDao.countSearch(paramMap);
+    int page_link = 7;
+    
+    HashMap<String, Object> selectMap = new HashMap<>();
+    selectMap.put("count", count);
+    selectMap.put("pageSize", pageSize);
+    selectMap.put("page_link", page_link);
+    
+    HashMap<String,Object> resultMap = new HashMap<>();
+    resultMap.put("status", "success");
+    resultMap.put("data", boards);
+    resultMap.put("pageAttribute", selectMap);
     
     return resultMap;
   }

@@ -31,27 +31,58 @@ h3.title {
 	margin-top: 15px !important;
 }
 
+#category {
+  width: 100px;
+  height: 36.5px;
+  position: relative;
+  webkit-box-sizing: border-box;
+  box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  margin-left: 2.1%;
+}
+
 .search_tool {
-	width: 300px;
+	width: 50%;
 	height: 50px;
 	position: relative;
 	float: right;
 	margin-top: 15px;
-	margin-right: 35px;
+	margin-right: 3.2%;
 }
 
-#searchOption {
-	width: 95px;
-	position: relative;
+#search_btn {
+	float: right;
+  position: relative;
+  height: 36.3px;
+  webkit-box-sizing: border-box;
+  box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
 }
 
 .search-box {
   float: right !important;
   width: 200px !important;
-  margin: -36px 0px 5px 0  !important;
+  margin: 0 1px 0 1px !important;
   position: relative !important;
   z-index: 1;
   display: inline !important;
   background-color: white;
   position: relative !important;
+  webkit-box-sizing: border-box;
+  box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+
+#searchOption {
+	width: 100px;
+	height: 36.5px;
+	position: relative;
+	float: right;
+	webkit-box-sizing: border-box;
+  box-sizing:border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
 }

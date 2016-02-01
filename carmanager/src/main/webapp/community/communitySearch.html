@@ -42,12 +42,15 @@
 	<script>
   new WOW().init();
   $(document).ready(function(){ 
-	  sessionStorage.removeItem('searchCategory');
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
     var userCarNo = sessionStorage.getItem('loginUsercarNo');
     var userPhoto = sessionStorage.getItem('loginUserPhoto');
-     $("#userNickname").html(userNickname);
-     $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
+    /* var category = sessionStorage.getItem('searchCategory'); */
+    if (sessionStorage.getItem('searchCategory') != null) {
+   	  document.getElementById('category').value = sessionStorage.getItem('searchCategory');
+    }
+    $("#userNickname").html(userNickname);
+    $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
   });  
 	
 	</script>
@@ -151,12 +154,12 @@
       </div>
       <div class="form-title" id="board-header">
         <div>
-          <select id="category" class="form-control" onchange="search_cate()"> 
-            <option value="">전체</option> 
-            <option value="소모품">소모품</option>
-            <option value="정비소">정비소</option>
-          </select>
-        </div>
+           <select id="category" class="form-control" onchange="search_cate()">
+             <option value="">전체</option> 
+             <option value="소모품">소모품</option>
+             <option value="정비소">정비소</option>
+           </select>
+         </div>
       </div>
       <div class="form-three widget-shadow">
 	      <div class="panel-default">
@@ -177,17 +180,18 @@
 				  <li class="disabled nextx"><a href="#">&raquo;</a></li>
 				</ul>
 				<div class="search_tool">
-				  <button type="button" id="search_btn" class="btn btn-primary">검색</button>
-					<div class="search-box">
-	          <form class="input">
-	            <input class="sb-search-input input__field--madoka" placeholder="검색어를 입력해주세요." type="search" id="input-31" />
+          <form class="input">
+					  <button type="button" id="search_btn" class="btn btn-primary">검색</button>
+						<div class="search-box">
+	            <input class="sb-search-input input__field--madoka" placeholder="검색어를 입력해주세요." type="text" id="input-31" />
 	            <label class="input__label" for="input-31">
 	              <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
 	                <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
 	              </svg>
 	            </label>
-	          </form>
-	        </div>
+	            
+		        </div>
+          </form>
           <div>
             <select id="searchOption" class="form-control">
               <option value="title">제목</option>
@@ -222,37 +226,59 @@
       classie.toggle(showLeftPush, 'disabled');
     }
   }
+
+  var page = document.location.search;
+  page = page.replace("?", "");
+  var keyword = sessionStorage.getItem('searchKeyword');
+  var category = sessionStorage.getItem('searchCategory');
   
-  $.getJSON('../community/ajax/list.do' + document.location.search, function(resultObj) {
- 	  var container = $("#container");
- 	  for (var board of resultObj.data) {
- 	    $("<div class='item block'>")
- 	      .html("<div class='thumbs-wrapper'>" +
- 	    		      "<div class='thumbs'>" +
- 	    		        "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
- 	    		          "<img src='../img/community/1.jpg'/>" +
- 	    		        "</a>" +
- 	    	        "</div>" +
- 	    	      "</div>" +
- 	    	      "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
- 	    	        "<h2 class='title'>"+ board.title + "</h2>" +
- 	    	      "</a>" +
- 	    	      "<p class='subline'>" + board.boardNo + "<span class='fancy'>&amp;</span>" + 
- 	    	      board.category + "<span class='fancy'>&amp;</span>" + board.nickname + "</p>"
- 	    	)
- 	    .appendTo(container);
- 	  }
- 	  
- 	  var selectMap = resultObj.pageAttribute;
- 	  
- 	  jQuery('#document_navi3').jaPageNavigator({
- 	    page_row : selectMap.pageSize, // 보여질 게시물 목록 수
- 	    page_link : selectMap.page_link, // 보여질 페이지 링크 수
- 	    total_count : selectMap.count // 게시물 총 수
- 	  });
+  if(category != null && keyword != null) {
+	  var searchWord = sessionStorage.getItem('searchWord'); 
+	  var url = '../community/ajax/search.do' + "?" + keyword + "=" + searchWord + "&category=" + category + "&" + page;
+  } else if (category != null && keyword == null) {
+		var url = '../community/ajax/search.do' + "?category=" + category + "&" + page;
+  } else {
+	  var searchKeyword = sessionStorage.getItem('searchKeyword');
+	  var searchWord = sessionStorage.getItem('searchWord');
+	  var url = '../community/ajax/search.do' + "?" + searchKeyword + "=" + searchWord + "&" + page;
+  }
+
+  $.getJSON(url, function(resultObj) {
+    var container = $("#container");
+    var selectMap = resultObj.pageAttribute;
+    
+    jQuery('#document_navi3').jaPageNavigator({
+      page_row : selectMap.pageSize, // 보여질 게시물 목록 수
+      page_link : selectMap.page_link, // 보여질 페이지 링크 수
+      total_count : selectMap.count // 게시물 총 수
+    });
+    
+    if (selectMap.count == 0) {
+    	$("<ul>")
+    	  .html("<li style='list-style-type: disc'>검색 조건에 맞는 게시물이 없습니다.</li>").appendTo(container);
+    }
+    
+    for (var board of resultObj.data) {
+      $("<div class='item block'>")
+        .html("<div class='thumbs-wrapper'>" +
+	              "<div class='thumbs'>" +
+	                "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
+	                  "<img src='../img/community/1.jpg'/>" +
+	                "</a>" +
+	              "</div>" +
+	            "</div>" +
+	            "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
+	              "<h2 class='title'>"+ board.title + "</h2>" +
+	            "</a>" +
+	            "<p class='subline'>" + board.boardNo + "<span class='fancy'>&amp;</span>" + 
+	            board.category + "<span class='fancy'>&amp;</span>" + board.nickname + "</p>"
+        )
+      .appendTo(container);
+    }
  	  
  	  // 제목 링크에 클릭 이벤트 리스너를 등록한다.
  	  $("a.detailLnk").click(clickDetailLnk);
+ 	  
  	});
   
   /* 
@@ -261,7 +287,6 @@
     	});
 
   */    	
-  
  	// 게시물 제목을 클릭했을 때 호출될 함수
  	function clickDetailLnk(event) {
  	  event.preventDefault(); 
@@ -273,7 +298,7 @@
           e.preventDefault();
   });
   $('#search_btn').click(searchEvent);
-  $("#input-31").keyup(function(e){
+  $('#input-31').keyup(function(e) {
       if(e.keyCode == 13) searchEvent(); 
   });
   
@@ -292,13 +317,21 @@
     sessionStorage.setItem('searchWord', $('#input-31').val());
     
     location.href = 'communitySearch.html';
-  }
+	}  
   
   function search_cate() {
-	  sessionStorage.removeItem('searchKeyword');
+    if ($('#category').val().length < 1) {
+    	sessionStorage.removeItem('searchKeyword');
+      sessionStorage.removeItem('searchWord');
+ 	    sessionStorage.removeItem('searchCategory');
+    	location.href = 'community.html';
+    	return false;
+    }
+    
+    sessionStorage.removeItem('searchKeyword');
     sessionStorage.removeItem('searchWord');
-	  sessionStorage.setItem('searchCategory', $('#category').val());
-	  location.href = 'communitySearch.html';
+    sessionStorage.setItem('searchCategory', $('#category').val());
+    location.href = 'communitySearch.html';
   }
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
