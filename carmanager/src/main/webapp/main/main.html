@@ -45,6 +45,7 @@ window.scrollTo(0,1); }
 <!-- Go.js -->
 <script src="../js/main/go.js"></script>
 <script src="../js/main/wow.min.js"></script>
+
 <script>
   new WOW().init();
   $(document).ready(function(){
@@ -73,6 +74,13 @@ window.scrollTo(0,1); }
 <script src="../lib/Chart.js/Chart.js"></script>
 <!-- 차트에 날짜 데이터 이용하기 -->
 <script src="../js/main/moment_local.js" type="text/javascript"></script>
+
+<script src="../js/main/d3.min.js" language="JavaScript"></script>
+<script src="../js/main/liquidFillGauge.js" language="JavaScript"></script>
+
+<style>
+    .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
+</style>
 <!-- //chart -->
 
 <!--Calender-->
@@ -278,16 +286,22 @@ window.scrollTo(0,1); }
         <!-- 차트 시작 -->
         <div class="charts">
           <div class="col-md-4 charts-grids widget">
-            <h4 id="topL" class="title">월별 주유 금액 입니다.</h4>
+            <h4 class="title">월별 주유 금액 입니다.</h4>
+            <div id="topL"></div>
             <canvas id="bar" height="300" width="400"> </canvas>
             <div id="bar-legend" class="chart-legend"></div>
           </div>
+          
           <div class="col-md-4 charts-grids widget states-mdl">
             <h4 class="title">저번 주유 대비 연비 개선율 입니다.</h4>
-            <canvas id="doughnut" height="300" width="400"> </canvas>
+            <div id="topM"></div>
+            <svg id="efficgauge"></svg>
+            <div id="circle-legend" class="chart-legend"></div>
           </div>
+          
           <div class="col-md-4 charts-grids widget">
-            <h4 id="topR" class="title">공인 연비 대비 연비 입니다.</h4>
+            <h4 class="title">공인 연비 대비 연비 입니다.</h4>
+            <div id="topR"></div>            
             <canvas id="line" height="300" width="400"> </canvas>
        		 <div id="line-legend" class="chart-legend"></div>
           </div>
@@ -314,7 +328,7 @@ window.scrollTo(0,1); }
       </div>
 
       </div>
-    </div>
+    </div>    
     <script id="code">
     var selectcar = $("#myCarList");
     var cnt = 0;
@@ -331,6 +345,7 @@ window.scrollTo(0,1); }
       $("a.detailLink").click(clickDetailLink);
      lineChart(resultObj);
      barChart(resultObj);
+     displayEffiChart(resultObj);
     
    });
     
@@ -369,14 +384,17 @@ window.scrollTo(0,1); }
       /* alert(sessionStorage.getItem("selectCarNo")); */
       $("#line").remove();
       $("#bar").remove();
+      $("#efficgauge").remove();
       $("#myDiagramDiv").remove();
       $("#diagramEventsMsg").remove();
       $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+selectCarNo, 
           function(resultObj) {
             $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
             $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
+            $("<svg id='efficgauge'></svg>").appendTo("#topM");
             lineChart(resultObj);
             barChart(resultObj);
+            displayEffiChart(resultObj);
           });
       
       $.post('../mygoods/selectCurrentMile.do', {
@@ -494,43 +512,91 @@ window.scrollTo(0,1); }
       });
       document.getElementById('bar-legend').innerHTML = myBar.generateLegend();
     }
-  var doughnutData = [
-	{
-		value: 300,
-		color:"#F7464A",
-		highlight: "#FF5A5E",
-		label: "Red"
-	},
-	{
-		value: 50,
-		color: "#46BFBD",
-		highlight: "#5AD3D1",
-		label: "Green"
-	},
-	{
-		value: 100,
-		color: "#FDB45C",
-		highlight: "#FFC870",
-		label: "Yellow"
-	},
-	{
-		value: 40,
-		color: "#949FB1",
-		highlight: "#A8B3C5",
-		label: "Grey"
-	},
-	{
-		value: 120,
-		color: "#4D5360",
-		highlight: "#616774",
-		label: "Dark Grey"
-	}
+  
+    function displayEffiChart(resultObj) {
+      var w = $("#line").width(), h = $("#line").height();
+      
+      var svg = d3.select("#efficgauge")
+      						.attr("width", w)
+      						.attr("height", h);
+      
+      var effic = new Array();
+      
+      if (resultObj.refuelList != ""  && resultObj.refuelList.length > 2) {
+        for (var i = 0; i < 3; i++) {
+          effic[i] = ((resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter).toFixed(2);
+        }
 
-];
+          var efficper = Math.round(((effic[0]-effic[1])/effic[1])*100); 
+          
+        	if (efficper < 0) {
+        		var config = liquidFillGaugeDefaultSettings();
+            config.circleThickness = 0.1;
+            config.circleColor = "#DC143C";
+            config.textColor = "#8B0000";
+            config.waveColor = "#F7464A";
+            config.textVertPosition = 0.8;
+            config.waveAnimateTime = 1000;
+            config.waveHeight = 0.05;
+            config.waveAnimate = true;
+            config.waveHeightScaling = false;
+            config.waveOffset = 0.25;
+            config.textSize = 0.75;
+            config.waveCount = 3;
+            
+            loadLiquidFillGauge("efficgauge", Math.abs(efficper), config, efficper);
+        	} else {
+	        	var config = liquidFillGaugeDefaultSettings();
+	        	config.circleThickness = 0.1;
+	        	config.circleColor = "#008080";
+	        	config.textColor = "#006400";
+	        	config.waveColor = "#46BFBD";
+	        	config.textVertPosition = 0.8;
+	        	config.waveAnimateTime = 1000;
+            config.waveHeight = 0.05;
+            config.waveAnimate = true;
+            config.waveHeightScaling = false;
+            config.waveOffset = 0.25;
+            config.textSize = 0.75;
+            config.waveCount = 3;
+            
+            loadLiquidFillGauge("efficgauge", efficper, config, efficper);
+	        }
+    	
+      } else {
+    	  
+        	var config = liquidFillGaugeDefaultSettings();
+        	config.circleThickness = 0.1;
+        	config.circleColor = "#008080";
+        	config.textColor = "#006400";
+        	config.waveColor = "#46BFBD";
+        	config.textVertPosition = 0.8;
+        	config.waveAnimateTime = 1000;
+        config.waveHeight = 0.05;
+        config.waveAnimate = true;
+        config.waveHeightScaling = false;
+        config.waveOffset = 0.25;
+        config.textSize = 0.75;
+        config.waveCount = 3;
+        
+        loadLiquidFillGauge("efficgauge", 0, config, 0);
+    	}
+      
+      document.getElementById('circle-legend').innerHTML = 
+    	  "<ul>"+
+          "<li><span style=\"background-color:#008080\"></span>"+
+               "<lable>개선율 증가<label></li>" + 
+          "<li><span style=\"background-color:#F7464A\"></span>"+
+               "<lable>개선율 감소<label></li>"+
+          "(최대:50% ~ 최소:-50%)" + 
+        "</ul>";
+      
+      svg.call(responsivefy);         // rsponsive 처리 
 
-	var ctx3 = document.getElementById("doughnut").getContext("2d");
-	var myDoughnut = new Chart(ctx3).Doughnut(doughnutData, {responsive : true});
-
+      $("#efficgauge").height($("#line").height());
+    }
+  
+  
 	
   	function goIntro(userRatio) {
   	var temp, indexMin; 
