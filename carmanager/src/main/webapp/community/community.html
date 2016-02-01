@@ -261,6 +261,10 @@
  	  location.href = "form.html?no=" + $(event.target).attr("boardNo");
  	}
  
+  $(document).keypress(function(e) {
+      if (e.keyCode == 13)
+          e.preventDefault();
+  });
   $('#search_btn').click(searchEvent);
   $("#input-31").keyup(function(e){
       if(e.keyCode == 13) searchEvent(); 
