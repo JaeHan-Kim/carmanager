@@ -48,6 +48,9 @@ window.scrollTo(0,1); }
 <script>
   new WOW().init();
   $(document).ready(function(){
+    if (sessionStorage.getItem('loginUserNickname') == null) {
+      location.href = "../auth/login.html";
+    }
     $('#blank').css('display', 'none')
     $('#exCar').css('display', 'none')
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
@@ -300,7 +303,7 @@ window.scrollTo(0,1); }
         <div class="row calender widget-shadow">
           <h4 class="title">교체 시기가 다가오는 소모품을 확인하세요.</h4>
           <div class="cal1">
-						<div id="myDiagramDiv" class="well" style="width: auto; height: 400px;"></div>
+						<div id="myDiagramDiv" class="well" style="width: auto; height: 300px;"></div>
         	  <span id="diagramEventsMsg" style="color: red">(message)</span>
           	<div class="clearfix"></div>
           </div>
@@ -394,17 +397,22 @@ window.scrollTo(0,1); }
 
   function lineChart(resultObj) {
     var effic = new Array();
+    var offiEffi = new Array();
     var driveDt = new Array();
-    
-    if (resultObj.refuelList != "") {
-      for (var i = 0; i < 7; i++) {
-        effic[i] = ((resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter).toFixed(2);
-        driveDt[i] = resultObj.refuelList[i].group_date
+    /* && resultObj.refuelList.length >= */
+    if (resultObj.refuelList != "" && resultObj.refuelList.length >= 2 ) {
+      for (var i = resultObj.refuelList.length-1; i > 0; i--) {
+/*         alert(resultObj.refuelList[i-1].group_date); */
+       /*  alert(((resultObj.refuelList[i-1].mile-resultObj.refuelList[i].mile)/resultObj.refuelList[i].liter).toFixed(2)); */
+       effic.push(((resultObj.refuelList[i-1].mile-resultObj.refuelList[i].mile)/resultObj.refuelList[i].liter).toFixed(2));
+        /* alert((resultObj.refuelList[i].mile-resultObj.refuelList[i-1].mile)/resultObj.refuelList[i-1].liter); */
+        offiEffi.push(resultObj.refuelList[0].effi);
+        driveDt.push(resultObj.refuelList[i-1].group_date) 
         //driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
        }
     }
       var lineChartData = {
-        labels : [driveDt[6],driveDt[5],driveDt[4],driveDt[3],driveDt[2],driveDt[1],driveDt[0]],
+        labels : driveDt,
         datasets : [
           {
             label: "구간연비",
@@ -414,13 +422,7 @@ window.scrollTo(0,1); }
             pointStrokeColor : "#fff",
             pointHighlightFill : "#fff",
             pointHighlightStroke : "rgba(220,220,220,1)",
-            data :  [effic[6],
-                     effic[5],
-                     effic[4],
-                     effic[3],
-                     effic[2],
-                     effic[1],
-                     effic[0]]
+            data :  effic
           },
           {
             label: "공인연비",
@@ -430,13 +432,7 @@ window.scrollTo(0,1); }
             pointStrokeColor : "#fff",
             pointHighlightFill : "#fff",
             pointHighlightStroke : "rgba(151,187,205,1)",
-            data : [resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi]
+            data : offiEffi
           }
         ]
     
@@ -537,11 +533,24 @@ window.scrollTo(0,1); }
 
 	
   	function goIntro(userRatio) {
-  	  var temp, indexMin;
+  	var temp, indexMin; 
+  	var repalecePart = 0;
   	var partName = ['와이퍼', '에어컨 필터', '브레이크 패드', '브레이크 오일', '부동액', '엔진오일', '미션오일', '타이어', '베터리'];
+  	var partImage = ['../img/refuel/refuel_goods/wiper.png', 
+  	                 '../img/refuel/refuel_goods/filter.png', 
+  	                 '../img/refuel/refuel_goods/breakpad.png', 
+  	                 '../img/refuel/refuel_goods/breakoil.png', 
+  	                 '../img/refuel/refuel_goods/coolant.png', 
+  	                 '../img/refuel/refuel_goods/engine.png', 
+  	                 '../img/refuel/refuel_goods/missionoil.png', 
+  	                 '../img/refuel/refuel_goods/tire.png', 
+  	                 '../img/refuel/refuel_goods/battery.png'];
 
     for (var i = 0; i < userRatio.length - 1; i++) {
       indexMin = i;
+      if (userRatio[i] >= 80) {
+  		  repalecePart++;
+      }
       for (var j = i + 1; j < userRatio.length; j++) {
           if (userRatio[j] > userRatio[indexMin]) {
               indexMin = j;
@@ -550,9 +559,14 @@ window.scrollTo(0,1); }
       temp = userRatio[indexMin];
       userRatio[indexMin] = userRatio[i];
       userRatio[i] = temp;
+      // -------------------------------
       temp = partName[indexMin];
       partName[indexMin] = partName[i];
       partName[i] = temp;
+   		// -------------------------------
+      temp = partImage[indexMin];
+      partImage[indexMin] = partImage[i];
+      partImage[i] = temp;
   }
 
   	  var $ = go.GraphObject.make;
@@ -611,17 +625,25 @@ window.scrollTo(0,1); }
       var posX = [-600, -600, -600, 600, 600, 600];
       var posY = [200, 0, -200, 200, 0, -200];
   
-       var nodeDataArray = [
-                     	    { "maxSize": new go.Size(300, 300), "key": "car", "img": "car.png", "loc": new go.Point(-150, 0) }];
+       var nodeDataArray = new Array();
        var linkDataArray = new Array();
 	for (var j = 0; j < 6; j++){
 		if (userRatio[j] >= 80) {
-
-			nodeDataArray.push({ "key": partName[j], "img": "car.png", "loc": new go.Point(posX[j], posY[j])});
+			nodeDataArray.push({ "key": partName[j], "img": partImage[j], "loc": new go.Point(posX[j], posY[j])});
 			linkDataArray.push({ from: 'car', to: partName[j], dash: [11, 10], color: 'crimson', width: 2});
 		} 
 	    	  /* alert(partName[j] + " : " + userRatio[j]); */
-	}    
+	}
+	var carStatus;
+	var size = 700;
+  if (repalecePart < 2) {
+    carStatus = "carG.png";
+  } else if (repalecePart < 4) {
+    carStatus = "carO.png";
+  } else {
+    carStatus = "carR.png";
+  }
+  nodeDataArray.push({ "maxSize": new go.Size(400, 500), "key": "car", "img": carStatus, "loc": new go.Point(0, 0) });
 	diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
   	} 
     </script>

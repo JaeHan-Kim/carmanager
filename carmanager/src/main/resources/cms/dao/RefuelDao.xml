@@ -28,16 +28,19 @@
   	select
       DATE_FORMAT(ref_dt, '%Y-%m') as group_date, avg(cost) as cost
     from refuel
+    where ref_dt  > DATE_FORMAT(DATE_ADD(now(), INTERVAL -60 DAY),'%Y-%m-%d')
     group by DATE_FORMAT(ref_dt, '%Y-%m')
     order by DATE_FORMAT(ref_dt, '%Y-%m') desc
+    limit 3
   </select>
 
   <select id="selectMemberCostAvg" resultMap="refuelMap" parameterType="int">
   	select
       grno, DATE_FORMAT(ref_dt, '%Y-%m') as group_date, avg(cost) as cost
-    from refuel where grno = #{no}
+    from refuel where grno = #{no} and  ref_dt  > DATE_FORMAT(DATE_ADD(now(), INTERVAL -60 DAY),'%Y-%m-%d')
     group by DATE_FORMAT(ref_dt, '%Y-%m')
     order by DATE_FORMAT(ref_dt, '%Y-%m') desc
+    limit 3
   </select>
   
   <delete id="delete" parameterType="int">
@@ -51,7 +54,7 @@
     from refuel r
     left outer join garage g on r.grno = g.grno
     left outer join official o on o.mdno = g.mdno
-    where r.grno = #{no}
+    where g.grno = #{no}
     order by ref_dt desc
     limit 1
   </select>

@@ -31,7 +31,7 @@ public class RefuelController {
     if (refuel == null) {
       return new AjaxResult("failure", new Refuel(garageService.carDetail(no).getFuelName()));
     }
-    //log.debug(refuel.toString());
+    log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
     
   }

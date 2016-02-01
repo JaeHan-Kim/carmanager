@@ -13,7 +13,6 @@ addEventListener("load", function() {
 setTimeout(hideURLbar, 0); }, false); 
 function hideURLbar(){ 
 window.scrollTo(0,1); } 
-
 </script>
 
 <!-- Bootstrap Core CSS -->
@@ -123,39 +122,41 @@ window.scrollTo(0,1); }
       <!-- header-right -->
       <div class="header-right">
       	<!-- 유저별 차량 리스트 -->
-          <div class="profile_details_left">
-            <label id="selectCarTitle">&nbsp;&nbsp;* 현재 선택된 차량입니다 :&nbsp;</label>
-            <div class="clearfix"></div>
-              <select id="myCarList" class="selecty s2 selectCar" name="town" id="town">
-              </select>
-         </div>
         <!-- 유저별 차량 리스트 end -->
       
-        <!-- 로그인 유저 정보 -->
+         <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
-            <li class="dropdown profile_details_drop"><a href="#"
-              class="dropdown-toggle" data-toggle="dropdown"
-              aria-expanded="false">
+            <li class="dropdown profile_details_drop">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <div class="profile_img">
                   <span class="prfil-img">
-                  <img id ="thumbnail" class="img-circle" src="" alt=""> </span>
+                  <img id ="thumbnail" src="" alt=""> </span>
                   <div class="user-name">
                     <p id="userNickname"></p>
                     <span>안녕하세요.</span>
                   </div>
                   <!-- 빈칸 유지를 위한 아이콘 자리 -->
-                  <i class="fa fa-angle-down lnr"></i> <i
-                    class="fa fa-angle-up lnr"></i>
+                  <i class="fa fa-angle-down lnr"></i>
+                  <i class="fa fa-angle-up lnr"></i>
                   <div class="clearfix"></div>
                 </div>
             </a>
-              <ul class="dropdown-menu drp-mnu">
-                <li><a id="Mypage" href="#"><i class="fa fa-cog"></i>Mypage</a></li>
-                <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
-              </ul></li>
+              <ul id="myCarList" class="dropdown-menu drp-mnu">
+              </ul>
+            </li>
           </ul>
-        </div>
+       </div>
+       
+       
+        		<div class="profile_details_left">
+					<div id="selectCarName">
+							<h4>현재 선택된 차량은</h4>
+							<label id="selectedMyCar"></label>
+					</div>
+				  <div class="clearfix"> </div>	
+				</div>
+         
         <!-- 로그인 유저 정보 end -->
         <div class="clearfix"></div>
       </div>
@@ -166,27 +167,33 @@ window.scrollTo(0,1); }
     <!--   로그 아웃 클릭 이벤트 -->
     <script>
     $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
-      /* alert(sessionStorage.getItem('loginUsercarNo')); */
       for (var garage of resultObj.data) {
-        $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList');
+        if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
+          /* alert(garage.nickName); */
+          $('#selectedMyCar').html(garage.nickName);
+        }
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-    	 $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
-     	 $('.selecty').selecty();
-   		});
-    	$('#myCarList').change(function(){
-      	sessionStorage.setItem('selectCarNo', $("#myCarList").val());
-    	});
-    $('#Mypage').click(function(event){
-        location.href = "../mypage/mypage.html";
-    });
-    
-    $('#Logout').click(function(event){
-        event.preventDefault();
-        sessionStorage.removeItem('loginUserNickname');
-        sessionStorage.removeItem('selectCarNo');
-        sessionStorage.removeItem('loginUserPhoto');
-        location.href = "../auth/login.html";
-      });
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
+      $("a.link").click(clickLink);
+   	});
+    function clickLink(event) {
+      event.preventDefault();
+      /* alert($(event.target).attr("carName")); */
+      if ($(event.target).attr("carNo") == 'Logout') {
+          sessionStorage.removeItem('loginUserNickname');
+      /*  sessionStorage.removeItem('loginUsercarNo'); */
+          sessionStorage.removeItem('loginUserPhoto');
+          sessionStorage.removeItem('selectCarNo');
+          location.href = "../auth/login.html";
+      } else {
+        /* alert($(event.target).attr("carNo")); */
+        $('#selectedMyCar').html($(event.target).attr("carName"));
+        alert($(event.target).attr("carNo"));
+        sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
+      }
+        
+    }
     </script>
     <!-- main content start-->
     <div id="page-wrapper">
@@ -268,7 +275,6 @@ window.scrollTo(0,1); }
                           confirmButtonText: "확인" }, function() {
                             if($('#deleteNo').val() == sessionStorage.getItem("selectCarNo")) {
                               sessionStorage.setItem('selectCarNo', ajaxResult.data.myCarNo);
-                              $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
                             }
                             location.href = "garage.html";
                           });
@@ -408,7 +414,6 @@ window.scrollTo(0,1); }
         $("#btn_reg").click(function(event){
           var detailModel = $('#txt_trim').val();
           var modelNo = $('#sel_modellist').val();
-
           if ($('#txt_nickname').val().length < 1) {
             swal({   
               title: "Error!",   
@@ -489,7 +494,10 @@ window.scrollTo(0,1); }
               title: "등록 성공!",   
               type: "success",   
               confirmButtonText: "확인 :)" }, function() {   
-                sessionStorage.setItem('loginUsercarNo', ajaxResult.data.myCarNo);
+                if(sessionStorage.getItem("selectCarNo") == 0) {
+                  alert(ajaxResult.data.myCarNo);
+                  sessionStorage.setItem('selectCarNo', ajaxResult.data.myCarNo);
+                }
                 location.href = "garage.html";
               });
         }, 'json');
@@ -503,7 +511,6 @@ window.scrollTo(0,1); }
             $('#div_modelinput').css('display', 'none');
          });  
         });
-
         </script>
         <!-- 차량 등록폼 끝 -->
         <div class="clearfix"></div>
@@ -525,14 +532,12 @@ window.scrollTo(0,1); }
   <script>
       var menuLeft = document.getElementById('cbp-spmenu-s1'), showLeftPush = document
           .getElementById('showLeftPush'), body = document.body;
-
       showLeftPush.onclick = function() {
         classie.toggle(this, 'active');
         classie.toggle(body, 'cbp-spmenu-push-toright');
         classie.toggle(menuLeft, 'cbp-spmenu-open');
         disableOther('showLeftPush');
       };
-
       function disableOther(button) {
         if (button !== 'showLeftPush') {
           classie.toggle(showLeftPush, 'disabled');
@@ -547,4 +552,3 @@ window.scrollTo(0,1); }
   <script src="../js/main/bootstrap.js">
       
     </script>
-<

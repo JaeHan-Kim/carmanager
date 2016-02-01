@@ -52,7 +52,7 @@ public class AuthController {
       session.invalidate();
       return new AjaxResult("failure", null);
     }
-    
+//    session.setAttribute("loginMember", member);
     return new AjaxResult("success", member);
   }
   
