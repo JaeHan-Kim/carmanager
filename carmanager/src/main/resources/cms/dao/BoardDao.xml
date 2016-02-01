@@ -10,17 +10,66 @@
     <result column="mno" property="memberNo"/>
     <result column="cre_dt" property="createdDate"/>
     <result column="cate" property="category"/>
+    <result column="nick" property="nickname"/>
   </resultMap>
   
   <select id="selectList" resultMap="boardMap" parameterType="map">
     select 
-    bno, mno, title, cre_dt, cate, likes, views 
-    from boards order by bno desc 
+    b.bno, b.title, b.cre_dt, b.cate, b.likes, b.views, m.nick
+    from boards b left outer join members m 
+    on m.mno = b.mno
+    order by bno desc 
+    limit #{startIndex}, #{length}
+  </select>
+  
+  <select id="searchList" resultMap="boardMap" parameterType="map">
+    select 
+    b.bno, b.title, b.cre_dt, b.cate, b.likes, b.views, m.nick
+    from boards b left outer join members m 
+    on m.mno = b.mno
+    where 
+    <if test="category != null">
+      b.cate=#{category}
+      <if test="keyword != null">
+        <choose>
+          <when test="keyword == 'title'"> and b.title like concat ('%', #{title}, '%') </when>
+          <when test="keyword == 'nickname'"> and m.nick=#{nickname} </when>
+        </choose>
+      </if>
+    </if>
+    <if test="category == null and keyword != null">
+      <choose>
+        <when test="keyword == 'title'">b.title like concat ('%', #{title}, '%') </when>
+        <when test="keyword == 'nickname'">m.nick=#{nickname} </when>
+      </choose> 
+    </if>
+    order by bno desc
     limit #{startIndex}, #{length}
   </select>
   
   <select id="countAll" resultType="int">
     select count(*) from boards
+  </select>
+  
+  <select id="countSearch" resultType="int" parameterType="map">
+    select count(*) from boards b left outer join members m
+    on m.mno = b.mno
+    where
+    <if test="category != null">
+      b.cate=#{category}
+      <if test="keyword != null">
+        <choose>
+          <when test="keyword == 'title'"> and b.title like concat ('%', #{title}, '%') </when>
+          <when test="keyword == 'nickname'"> and m.nick=#{nickname} </when>
+        </choose>
+      </if>
+    </if>
+    <if test="category == null and keyword != null">
+      <choose>
+        <when test="keyword == 'title'">b.title like concat ('%', #{title}, '%') </when>
+        <when test="keyword == 'nickname'">m.nick=#{nickname} </when>
+      </choose> 
+    </if>
   </select>
  
 </mapper>
