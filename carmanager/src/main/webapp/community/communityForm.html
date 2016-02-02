@@ -12,6 +12,7 @@
   <link type='text/css' rel="stylesheet" href="../css/community/default.css">
   <link type='text/css' rel='stylesheet' href="../lib/bootstrap/css/bootstrap.css" />
   <link type='text/css' rel="stylesheet" href="../lib/sweetalert/sweetalert.css">
+  <link type='text/css' rel="stylesheet" href="../lib/summernote/summernote.css">
   <link type="text/css" rel="stylesheet" media="all" href="../css/main/animate.css" >
   <link type="text/css" rel="stylesheet" href="../css/main/custom.css">
   <link type='text/css' rel='stylesheet' href="../css/main/style.css" />
@@ -25,11 +26,13 @@
         href='http://fonts.googleapis.com/css?family=Oswald' />
   <link type='text/css' rel='stylesheet' 
         href='http://fonts.googleapis.com/css?family=Ovo' />
+        
 
 
 	<script src="../lib/jquery/jquery.min.js"></script>
 	<script src="../lib/sweetalert/sweetalert.min.js"></script>
   <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../lib/summernote/summernote.js"></script>
   <script src="../js/main/classie.js"></script>
   <script src="../js/main/custom.js"></script>
   <script src="../js/main/metisMenu.min.js"></script>
@@ -44,8 +47,9 @@
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
     var userCarNo = sessionStorage.getItem('loginUsercarNo');
     var userPhoto = sessionStorage.getItem('loginUserPhoto');
-     $("#userNickname").html(userNickname);
-     $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
+    $("#userNickname").html(userNickname);
+    $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
+    $('#summernote').summernote();
   });  
 	
 	</script>
@@ -142,55 +146,48 @@
     </script>
 
     <div id="page-wrapper">
-      <div>
-        <h3 class="title">여기는 게시판 입니다!</h3>
-        <h4>마음대로 떠들어보아요.</h4>
-        <p>&nbsp;</p>
+      <div class="main-page">
+      	<h3 class="title">글을 작성하세요 !</h3>
+      	<h4> 1 </h4><p>&nbsp;</p>
+		  	<div class="form-three widget-shadow">
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="focusedinput" class="col-sm-2 control-label">카테고리</label>
+							<div class="col-sm-1">
+								<select id="category" class="form-control" onchange="search_cate()"> 
+      						<option value="">전체</option> 	
+									<option value="소모품">소모품</option>
+   							  <option value="정비소">정비소</option>
+     						</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="title" class="col-sm-2 control-label">제목</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control1" id="title" placeholder="제목을 입력하세요">
+							</div>
+						</div>
+						<div class="form-group">
+							<div id="summernote"><p>Hello Summernote</p></div>
+						</div>
+						<div class="form-group">
+      				<div class="col-sm-offset-2 col-sm-10">
+      					<button id='addBtn' type='button' class="newForm btn btn-primary">글쓰기</button>
+     						<button id='ListBtn' type='button' class="detailForm btn btn-primary">목록</button>
+      				</div>
+     				</div>
+      			<div class="clearfix"> </div>
+					</form>
+				</div>
       </div>
-      <div class="col-md-8 compose-right widget-shadow">
-        <div class="panel-default">
-          <div class="panel-heading">
-            <span id="bcategory"></span>
-            <h3 id="btitle"></h3>
-            <span id="bcreatedDate"></span>
-            <span id="bnickname"></span>
-          </div>
-          <div class="panel-body">
-            <div class="container" id="container">
-              <div id="viewnlike">
-                <label>조회 : </label>
-                <span id="bviews"></span>
-                <label>추천 : </label>
-                <span id="blikes"></span>
-              </div>
-                <div id="bcontent"></div>
-              </div>
-              <div id="div_likebtn">
-                <button class="btn btn-primary" type="button">좋아요</button>
-              </div>
-              
-            </div>
-            <div class="panel-heading">
-	            <button id='addBtn' type='button' 
-              class="newForm btn btn-default">글쓰기</button>
-              <button id='updateBtn' type='button' 
-              class="detailForm btn btn-default">변경</button>
-              <button id='deleteBtn' type='button' 
-              class="detailForm btn btn-default">삭제</button>
-              <button id='listBtn' type='button' 
-              class="detailForm btn btn-default">목록</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
+    </div>
+    
     <div class="footer">
       <p>
         &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
       </p>
     </div>
   </div>
-  
   <script>
   var menuLeft = document.getElementById('cbp-spmenu-s1'), 
       showLeftPush = document.getElementById('showLeftPush'), 
@@ -209,23 +206,22 @@
     }
   }
   
-  var no = location.href.split('?')[1].split('=')[1];
   
-  $.getJSON('../community/ajax/detail.do?no=' + no, function(resultObj) {
+/*   $.getJSON('../community/ajax/detail.do?no=' + no, function(resultObj) {
     var ajaxResult = resultObj.ajaxResult;
     if (ajaxResult.status == "success") {
       var board = ajaxResult.data;
-      $("#btitle").text(board.title);
-      $("#bcategory").html("[" + board.category + "]&nbsp;&nbsp;");
-      $("#bnickname").html(board.nickname + "&nbsp;&nbsp;");
-      $("#bcontent").html(board.content);
-      $("#bviews").html(board.views + "&nbsp;&nbsp;");
+      $("#btitle").html(board.title);
+      $("#bcategory").html("[" + board.category + "]");
+      $("#bnickname").html(board.nickname);
+      $("#bcontent").val(board.content);
+      $("#bviews").text(board.views);
       $("#blikes").text(board.likes);
       $("#bcreatedDate").text(board.createdDate);
     }
-  });  
+  });   */
   
-  $('#listBtn').click(function(event) {
+  $('#ListBtn').click(function(event) {
 	  location.href = "community.html";
   });
   </script>

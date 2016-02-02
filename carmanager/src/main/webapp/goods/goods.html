@@ -43,7 +43,7 @@
 	  new WOW().init();
 	  $(document).ready(function(){ 
 	    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
-	    var userCarNo = sessionStorage.getItem('loginUsercarNo');
+	    var userCarNo = sessionStorage.getItem('selectCarNo');
 	    var userPhoto = sessionStorage.getItem('loginUserPhoto');
 	    $("#userNickname").html(userNickname);
 	    $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
