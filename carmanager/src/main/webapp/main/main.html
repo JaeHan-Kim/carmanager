@@ -339,9 +339,9 @@ window.scrollTo(0,1); }
           /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
-        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
       $("a.link").click(clickLink);
      lineChart(resultObj);
      barChart(resultObj);
@@ -373,7 +373,7 @@ window.scrollTo(0,1); }
       } else {
         /* alert($(event.target).attr("carNo")); */
         $('#selectedMyCar').html($(event.target).attr("carName"));
-        alert($(event.target).attr("carNo"));
+       /*  alert($(event.target).attr("carNo")); */
         sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
         changeMyCar();
       }
@@ -470,8 +470,8 @@ window.scrollTo(0,1); }
     }
   
   function barChart(resultObj) {
-	  alert(resultObj.memCostAvg.length);
-    alert(resultObj.myCostAvg.length);
+	 /*  alert(resultObj.memCostAvg.length);
+    alert(resultObj.myCostAvg.length); */
     var month = new Array();
     var memCostAvg = new Array();
     var myCostAvg = new Array();

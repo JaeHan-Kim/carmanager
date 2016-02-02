@@ -163,9 +163,9 @@
           /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
-        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
       $("a.link").click(clickLink);
    	});
     function clickLink(event) {
@@ -182,8 +182,9 @@
         $('#selectedMyCar').html($(event.target).attr("carName"));
         alert($(event.target).attr("carNo"));
         sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
+        settingRecord();
       }
-        
+      
     }
     </script>
     <!-- main content start-->
@@ -327,7 +328,10 @@
             <script type="text/javascript">
               var today = moment().format('YYYY-MM-DD');
               var predictMile = null;
-              //alert(sessionStorage.getItem("selectCarNo"));
+              settingRecord();
+ 			
+              function settingRecord() {
+		      //alert(sessionStorage.getItem("selectCarNo"));
               $.getJSON('list.do?no=' + sessionStorage.getItem("selectCarNo"), function(resultObj) {
                 var ajaxResult = resultObj.ajaxResult;
                 var refuel = ajaxResult.data;
@@ -356,6 +360,7 @@
                 	}
                   });
               });
+ 			}
             </script>
             
             <!-- 날짜 클릭시 주유기록 출력 리스트 -->
