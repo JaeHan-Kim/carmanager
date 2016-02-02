@@ -41,14 +41,12 @@
     </property>
     </bean>
 
-	<!-- 
     <mvc:interceptors>
     <mvc:interceptor>
         <mvc:mapping path="/**"/>
-        <bean class="java76.pms.interceptor.AuthInterceptor"/>
+        <bean class="cms.interceptor.AuthInterceptor"/>
     </mvc:interceptor>
     </mvc:interceptors>
-    -->
 
 </beans>
 

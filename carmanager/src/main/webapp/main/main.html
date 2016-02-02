@@ -319,16 +319,16 @@ window.scrollTo(0,1); }
     var selectcar = $("#myCarList");
     var cnt = 0;
     var lifeTime = [0, 8000, 5000, 30000, 45000, 40000, 10000, 50000, 60000, 60000];
-    $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+    $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
       for (var garage of resultObj.data) {
         if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
           /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
-        $("<li><a class='detailLink' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-      $("<li><a class='detailLink' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
-      $("a.detailLink").click(clickDetailLink);
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
+      $("a.link").click(clickLink);
      lineChart(resultObj);
      barChart(resultObj);
     
@@ -346,7 +346,7 @@ window.scrollTo(0,1); }
     	  goIntro(userRatio);
       }
     }, 'json')
-    function clickDetailLink(event) {
+    function clickLink(event) {
       event.preventDefault();
       /* alert($(event.target).attr("carName")); */
       if ($(event.target).attr("carNo") == 'Logout') {
@@ -358,20 +358,21 @@ window.scrollTo(0,1); }
       } else {
         /* alert($(event.target).attr("carNo")); */
         $('#selectedMyCar').html($(event.target).attr("carName"));
-        changeMyCar($(event.target).attr("carNo"));
+        alert($(event.target).attr("carNo"));
+        sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
+        changeMyCar();
       }
         
     }
     
-    function changeMyCar(selectCarNo){
+    function changeMyCar(){
       /* alert($("#myCarList").val()); */
-      sessionStorage.setItem('selectCarNo', selectCarNo);
       /* alert(sessionStorage.getItem("selectCarNo")); */
       $("#line").remove();
       $("#bar").remove();
       $("#myDiagramDiv").remove();
       $("#diagramEventsMsg").remove();
-      $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+selectCarNo, 
+      $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), 
           function(resultObj) {
             $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
             $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
@@ -451,11 +452,28 @@ window.scrollTo(0,1); }
     }
   
   function barChart(resultObj) {
-     var twoago = (moment().subtract(60, 'days').months() + 1) + "월";
-      var oneago = (moment().subtract(30, 'days').months() + 1) + "월";
-      var present = moment().format('MM')  + "월";
+	  alert(resultObj.memCostAvg.length);
+    alert(resultObj.myCostAvg.length);
+    var month = new Array();
+    var memCostAvg = new Array();
+    var myCostAvg = new Array();
+    month.push((moment().subtract(60, 'days').months() + 1) + "월");
+    month.push((moment().subtract(30, 'days').months() + 1) + "월");
+    month.push(moment().format('MM')  + "월");
+
+ 	for (var i = resultObj.memCostAvg.length-1; i >= 0; i-- ) {
+ 		memCostAvg.push((resultObj.memCostAvg[i].cost/=1000).toFixed(2));
+  } 
+	for (var i = resultObj.myCostAvg.length-1; i >= 0; i-- ) {
+	  myCostAvg.push((resultObj.myCostAvg[i].cost/=1000).toFixed(2));
+  } 
+	if (resultObj.memCostAvg.length > resultObj.myCostAvg.length) {
+	  for (var i = resultObj.myCostAvg.length; i < resultObj.memCostAvg.length; i++) {
+		  myCostAvg.push(0);
+	  }
+	}
          var barChartData = {
-           labels : [twoago, oneago, present],
+           labels : month,
            datasets : [
              {
                label: "회원평균",
@@ -463,9 +481,7 @@ window.scrollTo(0,1); }
                strokeColor : "rgba(233, 78, 2, 0.9)",
                highlightFill: "#e94e02",
                highlightStroke: "#e94e02",
-               data : [(resultObj.memCostAvg[2].cost/=1000).toFixed(2), 
-                      (resultObj.memCostAvg[1].cost/=1000).toFixed(2), 
-                      (resultObj.memCostAvg[0].cost/=1000).toFixed(2)]
+               data : memCostAvg
              },
              {
                label: "개인평균",
@@ -473,9 +489,7 @@ window.scrollTo(0,1); }
                strokeColor : "rgba(79, 82, 186, 0.9)",
                highlightFill: "#4F52BA",
                highlightStroke: "#4F52BA",
-               data : [(resultObj.myCostAvg[2].cost/=1000).toFixed(2), 
-                      (resultObj.myCostAvg[1].cost/=1000).toFixed(2),
-                      (resultObj.myCostAvg[0].cost/=1000).toFixed(2)]
+               data : myCostAvg
              }
            ]
          };
@@ -622,7 +636,7 @@ window.scrollTo(0,1); }
               new go.Binding("strokeDashArray", "dash"))
           );
 			
-      var posX = [-600, -600, -600, 600, 600, 600];
+      var posX = [-400, -400, -400, 400, 400, 400];
       var posY = [200, 0, -200, 200, 0, -200];
   
        var nodeDataArray = new Array();
@@ -643,7 +657,7 @@ window.scrollTo(0,1); }
   } else {
     carStatus = "carR.png";
   }
-  nodeDataArray.push({ "maxSize": new go.Size(400, 500), "key": "car", "img": carStatus, "loc": new go.Point(0, 0) });
+  nodeDataArray.push({ "maxSize": new go.Size(400, 500), "key": "car", "img": carStatus, "loc": new go.Point(-150, -100) });
 	diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
   	} 
     </script>

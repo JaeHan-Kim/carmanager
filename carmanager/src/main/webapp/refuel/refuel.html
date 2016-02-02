@@ -39,7 +39,7 @@
 	  new WOW().init();
 	  $(document).ready(function(){ 
 	    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
-	    var userCarNo = sessionStorage.getItem('selectCarNo');
+	    /* var userCarNo = sessionStorage.getItem('selectCarNo'); */
 	    var userPhoto = sessionStorage.getItem('loginUserPhoto');
 	    $("#userNickname").html(userNickname);
       $('#liter').css('display', 'none')
@@ -163,12 +163,12 @@
           /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
-        $("<li><a class='detailLink' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-      $("<li><a class='detailLink' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
-      $("a.detailLink").click(clickDetailLink);
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
+      $("a.link").click(clickLink);
    	});
-    function clickDetailLink(event) {
+    function clickLink(event) {
       event.preventDefault();
       /* alert($(event.target).attr("carName")); */
       if ($(event.target).attr("carNo") == 'Logout') {
@@ -180,7 +180,6 @@
       } else {
         /* alert($(event.target).attr("carNo")); */
         $('#selectedMyCar').html($(event.target).attr("carName"));
-        alert($(event.target).attr("carNo"));
         alert($(event.target).attr("carNo"));
         sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
       }
@@ -328,7 +327,9 @@
             <script type="text/javascript">
               var today = moment().format('YYYY-MM-DD');
               var predictMile = null;
-
+              	
+ 
+						  alert(sessionStorage.getItem("selectCarNo"));
               $.getJSON('list.do?no=' + sessionStorage.getItem("selectCarNo"), function(resultObj) {
                 var ajaxResult = resultObj.ajaxResult;
                 var refuel = ajaxResult.data;
@@ -357,7 +358,6 @@
                 	}
                   });
               });
-      
             </script>
             
             <!-- 날짜 클릭시 주유기록 출력 리스트 -->
