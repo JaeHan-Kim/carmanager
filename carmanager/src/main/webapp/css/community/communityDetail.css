@@ -5,23 +5,19 @@
 }
 
 #board-header {
-	position: relative;
 	margin-bottom: -32px;
 	background-color: RGB(220, 220, 220);
   box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
   -webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
   -moz-box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
-  border: 1px solid red;
 }
 
 #bcategory,
-#btitle {
+#btitle,
+#bnickname,
+#bcreatedDate {
 	display: inline;
-}
-
-#btitle {
-	text-align: center;
-	
+	position: relative;
 }
 
 h3.title {
@@ -30,70 +26,31 @@ h3.title {
 	margin-bottom: 0.8em;
 }
 
-#board-footer {
-	background-color: RGB(220, 220, 220);
-	box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
-  -webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
-  -moz-box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
-}
-
-#document_navi3 {
-	position: relative;
-	margin-top: 15px !important;
-}
-
-#category {
-  width: 100px;
-  height: 36.5px;
-  position: relative;
-  webkit-box-sizing: border-box;
-  box-sizing:border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  margin-left: 2.1%;
-}
-
-.search_tool {
-	width: 50%;
-	height: 50px;
-	position: relative;
+#bnickname {
 	float: right;
-	margin-top: 15px;
-	margin-right: 3.2%;
+	font-size: 20px;
 }
 
-#search_btn {
+#bcreatedDate {
+  float: right;
+  font-size: 20px;
+}
+
+#viewnlike {
+	width: 100%;
 	float: right;
-  position: relative;
-  height: 36.3px;
-  webkit-box-sizing: border-box;
-  box-sizing:border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
+	text-align: right;
+	margin-bottom: 50px;
 }
 
-.search-box {
-  float: right !important;
-  width: 200px !important;
-  margin: 0 1px 0 1px !important;
-  position: relative !important;
-  z-index: 1;
-  display: inline !important;
-  background-color: white;
-  position: relative !important;
-  webkit-box-sizing: border-box;
-  box-sizing:border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
+#bcontent {
+	width: 70%;
+	height: 100%;
+	display: block;
+	margin-bottom: 30px;
 }
 
-#searchOption {
-	width: 100px;
-	height: 36.5px;
-	position: relative;
-	float: right;
-	webkit-box-sizing: border-box;
-  box-sizing:border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
+#addBtn, #updateBtn,
+#deleteBtn, #listBtn {
+	background-color: #eaeaea!important;
 }

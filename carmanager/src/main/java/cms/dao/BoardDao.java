@@ -15,6 +15,8 @@ public interface BoardDao {
   int countSearch(Map<String,Object> paramMap);
   
   Board selectOne(int no);
+  
+  int viewsUp(int no);
 }
 
 
