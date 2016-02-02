@@ -147,68 +147,50 @@
         <h4>마음대로 떠들어보아요.</h4>
         <p>&nbsp;</p>
       </div>
-      <div class="form-title" id="board-header">
-        <span id="bcategory"></span><h3 id="btitle"></h3>
-      </div>
-      <div class="form-three widget-shadow">
+      <div class="col-md-8 compose-right widget-shadow">
         <div class="panel-default">
-          <div class="main-page">
+          <div class="panel-heading">
+            <span id="bcategory"></span>
+            <h3 id="btitle"></h3>
+            <span id="bcreatedDate"></span>
+            <span id="bnickname"></span>
+          </div>
+          <div class="panel-body">
             <div class="container" id="container">
-              <form id='form1' class="form-horizontal">
-							  <div class="form-group">
-							    <label for="bcontent" class="col-sm-2 control-label">내용</label>
-							    <div class="col-sm-10">
-							      <textarea id="bcontent" class="form-control" 
-							                rows='10' cols='60' placeholder="내용"></textarea>
-							    </div>
-							  </div>
-							  <div class="detailForm form-group">
-							    <label class="col-sm-2 control-label">조회수</label>
-							    <div class="col-sm-10">
-							      <p id="bviews" class="form-control-static"></p>
-							    </div>
-							  </div>
-							  <div class="detailForm form-group">
-                  <label class="col-sm-2 control-label">추천수</label>
-                  <div class="col-sm-10">
-                    <p id="blikes" class="form-control-static"></p>
-                  </div>
-                </div>
-							  <div class="detailForm form-group">
-							    <label class="col-sm-2 control-label">등록일</label>
-							    <div class="col-sm-10">
-							      <p id="bcreatedDate" class="form-control-static"></p>
-							    </div>
-							  </div>
-							</form>
+              <div id="viewnlike">
+                <label>조회 : </label>
+                <span id="bviews"></span>
+                <label>추천 : </label>
+                <span id="blikes"></span>
+              </div>
+                <div id="bcontent"></div>
+              </div>
+              <div id="div_likebtn">
+                <button class="btn btn-primary" type="button">좋아요</button>
+              </div>
               
+            </div>
+            <div class="panel-heading">
+	            <button id='addBtn' type='button' 
+              class="newForm btn btn-default">글쓰기</button>
+              <button id='updateBtn' type='button' 
+              class="detailForm btn btn-default">변경</button>
+              <button id='deleteBtn' type='button' 
+              class="detailForm btn btn-default">삭제</button>
+              <button id='listBtn' type='button' 
+              class="detailForm btn btn-default">목록</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="form-title" id="board-footer">
-				<div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button id='addBtn' type='button' 
-              class="newForm btn btn-primary">글쓰기</button>
-            <button id='updateBtn' type='button' 
-              class="detailForm btn btn-primary">변경</button>
-            <button id='deleteBtn' type='button' 
-              class="detailForm btn btn-primary">삭제</button>
-            <button id='ListBtn' type='button' 
-              class="detailForm btn btn-primary">목록</button>
-          </div>
-        </div>
-        <div class="clearfix"> </div>
-      </div>
-    </div>
-    
+      
     <div class="footer">
       <p>
         &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
       </p>
     </div>
   </div>
+  
   <script>
   var menuLeft = document.getElementById('cbp-spmenu-s1'), 
       showLeftPush = document.getElementById('showLeftPush'), 
@@ -233,17 +215,17 @@
     var ajaxResult = resultObj.ajaxResult;
     if (ajaxResult.status == "success") {
       var board = ajaxResult.data;
-      $("#btitle").html(board.title);
-      $("#bcategory").html("[" + board.category + "]");
-      $("#bnickname").html(board.nickname);
-      $("#bcontent").val(board.content);
-      $("#bviews").text(board.views);
+      $("#btitle").text(board.title);
+      $("#bcategory").html("[" + board.category + "]&nbsp;&nbsp;");
+      $("#bnickname").html(board.nickname + "&nbsp;&nbsp;");
+      $("#bcontent").html(board.content);
+      $("#bviews").html(board.views + "&nbsp;&nbsp;");
       $("#blikes").text(board.likes);
       $("#bcreatedDate").text(board.createdDate);
     }
   });  
   
-  $('#ListBtn').click(function(event) {
+  $('#listBtn').click(function(event) {
 	  location.href = "community.html";
   });
   </script>

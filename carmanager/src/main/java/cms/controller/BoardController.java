@@ -104,7 +104,7 @@ public class BoardController {
   
   @RequestMapping("detail")
   public Object detail(int no) throws Exception {
-    System.out.println(no);
+    boardDao.viewsUp(no);
     Board board = boardDao.selectOne(no);
     return new AjaxResult("success", board);
   }

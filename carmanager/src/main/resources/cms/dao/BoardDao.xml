@@ -79,5 +79,10 @@
     on m.mno = b.mno
     where b.bno=#{boardNo}
   </select> 
+  
+  <update id="viewsUp" parameterType="int">
+    update boards set views=views + 1  
+    where bno=#{boardNo};
+  </update>
  
 </mapper>
