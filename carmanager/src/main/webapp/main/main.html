@@ -363,7 +363,8 @@ window.scrollTo(0,1); }
     }, 'json')
     function clickLink(event) {
       event.preventDefault();
-      /* alert($(event.target).attr("carName")); */
+    	alert($(event.target).attr("carNo"));
+      alert($(event.target).attr("carName"));
       if ($(event.target).attr("carNo") == 'Logout') {
           sessionStorage.removeItem('loginUserNickname');
       /*  sessionStorage.removeItem('loginUsercarNo'); */
@@ -371,24 +372,22 @@ window.scrollTo(0,1); }
           sessionStorage.removeItem('selectCarNo');
           location.href = "../auth/login.html";
       } else {
-        /* alert($(event.target).attr("carNo")); */
         $('#selectedMyCar').html($(event.target).attr("carName"));
-       /*  alert($(event.target).attr("carNo")); */
         sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
-        changeMyCar();
+        changeMyCar(sessionStorage.getItem("selectCarNo"));
       }
         
     }
     
-    function changeMyCar(){
-      /* alert($("#myCarList").val()); */
-      /* alert(sessionStorage.getItem("selectCarNo")); */
+    function changeMyCar(selectCarNo){
+      /* alert(sessionStorage.getItem('selectCarNo'));
+      alert(selectCarNo); */
       $("#line").remove();
       $("#bar").remove();
       $("#efficgauge").remove();
       $("#myDiagramDiv").remove();
       $("#diagramEventsMsg").remove();
-      $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), 
+      $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+selectCarNo, 
           function(resultObj) {
             $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
             $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
@@ -399,7 +398,7 @@ window.scrollTo(0,1); }
           });
       
       $.post('../mygoods/selectCurrentMile.do', {
-	      no: sessionStorage.getItem("selectCarNo")
+	      no: selectCarNo
 	    }, function(resultObj) {
 	      var userRatio = new Array();
 	      if (resultObj.status == "success") {
@@ -418,17 +417,18 @@ window.scrollTo(0,1); }
     var effic = new Array();
     var offiEffi = new Array();
     var driveDt = new Array();
-    /* && resultObj.refuelList.length >= */
     if (resultObj.refuelList != "" && resultObj.refuelList.length >= 2 ) {
       for (var i = resultObj.refuelList.length-1; i > 0; i--) {
-/*         alert(resultObj.refuelList[i-1].group_date); */
-       /*  alert(((resultObj.refuelList[i-1].mile-resultObj.refuelList[i].mile)/resultObj.refuelList[i].liter).toFixed(2)); */
        effic.push(((resultObj.refuelList[i-1].mile-resultObj.refuelList[i].mile)/resultObj.refuelList[i].liter).toFixed(2));
-        /* alert((resultObj.refuelList[i].mile-resultObj.refuelList[i-1].mile)/resultObj.refuelList[i-1].liter); */
         offiEffi.push(resultObj.refuelList[0].effi);
         driveDt.push(resultObj.refuelList[i-1].group_date) 
-        //driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
        }
+    } else {
+      var canvas = document.getElementById("line");
+      var ctx = canvas.getContext("2d");
+      ctx.font = "25px Arial";
+      ctx.fillText("최소 3개 이상의 기록이 필요합니다.",30,50);
+      return;
     }
       var lineChartData = {
         labels : driveDt,
@@ -470,26 +470,39 @@ window.scrollTo(0,1); }
     }
   
   function barChart(resultObj) {
-	 /*  alert(resultObj.memCostAvg.length);
-    alert(resultObj.myCostAvg.length); */
+		/* alert("memCostAvg : " + resultObj.memCostAvg.length);
+    alert("myCostAvg : " + resultObj.myCostAvg.length); */
     var month = new Array();
     var memCostAvg = new Array();
     var myCostAvg = new Array();
     month.push((moment().subtract(60, 'days').months() + 1) + "월");
     month.push((moment().subtract(30, 'days').months() + 1) + "월");
     month.push(moment().format('MM')  + "월");
-
+   
  	for (var i = resultObj.memCostAvg.length-1; i >= 0; i-- ) {
  		memCostAvg.push((resultObj.memCostAvg[i].cost/=1000).toFixed(2));
   } 
-	for (var i = resultObj.myCostAvg.length-1; i >= 0; i-- ) {
-	  myCostAvg.push((resultObj.myCostAvg[i].cost/=1000).toFixed(2));
+ 	if (resultObj.myCostAvg.length == 3) {
+ 	 for (var i = resultObj.myCostAvg.length-1; i >= 0; i-- ) {
+	    myCostAvg.push((resultObj.myCostAvg[i].cost/=1000).toFixed(2));
+ 	} 
+ 	} else if (resultObj.myCostAvg.length == 2) {
+ 	 for (var i = resultObj.myCostAvg.length-1; i >= 0; i-- ) {
+     myCostAvg.push((resultObj.myCostAvg[i].cost/=1000).toFixed(2));
+	 } 
+ 	myCostAvg.push(0);
+ 	} else if (resultObj.myCostAvg.length == 1) {
+ 	 	myCostAvg.push(0);
+ 	 	myCostAvg.push(0);
+ 	 for (var i = resultObj.myCostAvg.length-1; i >= 0; i-- ) {
+	   myCostAvg.push((resultObj.myCostAvg[i].cost/=1000).toFixed(2));
   } 
-	if (resultObj.memCostAvg.length > resultObj.myCostAvg.length) {
-	  for (var i = resultObj.myCostAvg.length; i < resultObj.memCostAvg.length; i++) {
-		  myCostAvg.push(0);
-	  }
-	}
+ 	} else {
+ 		myCostAvg.push(0);
+ 		myCostAvg.push(0);
+	 	myCostAvg.push(0);
+ 	}
+	
          var barChartData = {
            labels : month,
            datasets : [
