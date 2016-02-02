@@ -4050,3 +4050,9 @@ h4.title3 {
   float: left;
   width: 20px;
 }
+
+#selectedMyCar {
+  font-weight: bolder;
+  font-size: 1.5em;
+  color: rgb(59, 68, 88);
+}

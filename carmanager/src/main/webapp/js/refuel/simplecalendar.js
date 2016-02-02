@@ -227,7 +227,7 @@ var calendar = {
         //alert(eventYear);
         //alert(monthEvent);
         //alert(eventDay);
-        alert(refuelValue);
+        //alert(refuelValue);
         
         $('#addForm').css('display', 'none')
         $('#updateForm').css('display', '')
