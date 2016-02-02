@@ -7,8 +7,10 @@
 	text-align:  center;
 }
 .temp { 
-		  padding: 40px 20px;
-		  background: white;
+/* 			width: 50px; */
+/* 			height: 50px; */
+		  padding: 5px 10px;
+		  /* background: white; */
 		 	text-align: center; 
 }
 .slider div {

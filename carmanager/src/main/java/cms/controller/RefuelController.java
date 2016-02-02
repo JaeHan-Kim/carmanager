@@ -29,9 +29,13 @@ public class RefuelController {
     Refuel refuel = refuelService.oilList(no);
     
     if (refuel == null) {
+    	log.debug("---------------");
+    	log.debug(" 들어옴");
+    	log.debug("---------------");
+    	
       return new AjaxResult("failure", new Refuel(garageService.carDetail(no).getFuelName()));
     }
-    //log.debug(refuel.toString());
+    log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
     
   }
@@ -53,6 +57,9 @@ public class RefuelController {
   public AjaxResult addRefuel(Refuel refuel) throws Exception {
     
     if (garageService.carDetail(refuel.getMyCarNo()).getMile() > refuel.getMile()) {
+    	log.debug("------------------------");
+    	log.debug(garageService.carDetail(refuel.getMyCarNo()).getMile());
+    	log.debug("------------------------");
       return new AjaxResult("failure", null);
     }
 

@@ -45,9 +45,13 @@ window.scrollTo(0,1); }
 <!-- Go.js -->
 <script src="../js/main/go.js"></script>
 <script src="../js/main/wow.min.js"></script>
+
 <script>
   new WOW().init();
   $(document).ready(function(){
+    if (sessionStorage.getItem('loginUserNickname') == null) {
+      location.href = "../auth/login.html";
+    }
     $('#blank').css('display', 'none')
     $('#exCar').css('display', 'none')
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
@@ -70,6 +74,13 @@ window.scrollTo(0,1); }
 <script src="../lib/Chart.js/Chart.js"></script>
 <!-- 차트에 날짜 데이터 이용하기 -->
 <script src="../js/main/moment_local.js" type="text/javascript"></script>
+
+<script src="../js/main/d3.min.js" language="JavaScript"></script>
+<script src="../js/main/liquidFillGauge.js" language="JavaScript"></script>
+
+<style>
+    .liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
+</style>
 <!-- //chart -->
 
 <!--Calender-->
@@ -275,16 +286,22 @@ window.scrollTo(0,1); }
         <!-- 차트 시작 -->
         <div class="charts">
           <div class="col-md-4 charts-grids widget">
-            <h4 id="topL" class="title">월별 주유 금액 입니다.</h4>
+            <h4 class="title">월별 주유 금액 입니다.</h4>
+            <div id="topL"></div>
             <canvas id="bar" height="300" width="400"> </canvas>
             <div id="bar-legend" class="chart-legend"></div>
           </div>
+          
           <div class="col-md-4 charts-grids widget states-mdl">
             <h4 class="title">저번 주유 대비 연비 개선율 입니다.</h4>
-            <canvas id="doughnut" height="300" width="400"> </canvas>
+            <div id="topM"></div>
+            <svg id="efficgauge"></svg>
+            <div id="circle-legend" class="chart-legend"></div>
           </div>
+          
           <div class="col-md-4 charts-grids widget">
-            <h4 id="topR" class="title">공인 연비 대비 연비 입니다.</h4>
+            <h4 class="title">공인 연비 대비 연비 입니다.</h4>
+            <div id="topR"></div>            
             <canvas id="line" height="300" width="400"> </canvas>
        		 <div id="line-legend" class="chart-legend"></div>
           </div>
@@ -300,7 +317,7 @@ window.scrollTo(0,1); }
         <div class="row calender widget-shadow">
           <h4 class="title">교체 시기가 다가오는 소모품을 확인하세요.</h4>
           <div class="cal1">
-						<div id="myDiagramDiv" class="well" style="width: auto; height: 400px;"></div>
+						<div id="myDiagramDiv" class="well" style="width: auto; height: 300px;"></div>
         	  <span id="diagramEventsMsg" style="color: red">(message)</span>
           	<div class="clearfix"></div>
           </div>
@@ -311,23 +328,24 @@ window.scrollTo(0,1); }
       </div>
 
       </div>
-    </div>
+    </div>    
     <script id="code">
     var selectcar = $("#myCarList");
     var cnt = 0;
     var lifeTime = [0, 8000, 5000, 30000, 45000, 40000, 10000, 50000, 60000, 60000];
-    $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+    $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
       for (var garage of resultObj.data) {
         if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
           /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
-        $("<li><a class='detailLink' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-      $("<li><a class='detailLink' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
-      $("a.detailLink").click(clickDetailLink);
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i>Logout</a></li>").appendTo('#myCarList');
+      $("a.link").click(clickLink);
      lineChart(resultObj);
      barChart(resultObj);
+     displayEffiChart(resultObj);
     
    });
     
@@ -343,7 +361,7 @@ window.scrollTo(0,1); }
     	  goIntro(userRatio);
       }
     }, 'json')
-    function clickDetailLink(event) {
+    function clickLink(event) {
       event.preventDefault();
       /* alert($(event.target).attr("carName")); */
       if ($(event.target).attr("carNo") == 'Logout') {
@@ -355,25 +373,29 @@ window.scrollTo(0,1); }
       } else {
         /* alert($(event.target).attr("carNo")); */
         $('#selectedMyCar').html($(event.target).attr("carName"));
-        changeMyCar($(event.target).attr("carNo"));
+        alert($(event.target).attr("carNo"));
+        sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
+        changeMyCar();
       }
         
     }
     
-    function changeMyCar(selectCarNo){
+    function changeMyCar(){
       /* alert($("#myCarList").val()); */
-      sessionStorage.setItem('selectCarNo', selectCarNo);
       /* alert(sessionStorage.getItem("selectCarNo")); */
       $("#line").remove();
       $("#bar").remove();
+      $("#efficgauge").remove();
       $("#myDiagramDiv").remove();
       $("#diagramEventsMsg").remove();
-      $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+selectCarNo, 
+      $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), 
           function(resultObj) {
             $("<canvas id='bar' height='400' width='450'></canvas>").appendTo("#topL");
             $("<canvas id='line' height='400' width='450'></canvas>").appendTo("#topR");
+            $("<svg id='efficgauge'></svg>").appendTo("#topM");
             lineChart(resultObj);
             barChart(resultObj);
+            displayEffiChart(resultObj);
           });
       
       $.post('../mygoods/selectCurrentMile.do', {
@@ -394,17 +416,22 @@ window.scrollTo(0,1); }
 
   function lineChart(resultObj) {
     var effic = new Array();
+    var offiEffi = new Array();
     var driveDt = new Array();
-    
-    if (resultObj.refuelList != "") {
-      for (var i = 0; i < 7; i++) {
-        effic[i] = ((resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter).toFixed(2);
-        driveDt[i] = resultObj.refuelList[i].group_date
+    /* && resultObj.refuelList.length >= */
+    if (resultObj.refuelList != "" && resultObj.refuelList.length >= 2 ) {
+      for (var i = resultObj.refuelList.length-1; i > 0; i--) {
+/*         alert(resultObj.refuelList[i-1].group_date); */
+       /*  alert(((resultObj.refuelList[i-1].mile-resultObj.refuelList[i].mile)/resultObj.refuelList[i].liter).toFixed(2)); */
+       effic.push(((resultObj.refuelList[i-1].mile-resultObj.refuelList[i].mile)/resultObj.refuelList[i].liter).toFixed(2));
+        /* alert((resultObj.refuelList[i].mile-resultObj.refuelList[i-1].mile)/resultObj.refuelList[i-1].liter); */
+        offiEffi.push(resultObj.refuelList[0].effi);
+        driveDt.push(resultObj.refuelList[i-1].group_date) 
         //driveDt[i] = resultObj.refuelList[i+1].group_date + "~" + resultObj.refuelList[i].group_date
        }
     }
       var lineChartData = {
-        labels : [driveDt[6],driveDt[5],driveDt[4],driveDt[3],driveDt[2],driveDt[1],driveDt[0]],
+        labels : driveDt,
         datasets : [
           {
             label: "구간연비",
@@ -414,13 +441,7 @@ window.scrollTo(0,1); }
             pointStrokeColor : "#fff",
             pointHighlightFill : "#fff",
             pointHighlightStroke : "rgba(220,220,220,1)",
-            data :  [effic[6],
-                     effic[5],
-                     effic[4],
-                     effic[3],
-                     effic[2],
-                     effic[1],
-                     effic[0]]
+            data :  effic
           },
           {
             label: "공인연비",
@@ -430,13 +451,7 @@ window.scrollTo(0,1); }
             pointStrokeColor : "#fff",
             pointHighlightFill : "#fff",
             pointHighlightStroke : "rgba(151,187,205,1)",
-            data : [resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi,
-                    resultObj.refuelList[0].effi]
+            data : offiEffi
           }
         ]
     
@@ -455,11 +470,28 @@ window.scrollTo(0,1); }
     }
   
   function barChart(resultObj) {
-     var twoago = (moment().subtract(60, 'days').months() + 1) + "월";
-      var oneago = (moment().subtract(30, 'days').months() + 1) + "월";
-      var present = moment().format('MM')  + "월";
+	  alert(resultObj.memCostAvg.length);
+    alert(resultObj.myCostAvg.length);
+    var month = new Array();
+    var memCostAvg = new Array();
+    var myCostAvg = new Array();
+    month.push((moment().subtract(60, 'days').months() + 1) + "월");
+    month.push((moment().subtract(30, 'days').months() + 1) + "월");
+    month.push(moment().format('MM')  + "월");
+
+ 	for (var i = resultObj.memCostAvg.length-1; i >= 0; i-- ) {
+ 		memCostAvg.push((resultObj.memCostAvg[i].cost/=1000).toFixed(2));
+  } 
+	for (var i = resultObj.myCostAvg.length-1; i >= 0; i-- ) {
+	  myCostAvg.push((resultObj.myCostAvg[i].cost/=1000).toFixed(2));
+  } 
+	if (resultObj.memCostAvg.length > resultObj.myCostAvg.length) {
+	  for (var i = resultObj.myCostAvg.length; i < resultObj.memCostAvg.length; i++) {
+		  myCostAvg.push(0);
+	  }
+	}
          var barChartData = {
-           labels : [twoago, oneago, present],
+           labels : month,
            datasets : [
              {
                label: "회원평균",
@@ -467,9 +499,7 @@ window.scrollTo(0,1); }
                strokeColor : "rgba(233, 78, 2, 0.9)",
                highlightFill: "#e94e02",
                highlightStroke: "#e94e02",
-               data : [(resultObj.memCostAvg[2].cost/=1000).toFixed(2), 
-                      (resultObj.memCostAvg[1].cost/=1000).toFixed(2), 
-                      (resultObj.memCostAvg[0].cost/=1000).toFixed(2)]
+               data : memCostAvg
              },
              {
                label: "개인평균",
@@ -477,9 +507,7 @@ window.scrollTo(0,1); }
                strokeColor : "rgba(79, 82, 186, 0.9)",
                highlightFill: "#4F52BA",
                highlightStroke: "#4F52BA",
-               data : [(resultObj.myCostAvg[2].cost/=1000).toFixed(2), 
-                      (resultObj.myCostAvg[1].cost/=1000).toFixed(2),
-                      (resultObj.myCostAvg[0].cost/=1000).toFixed(2)]
+               data : myCostAvg
              }
            ]
          };
@@ -498,50 +526,111 @@ window.scrollTo(0,1); }
       });
       document.getElementById('bar-legend').innerHTML = myBar.generateLegend();
     }
-  var doughnutData = [
-	{
-		value: 300,
-		color:"#F7464A",
-		highlight: "#FF5A5E",
-		label: "Red"
-	},
-	{
-		value: 50,
-		color: "#46BFBD",
-		highlight: "#5AD3D1",
-		label: "Green"
-	},
-	{
-		value: 100,
-		color: "#FDB45C",
-		highlight: "#FFC870",
-		label: "Yellow"
-	},
-	{
-		value: 40,
-		color: "#949FB1",
-		highlight: "#A8B3C5",
-		label: "Grey"
-	},
-	{
-		value: 120,
-		color: "#4D5360",
-		highlight: "#616774",
-		label: "Dark Grey"
-	}
+  
+    function displayEffiChart(resultObj) {
+      var w = $("#line").width(), h = $("#line").height();
+      
+      var svg = d3.select("#efficgauge")
+      						.attr("width", w)
+      						.attr("height", h);
+      
+      var effic = new Array();
+      
+      if (resultObj.refuelList != ""  && resultObj.refuelList.length > 2) {
+        for (var i = 0; i < 3; i++) {
+          effic[i] = ((resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter).toFixed(2);
+        }
 
-];
+          var efficper = Math.round(((effic[0]-effic[1])/effic[1])*100); 
+          
+        	if (efficper < 0) {
+        		var config = liquidFillGaugeDefaultSettings();
+            config.circleThickness = 0.1;
+            config.circleColor = "#DC143C";
+            config.textColor = "#8B0000";
+            config.waveColor = "#F7464A";
+            config.textVertPosition = 0.8;
+            config.waveAnimateTime = 1000;
+            config.waveHeight = 0.05;
+            config.waveAnimate = true;
+            config.waveHeightScaling = false;
+            config.waveOffset = 0.25;
+            config.textSize = 0.75;
+            config.waveCount = 3;
+            
+            loadLiquidFillGauge("efficgauge", Math.abs(efficper), config, efficper);
+        	} else {
+	        	var config = liquidFillGaugeDefaultSettings();
+	        	config.circleThickness = 0.1;
+	        	config.circleColor = "#008080";
+	        	config.textColor = "#006400";
+	        	config.waveColor = "#46BFBD";
+	        	config.textVertPosition = 0.8;
+	        	config.waveAnimateTime = 1000;
+            config.waveHeight = 0.05;
+            config.waveAnimate = true;
+            config.waveHeightScaling = false;
+            config.waveOffset = 0.25;
+            config.textSize = 0.75;
+            config.waveCount = 3;
+            
+            loadLiquidFillGauge("efficgauge", efficper, config, efficper);
+	        }
+    	
+      } else {
+    	  
+        	var config = liquidFillGaugeDefaultSettings();
+        	config.circleThickness = 0.1;
+        	config.circleColor = "#008080";
+        	config.textColor = "#006400";
+        	config.waveColor = "#46BFBD";
+        	config.textVertPosition = 0.8;
+        	config.waveAnimateTime = 1000;
+        config.waveHeight = 0.05;
+        config.waveAnimate = true;
+        config.waveHeightScaling = false;
+        config.waveOffset = 0.25;
+        config.textSize = 0.75;
+        config.waveCount = 3;
+        
+        loadLiquidFillGauge("efficgauge", 0, config, 0);
+    	}
+      
+      document.getElementById('circle-legend').innerHTML = 
+    	  "<ul>"+
+          "<li><span style=\"background-color:#008080\"></span>"+
+               "<lable>개선율 증가<label></li>" + 
+          "<li><span style=\"background-color:#F7464A\"></span>"+
+               "<lable>개선율 감소<label></li>"+
+          "(최대:50% ~ 최소:-50%)" + 
+        "</ul>";
+      
+      svg.call(responsivefy);         // rsponsive 처리 
 
-	var ctx3 = document.getElementById("doughnut").getContext("2d");
-	var myDoughnut = new Chart(ctx3).Doughnut(doughnutData, {responsive : true});
-
+      $("#efficgauge").height($("#line").height());
+    }
+  
+  
 	
   	function goIntro(userRatio) {
-  	  var temp, indexMin;
+  	var temp, indexMin; 
+  	var repalecePart = 0;
   	var partName = ['와이퍼', '에어컨 필터', '브레이크 패드', '브레이크 오일', '부동액', '엔진오일', '미션오일', '타이어', '베터리'];
+  	var partImage = ['../img/refuel/refuel_goods/wiper.png', 
+  	                 '../img/refuel/refuel_goods/filter.png', 
+  	                 '../img/refuel/refuel_goods/breakpad.png', 
+  	                 '../img/refuel/refuel_goods/breakoil.png', 
+  	                 '../img/refuel/refuel_goods/coolant.png', 
+  	                 '../img/refuel/refuel_goods/engine.png', 
+  	                 '../img/refuel/refuel_goods/missionoil.png', 
+  	                 '../img/refuel/refuel_goods/tire.png', 
+  	                 '../img/refuel/refuel_goods/battery.png'];
 
     for (var i = 0; i < userRatio.length - 1; i++) {
       indexMin = i;
+      if (userRatio[i] >= 80) {
+  		  repalecePart++;
+      }
       for (var j = i + 1; j < userRatio.length; j++) {
           if (userRatio[j] > userRatio[indexMin]) {
               indexMin = j;
@@ -550,9 +639,14 @@ window.scrollTo(0,1); }
       temp = userRatio[indexMin];
       userRatio[indexMin] = userRatio[i];
       userRatio[i] = temp;
+      // -------------------------------
       temp = partName[indexMin];
       partName[indexMin] = partName[i];
       partName[i] = temp;
+   		// -------------------------------
+      temp = partImage[indexMin];
+      partImage[indexMin] = partImage[i];
+      partImage[i] = temp;
   }
 
   	  var $ = go.GraphObject.make;
@@ -608,20 +702,28 @@ window.scrollTo(0,1); }
               new go.Binding("strokeDashArray", "dash"))
           );
 			
-      var posX = [-600, -600, -600, 600, 600, 600];
+      var posX = [-400, -400, -400, 400, 400, 400];
       var posY = [200, 0, -200, 200, 0, -200];
   
-       var nodeDataArray = [
-                     	    { "maxSize": new go.Size(300, 300), "key": "car", "img": "car.png", "loc": new go.Point(-150, 0) }];
+       var nodeDataArray = new Array();
        var linkDataArray = new Array();
 	for (var j = 0; j < 6; j++){
 		if (userRatio[j] >= 80) {
-
-			nodeDataArray.push({ "key": partName[j], "img": "car.png", "loc": new go.Point(posX[j], posY[j])});
+			nodeDataArray.push({ "key": partName[j], "img": partImage[j], "loc": new go.Point(posX[j], posY[j])});
 			linkDataArray.push({ from: 'car', to: partName[j], dash: [11, 10], color: 'crimson', width: 2});
 		} 
 	    	  /* alert(partName[j] + " : " + userRatio[j]); */
-	}    
+	}
+	var carStatus;
+	var size = 700;
+  if (repalecePart < 2) {
+    carStatus = "carG.png";
+  } else if (repalecePart < 4) {
+    carStatus = "carO.png";
+  } else {
+    carStatus = "carR.png";
+  }
+  nodeDataArray.push({ "maxSize": new go.Size(400, 500), "key": "car", "img": carStatus, "loc": new go.Point(-150, -100) });
 	diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
   	} 
     </script>

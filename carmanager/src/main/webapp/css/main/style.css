@@ -884,6 +884,12 @@ ul.dropdown-menu.drp-mnu li {
 .charts canvas#line {
     width: 100% !important;
 }
+
+/* main.css 추가 */
+#efficgauge {
+	width: 100% !important;
+}
+
 h4.title {
     font-size: 1.1em;
     color: #C1C1C1;

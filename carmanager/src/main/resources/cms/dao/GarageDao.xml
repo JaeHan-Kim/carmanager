@@ -30,7 +30,7 @@
     from garage g
     left outer join model m on g.mdno = m.mdno
     left outer join makers k on k.mkno = m.mkno
-    left outer join official o on o.mdno = m.mkno
+    left outer join official o on o.mdno = m.mdno
     where grno = #{no}
   </select>
 

@@ -354,3 +354,12 @@ and (max-device-width : 568px)
 and (orientation : portrait) {
 /* STYLES GO HERE */
 }
+/* 현재 선택된 차량 선택 */
+#selectCarName{
+ position: relative;
+  font-size: 15px;
+ /*     float: left; */
+    width: auto;
+	text-align: center;
+	padding: 1em;
+}
