@@ -363,8 +363,8 @@ window.scrollTo(0,1); }
     }, 'json')
     function clickLink(event) {
       event.preventDefault();
-    	alert($(event.target).attr("carNo"));
-      alert($(event.target).attr("carName"));
+    	alert($(this).attr("carNo"));
+      alert($(this).attr("carName"));
       if ($(event.target).attr("carNo") == 'Logout') {
           sessionStorage.removeItem('loginUserNickname');
       /*  sessionStorage.removeItem('loginUsercarNo'); */
@@ -373,7 +373,7 @@ window.scrollTo(0,1); }
           location.href = "../auth/login.html";
       } else {
         $('#selectedMyCar').html($(event.target).attr("carName"));
-        sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
+        sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
         changeMyCar(sessionStorage.getItem("selectCarNo"));
       }
         
