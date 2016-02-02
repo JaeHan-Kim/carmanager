@@ -150,13 +150,16 @@
         <p>&nbsp;</p>
       </div>
       <div class="form-title" id="board-header">
-        <div>
+        <span>
           <select id="category" class="form-control" onchange="search_cate()"> 
             <option value="">전체</option> 
             <option value="소모품">소모품</option>
             <option value="정비소">정비소</option>
           </select>
-        </div>
+        </span>
+        <span>
+          <button id="writebtn" class="btn btn-primary" type="button">글쓰기</button>
+        </span>
       </div>
       <div class="form-three widget-shadow">
 	      <div class="panel-default">
@@ -227,22 +230,23 @@
  	  var container = $("#container");
  	  for (var board of resultObj.data) {
  	    $("<div class='item block'>")
- 	      .html("<div class='thumbs-wrapper'>" +
- 	    		      "<div class='thumbs'>" +
- 	    		        "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
- 	    		          "<img src='../img/community/1.jpg'/>" +
- 	    		        "</a>" +
+ 	      
+ 	    .html("<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
+   		          "<div class='thumbs-wrapper'>" +
+ 	    		        "<div class='thumbs'>" +
+    		            "<img src='../img/community/1.jpg'/>" +
+ 	    	          "</div>" +
  	    	        "</div>" +
- 	    	      "</div>" +
- 	    	      "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
  	    	        "<h2 class='title'>"+ board.title + "</h2>" +
  	    	      "</a>" +
  	    	      "<p class='subline'>" + board.boardNo + "<span class='fancy'>&amp;</span>" + 
  	    	      board.category + "<span class='fancy'>&amp;</span>" + board.nickname + "</p>"
- 	    	)
+ 	    	     )
  	    .appendTo(container);
  	  }
  	  
+ 	  $("a.detailLnk").click(clickDetailLnk);
+
  	  var selectMap = resultObj.pageAttribute;
  	  
  	  jQuery('#document_navi3').jaPageNavigator({
@@ -250,28 +254,24 @@
  	    page_link : selectMap.page_link, // 보여질 페이지 링크 수
  	    total_count : selectMap.count // 게시물 총 수
  	  });
- 	  
- 	  // 제목 링크에 클릭 이벤트 리스너를 등록한다.
- 	  $("a.detailLnk").click(clickDetailLnk);
  	});
-  
-  /* 
-    	$('#newBtn').click(function(event){
-    	  location.href = "form.html?no=-1";
-    	});
 
-  */    	
+  $('#writebtn').click(function(event){
+	  location.href = "communityForm.html";
+	});
   
- 	// 게시물 제목을 클릭했을 때 호출될 함수
  	function clickDetailLnk(event) {
  	  event.preventDefault(); 
- 	  location.href = "form.html?no=" + $(event.target).attr("boardNo");
+ 	  console.log($(this).attr("boardNo"));
+ 	  location.href = "communityDetail.html?no=" + $(this).attr("boardNo");
  	}
+ 	  
  
   $(document).keypress(function(e) {
-      if (e.keyCode == 13)
-          e.preventDefault();
+    if (e.keyCode == 13)
+      e.preventDefault();
   });
+  
   $('#search_btn').click(searchEvent);
   $("#input-31").keyup(function(e){
       if(e.keyCode == 13) searchEvent(); 
