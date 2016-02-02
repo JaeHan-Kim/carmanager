@@ -13,6 +13,8 @@ public interface BoardDao {
   int countAll();
   
   int countSearch(Map<String,Object> paramMap);
+  
+  Board selectOne(int no);
 }
 
 
