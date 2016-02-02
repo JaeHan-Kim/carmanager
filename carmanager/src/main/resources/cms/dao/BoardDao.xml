@@ -18,7 +18,7 @@
     b.bno, b.title, b.cre_dt, b.cate, b.likes, b.views, m.nick
     from boards b left outer join members m 
     on m.mno = b.mno
-    order by bno desc 
+    order by b.bno desc 
     limit #{startIndex}, #{length}
   </select>
   
@@ -43,7 +43,7 @@
         <when test="keyword == 'nickname'">m.nick=#{nickname} </when>
       </choose> 
     </if>
-    order by bno desc
+    order by b.bno desc
     limit #{startIndex}, #{length}
   </select>
   
@@ -71,5 +71,13 @@
       </choose> 
     </if>
   </select>
+ 
+  <select id="selectOne" resultMap="boardMap" parameterType="int">
+    select 
+      b.bno, b.title, b.content, b.cate, b.views, b.likes, b.cre_dt, m.nick
+    from boards b left outer join members m 
+    on m.mno = b.mno
+    where b.bno=#{boardNo}
+  </select> 
  
 </mapper>

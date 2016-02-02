@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cms.dao.BoardDao;
+import cms.domain.AjaxResult;
 import cms.domain.Board;
 
 @Controller("ajax.CommunityController")
@@ -44,7 +45,6 @@ public class BoardController {
     resultMap.put("status", "success");
     resultMap.put("data", boards);
     resultMap.put("pageAttribute", selectMap);
-    
     
     return resultMap;
   }
@@ -100,6 +100,13 @@ public class BoardController {
     resultMap.put("pageAttribute", selectMap);
     
     return resultMap;
+  }
+  
+  @RequestMapping("detail")
+  public Object detail(int no) throws Exception {
+    System.out.println(no);
+    Board board = boardDao.selectOne(no);
+    return new AjaxResult("success", board);
   }
   
 }
