@@ -114,40 +114,41 @@
       <div class="header-right">
       
         <!-- 유저별 차량 리스트 -->
-          <div class="profile_details_left">
-            <label id="selectCarTitle">&nbsp;&nbsp;* 현재 선택된 차량입니다 :&nbsp;</label>
-            <div class="clearfix"></div>
-              <select id="myCarList" class="selecty s2 selectCar" name="town" id="town">
-              </select>
-         </div>
+
         <!-- 유저별 차량 리스트 end -->
-        <!-- 로그인 유저 정보 -->
+ <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
-	          <li class="dropdown profile_details_drop">
-	            <a href="#" class="dropdown-toggle" 
-	               data-toggle="dropdown" aria-expanded="false">
-	              <div class="profile_img">
-	                <span class="prfil-img">
-	                  <img id ="thumbnail" class="img-circle" src="" alt=""> 
-	                </span>
-	                <div class="user-name">
-	                  <p id="userNickname"></p>
-	                  <span>안녕하세요.</span>
-	                </div>
-	                <!-- 빈칸 유지를 위한 아이콘 자리 -->
-	                <i class="fa fa-angle-down lnr"></i> 
-	                <i class="fa fa-angle-up lnr"></i>
-	                <div class="clearfix"></div>
-	              </div>
-	            </a>
-	            <ul class="dropdown-menu drp-mnu">
-	              <li><a href="#"><i class="fa fa-cog"></i>Mypage</a></li>
-	              <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
-	            </ul>
-	          </li>
+            <li class="dropdown profile_details_drop">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <div class="profile_img">
+                  <span class="prfil-img">
+                  <img id ="thumbnail" src="" alt=""> </span>
+                  <div class="user-name">
+                    <p id="userNickname"></p>
+                    <span>반갑습니다 : )</span>
+                  </div>
+                  <!-- 빈칸 유지를 위한 아이콘 자리 -->
+                  <i class="fa fa-angle-down lnr"></i>
+                  <i class="fa fa-angle-up lnr"></i>
+                  <div class="clearfix"></div>
+                </div>
+            </a>
+              <ul id="myCarList" class="dropdown-menu drp-mnu">
+              </ul>
+            </li>
           </ul>
-        </div>
+       </div>
+
+
+       <!--  <div class="profile_details_left">
+          <div id="selectCarName">
+            <h4>현재 선택된 차량은</h4>
+            <label id="selectedMyCar"></label>
+          </div>
+          <div class="clearfix"></div>
+        </div> -->
+
         <!-- 로그인 유저 정보 end -->
         <div class="clearfix"></div>
       </div>
@@ -158,28 +159,34 @@
      <!--   로그 아웃 클릭 이벤트 -->
     <script>
     $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
-      /* alert(sessionStorage.getItem('loginUsercarNo')); */
       for (var garage of resultObj.data) {
-        $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList');
+        if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
+          /* alert(garage.nickName); */
+          $('#selectedMyCar').html(garage.nickName);
+        }
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-    	 $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
-     	 $('.selecty').selecty();
-   		});
-    	$('#myCarList').change(function(){
-      	sessionStorage.setItem('selectCarNo', $("#myCarList").val());
-      	displayItem(0);
-    	});
-     	$('#Mypage').click(function(event){
-        location.href = "../mypage/mypage.html";
- 		 	});
-  
-		  $('#Logout').click(function(event){
-      	event.preventDefault();
-      	sessionStorage.removeItem('loginUserNickname');
-      	sessionStorage.removeItem('selectCarNo');
-      	sessionStorage.removeItem('loginUserPhoto');
-      	location.href = "../auth/login.html";
-    	});
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
+      $("a.link").click(clickLink);
+   	});
+    function clickLink(event) {
+      event.preventDefault();
+      /* alert($(event.target).attr("carName")); */
+      if ($(event.target).attr("carNo") == 'Logout') {
+          sessionStorage.removeItem('loginUserNickname');
+      /*  sessionStorage.removeItem('loginUsercarNo'); */
+          sessionStorage.removeItem('loginUserPhoto');
+          sessionStorage.removeItem('selectCarNo');
+          location.href = "../auth/login.html";
+      } else {
+        /* alert($(event.target).attr("carNo")); */
+        /* $('#selectedMyCar').html($(event.target).attr("carName")); */
+        //alert($(event.target).attr("carNo"));
+        sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
+        displayItem(0);
+      }
+      
+    }
     </script>
     <!-- main content start-->
     <div id="page-wrapper">
