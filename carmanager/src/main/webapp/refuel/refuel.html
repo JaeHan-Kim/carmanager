@@ -361,9 +361,26 @@
             
             <!-- 날짜 클릭시 주유기록 출력 리스트 -->
             <script>
-            /* $.getJSON('refuelOne.do?no=' + userCarNo, function(resultObj) {
-              
-            }); */
+              /* $.getJSON('refuelOne.do?no=' + sessionStorage.getItem('selectCarNo'), function(resultObj) {
+                var ajaxResult = resultObj.ajaxResult;
+                var refuelOne = ajaxResult.data;
+                var fuelName = refuelOne.fuelName
+                if (ajaxResult.status == "success") {
+                  $("date_refuelDateUP").val(refuelOne.refuelDate);
+                  $("num_driveMileUP").val(refuelOne.mile);
+                }
+                
+                $.getJSON('http://localhost:8989/oil', function(resultObj) {
+                  if (fuelName == "휘발유") {
+                    $("#num_literCost").val(Math.round(resultObj.result.Oil[1].PRICE));
+                  } else if (fuelName == "경유") {
+                    $("#num_literCost").val(Math.round(resultObj.result.Oil[2].PRICE));
+                  } else {
+                    $("#num_literCost").val(Math.round(resultObj.result.Oil[4].PRICE));
+                  }
+                });
+                
+              }); */
             </script>
             
             <!-- 주유기록 등록 -->
@@ -399,7 +416,7 @@
                 }
                 
               $.post('addRefuel.do', {
-                  myCarNo: sessionStorage.getItem('loginUsercarNo'),
+                  myCarNo: sessionStorage.getItem('selectCarNo'),
                   refuelDate: $('#date_refuelDate').val(),
                   mile: mile,
                   cost: cost,
