@@ -467,7 +467,7 @@
             <!-- 기록 달력에 표시 하기 -->
               $.ajaxSetup({ async:false }); // ajax 동기 요청을 위한 셋팅 함수
               $.getJSON('monthList.do?no=' + sessionStorage.getItem('selectCarNo'), function(resultObj) {
-                alert(sessionStorage.getItem('selectCarNo'));
+               // alert(sessionStorage.getItem('selectCarNo'));
                 var dateArray = null;
                 var year = null;
                 var month = null;
