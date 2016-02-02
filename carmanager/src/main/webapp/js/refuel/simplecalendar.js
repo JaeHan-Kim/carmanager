@@ -219,7 +219,7 @@ var calendar = {
         var monthEvent = $(this).attr('date-month');
         var dayEvent = $(this).text();
         //$('.day-event[date-month="' + monthEvent + '"][date-day="' + dayEvent + '"]').slideDown('fast');
-        //alert("변신!")
+        alert("변신!")
         
         $('#addForm').css('display', 'none')
         $('#updateForm').css('display', '')
@@ -235,6 +235,29 @@ var calendar = {
           $('#moneyUP').css('display', 'none')
           $('#literUP').css('display', '')
         });
+       
+        $.getJSON('refuelOne.do?no=' + sessionStorage.getItem('selectCarNo'), function(resultObj) {
+          alert("변신222!")
+          var ajaxResult = resultObj.ajaxResult;
+          var refuelOne = ajaxResult.data;
+          var fuelName = refuelOne.fuelName
+          if (ajaxResult.status == "success") {
+            $("#date_refuelDateUP").val(refuelOne.refuelDate);
+            $("#num_driveMileUP").val(refuelOne.mile);
+          }
+          
+          $.getJSON('http://localhost:8989/oil', function(resultObj) {
+            if (fuelName == "휘발유") {
+              $("#num_literCost").val(Math.round(resultObj.result.Oil[1].PRICE));
+            } else if (fuelName == "경유") {
+              $("#num_literCost").val(Math.round(resultObj.result.Oil[2].PRICE));
+            } else {
+              $("#num_literCost").val(Math.round(resultObj.result.Oil[4].PRICE));
+            }
+          });
+          
+        });
+        
         
       });
     };

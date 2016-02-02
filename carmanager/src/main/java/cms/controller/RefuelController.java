@@ -70,13 +70,13 @@ public class RefuelController {
     return new AjaxResult("success", refuel);
   }
   
-/*  @RequestMapping("refuelOne")
+  @RequestMapping("refuelOne")
   public Object refuelOne(int no) throws Exception {
     
     Refuel refuel = refuelService.refuelOne(no);
-    
+    log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
   }
-*/  
+  
   
 }
