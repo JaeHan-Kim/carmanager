@@ -219,7 +219,7 @@ var calendar = {
         var monthEvent = $(this).attr('date-month');
         var dayEvent = $(this).text();
         //$('.day-event[date-month="' + monthEvent + '"][date-day="' + dayEvent + '"]').slideDown('fast');
-        alert("변신!")
+        //alert("변신!")
         
         $('#addForm').css('display', 'none')
         $('#updateForm').css('display', '')
@@ -237,7 +237,7 @@ var calendar = {
         });
        
         $.getJSON('refuelOne.do?no=' + sessionStorage.getItem('selectCarNo'), function(resultObj) {
-          alert("변신222!")
+          //alert("변신222!")
           var ajaxResult = resultObj.ajaxResult;
           var refuelOne = ajaxResult.data;
           var fuelName = refuelOne.fuelName

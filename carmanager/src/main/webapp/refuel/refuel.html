@@ -327,15 +327,13 @@
             <script type="text/javascript">
               var today = moment().format('YYYY-MM-DD');
               var predictMile = null;
-              	
- 
-						  alert(sessionStorage.getItem("selectCarNo"));
+              //alert(sessionStorage.getItem("selectCarNo"));
               $.getJSON('list.do?no=' + sessionStorage.getItem("selectCarNo"), function(resultObj) {
                 var ajaxResult = resultObj.ajaxResult;
                 var refuel = ajaxResult.data;
                 var fuelName = refuel.fuelName;
-               alert(fuelName);
-               // alert(ajaxResult.data.refuelNo);
+               //alert(fuelName);
+               //alert(ajaxResult.data.refuelNo);
                  if (ajaxResult.status == "success") {
                   $("#date_refuelDate").val(today);
                   predictMile = Math.round(refuel.mile + ((refuel.cost/refuel.literCost) * refuel.effi))
