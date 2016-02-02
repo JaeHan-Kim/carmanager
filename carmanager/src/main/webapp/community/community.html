@@ -227,7 +227,8 @@
  	  var container = $("#container");
  	  for (var board of resultObj.data) {
  	    $("<div class='item block'>")
- 	      .html("<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
+ 	      
+ 	    .html("<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
    		          "<div class='thumbs-wrapper'>" +
  	    		        "<div class='thumbs'>" +
     		            "<img src='../img/community/1.jpg'/>" +
@@ -254,8 +255,8 @@
 
   
  	function clickDetailLnk(event) {
- 	  event.preventDefault(); 
- 	  console.log($(event.target).attr("boardNo"));
+ 	 event.preventDefault();
+ 	 console.log($(event.target).attr("boardNo"));
  	  /* location.href = "communityDetail.html?no=" + $(event.target).attr("boardNo"); */
  	}
  	  
