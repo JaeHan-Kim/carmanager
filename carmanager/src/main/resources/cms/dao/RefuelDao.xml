@@ -73,7 +73,7 @@
   <select id="selectMonthList" resultMap="refuelMap" parameterType="int">
     select
       grno, DATE_FORMAT(ref_dt, '%Y-%c-%e') as group_date
-    from refuel where grno = 1
+    from refuel where grno = #{no}
     order by DATE_FORMAT(ref_dt, '%Y-%c') asc
   </select>
   
@@ -85,10 +85,9 @@
     order by DATE_FORMAT(ref_dt, '%Y-%c') asc
   </select>
   
-  <select id="selectRefuelOne" resultMap="refuelMap" parameterType="int">
-    select
-      grno, rno, ref_dt, mile, cost, liter, lcost
-    from refuel where rno = #{no}
+  <select id="selectRefuelOne" resultMap="refuelMap" parameterType="map">
+    select * from refuel 
+    where ref_dt = #{date} and grno = #{selectCar}
   </select>
   
 

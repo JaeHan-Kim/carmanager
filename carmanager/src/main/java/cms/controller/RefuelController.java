@@ -1,5 +1,6 @@
 package cms.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -35,7 +36,7 @@ public class RefuelController {
     	
       return new AjaxResult("failure", new Refuel(garageService.carDetail(no).getFuelName()));
     }
-    log.debug(refuel.toString());
+    //log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
     
   }
@@ -71,9 +72,16 @@ public class RefuelController {
   }
   
   @RequestMapping("refuelOne")
-  public Object refuelOne(int no) throws Exception {
+  public Object refuelOne(Date date, int selectCar) throws Exception {
     
-    Refuel refuel = refuelService.refuelOne(no);
+    Object refuel = refuelService.refuelOne(date, selectCar);
+    log.debug(refuel);
+    //log.debug(refuel.toString());
+    
+    if (refuel == null) {
+      return new AjaxResult("failure", refuel);
+    }
+    
     log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
   }

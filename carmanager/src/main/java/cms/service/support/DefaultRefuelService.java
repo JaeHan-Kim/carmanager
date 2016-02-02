@@ -1,5 +1,7 @@
 package cms.service.support;
 
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +61,11 @@ public class DefaultRefuelService implements RefuelService {
   }
 
   @Override
-  public Refuel refuelOne(int no) {
-    return refuelDao.selectRefuelOne(no);
+  public Object refuelOne(Date date, int selectCar) {
+    HashMap<String, Object> resultMap = new HashMap<>();
+    resultMap.put("date", date);
+    resultMap.put("selectCar", selectCar);
+    return refuelDao.selectRefuelOne(resultMap);
   }
 
 }

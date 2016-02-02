@@ -149,8 +149,8 @@ var calendar = {
       var getCalendarday = (getYear + '-' + getMonth);
       
       /* 월 이동시 평균 주유 값 출력하기 */
-      $.ajaxSetup({ async:false });
-      $.getJSON('monthCost.do?no=' + sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
+      //$.ajaxSetup({ async:false });
+      $.getJSON('monthCost.do?no=' + sessionStorage.getItem('selectCarNo'), function(resultObj) {
         var costArray = null;
         var monthArray = null;
         var ajaxResult = resultObj.ajaxResult;
@@ -215,11 +215,19 @@ var calendar = {
     /* 날짜 클릭시 업데이트 폼으로 전환하기 */
     function displayEvent() {
       $('tbody.event-calendar td').on('click', function(e) {
+        event.preventDefault();
         $('.day-event').slideUp('fast');
+        var eventYear = $(this).attr('date-year');
         var monthEvent = $(this).attr('date-month');
+        var eventDay = $(this).attr('date-day');
         var dayEvent = $(this).text();
         //$('.day-event[date-month="' + monthEvent + '"][date-day="' + dayEvent + '"]').slideDown('fast');
-        //alert("변신!")
+        var refuelValue = (eventYear + '-' + monthEvent + '-' + eventDay);
+        //alert(typeof(refuelValue))
+        //alert(eventYear);
+        //alert(monthEvent);
+        //alert(eventDay);
+        alert(refuelValue);
         
         $('#addForm').css('display', 'none')
         $('#updateForm').css('display', '')
@@ -236,25 +244,19 @@ var calendar = {
           $('#literUP').css('display', '')
         });
        
-        $.getJSON('refuelOne.do?no=' + sessionStorage.getItem('selectCarNo'), function(resultObj) {
-          //alert("변신222!")
+        $.getJSON('refuelOne.do?date=' + refuelValue + '&selectCar=' + sessionStorage.getItem('selectCarNo'), function(resultObj) {
           var ajaxResult = resultObj.ajaxResult;
           var refuelOne = ajaxResult.data;
-          var fuelName = refuelOne.fuelName
           if (ajaxResult.status == "success") {
             $("#date_refuelDateUP").val(refuelOne.refuelDate);
             $("#num_driveMileUP").val(refuelOne.mile);
+            $("#num_literCostUP").val(refuelOne.literCost);
+            $("#num_costUP").val(refuelOne.cost);
+            $("#num_literUP").val(refuelOne.liter);
+          } else if (ajaxResult.status == "failure") {
+            swal("해당 날짜의 주유기록이 없습니다 ; (", "주유기록이 있는 날짜를 클릭하세요.")
+            return false;
           }
-          
-          $.getJSON('http://localhost:8989/oil', function(resultObj) {
-            if (fuelName == "휘발유") {
-              $("#num_literCost").val(Math.round(resultObj.result.Oil[1].PRICE));
-            } else if (fuelName == "경유") {
-              $("#num_literCost").val(Math.round(resultObj.result.Oil[2].PRICE));
-            } else {
-              $("#num_literCost").val(Math.round(resultObj.result.Oil[4].PRICE));
-            }
-          });
           
         });
         

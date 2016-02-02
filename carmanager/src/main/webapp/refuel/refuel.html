@@ -39,7 +39,7 @@
 	  new WOW().init();
 	  $(document).ready(function(){ 
 	    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
-	    /* var userCarNo = sessionStorage.getItem('selectCarNo'); */
+	    var userCarNo = sessionStorage.getItem('selectCarNo');
 	    var userPhoto = sessionStorage.getItem('loginUserPhoto');
 	    $("#userNickname").html(userNickname);
       $('#liter').css('display', 'none')
@@ -138,16 +138,16 @@
             </li>
           </ul>
        </div>
-       
-       
-        		<div class="profile_details_left">
-					<div id="selectCarName">
-							<h4>현재 선택된 차량은</h4>
-							<label id="selectedMyCar"></label>
-					</div>
-				  <div class="clearfix"> </div>	
-				</div>
-         
+
+
+        <div class="profile_details_left">
+          <div id="selectCarName">
+            <h4>현재 선택된 차량은</h4>
+            <label id="selectedMyCar"></label>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
         <!-- 로그인 유저 정보 end -->
         <div class="clearfix"></div>
       </div>
@@ -297,14 +297,14 @@
                       <label> <input type="radio" name="gender" required>단가 + 주유량 기록</label>
                     </div>
                     <p>&nbsp;&nbsp;</p>
-                      &nbsp;&nbsp;단가 : (원)<input id="num_literCost" name="literCost" type="number" class="form-control" id="inputName" required>
+                      &nbsp;&nbsp;단가 : (원)<input id="num_literCostUP" name="literCost" type="number" class="form-control" id="inputName" required>
                       <span class="help-block with-errors">
                       단가를 잊으셨나요? 현재 전국평균 가격을 넣어드립니다. 자세한 분석을 원하시면 정확한 가격을 입력하세요.</span>
                     <div id="moneyUP" class="form-group">
-                      &nbsp;&nbsp;금액 : <input id="num_cost" name="cost" type="number" class="form-control" id="inputName" placeholder="주유한 금액을 입력하세요. (원)" required>
+                      &nbsp;&nbsp;금액 : <input id="num_costUP" name="cost" type="number" class="form-control" id="inputName" placeholder="주유한 금액을 입력하세요. (원)" required>
                     </div>
                     <div id="literUP" class="form-group">
-                      &nbsp;&nbsp;주유량 : <input id="num_liter" name="liter" type="number" class="form-control" id="inputName" placeholder="주유한 양을 입력하세요. (리터)" required>
+                      &nbsp;&nbsp;주유량 : <input id="num_literUP" name="liter" type="number" class="form-control" id="inputName" placeholder="주유한 양을 입력하세요. (리터)" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -454,10 +454,8 @@
                   <div class="calendar">
                     <header>
                       <h2 class="month"></h2>
-                      <a class="btn-prev fontawesome-angle-left"
-                        href="#"></a> <a
-                        class="btn-next fontawesome-angle-right"
-                        href="#"></a>
+                      <a class="btn-prev fontawesome-angle-left" href="#"></a> 
+                      <a class="btn-next fontawesome-angle-right" href="#"></a>
                     </header>
                     <table>
                       <thead class="event-days">
@@ -493,7 +491,7 @@
             <!-- 기록 달력에 표시 하기 -->
             <script type="text/javascript">
               $.ajaxSetup({ async:false }); // ajax 동기 요청을 위한 셋팅 함수
-              $.getJSON('monthList.do?no=' + sessionStorage.getItem('loginUsercarNo'), function(resultObj) {
+              $.getJSON('monthList.do?no=' + sessionStorage.getItem('selectCarNo'), function(resultObj) {
                 var dateArray = null;
                 var year = null;
                 var month = null;

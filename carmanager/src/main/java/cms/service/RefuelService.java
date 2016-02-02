@@ -1,5 +1,6 @@
 package cms.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import cms.domain.Refuel;
@@ -23,5 +24,5 @@ public interface RefuelService {
   
   List<Refuel> monthAvg(int no);
   
-  Refuel refuelOne(int no);
+  Object refuelOne(Date date, int selectCar);
 }

@@ -1,5 +1,6 @@
 package cms.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import cms.domain.Refuel;
@@ -23,5 +24,5 @@ public interface RefuelDao {
 
 	public List<Refuel> selectMonthList(int no);
 	
-	public Refuel selectRefuelOne(int no);
+  public Object selectRefuelOne(HashMap<String, Object> resultMap);
 }
