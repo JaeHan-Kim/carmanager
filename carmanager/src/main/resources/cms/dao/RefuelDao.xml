@@ -90,7 +90,7 @@
     where ref_dt = #{date} and grno = #{selectCar}
   </select>
   
-  <update id="updateRefuel" parameterType="map">
+  <update id="updateRefuel" parameterType="refuel">
     update refuel set 
       ref_dt = #{redate},
       mile = #{remile},

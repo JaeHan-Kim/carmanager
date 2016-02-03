@@ -86,7 +86,7 @@ public class RefuelController {
     return new AjaxResult("success", refuel);
   }
   
-  @RequestMapping("refuelOne")
+  @RequestMapping("updateRefuel")
   public Object updateRefuel(Refuel refuel) throws Exception {
     
     refuelService.changeRefuel(refuel);
