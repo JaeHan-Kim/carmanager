@@ -398,7 +398,7 @@ window.scrollTo(0,1); }
           });
       
       $.post('../mygoods/selectCurrentMile.do', {
-	      no: selectCarNo
+	      no: sessionStorage.getItem("selectCarNo")
 	    }, function(resultObj) {
 	      var userRatio = new Array();
 	      if (resultObj.status == "success") {
@@ -626,118 +626,117 @@ window.scrollTo(0,1); }
   
 	
   	function goIntro(userRatio) {
-  	var temp, indexMin; 
-  	var repalecePart = 0;
-  	var partName = ['와이퍼', '에어컨 필터', '브레이크 패드', '브레이크 오일', '부동액', '엔진오일', '미션오일', '타이어', '베터리'];
-  	var partImage = ['../img/refuel/refuel_goods/wiper.png', 
-  	                 '../img/refuel/refuel_goods/filter.png', 
-  	                 '../img/refuel/refuel_goods/breakpad.png', 
-  	                 '../img/refuel/refuel_goods/breakoil.png', 
-  	                 '../img/refuel/refuel_goods/coolant.png', 
-  	                 '../img/refuel/refuel_goods/engine.png', 
-  	                 '../img/refuel/refuel_goods/missionoil.png', 
-  	                 '../img/refuel/refuel_goods/tire.png', 
-  	                 '../img/refuel/refuel_goods/battery.png'];
-
-    for (var i = 0; i < userRatio.length - 1; i++) {
-      indexMin = i;
-      if (userRatio[i] >= 80) {
-  		  repalecePart++;
-      }
-      for (var j = i + 1; j < userRatio.length; j++) {
-          if (userRatio[j] > userRatio[indexMin]) {
-              indexMin = j;
-          }
-      }
-      temp = userRatio[indexMin];
-      userRatio[indexMin] = userRatio[i];
-      userRatio[i] = temp;
-      // -------------------------------
-      temp = partName[indexMin];
-      partName[indexMin] = partName[i];
-      partName[i] = temp;
-   		// -------------------------------
-      temp = partImage[indexMin];
-      partImage[indexMin] = partImage[i];
-      partImage[i] = temp;
-  }
-
-  	  var $ = go.GraphObject.make;
-  	  
-  	  var diagram = $(go.Diagram, "myDiagramDiv",
-  	    {
-  	    	autoScale: go.Diagram.Uniform,
-  	    	allowSelect: true,
-  	    	allowCopy: false,
-  	    	allowDelete: false,
-  	    	allowMove: false,
-  	    	contentAlignment: go.Spot.Center,
-  	    	allowVerticalScroll: false
-  	  	});
-  	  function showMessage(s) {
-  	    document.getElementById("diagramEventsMsg").textContent = s;
-  	  }
-
-  	  diagram.addDiagramListener("ObjectSingleClicked",
-  	      function(e) {
-  	    /* 	location.href = "../refuel/refuel_goods.html" */
-  	        var part = e.subject.part;
-  	        if (!(part instanceof go.Link)) showMessage("Clicked on " + part.data.key);
-  	      });
-
-  	  diagram.addDiagramListener("BackgroundDoubleClicked",
-  	      function(e) { showMessage("Double-clicked at " + e.diagram.lastInput.documentPoint); });
-
-
-      
-      diagram.nodeTemplate =
-  	    $(go.Node, "Spot",
-  	      new go.Binding("location", "loc"),
-  	         
-  	      $(go.Picture, 
-  	          {maxSize: new go.Size(100, 100)},
-  	        new go.Binding("maxSize", "maxSize"),
-  	        new go.Binding("source", "img"),
-            new go.Binding("stroke", "color"),
-	          new go.Binding("strokeWidth", "width"),
-	          new go.Binding("strokeDashArray", "dash")
-            ),
-  	      $(go.TextBlock,
-  	        { margin: new go.Margin(3, 0, 0, 0),
-  	          maxSize: new go.Size(100, 30),
-  	          isMultiline: false })
-  	    );
-      diagram.linkTemplate = $(go.Link,
-          { curve: go.Link.Bezier },
-          $(go.Shape,
+  	 	var temp, indexMin; 
+    	var repalecePart = 0;
+    	var partName = ['와이퍼', '에어컨 필터', '브레이크 패드', '브레이크 오일', '부동액', '엔진오일', '미션오일', '타이어', '베터리'];
+    	var partImage = ['../img/refuel/refuel_goods/wiper.png', 
+    	                 '../img/refuel/refuel_goods/filter.png', 
+    	                 '../img/refuel/refuel_goods/breakpad.png', 
+    	                 '../img/refuel/refuel_goods/breakoil.png', 
+    	                 '../img/refuel/refuel_goods/coolant.png', 
+    	                 '../img/refuel/refuel_goods/engine.png', 
+    	                 '../img/refuel/refuel_goods/missionoil.png', 
+    	                 '../img/refuel/refuel_goods/tire.png', 
+    	                 '../img/refuel/refuel_goods/battery.png'];
+      for (var i = 0; i < userRatio.length - 1; i++) {
+        indexMin = i;
+        if (userRatio[i] >= 80) {
+    		  repalecePart++;
+        }
+        for (var j = i + 1; j < userRatio.length; j++) {
+            if (userRatio[j] > userRatio[indexMin]) {
+                indexMin = j;
+            }
+        }
+        temp = userRatio[indexMin];
+        userRatio[indexMin] = userRatio[i];
+        userRatio[i] = temp;
+        // -------------------------------
+        temp = partName[indexMin];
+        partName[indexMin] = partName[i];
+        partName[i] = temp;
+     		// -------------------------------
+        temp = partImage[indexMin];
+        partImage[indexMin] = partImage[i];
+        partImage[i] = temp;
+    }
+    	  var $ = go.GraphObject.make;
+    	  
+    	  var diagram = $(go.Diagram, "myDiagramDiv",
+    	    {
+    	    	autoScale: go.Diagram.Uniform,
+    	    	allowSelect: true,
+    	    	allowCopy: false,
+    	    	allowDelete: false,
+    	    	allowMove: false,
+    	    	contentAlignment: go.Spot.Center,
+    	    	allowVerticalScroll: false
+    	  	});
+    	  function showMessage(s) {
+    	    document.getElementById("diagramEventsMsg").textContent = s;
+    	  }
+    	  diagram.addDiagramListener("ObjectSingleClicked",
+    	      function(e) {
+    	    /* 	location.href = "../refuel/refuel_goods.html" */
+    	        var part = e.subject.part;
+    	        if (!(part instanceof go.Link)) showMessage("Clicked on " + part.data.key);
+    	      });
+    	  diagram.addDiagramListener("BackgroundDoubleClicked",
+    	      function(e) { showMessage("Double-clicked at " + e.diagram.lastInput.documentPoint); });
+        
+        diagram.nodeTemplate =
+    	    $(go.Node, "Spot",
+    	      new go.Binding("location", "loc"),
+    	         
+    	      $(go.Picture, 
+    	          {maxSize: new go.Size(100, 100)},
+    	        new go.Binding("maxSize", "maxSize"),
+    	        new go.Binding("source", "img"),
               new go.Binding("stroke", "color"),
-              new go.Binding("strokeWidth", "width"),
-              new go.Binding("strokeDashArray", "dash"))
-          );
-			
-      var posX = [-400, -400, -400, 400, 400, 400];
-      var posY = [200, 0, -200, 200, 0, -200];
-  
-       var nodeDataArray = new Array();
-       var linkDataArray = new Array();
-	for (var j = 0; j < 6; j++){
-		if (userRatio[j] >= 80) {
-			nodeDataArray.push({ "key": partName[j], "img": partImage[j], "loc": new go.Point(posX[j], posY[j])});
-			linkDataArray.push({ from: 'car', to: partName[j], dash: [11, 10], color: 'crimson', width: 2});
-		} 
-	    	  /* alert(partName[j] + " : " + userRatio[j]); */
-	}
-	var carStatus;
-	var size = 700;
-  if (repalecePart < 2) {
-    carStatus = "carG.png";
-  } else if (repalecePart < 4) {
-    carStatus = "carO.png";
-  } else {
-    carStatus = "carR.png";
-  }
-  nodeDataArray.push({ "maxSize": new go.Size(400, 500), "key": "car", "img": carStatus, "loc": new go.Point(-150, -100) });
-	diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+  	          new go.Binding("strokeWidth", "width"),
+  	          new go.Binding("strokeDashArray", "dash")
+              ),
+    	      $(go.TextBlock,
+    	        { margin: new go.Margin(3, 0, 0, 0),
+    	          maxSize: new go.Size(100, 30),
+    	          isMultiline: false })
+    	    );
+        diagram.linkTemplate = $(go.Link,
+            { curve: go.Link.Bezier },
+            $(go.Shape,
+                new go.Binding("stroke", "color"),
+                new go.Binding("strokeWidth", "width"),
+                new go.Binding("strokeDashArray", "dash"))
+            );
+  			
+        var posX = [-400, -400, -400, 400, 400, 400];
+        var posY = [200, 0, -200, 200, 0, -200];
+    
+         var nodeDataArray = new Array();
+         var linkDataArray = new Array();
+    alert(repalecePart);
+  	for (var j = 0; j < repalecePart; j++){
+  	  if (j == 6) {
+  	    break;
+  	  }
+  		if (userRatio[j] >= 80) {
+  			nodeDataArray.push({ "key": partName[j], "img": partImage[j], "loc": new go.Point(posX[j], posY[j])});
+  			linkDataArray.push({ from: 'car', to: partName[j], dash: [11, 10], color: 'crimson', width: 2});
+  		} 
+  	    	  /* alert(partName[j] + " : " + userRatio[j]); */
+  	}
+  	var carStatus;
+  	var size = 700;
+    if (repalecePart < 2) {
+      carStatus = "carG.png";
+    } else if (repalecePart < 4) {
+      carStatus = "carO.png";
+    } else {
+      carStatus = "carR.png";
+    }
+    nodeDataArray.push({ "maxSize": new go.Size(400, 500), "key": "car", "img": carStatus, "loc": new go.Point(-150, -100) });
+  	diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+
   	} 
     </script>
     <!--footer-->
