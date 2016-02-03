@@ -68,4 +68,9 @@ public class DefaultRefuelService implements RefuelService {
     return refuelDao.selectRefuelOne(resultMap);
   }
 
+  @Override
+  public Object changeRefuel(Refuel refuel) {
+    return refuelDao.updateRefuel(refuel);
+  }
+
 }
