@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cms.dao.CommentDao">
+  
+  <resultMap type="comment" id="commentMap">
+    <id column="cno" property="commentNo"/>
+    <result column="bno" property="boardNo"/>
+    <result column="mno" property="memberNo"/>
+    <result column="cre_dt" property="createdDate"/>
+    <result column="nick" property="nickname"/>
+  </resultMap>
+  
+  <select id="selectList" resultMap="commentMap" parameterType="int">
+    select
+    c.cmno, c.content, c.cre_dt, m.nick
+    from comments c left outer join members m on m.mno=c.mno
+    where c.bno=#{no}
+    order by c.bno
+  </select>
+  
+  <insert id="insert" parameterType="comment">
+    insert into 
+    comments(bno, mno, content, cre_dt)
+    values(#{boardNo}, #{memberNo}, #{content}, now())
+  </insert>
+  
+</mapper>

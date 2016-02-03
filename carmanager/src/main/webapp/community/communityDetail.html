@@ -7,6 +7,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
   <link type='text/css' rel="stylesheet" href="../css/community/communityDetail.css">
   <link type='text/css' rel="stylesheet" href="../css/community/cstyle.css">
   <link type='text/css' rel="stylesheet" href="../css/community/default.css">
@@ -25,7 +26,6 @@
         href='http://fonts.googleapis.com/css?family=Oswald' />
   <link type='text/css' rel='stylesheet' 
         href='http://fonts.googleapis.com/css?family=Ovo' />
-
 
 	<script src="../lib/jquery/jquery.min.js"></script>
 	<script src="../lib/sweetalert/sweetalert.min.js"></script>
@@ -184,12 +184,17 @@
 	          </div>
 	        </div>
 		      
-		      <div class="col-md-8 compose-right widget-shadow commentBody">
+		      <div class="col-md-8 compose-right widget-shadow commentWrap">
 		        <div class="panel-default">
-		          <div id="commentTool" class="panel-body">
-		            <div id="comment_writer"></div>
-		            <div id="comment_text_div">
-		              <textarea id="comment_text" rows="4" cols="90"></textarea>
+		          <div id="commentBody" class="panel-body">
+		            <div>
+		              <span id="comment_writer"></span>
+		              <span>
+	                  <button id="commentBtn" class="btn btn-default btn-xs" type="button">등록</button>
+	                </span>
+	 		            <div id="comment_text_div">
+			              <textarea id="comment_text" rows="4" cols="100"></textarea>
+			            </div>
 		            </div>
 		          </div>
 		        </div>
@@ -237,7 +242,18 @@
       $("#blikes").text(board.likes);
       $("#bcreatedDate").text(board.createdDate);
     }
-  });  
+  });
+  
+  $.getJSON('../comment/ajax/list.do?no=' + no, function(resultObj) {
+	  var commentBody = $('#commentBody');
+	  for (var comment of resultObj.data) {
+	    $("<div>").html(
+	        "<span style='font-weight:bold;'>" + sessionStorage.getItem('loginUserNickname') + "</span>" +
+	        "&nbsp;&nbsp;<span>("+ comment.createdDate +")</span>" +
+	            "<div class='panel-footer' style='border:1px solid lightgray'>" + comment.content + "</div><br>"
+	    ).appendTo(commentBody);
+	  }
+  });
   
   $('#listBtn').click(function(event) {
 	  location.href = "community.html";
@@ -259,6 +275,26 @@
 	        	    	
 	        }
 	    });  	
+  });
+  
+  $('#commentBtn').click(function(event){
+	  $.post('../comment/ajax/add.do', {
+      boardNo: no,
+		  memberNo: sessionStorage.getItem("loginUser"),
+      content: $('#comment_text').val()
+    }, function(resultObj) {
+      var ajaxResult = resultObj.ajaxResult;
+      if (ajaxResult.status == "failure") { 
+        swal({   
+          title: "Error!",   
+          text: "댓글 등록 실패!",   
+          type: "error",   
+          confirmButtonText: "확인 ;(" });
+        return false;
+      }
+
+      location.href = "communityDetail.html?no=" + no;
+    }, 'json');  
   });
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>

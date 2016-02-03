@@ -56,20 +56,15 @@ h3.title {
 	position: relative;
 }
 
-#likeBtn {
-	position: relative;
-  display: inline;
-}
-
 #addBtn, #updateBtn,
 #deleteBtn, #listBtn,
-#likeBtn {
+#commentBtn {
 	background-color: #eaeaea !important;
 }
 
 #addBtn:hover, #updateBtn:hover,
 #deleteBtn:hover, #listBtn:hover,
-#likeBtn:hover {
+#commentBtn:hover {
 	background-color: white !important;
 }
 
@@ -82,23 +77,24 @@ h3.title {
 	margin-right: 5px;
 }
 
-.commentBody {
+.commentWrap {
 	margin-top: 10px;
-	display: block;
-}
-
-#commentTool {
-	position: relative;
-	display: inline-block;
+	word-break: break-all;
 }
 
 #comment_writer {
 	font-weight: bold;
+}
+
+#commentBtn {
 	margin-bottom: 5px;
+	float: right;
+	font-size: 15px;
 }
 
 #comment_text {
 	resize: none; 
-	wrap:hard;
+	wrap: hard;
 	width: 100%;
+	margin-bottom: 10px;
 }
