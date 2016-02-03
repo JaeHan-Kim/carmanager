@@ -17,6 +17,8 @@ public interface BoardDao {
   Board selectOne(int no);
   
   int viewsUp(int no);
+  
+  int likesUp(int no);
 }
 
 
