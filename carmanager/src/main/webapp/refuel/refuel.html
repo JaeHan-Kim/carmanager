@@ -414,7 +414,22 @@
 
               <script type="text/javascript">
               <!-- 주유기록 업데이트 -->
-                
+              $('#btn_updateRefuel').click(function(event) {
+                $.post('updateRefuel.do', {
+                  no: $('#fno').val(),
+                  title: $('#ftitle').val(),
+                  content: $('#fcontent').val(),
+                  password: $('#fpassword').val()
+                  
+                }, function(resultObj) {
+                  var ajaxResult = resultObj.ajaxResult;
+                  if (ajaxResult.status == "success") {
+                    location.href = "index.html";
+                  } else {
+                  	  alert("게시물 변경에 실패했습니다.");
+                  }
+                }, 'json');
+              });
               </script>
             
             <!-- 달력 폼 시작-->
