@@ -19,6 +19,7 @@ import cms.domain.Official;
 import cms.service.GarageService;
 import cms.service.MakersService;
 import cms.service.ModelService;
+import cms.service.MyGoodsService;
 import cms.service.OfficialService;
 import cms.service.RefuelService;
 
@@ -32,6 +33,7 @@ public class GarageController {
   @Autowired MakersService makersService;
   @Autowired ModelService modelService;
   @Autowired OfficialService officialService;
+  @Autowired MyGoodsService mygoodsService;
   @Autowired ServletContext servletContext;
   
   @RequestMapping("list")
@@ -56,12 +58,12 @@ public class GarageController {
   
   @RequestMapping(value="delete", method=RequestMethod.POST)
   public Object deleteCar(int no, int userNo) throws Exception {
-  	log.debug("삭제할 차량 : " + no + "접속한 유저 : " + userNo);
+//  	log.debug("삭제할 차량 : " + no + "접속한 유저 : " + userNo);
+  	mygoodsService.carDelete(no);
     refuelService.carDelete(no);
     garageService.carDelete(no);
     Garage garage = garageService.searchFirstCar(userNo);
     if (garage == null) {
-    	log.debug("null");
     	return new AjaxResult("success", new Garage(0));
     	//garage.setMyCarNo(0);
     }

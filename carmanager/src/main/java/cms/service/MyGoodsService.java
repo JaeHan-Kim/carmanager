@@ -15,6 +15,8 @@ public interface MyGoodsService {
   MyGoods searchMygoods(MyGoods mygoods);
   
   List<MyGoods> searchList(int no);
+  
+  int carDelete(int no);
 }
 
 

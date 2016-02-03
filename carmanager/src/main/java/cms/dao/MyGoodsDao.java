@@ -15,4 +15,6 @@ public interface MyGoodsDao {
   public MyGoods selectChangeMygoods(MyGoods mygoods);
   
   public List<MyGoods> selectList(int no);
+  
+  public int delete(int no);
 }

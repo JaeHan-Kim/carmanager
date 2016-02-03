@@ -41,4 +41,8 @@ public class DefaultMyGoodsService implements MyGoodsService {
   public List<MyGoods> searchList(int no) {
     return mygoodsDao.selectList(no);
   }
+  @Override
+  public int carDelete(int no) {
+    return mygoodsDao.delete(no);
+  }
 }

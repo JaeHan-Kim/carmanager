@@ -43,4 +43,8 @@
     where grno = #{no}
   </select>
   
+  <delete id="delete" parameterType="int">
+    delete from mygoods
+    where grno=#{no}
+  </delete>
 </mapper>
