@@ -25,4 +25,6 @@ public interface RefuelService {
   List<Refuel> monthAvg(int no);
   
   Object refuelOne(Date date, int selectCar);
+  
+  Object changeRefuel(Refuel refuel);
 }

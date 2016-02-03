@@ -25,4 +25,6 @@ public interface RefuelDao {
 	public List<Refuel> selectMonthList(int no);
 	
   public Object selectRefuelOne(HashMap<String, Object> resultMap);
+  
+  public Object updateRefuel(Refuel refuel);
 }
