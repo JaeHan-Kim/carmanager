@@ -3,7 +3,7 @@
      실제로 사용할 때 정리해서 사용할 것을 권장합니다. -->
 <html>
 <head>
-<title>new 내 차를 부탁해 - 차량 관리입니다.</title>
+<title>new 내 차를 부탁해 - 차량 관리 페이지</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -16,6 +16,7 @@
 
 	<!-- Bootstrap Core CSS -->
 	<link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
 	<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
 	<link type='text/css' rel='stylesheet' href="../css/main/style.css" />
 	<!-- font CSS -->
@@ -78,13 +79,13 @@
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
           id="cbp-spmenu-s1">
           <ul class="nav" id="side-menu">
-            <li><a href="../main/main.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
-            <li><a href="../mypage/mypage.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
-            <li><a href="../garage/garage.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
-            <li><a href="../refuel/refuel.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
-            <li><a href="../center/center.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
-            <li><a href="../goods/goods.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
-            <li><a href="../community/community.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
+            <li><a href="../main/main.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
+            <li><a href="../mypage/mypage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
+            <li><a href="../garage/garage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
+            <li><a href="../refuel/refuel.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
+            <li><a href="../center/center.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
+            <li><a href="../goods/goods.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
+            <li><a href="../community/community.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
           </ul>
           <!-- //sidebar-collapse -->
         </nav>
@@ -122,7 +123,8 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <div class="profile_img">
                   <span class="prfil-img">
-                  <img id ="thumbnail" src="" alt=""> </span>
+                    <img id="thumbnail" class="img-rounded" src="" alt=""> 
+                  </span>
                   <div class="user-name">
                     <p id="userNickname"></p>
                     <span>반갑습니다 : )</span>
@@ -133,21 +135,13 @@
                   <div class="clearfix"></div>
                 </div>
             </a>
+             <!-- 유저별 차량 리스트 -->
               <ul id="myCarList" class="dropdown-menu drp-mnu">
               </ul>
+            <!-- 유저별 차량 리스트 end -->
             </li>
           </ul>
        </div>
-
-
-        <!-- <div class="profile_details_left">
-          <div id="selectCarName">
-            <h4>현재 선택된 차량은</h4>
-            <label id="selectedMyCar"></label>
-          </div>
-          <div class="clearfix"></div>
-        </div> -->
-
         <!-- 로그인 유저 정보 end -->
         <div class="clearfix"></div>
       </div>
@@ -163,9 +157,9 @@
           /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
-        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='nav_icon'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='nav_icon'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
       $("a.link").click(clickLink);
    	});
     function clickLink(event) {
@@ -181,7 +175,7 @@
         /* alert($(event.target).attr("carNo")); */
         $('#selectedMyCar').html($(event.target).attr("carName"));
         //alert($(event.target).attr("carNo"));
-        sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
+        sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
         //settingRecord();
         location.href = 'refuel.html';
       }

@@ -3,7 +3,7 @@
      실제로 사용할 때 정리해서 사용할 것을 권장합니다. -->
 <html>
 <head>
-<title>new 내 차를 부탁해</title>
+<title>내 차를 부탁해 - 정비소 페이지</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -16,6 +16,7 @@
 
 	<!-- Bootstrap Core CSS -->
 	<link type='text/css' rel='stylesheet' href="../css/main/bootstrap.css" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
 	<!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
 	<link type='text/css' rel='stylesheet' href="../css/main/style.css" />
 	<!-- font CSS -->
@@ -36,7 +37,7 @@
 	  new WOW().init();
 	  $(document).ready(function(){ 
 	    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
-	    var userCarNo = sessionStorage.getItem('loginUsercarNo');
+	    var userCarNo = sessionStorage.getItem('selectCarNo');
 	    var userPhoto = sessionStorage.getItem('loginUserPhoto');
       $("#userNickname").html(userNickname);
 	    $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
@@ -70,13 +71,13 @@
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
           id="cbp-spmenu-s1">
           <ul class="nav" id="side-menu">
-           <li><a href="../main/main.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
-            <li><a href="../mypage/mypage.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
-            <li><a href="../garage/garage.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
-            <li><a href="../refuel/refuel.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
-            <li><a href="../center/center.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
-            <li><a href="../goods/goods.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
-            <li><a href="../community/community.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
+            <li><a href="../main/main.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
+            <li><a href="../mypage/mypage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
+            <li><a href="../garage/garage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
+            <li><a href="../refuel/refuel.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
+            <li><a href="../center/center.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
+            <li><a href="../goods/goods.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
+            <li><a href="../community/community.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
           </ul>
           <!-- //sidebar-collapse -->
         </nav>
@@ -107,39 +108,30 @@
 
       <!-- header-right -->
       <div class="header-right">
-        <!-- 유저별 차량 리스트 -->
-          <div class="profile_details_left">
-            <label id="selectCarTitle">&nbsp;&nbsp;* 현재 선택된 차량입니다 :&nbsp;</label>
-            <div class="clearfix"></div>
-              <select id="myCarList" class="selecty s2 selectCar" name="town" id="town">
-              </select>
-         </div>
-        <!-- 유저별 차량 리스트 end -->
         <!-- 로그인 유저 정보 -->
-        <div class="profile_details">
+         <div class="profile_details">
           <ul>
-	          <li class="dropdown profile_details_drop">
-	            <a href="#" class="dropdown-toggle" 
-	               data-toggle="dropdown" aria-expanded="false">
-	              <div class="profile_img">
-	                <span class="prfil-img">
-	                  <img id ="thumbnail" class="img-circle" src="" alt=""> 
-	                </span>
-	                <div class="user-name">
-	                  <p id="userNickname"></p>
-	                  <span>안녕하세요.</span>
-	                </div>
-	                <!-- 빈칸 유지를 위한 아이콘 자리 -->
-	                <i class="fa fa-angle-down lnr"></i> 
-	                <i class="fa fa-angle-up lnr"></i>
-	                <div class="clearfix"></div>
-	              </div>
-	            </a>
-	            <ul class="dropdown-menu drp-mnu">
-	              <li><a id="Mypage" href="#"><i class="fa fa-cog"></i>Mypage</a></li>
-	              <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
-	            </ul>
-	          </li>
+            <li class="dropdown profile_details_drop">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <div class="profile_img">
+                  <span class="prfil-img">
+                    <img id="thumbnail" class="img-rounded" src="" alt=""> 
+                  </span>
+                  <div class="user-name">
+                    <p id="userNickname"></p>
+                    <span>반갑습니다 : )</span>
+                  </div>
+                  <!-- 빈칸 유지를 위한 아이콘 자리 -->
+                  <i class="fa fa-angle-down lnr"></i> 
+                  <i class="fa fa-angle-up lnr"></i>
+                  <div class="clearfix"></div>
+                </div>
+              </a>
+              <!-- 유저별 차량 리스트 -->
+              <ul id="myCarList" class="dropdown-menu drp-mnu">
+              </ul>
+              <!-- 유저별 차량 리스트 end -->
+            </li>
           </ul>
         </div>
         <!-- 로그인 유저 정보 end -->
@@ -152,27 +144,33 @@
      <!--   로그 아웃 클릭 이벤트 -->
     <script>
     $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
-      /* alert(sessionStorage.getItem('loginUsercarNo')); */
       for (var garage of resultObj.data) {
-        $("<option value='"+ garage.myCarNo +"'>"+ garage.nickName +"</option>").appendTo('#myCarList');
+        if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
+          /* alert(garage.nickName); */
+          $('#selectedMyCar').html(garage.nickName);
+        }
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='nav_icon'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-    	 $('#myCarList option[value='+ sessionStorage.getItem("selectCarNo") +']').attr('selected', 'selected');
-     	 $('.selecty').selecty();
-   		});
-    	$('#myCarList').change(function(){
-      	sessionStorage.setItem('selectCarNo', $("#myCarList").val());
-    	});
-    $('#Mypage').click(function(event){
-        location.href = "../mypage/mypage.html";
-    });
-    
-    $('#Logout').click(function(event){
-        event.preventDefault();
-        sessionStorage.removeItem('loginUserNickname');
-        sessionStorage.removeItem('selectCarNo');
-        sessionStorage.removeItem('loginUserPhoto');
-        location.href = "../auth/login.html";
-      });
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='nav_icon'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
+      $("a.link").click(clickLink);
+   	});
+    function clickLink(event) {
+      event.preventDefault();
+      /* alert($(event.target).attr("carName")); */
+      if ($(event.target).attr("carNo") == 'Logout') {
+          sessionStorage.removeItem('loginUserNickname');
+      /*  sessionStorage.removeItem('loginUsercarNo'); */
+          sessionStorage.removeItem('loginUserPhoto');
+          sessionStorage.removeItem('selectCarNo');
+          location.href = "../auth/login.html";
+      } else {
+        /* alert($(event.target).attr("carNo")); */
+        $('#selectedMyCar').html($(event.target).attr("carName"));
+        //alert($(event.target).attr("carNo"));
+        sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
+      }
+        
+    }
     </script>
     
     <!-- main content start-->
