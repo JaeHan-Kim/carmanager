@@ -89,7 +89,7 @@
     select * from refuel 
     where ref_dt = #{date} and grno = #{selectCar}
   </select>
-  
+
   <update id="updateRefuel" parameterType="map">
     update refuel set 
       ref_dt = #{redate},
@@ -99,7 +99,7 @@
       liter = #{reliter}
     where ref_dt = #{date} and grno = #{selectCar}
   </update>
-
+ 
 </mapper>
 
 
