@@ -348,17 +348,15 @@ window.scrollTo(0,1); }
     }, function(resultObj) {
       if (resultObj.status == "success") {
        	var userRatio = new Array();
+
     	  for (var i=1; i <= 9; i++) {
     	    userRatio.push(parseInt(((lifeTime[i]-resultObj.data[i])/lifeTime[i]) * 100));
     	  }
-    	 
     	  goIntro(userRatio);
       }
     }, 'json')
     function clickLink(event) {
       event.preventDefault();
-    	//alert($(this).attr("carNo"));
-      //alert($(this).attr("carName"));
       if ($(event.target).attr("carNo") == 'Logout') {
           sessionStorage.removeItem('loginUserNickname');
       /*  sessionStorage.removeItem('loginUsercarNo'); */
@@ -622,6 +620,7 @@ window.scrollTo(0,1); }
   	function goIntro(userRatio) {
   	 	var temp, indexMin; 
     	var repalecePart = 0;
+    	var ct = 0;
     	var partName = ['와이퍼', '에어컨 필터', '브레이크 패드', '브레이크 오일', '부동액', '엔진오일', '미션오일', '타이어', '베터리'];
     	var partImage = ['../img/refuel/refuel_goods/wiper.png', 
     	                 '../img/refuel/refuel_goods/filter.png', 
@@ -632,6 +631,7 @@ window.scrollTo(0,1); }
     	                 '../img/refuel/refuel_goods/missionoil.png', 
     	                 '../img/refuel/refuel_goods/tire.png', 
     	                 '../img/refuel/refuel_goods/battery.png'];
+			
       for (var i = 0; i < userRatio.length - 1; i++) {
         indexMin = i;
         if (userRatio[i] >= 80) {
@@ -654,6 +654,10 @@ window.scrollTo(0,1); }
         partImage[indexMin] = partImage[i];
         partImage[i] = temp;
     }
+      
+     /*  for (var i = 0; i < userRatio.length; i++) {
+      	alert(userRatio[i]);
+      } */
     	  var $ = go.GraphObject.make;
     	  
     	  var diagram = $(go.Diagram, "myDiagramDiv",
@@ -708,12 +712,12 @@ window.scrollTo(0,1); }
     
          var nodeDataArray = new Array();
          var linkDataArray = new Array();
-    alert(repalecePart);
-  	for (var j = 0; j < repalecePart; j++){
-  	  if (j == 6) {
+  	for (var j = 0; j < userRatio.length; j++){
+  	  if (ct == 6) {
   	    break;
-  	  }
+  	  } 
   		if (userRatio[j] >= 80) {
+  		  ct++
   			nodeDataArray.push({ "key": partName[j], "img": partImage[j], "loc": new go.Point(posX[j], posY[j])});
   			linkDataArray.push({ from: 'car', to: partName[j], dash: [11, 10], color: 'crimson', width: 2});
   		} 
@@ -721,9 +725,11 @@ window.scrollTo(0,1); }
   	}
   	var carStatus;
   	var size = 700;
-    if (repalecePart < 2) {
+  	/* alert(ct);
+  	alert(repalecePart); */
+    if (ct < 2) {
       carStatus = "carG.png";
-    } else if (repalecePart < 4) {
+    } else if (ct < 4) {
       carStatus = "carO.png";
     } else {
       carStatus = "carR.png";
