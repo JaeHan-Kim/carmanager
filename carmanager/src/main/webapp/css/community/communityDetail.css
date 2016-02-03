@@ -58,13 +58,14 @@ h3.title {
 
 #addBtn, #updateBtn,
 #deleteBtn, #listBtn,
-#commentBtn {
+#commentBtn,
+.deleteBtn {
 	background-color: #eaeaea !important;
 }
 
 #addBtn:hover, #updateBtn:hover,
 #deleteBtn:hover, #listBtn:hover,
-#commentBtn:hover {
+#commentBtn:hover, .deleteBtn:hover {
 	background-color: white !important;
 }
 
@@ -97,4 +98,9 @@ h3.title {
 	wrap: hard;
 	width: 100%;
 	margin-bottom: 10px;
+}
+
+.deleteBtn {
+	float: right;
+	
 }

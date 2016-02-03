@@ -6,7 +6,7 @@
 <mapper namespace="cms.dao.CommentDao">
   
   <resultMap type="comment" id="commentMap">
-    <id column="cno" property="commentNo"/>
+    <id column="cmno" property="commentNo"/>
     <result column="bno" property="boardNo"/>
     <result column="mno" property="memberNo"/>
     <result column="cre_dt" property="createdDate"/>
@@ -18,7 +18,7 @@
     c.cmno, c.content, c.cre_dt, m.nick
     from comments c left outer join members m on m.mno=c.mno
     where c.bno=#{no}
-    order by c.bno
+    order by c.cmno
   </select>
   
   <insert id="insert" parameterType="comment">

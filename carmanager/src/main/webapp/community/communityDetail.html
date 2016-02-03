@@ -247,12 +247,19 @@
   $.getJSON('../comment/ajax/list.do?no=' + no, function(resultObj) {
 	  var commentBody = $('#commentBody');
 	  for (var comment of resultObj.data) {
+	    if (sessionStorage.getItem('loginUserNickname') == comment.nickname) {
+	    	$("<span>").html(
+	    			"<button class='deleteBtn btn btn-default' type='button' commentNo='" + comment.commentNo + "'>삭제</button>"
+	    			).appendTo(commentBody);
+	    }
 	    $("<div>").html(
-	        "<span style='font-weight:bold;'>" + sessionStorage.getItem('loginUserNickname') + "</span>" +
-	        "&nbsp;&nbsp;<span>("+ comment.createdDate +")</span>" +
+	        "<span style='font-weight:bold;'>" + comment.nickname + "</span>" +
+	        "&nbsp;&nbsp;<span>("+ comment.createdDate +")</span>").appendTo(commentBody);
+	    $("<div>").html(
 	            "<div class='panel-footer' style='border:1px solid lightgray'>" + comment.content + "</div><br>"
 	    ).appendTo(commentBody);
 	  }
+	  $(".deleteBtn").click(clickDelete);
   });
   
   $('#listBtn').click(function(event) {
@@ -296,6 +303,11 @@
       location.href = "communityDetail.html?no=" + no;
     }, 'json');  
   });
+	  
+  function clickDelete(event) {
+    event.preventDefault();
+    
+  }
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>
