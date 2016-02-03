@@ -41,11 +41,12 @@
   new WOW().init();
   $(document).ready(function(){ 
 	  sessionStorage.removeItem('searchCategory');
-    var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
+    var userNickname = sessionStorage.getItem('loginUserNickname');
     var userCarNo = sessionStorage.getItem('loginUsercarNo');
     var userPhoto = sessionStorage.getItem('loginUserPhoto');
-     $("#userNickname").html(userNickname);
+     $("#userNickname").html(userNickname + "님");
      $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
+     $("#comment_writer").text(userNickname);
   });  
 	
 	</script>
@@ -142,47 +143,58 @@
     </script>
 
     <div id="page-wrapper">
-      <div>
-        <h3 class="title">여기는 게시판 입니다!</h3>
-        <h4>마음대로 떠들어보아요.</h4>
-        <p>&nbsp;</p>
-      </div>
-      <div class="col-md-8 compose-right widget-shadow">
-        <div class="panel-default">
-          <div class="panel-heading">
-            <span id="bcategory"></span>
-            <h3 id="btitle"></h3>
-            <span id="bcreatedDate"></span>
-            <span id="bnickname"></span>
-          </div>
-          <div class="panel-body">
-            <div class="container" id="container">
-              <div id="bcontent"></div>
-            </div>
-            <div id="bodyfooter">
-	            <span id="div_likebtn">
-	              <button id="likeBtn" class="btn btn-default" type="button">추천</button>
-	            </span>
-	            <span id="viewnlike">
-	              <label>조회 : </label>
-	              <span id="bviews"></span>
-	              <label>추천 : </label>
-	              <span id="blikes"></span>
-	            </span>
-            </div>
-              
-            </div>
-            <div class="panel-heading">
-	            <button id='addBtn' type='button' 
-              class="newForm btn btn-default">글쓰기</button>
-              <button id='updateBtn' type='button' 
-              class="detailForm btn btn-default">수정</button>
-              <button id='deleteBtn' type='button' 
-              class="detailForm btn btn-default">삭제</button>
-              <button id='listBtn' type='button' 
-              class="detailForm btn btn-default">목록</button>
-            </div>
-          </div>
+      <div class="main-page compose">
+	      <div>
+	        <h3 class="title">여기는 게시판 입니다!</h3>
+	        <h4>마음대로 떠들어보아요.</h4>
+	        <p>&nbsp;</p>
+	      </div>
+	      <div class="col-md-8 compose-right widget-shadow">
+	        <div class="panel-default">
+	          <div class="panel-heading">
+	            <span id="bcategory"></span>
+	            <h3 id="btitle"></h3>
+	            <span id="bcreatedDate"></span>
+	            <span id="bnickname"></span>
+	          </div>
+	          <div class="panel-body">
+	            <div class="container" id="container">
+	              <div id="bcontent"></div>
+	            </div>
+	            <div id="bodyfooter">
+		            <span id="viewnlike">
+		              <label>조회 : </label>
+		              <span id="bviews"></span>
+		              <a id="likeLink" href="#">추천 : </a>
+		              <span id="blikes"></span>
+		            </span>
+	            </div>
+	              
+	            </div>
+	            <div class="panel-heading">
+		            <button id='addBtn' type='button' 
+	              class="newForm btn btn-default">글쓰기</button>
+	              <button id='updateBtn' type='button' 
+	              class="detailForm btn btn-default">수정</button>
+	              <button id='deleteBtn' type='button' 
+	              class="detailForm btn btn-default">삭제</button>
+	              <button id='listBtn' type='button' 
+	              class="detailForm btn btn-default">목록</button>
+	            </div>
+	          </div>
+	        </div>
+		      
+		      <div class="col-md-8 compose-right widget-shadow commentBody">
+		        <div class="panel-default">
+		          <div id="commentTool" class="panel-body">
+		            <div id="comment_writer"></div>
+		            <div id="comment_text_div">
+		              <textarea id="comment_text" rows="4" cols="90"></textarea>
+		            </div>
+		          </div>
+		        </div>
+		      </div>
+		      <div class="clearfix"> </div>
         </div>
       </div>
       
@@ -231,7 +243,11 @@
 	  location.href = "community.html";
   });
   
-  $('#likeBtn').click(function(event) {
+  $('#addBtn').click(function(event){
+	    location.href = "communityForm.html";
+  });
+  
+  $('#likeLink').click(function(event) {
 	    $.getJSON('../community/ajax/likesUp.do?no=' + no, function(resultObj) {
 	    	var ajaxResult = resultObj.ajaxResult;
 	        if (ajaxResult.status == "success") {

@@ -72,3 +72,33 @@ h3.title {
 #likeBtn:hover {
 	background-color: white !important;
 }
+
+#addBtn, #listBtn {
+	float: right;
+  text-align: right;
+}
+
+#listBtn {
+	margin-right: 5px;
+}
+
+.commentBody {
+	margin-top: 10px;
+	display: block;
+}
+
+#commentTool {
+	position: relative;
+	display: inline-block;
+}
+
+#comment_writer {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+#comment_text {
+	resize: none; 
+	wrap:hard;
+	width: 100%;
+}
