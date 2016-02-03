@@ -26,5 +26,5 @@ public interface RefuelService {
   
   Object refuelOne(Date date, int selectCar);
   
-  Object changeRefuel(Refuel refuel);
+  Refuel changeRefuel(Refuel refuel);
 }

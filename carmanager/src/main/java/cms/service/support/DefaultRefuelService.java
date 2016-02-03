@@ -69,7 +69,7 @@ public class DefaultRefuelService implements RefuelService {
   }
 
   @Override
-  public Object changeRefuel(Refuel refuel) {
+  public Refuel changeRefuel(Refuel refuel) {
     return refuelDao.updateRefuel(refuel);
   }
 
