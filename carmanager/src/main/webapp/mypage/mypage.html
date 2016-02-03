@@ -39,14 +39,13 @@
     new WOW().init();
     $(document).ready(function(){ 
       var userEmail = sessionStorage.getItem('loginUseremail');
-      var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
-      var userNickname2 = sessionStorage.getItem('loginUserNickname');
+      var userNickname = sessionStorage.getItem('loginUserNickname');
       var userPhoto = sessionStorage.getItem('loginUserPhoto');
       var userCarNo = sessionStorage.getItem('selectCarNo');
       $("#userNickname").html(userNickname);
       $("#txt_email").html(userEmail);
-      $(".nickname").html(userNickname);
-      $(".nickname2").html(userNickname2);
+      $(".nickname").html(userNickname+"님");
+      $(".nickname2").html(userNickname);
       $("#memberImg").attr("src", "../img/member/" + userPhoto);
       $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
 

@@ -103,7 +103,7 @@
 	               data-toggle="dropdown" aria-expanded="false">
 	              <div class="profile_img">
 	                <span class="prfil-img">
-	                  <img id="thumbnail" class="img-circle" src="" alt=""> 
+	                  <img id="thumbnail" class="img-rounded" src="" alt=""> 
 	                </span>
 	                <div class="user-name">
 	                  <p id="userNickname"></p>
@@ -157,24 +157,26 @@
           </div>
           <div class="panel-body">
             <div class="container" id="container">
-              <div id="viewnlike">
-                <label>조회 : </label>
-                <span id="bviews"></span>
-                <label>추천 : </label>
-                <span id="blikes"></span>
-              </div>
-                <div id="bcontent"></div>
-              </div>
-              <div id="div_likebtn">
-                <button class="btn btn-primary" type="button">좋아요</button>
-              </div>
+              <div id="bcontent"></div>
+            </div>
+            <div id="bodyfooter">
+	            <span id="div_likebtn">
+	              <button id="likeBtn" class="btn btn-default" type="button">추천</button>
+	            </span>
+	            <span id="viewnlike">
+	              <label>조회 : </label>
+	              <span id="bviews"></span>
+	              <label>추천 : </label>
+	              <span id="blikes"></span>
+	            </span>
+            </div>
               
             </div>
             <div class="panel-heading">
 	            <button id='addBtn' type='button' 
               class="newForm btn btn-default">글쓰기</button>
               <button id='updateBtn' type='button' 
-              class="detailForm btn btn-default">변경</button>
+              class="detailForm btn btn-default">수정</button>
               <button id='deleteBtn' type='button' 
               class="detailForm btn btn-default">삭제</button>
               <button id='listBtn' type='button' 
@@ -227,6 +229,20 @@
   
   $('#listBtn').click(function(event) {
 	  location.href = "community.html";
+  });
+  
+  $('#likeBtn').click(function(event) {
+	    $.getJSON('../community/ajax/likesUp.do?no=' + no, function(resultObj) {
+	    	var ajaxResult = resultObj.ajaxResult;
+	        if (ajaxResult.status == "success") {
+	        	swal({    
+              title: "추천 성공!",   
+              type: "success",
+              confirmButtonText: "확인"
+            }, function() {location.href = "communityDetail.html?no=" + no;});
+	        	    	
+	        }
+	    });  	
   });
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
