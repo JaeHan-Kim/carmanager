@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>new 내 차를 부탁해 - 차량 등록입니다.</title>
+<title>내 차를 부탁해 - 차량 등록 페이지</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords"
@@ -17,6 +17,7 @@ window.scrollTo(0,1); }
 
 <!-- Bootstrap Core CSS -->
 <link href="../css/main/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
 <!-- Custom CSS 메뉴바()메뉴내용, 상단, 차트박스, 글자색 스타일 -->
 <link href="../css/main/style.css" rel='stylesheet' type='text/css' />
 <!-- garage 에서 사용하는 CSS -->
@@ -84,13 +85,13 @@ window.scrollTo(0,1); }
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
           id="cbp-spmenu-s1">
           <ul class="nav" id="side-menu">
-           <li><a href="../main/main.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
-            <li><a href="../mypage/mypage.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
-            <li><a href="../garage/garage.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
-            <li><a href="../refuel/refuel.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
-            <li><a href="../center/center.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
-            <li><a href="../goods/goods.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
-            <li><a href="../community/community.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
+            <li><a href="../main/main.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
+            <li><a href="../mypage/mypage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
+            <li><a href="../garage/garage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
+            <li><a href="../refuel/refuel.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
+            <li><a href="../center/center.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
+            <li><a href="../goods/goods.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
+            <li><a href="../community/community.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
           </ul>
           <!-- //sidebar-collapse -->
         </nav>
@@ -121,20 +122,17 @@ window.scrollTo(0,1); }
 
       <!-- header-right -->
       <div class="header-right">
-      	<!-- 유저별 차량 리스트 -->
-        <!-- 유저별 차량 리스트 end -->
-      
-         <!-- 로그인 유저 정보 -->
+        <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
             <li class="dropdown profile_details_drop">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <div class="profile_img">
                   <span class="prfil-img">
-                  <img id ="thumbnail" src="" alt=""> </span>
+                  <img id="thumbnail" class="img-rounded" src="" alt=""> </span>
                   <div class="user-name">
                     <p id="userNickname"></p>
-                    <span>안녕하세요.</span>
+                    <span>반갑습니다 : )</span>
                   </div>
                   <!-- 빈칸 유지를 위한 아이콘 자리 -->
                   <i class="fa fa-angle-down lnr"></i>
@@ -142,21 +140,13 @@ window.scrollTo(0,1); }
                   <div class="clearfix"></div>
                 </div>
             </a>
+            <!-- 유저별 차량 리스트 -->
               <ul id="myCarList" class="dropdown-menu drp-mnu">
               </ul>
+            <!-- 유저별 차량 리스트 end -->
             </li>
           </ul>
-       </div>
-       
-       
-        		<div class="profile_details_left">
-					<div id="selectCarName">
-							<h4>현재 선택된 차량은</h4>
-							<label id="selectedMyCar"></label>
-					</div>
-				  <div class="clearfix"> </div>	
-				</div>
-         
+        </div>
         <!-- 로그인 유저 정보 end -->
         <div class="clearfix"></div>
       </div>
@@ -164,7 +154,7 @@ window.scrollTo(0,1); }
       <div class="clearfix"></div>
     </div>
     <!-- //header-ends -->
-    <!--   로그 아웃 클릭 이벤트 -->
+    <!-- 로그 아웃 클릭 이벤트 -->
     <script>
     $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
       for (var garage of resultObj.data) {
@@ -172,9 +162,9 @@ window.scrollTo(0,1); }
           /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
-        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='fa fa-sign-out'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='nav_icon'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
      	} 
-      $("<li><a class='link' carNo = 'Logout' href='#'><i class='fa fa-sign-out'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='nav_icon'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
       $("a.link").click(clickLink);
    	});
     function clickLink(event) {
@@ -189,8 +179,8 @@ window.scrollTo(0,1); }
       } else {
         /* alert($(event.target).attr("carNo")); */
         $('#selectedMyCar').html($(event.target).attr("carName"));
-        alert($(event.target).attr("carNo"));
-        sessionStorage.setItem('selectCarNo', $(event.target).attr("carNo"));
+        //alert($(event.target).attr("carNo"));
+        sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
       }
         
     }
@@ -226,7 +216,7 @@ window.scrollTo(0,1); }
             var myList = $("#carList");
             $.getJSON('list.do?no=' + sessionStorage.getItem("loginUser"), function(resultObj) {
               for (var garage of resultObj.data) {
-              $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='fa fa-inbox'></i>" + garage.nickName + "</a></li>").appendTo(myList)
+              $("<li value='" + garage.myCarNo + "'><a class='detailLink' href='#' myCarNo='" + garage.myCarNo + "'><i class='nav_icon'></i><img class='img_mycar' src='../img/main/mycar.png'>" + garage.nickName + "</a></li>").appendTo(myList)
               }
               $("a.detailLink").click(clickDetailLink);
             });
@@ -234,7 +224,7 @@ window.scrollTo(0,1); }
            function clickDetailLink(event) {
              event.preventDefault(); 
              $(detail).empty();
-             $.getJSON('detail.do?no='+ $(event.target).attr("myCarNo"), function(resultObj) {
+             $.getJSON('detail.do?no='+ $(this).attr("myCarNo"), function(resultObj) {
               var ajaxResult = resultObj.ajaxResult;
               if (ajaxResult.status == "success") {
                  $("<li class='head'>차량 확인후 삭제하세요.</li>).appendTo(detail").appendTo(detail)

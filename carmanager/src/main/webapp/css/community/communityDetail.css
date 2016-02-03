@@ -36,21 +36,39 @@ h3.title {
   font-size: 20px;
 }
 
-#viewnlike {
-	width: 100%;
-	float: right;
-	text-align: right;
-	margin-bottom: 50px;
-}
 
 #bcontent {
 	width: 70%;
 	height: 100%;
 	display: block;
 	margin-bottom: 30px;
+	word-break: break-all;
+}
+
+#bodyfooter {
+	position: relative;
+  display: inline;
+}
+
+#viewnlike {
+	float: right;
+	text-align: right;
+	position: relative;
+}
+
+#likeBtn {
+	position: relative;
+  display: inline;
 }
 
 #addBtn, #updateBtn,
-#deleteBtn, #listBtn {
-	background-color: #eaeaea!important;
+#deleteBtn, #listBtn,
+#likeBtn {
+	background-color: #eaeaea !important;
+}
+
+#addBtn:hover, #updateBtn:hover,
+#deleteBtn:hover, #listBtn:hover,
+#likeBtn:hover {
+	background-color: white !important;
 }

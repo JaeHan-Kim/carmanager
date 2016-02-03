@@ -109,4 +109,10 @@ public class BoardController {
     return new AjaxResult("success", board);
   }
   
+  @RequestMapping("likesUp")
+  public Object likesUp(int no) throws Exception {
+    boardDao.likesUp(no);
+    return new AjaxResult("success", null);
+  }
+  
 }

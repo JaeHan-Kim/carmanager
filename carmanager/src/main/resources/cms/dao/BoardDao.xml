@@ -84,5 +84,10 @@
     update boards set views=views + 1  
     where bno=#{boardNo};
   </update>
+  
+  <update id="likesUp" parameterType="int">
+    update boards set likes=likes + 1  
+    where bno=#{boardNo};
+  </update>
  
 </mapper>
