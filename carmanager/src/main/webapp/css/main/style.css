@@ -225,6 +225,9 @@ ul.dropdown-menu{
     text-align: center;
     letter-spacing: 7px;
 }
+.logo:hover {
+  background: rgb(100, 100, 100);
+}
 /* ----//Logo----*/
 /*start search*/
 .search-box {
