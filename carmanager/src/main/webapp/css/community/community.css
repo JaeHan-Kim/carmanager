@@ -56,6 +56,7 @@ h3.title {
 	height: 50px;
 	position: relative;
 	float: right;
+	display: inline;
 	margin-top: 15px;
 	margin-right: 3.2%;
 }
@@ -63,6 +64,7 @@ h3.title {
 #search_btn {
 	float: right;
   position: relative;
+  display: inline;
   height: 36.3px;
   webkit-box-sizing: border-box;
   box-sizing:border-box;
@@ -90,6 +92,7 @@ h3.title {
 	height: 36.5px;
 	position: relative;
 	float: right;
+	display: inline;
 	webkit-box-sizing: border-box;
   box-sizing:border-box;
   -moz-box-sizing: border-box;
@@ -125,4 +128,8 @@ h2.title {
 .viewnlike span img {
 	position: relative;
   display: inline-block;
+}
+
+#board-footer {
+	white-space: nowrap;
 }

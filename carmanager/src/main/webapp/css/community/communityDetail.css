@@ -64,14 +64,14 @@ h3.title {
 	border-radius: 0 0 3px 3px;
 }
 
-#list_footer button {
+#list_footer button, #commentBtn {
 	padding: 3px 3px 3px 3px !important;
+	font-weight: bold;
 }
 
 #addBtn, #updateBtn,
 #deleteBtn, #listBtn,
-#commentBtn,
-.deleteBtn {
+#commentBtn, .deleteBtn {
 	background-color: #eaeaea !important;
 }
 
