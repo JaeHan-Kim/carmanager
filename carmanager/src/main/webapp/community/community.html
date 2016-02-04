@@ -7,6 +7,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
   <link type='text/css' rel="stylesheet" href="../css/community/community.css">
   <link type='text/css' rel="stylesheet" href="../css/community/cstyle.css">
   <link type='text/css' rel="stylesheet" href="../css/community/default.css">
@@ -25,7 +26,6 @@
         href='http://fonts.googleapis.com/css?family=Oswald' />
   <link type='text/css' rel='stylesheet' 
         href='http://fonts.googleapis.com/css?family=Ovo' />
-
 
 	<script src="../lib/jquery/jquery.min.js"></script>
 	<script src="../lib/sweetalert/sweetalert.min.js"></script>
@@ -230,7 +230,6 @@
  	  var container = $("#container");
  	  for (var board of resultObj.data) {
  	    $("<div class='item block'>")
- 	      
  	    .html("<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
    		          "<div class='thumbs-wrapper'>" +
  	    		        "<div class='thumbs'>" +
@@ -262,7 +261,6 @@
   
  	function clickDetailLnk(event) {
  	  event.preventDefault(); 
- 	  console.log($(this).attr("boardNo"));
  	  location.href = "communityDetail.html?no=" + $(this).attr("boardNo");
  	}
  	  

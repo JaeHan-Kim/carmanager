@@ -207,6 +207,7 @@
 	    		  var restmile = resultObj.data[i];
 	    	    var lifemile = $(".lbl_lifemile").eq(i-1).text();
 	    	    var per = ((lifemile - restmile) / lifemile) * 100;
+	    	    var changemile = resultObj.datamile[i];
 	    	    
  		    	  $(".lbl_txt14px").eq(i - 1).show();
    		    	$(".lbl_sign").eq(i-1).hide();
@@ -220,8 +221,8 @@
 			    		  $(".lbl_changemile").eq(i-1).text("");
 			    	  } else {
 								$(".lbl_changetxt").eq(i-1).text("");						
-								$(".lbl_changetxt").eq(i-1).html('마지막 점검 주행거리 : ' + '<span><label class="lbl_changemile">0</label></span>' + 'km');					
-								$(".lbl_changemile").eq(i-1).text(resultObj.datamile[i]);
+								$(".lbl_changetxt").eq(i-1).html('마지막 점검 주행거리 : ' + '<span><label class="lbl_changemile">'+ changemile +'</label></span>' + 'km');					
+								//$(".lbl_changemile").eq(i-1).text(resultObj.datamile[i-1]);
 			    	  }
             } else {
             	$(".lbl_changetxt").eq(i-1).text("점검 기록이 없습니다.");
@@ -474,6 +475,8 @@
 			  }, function(resultObj){
 			    var ajaxResult = resultObj.ajaxResult;
 				  if (ajaxResult.status == "success") {
+					  var changemile = ajaxResult.data;
+					  
 				    $(".lbl_txt14px").eq(indexnum).show();
 		   		  $(".lbl_sign").eq(indexnum).hide();
 		      	$(".percent").eq(indexnum).text('0%');
@@ -481,8 +484,8 @@
 						$(".lbl_restmile").eq(indexnum).text($(".lbl_lifemile").eq(indexnum).text());
 						$(".lbl_changetxt").eq(indexnum).show();
 						$(".lbl_changetxt").eq(indexnum).text("");						
-						$(".lbl_changetxt").eq(indexnum).html('마지막 점검 주행거리 : ' + '<span><label class="lbl_changemile">0</label></span>' + 'km');					
-						$(".lbl_changemile").eq(indexnum).text(ajaxResult.data);
+						$(".lbl_changetxt").eq(indexnum).html('마지막 점검 주행거리 : ' + '<span><label class="lbl_changemile">'+ ajaxResult.data +'</label></span>' + 'km');					
+						//$(".lbl_changemile").eq(indexnum).text(ajaxResult.data);
 				  } else {
 					  console.log("실패 ");
 				  }
