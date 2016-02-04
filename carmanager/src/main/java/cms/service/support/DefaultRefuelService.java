@@ -69,8 +69,17 @@ public class DefaultRefuelService implements RefuelService {
   }
 
   @Override
-  public Refuel changeRefuel(Refuel refuel) {
-    return refuelDao.updateRefuel(refuel);
+  public Object changeRefuel(Date date, int myCarNo, Date refuelDate, 
+      int mile, int literCost, int cost, float liter) {
+    HashMap<String, Object> resultMap = new HashMap<>();
+    resultMap.put("date", date);
+    resultMap.put("myCarNo", myCarNo);
+    resultMap.put("refuelDate", refuelDate);
+    resultMap.put("mile", mile);
+    resultMap.put("literCost", literCost);
+    resultMap.put("cost", cost);
+    resultMap.put("liter", liter);
+    return refuelDao.updateRefuel(resultMap);
   }
 
 }

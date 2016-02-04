@@ -1,20 +1,20 @@
 package cms.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Board implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  protected int     boardNo;
-  protected int     memberNo;
-  protected String  nickname;
-  protected String  title;
-  protected String  content;
-  protected Date    createdDate;
-  protected String  category;
-  protected int     likes;
-  protected int     views;
+  protected int          boardNo;
+  protected int          memberNo;
+  protected String       nickname;
+  protected String       title;
+  protected String       content;
+  protected Timestamp    createdDate;
+  protected String       category;
+  protected int          likes;
+  protected int          views;
   
   public Board() {}
 
@@ -65,11 +65,11 @@ public class Board implements Serializable {
     this.content = content;
   }
 
-  public Date getCreatedDate() {
+  public Timestamp getCreatedDate() {
     return createdDate;
   }
 
-  public void setCreatedDate(Date createdDate) {
+  public void setCreatedDate(Timestamp createdDate) {
     this.createdDate = createdDate;
   }
 

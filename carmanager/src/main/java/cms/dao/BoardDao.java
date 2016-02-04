@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import cms.domain.Board;
-import cms.domain.Garage;
 
 public interface BoardDao {
   List<Board> selectList(Map<String,Object> paramMap);
