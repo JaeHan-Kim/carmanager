@@ -4097,3 +4097,6 @@ h4.title3 {
 #btn_addRefuel:hover,#btn_updateRefuel:hover {
   background-color: #627A71;
 }
+#menu_active {
+  color: #F2B33F;
+}
