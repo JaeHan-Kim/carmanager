@@ -289,14 +289,9 @@
     	} 
     	imageFile = imageFile.substring(0,imageFile.lastIndexOf('/'));
     }
-     alert(sessionStorage.getItem("loginUser"));
-    alert($("#category").val());
-    alert($("#txt_title").val());
-    alert(content);
     if (imageFile == "") {
       imageFile = "../img/community/defaultImage.png"
     }
-    alert(imageFile); 
     $.post('ajax/addText.do', {
       userNo: sessionStorage.getItem("loginUser"),
       title: $("#txt_title").val(),
@@ -304,14 +299,13 @@
       category: $("#category").val(),
       imageFile: imageFile
     }, function(resultObj) {
-      alert("!!!");
-      if (resultObj.status == "success") {
-      }
+     
+        location.href = "community.html";
     }, 'json');
   });
   
   $('#updateBtn').click(function(event) {
-	  //location.href = "community.html";
+	  location.href = "community.html";
   });
   
   </script>

@@ -95,4 +95,8 @@
      values(#{userNo}, #{title},  #{content}, now(), #{category});
   </insert>
  
+ 	<select id="selectBoradNo" resultMap="boardMap">
+    select * 
+    	from boards order by bno desc limit 1;
+  </select> 
 </mapper>

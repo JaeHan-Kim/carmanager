@@ -19,8 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cms.dao.BoardDao;
+import cms.dao.PhotoesDao;
 import cms.domain.AjaxResult;
 import cms.domain.Board;
+import cms.domain.Photoes;
 import cms.util.MultipartHelper;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -33,6 +35,7 @@ public class BoardController {
 	
 	public static final String SAVED_DIR = "/img/community";
   @Autowired BoardDao boardDao;
+  @Autowired PhotoesDao photoesDao;
   @Autowired ServletContext servletContext;
   
   @RequestMapping("list")
@@ -164,7 +167,8 @@ public class BoardController {
   
   @RequestMapping(value="addText", method=RequestMethod.POST)
   public AjaxResult addText(int userNo, String title, String content, String category, String imageFile) {
-  	log.debug(userNo + " " + title + " " + content + " " + category + " " + imageFile);
+  	Board board;
+  	//  log.debug(userNo + " " + title + " " + content + " " + category + " " + imageFile);
   	HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("userNo", userNo);
     paramMap.put("title", title);
@@ -172,6 +176,10 @@ public class BoardController {
     paramMap.put("category", category);
     paramMap.put("imageFile", imageFile);
     boardDao.insertText(paramMap);
+    board = boardDao.selectBoradNo();
+    
+    Photoes photo = new Photoes(board.getBoardNo(),imageFile);
+    photoesDao.insertPhoto(photo);
     
   	return new AjaxResult("success", null);
   }
