@@ -178,9 +178,9 @@
 		            <button id='addBtn' type='button' 
 	                      class="btn btn-default">글쓰기</button>
 	              <button id='updateBtn' type='button' 
-	                      class="btn btn-default">수정</button>
+	                      class="btn btn-default" style="">수정</button>
 	              <button id='deleteBtn' type='button' 
-	                      class="btn btn-default">삭제</button>
+	                      class="btn btn-default" style="">삭제</button>&nbsp;
 	              <button id='listBtn' type='button' 
 	                      class="btn btn-default">목록</button>
 	            </div>
@@ -232,6 +232,7 @@
   }
   
   var no = location.href.split('?')[1].split('=')[1];
+  var writer;
   
   $.getJSON('../community/ajax/detail.do?no=' + no, function(resultObj) {
     var ajaxResult = resultObj.ajaxResult;
@@ -245,6 +246,11 @@
       $("#bviews").html(board.views + "&nbsp;&nbsp;");
       $("#blikes").text(board.likes);
       $("#bcreatedDate").text("작성일 | " + credate.format('{yyyy}-{MM}-{dd} {HH}:{mm}:{ss}'));
+      
+      if (sessionStorage.getItem('loginUserNickname') != board.nickname) {
+    	  $('#updateBtn').attr('style', 'display:none;');
+    	  $('#deleteBtn').attr('style', 'display:none;');
+      }
     }
   });
   
@@ -291,12 +297,9 @@
               type: "success",
               confirmButtonText: "확인"
             }, function() {location.href = "communityDetail.html?no=" + no;});
-	        	    	
 	        }
 	    });  	
   });
-  
-  
   
   $('#commentBtn').click(function(event){
 	  $.post('../comment/ajax/add.do', {
