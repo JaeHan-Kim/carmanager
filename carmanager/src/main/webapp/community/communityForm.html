@@ -6,7 +6,7 @@
 <title>new 내 차를 부탁해</title>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
   <link type='text/css' rel="stylesheet" href="../css/community/communityDetail.css">
   <link type='text/css' rel="stylesheet" href="../css/community/cstyle.css">
   <link type='text/css' rel="stylesheet" href="../css/community/default.css">
@@ -50,12 +50,14 @@
     $("#userNickname").html(userNickname);
     $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
     $('#summernote').summernote({
-      height: 270,                 // set editor height
-      minHeight: 270,             // set minimum height of editor
-      maxHeight: 270,             // set maximum height of editor
-      focus: true,                 // set focus to editable area after initializing summernote
-      lang: 'ko-KR'
-    });
+      height: 200,
+      callbacks: {
+      onImageUpload: function(files, editor, welEditable) {
+          sendFile(files[0], editor, welEditable);
+      }
+      }
+  });
+  
   });  
 	
 	</script>
@@ -151,38 +153,44 @@
 		</script>
 
 		<div id="page-wrapper">
-    	<div>
-	      <h3 class="title">여기는 게시판 입니다!</h3>
-    	</div>
-   		<div class="col-md-8 compose-right widget-shadow">
- 	    	<form class="form-horizontal">
- 	    		<div class="panel-default">
- 	    			<div class="panel-heading">
-								<div class="col-md-3">
-								<select id="category" class="form-control" onchange="search_cate()"> 
-      								<option value="">주제선택</option> 	
-											<option value="소모품">소모품</option>
-   										<option value="정비소">정비소</option>
-     								</select>
-								</div>
-								<div class="col-md-8">
-								<input type="text" class="form-control1" placeholder=".col-md-10">
-								</div>
-								<div class="clearfix"> </div>
-								
-         		</div>
-    				<div class="panel-body" id="summernote"></div>
+    	<div class="main-page compose">
+	  		<div>
+	  			<h3 class="title">여기는 게시판 입니다!</h3>
+	 				<h4>마음대로 떠들어보아요.</h4>
+	  			<p>&nbsp;</p>
+	 			</div>
+	 		 	<div class="col-md-8 compose-right widget-shadow">
+	  			<form class="form-horizontal">
+	  		
+	  			<div class="panel-default">
+	  				<div class="panel-heading">
+	  					<div class="col-md-3">
+								<select id="category" class="form-control"> 
+      						<option value="">카테고리</option> 	
+									<option value="소모품">소모품</option>
+   								<option value="정비소">정비소</option>
+     						</select>
+							</div>
+							<div class="col-md-8">
+								<input id="txt_title" type="text" class="form-control1" placeholder="제목을 입력하세요.">
+							</div>
+							<div class="clearfix"> </div>
+	  				</div>
+	 	 				<div class="panel-body" id="summernote"></div>
     				<div class="panel-heading">
-	 						<button id='addBtn' type='button' 
-  						class="newForm btn btn-default">글쓰기</button>
-   						<button id='listBtn' type='button' 
-   						class="detailForm btn btn-default">목록</button>
-    				</div>
-   				</div>
-      	</form>
+							<button id='addBtn' type='button' 
+	  					class="newForm btn btn-default">글쓰기</button>
+	  					<button id='updateBtn' type='button' 
+	  					class="detailForm btn btn-default">목록</button>
+	 			 		</div>
+    			</div>
+    		</form>
+    	</div>
+			<div class="clearfix"> </div>
+
     	</div>
     </div>
-    
+		    
     <div class="footer">
       <p>
         &copy; 2016 Java76th 태웅 재한 영호 다인. All Rights Reserved | Project by <a href="" target="_blank">내 차를 부탁해</a>
@@ -225,11 +233,70 @@
   
   $('#addBtn').click(function(event) {
     var html = $('#summernote').summernote('code');
-    alert(html);
+    
+    if ($('#category').val() == "") {
+      swal({   
+        title: "Error!",   
+        text: "카테고리를 선택해주세요!",   
+        type: "error",   
+        confirmButtonText: "확인" });
+      return false;
+    }
+    if ($('#txt_title').val().length < 1) {
+      swal({   
+        title: "Error!",   
+        text: "제목을 입력해주세요!",   
+        type: "error",   
+        confirmButtonText: "확인" });
+      return false;
+    }
+    if (html.length ==  11 || html.length  < 0) {
+      swal({   
+        title: "Error!",   
+        text: "내용을 입력해주세요!",   
+        type: "error",   
+        confirmButtonText: "확인" });
+      return false;
+    }
+    
   });
-  $('#ListBtn').click(function(event) {
+  $('#updateBtn').click(function(event) {
 	  location.href = "community.html";
   });
+  function sendFile(file,editor,welEditable) {
+    /*  alert(file.size);
+     alert(file.name); */
+       data = new FormData();
+       data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
+       $.ajax({
+           data: data,
+           type: "POST",
+           url: 'ajax/imageUpload.do',
+           cache: false,
+           contentType: false,
+           processData: false,
+           success: function(url) {
+            alert(url);
+            $('#summernote').summernote('insertImage', url);
+           }
+       });
+   }
+   /* function sendFile(file,editor,welEditable) {
+        data = new FormData();
+        data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
+        $.ajax({
+            data: data,
+            type: "POST",
+            url: 'ajax/imageUpload.do',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(url) {
+             alert(url);
+             $('#summernote').summernote('insertImage', url);
+            }
+        });
+    } */
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>

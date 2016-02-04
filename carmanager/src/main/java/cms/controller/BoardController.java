@@ -1,24 +1,38 @@
 package cms.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cms.dao.BoardDao;
 import cms.domain.AjaxResult;
 import cms.domain.Board;
+import cms.domain.Member;
+import cms.util.MultipartHelper;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Controller("ajax.CommunityController")
 @RequestMapping("/community/ajax/*")
 public class BoardController { 
   
+	public static final Logger log = Logger.getLogger(GarageController.class);
+	
+	
+	public static final String SAVED_DIR = "/img/community";
   @Autowired BoardDao boardDao;
   @Autowired ServletContext servletContext;
   
@@ -115,4 +129,43 @@ public class BoardController {
     return new AjaxResult("success", null);
   }
   
+  @RequestMapping(value="imageUpload", method=RequestMethod.POST)
+  @ResponseBody
+  public Object imageUpload(MultipartHttpServletRequest request) throws Exception {
+  	String newFileName = null;
+  	String reFileName = "../img/community/";
+  	log.debug("sdfsdf");
+
+    if (request.getFileMap().size() != 0) { 
+    
+      Iterator<String> itr =  request.getFileNames();
+      MultipartFile mpf = request.getFile(itr.next());
+      
+      log.debug(mpf.getSize());
+      log.debug(mpf.getName());
+      if (mpf.getSize() > 0) {
+        newFileName = MultipartHelper.generateFilename(mpf.getOriginalFilename());  
+        File attachfile = new File(servletContext.getRealPath(SAVED_DIR) 
+                                    + "/" + newFileName);
+        mpf.transferTo(attachfile);
+       
+//        makeThumbnailImage(
+//            servletContext.getRealPath(SAVED_DIR) + "/" + newFileName, 
+//            servletContext.getRealPath(SAVED_DIR) + "/m-" + newFileName + ".png");
+        reFileName += attachfile.getName();
+        log.debug(reFileName);
+      }    
+    }
+    String url = reFileName;
+    return url;
+  	
+  }
+//  private void makeThumbnailImage(String originPath, String thumbPath) 
+//      throws IOException {
+//    Thumbnails.of(new File(originPath))
+//    .size(60,44)
+//    .outputFormat("png")
+//    .outputQuality(1.0)
+//    .toFile(new File(thumbPath));
+//  }
 }
