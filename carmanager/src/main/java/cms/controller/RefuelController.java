@@ -30,9 +30,9 @@ public class RefuelController {
     Refuel refuel = refuelService.oilList(no);
     
     if (refuel == null) {
-    	log.debug("---------------");
-    	log.debug(" 들어옴");
-    	log.debug("---------------");
+    	//log.debug("---------------");
+    	//log.debug(" 들어옴");
+    	//log.debug("---------------");
     	
       return new AjaxResult("failure", new Refuel(garageService.carDetail(no).getFuelName()));
     }
@@ -58,9 +58,9 @@ public class RefuelController {
   public AjaxResult addRefuel(Refuel refuel) throws Exception {
     
     if (garageService.carDetail(refuel.getMyCarNo()).getMile() > refuel.getMile()) {
-    	log.debug("------------------------");
-    	log.debug(garageService.carDetail(refuel.getMyCarNo()).getMile());
-    	log.debug("------------------------");
+    	//log.debug("------------------------");
+    	//log.debug(garageService.carDetail(refuel.getMyCarNo()).getMile());
+    	//log.debug("------------------------");
       return new AjaxResult("failure", null);
     }
 
@@ -75,23 +75,24 @@ public class RefuelController {
   public Object refuelOne(Date date, int selectCar) throws Exception {
     
     Object refuel = refuelService.refuelOne(date, selectCar);
-    log.debug(refuel);
+    //log.debug(refuel);
     //log.debug(refuel.toString());
     
     if (refuel == null) {
       return new AjaxResult("failure", refuel);
     }
     
-    log.debug(refuel.toString());
+    //log.debug(refuel.toString());
     return new AjaxResult("success", refuel);
   }
   
-  @RequestMapping("updateRefuel")
-  public Object updateRefuel(Refuel refuel) throws Exception {
-    
-    refuelService.changeRefuel(refuel);
-    
-    return new AjaxResult("success", refuel);
+  @RequestMapping(value="updateRefuel", method=RequestMethod.POST)
+  public Object updateRefuel(Date date, int myCarNo, Date refuelDate, 
+      int mile, int literCost, int cost, float liter) throws Exception {
+    //log.debug(refuel);
+    refuelService.changeRefuel(date, myCarNo, refuelDate, 
+        mile, literCost, cost, liter);
+    return new AjaxResult("success", null);
   }
   
 }

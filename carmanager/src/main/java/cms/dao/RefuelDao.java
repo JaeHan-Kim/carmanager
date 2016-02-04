@@ -26,5 +26,5 @@ public interface RefuelDao {
 	
   public Object selectRefuelOne(HashMap<String, Object> resultMap);
   
-  public Refuel updateRefuel(Refuel refuel);
+  public int updateRefuel(HashMap<String, Object> resultMap);
 }
