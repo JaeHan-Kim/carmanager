@@ -486,7 +486,7 @@ window.scrollTo(0,1); }
               type: "success",   
               confirmButtonText: "확인 :)" }, function() {   
                 if(sessionStorage.getItem("selectCarNo") == 0) {
-                  alert(ajaxResult.data.myCarNo);
+                  /* alert(ajaxResult.data.myCarNo); */
                   sessionStorage.setItem('selectCarNo', ajaxResult.data.myCarNo);
                 }
                 location.href = "garage.html";
