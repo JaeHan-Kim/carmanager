@@ -28,6 +28,7 @@
         href='http://fonts.googleapis.com/css?family=Ovo' />
 
 	<script src="../lib/jquery/jquery.min.js"></script>
+	<script src="../js/community/sugar.min.js"></script>
 	<script src="../lib/sweetalert/sweetalert.min.js"></script>
   <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="../js/main/classie.js"></script>
@@ -234,32 +235,37 @@
     var ajaxResult = resultObj.ajaxResult;
     if (ajaxResult.status == "success") {
       var board = ajaxResult.data;
+      var credate = Date.create(board.createdDate);
       $("#btitle").text(board.title);
       $("#bcategory").html("[" + board.category + "]&nbsp;&nbsp;");
       $("#bnickname").html(board.nickname + "&nbsp;&nbsp;");
       $("#bcontent").html(board.content);
       $("#bviews").html(board.views + "&nbsp;&nbsp;");
       $("#blikes").text(board.likes);
-      $("#bcreatedDate").text(board.createdDate);
+      $("#bcreatedDate").text(credate.format('{yyyy}-{MM}-{dd} {HH}:{mm}:{ss}'));
     }
   });
   
   $.getJSON('../comment/ajax/list.do?no=' + no, function(resultObj) {
 	  var commentBody = $('#commentBody');
 	  for (var comment of resultObj.data) {
+		  var credate = Date.create(comment.createdDate);
+	    $("<span>").html(
+	        "<span style='font-weight:bold;'>" + comment.nickname + "</span>" +
+	        "&nbsp;<span>("+ credate.format('{yyyy}-{MM}-{dd} {HH}:{mm}:{ss}') +")</span>"
+	     ).appendTo(commentBody);
 	    if (sessionStorage.getItem('loginUserNickname') == comment.nickname) {
 	    	$("<span>").html(
-	    			"<button class='deleteBtn btn btn-default' type='button' commentNo='" + comment.commentNo + "'>삭제</button>"
-	    			).appendTo(commentBody);
+	    			"<a href='#' class='deleteLink' commentNo='" + comment.commentNo + "'>" +
+	    			  "&nbsp;<img id='deleteImg' src='../img/community/delete.png'>" +
+	    			"</a>"
+    			).appendTo(commentBody);
 	    }
 	    $("<div>").html(
-	        "<span style='font-weight:bold;'>" + comment.nickname + "</span>" +
-	        "&nbsp;&nbsp;<span>("+ comment.createdDate +")</span>").appendTo(commentBody);
-	    $("<div>").html(
-	            "<div class='panel-footer' style='border:1px solid lightgray'>" + comment.content + "</div><br>"
+	      "<div class='panel-footer' style='border:1px solid lightgray'>" + comment.content + "</div><br>"
 	    ).appendTo(commentBody);
 	  }
-	  $(".deleteBtn").click(clickDelete);
+	  $(".deleteLink").click(clickDelete);
   });
   
   $('#listBtn').click(function(event) {
@@ -305,8 +311,9 @@
   });
 	  
   function clickDelete(event) {
-    event.preventDefault();
-    
+	  $.getJSON('../comment/ajax/delete.do?no=' + $(this).attr("commentNo"), function(resultObj) {
+		  location.href = "communityDetail.html?no=" + no;
+	  });
   }
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>

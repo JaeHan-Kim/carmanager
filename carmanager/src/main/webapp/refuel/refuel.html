@@ -3,7 +3,7 @@
      실제로 사용할 때 정리해서 사용할 것을 권장합니다. -->
 <html>
 <head>
-<title>new 내 차를 부탁해 - 차량 관리 페이지</title>
+<title>내 차를 부탁해 - 차량 관리 페이지</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -277,31 +277,34 @@
                 <div class="form-body">
                 <form method="post" name="addRefuel" data-toggle="validator" novalidate>
                   <div class="form-group">
-                    &nbsp;&nbsp;주유한 날짜 : <input type="date" name="refuelDate" id="date_refuelDateUP" class="form-control" placeholder="">
+                    &nbsp;&nbsp;주유한 날짜 : <input type="date" name="refuelDate" id="date_refuelDateUP" class="form-control" readonly>     
+                    <span class="help-block with-errors">
+                    날짜가 다르다면 수정할 날짜를 입력하세요.<br>오늘 이후로 입력은 불가능 합니다.<br>(주의! 구간 연비가 조정됩니다)</span>
+                     <input type="date" name="refuelDate" id="date_userDateUP" class="form-control" placeholder="수정할 날짜를 입력하세요.">
                   </div>
                   <div class="form-group has-feedback">
                    &nbsp;&nbsp;기록된 주행거리 : 
                      <input class="form-control" id="num_driveMileUP" readonly>
                     <span class="help-block with-errors">
                     수정할 주행거리를 입력하세요.<br>누적된 주행거리를 낮추거나 높일 수는 없습니다.<br>(주의! 구간 연비가 조정됩니다)</span>
-                     <input type="number" name="mile" id="num_userMileUP" class="form-control" placeholder="수정할 주행 거리를 입력하세요.">
+                     <input type="number" name="mileUP" id="num_userMileUP" class="form-control" placeholder="수정할 주행 거리를 입력하세요.">
                   </div>
                   <div class="form-group">
                     <div id="sMoneyUP" class="radio">
-                      <label> <input type="radio" name="gender" required>단가 + 금액 기록</label>
+                      <label> <input type="radio" name="LC" required>단가 + 금액 기록</label>
                     </div>
                     <div id="sLiterUP" class="radio">
-                      <label> <input type="radio" name="gender" required>단가 + 주유량 기록</label>
+                      <label> <input type="radio" name="LC" required>단가 + 주유량 기록</label>
                     </div>
                     <p>&nbsp;&nbsp;</p>
-                      &nbsp;&nbsp;단가 : (원)<input id="num_literCostUP" name="literCost" type="number" class="form-control" id="inputName" required>
+                      &nbsp;&nbsp;단가 : (원)<input id="num_literCostUP" name="literCostUP" type="number" class="form-control" id="inputName" required>
                       <span class="help-block with-errors">
                       단가를 잊으셨나요? 현재 전국평균 가격을 넣어드립니다. 자세한 분석을 원하시면 정확한 가격을 입력하세요.</span>
                     <div id="moneyUP" class="form-group">
-                      &nbsp;&nbsp;금액 : <input id="num_costUP" name="cost" type="number" class="form-control" id="inputName" placeholder="주유한 금액을 입력하세요. (원)" required>
+                      &nbsp;&nbsp;금액 : <input id="num_costUP" name="costUP" type="number" class="form-control" id="inputName" placeholder="주유한 금액을 입력하세요. (원)" required>
                     </div>
                     <div id="literUP" class="form-group">
-                      &nbsp;&nbsp;주유량 : <input id="num_literUP" name="liter" type="number" class="form-control" id="inputName" placeholder="주유한 양을 입력하세요. (리터)" required>
+                      &nbsp;&nbsp;주유량 : <input id="num_literUP" name="literUP" type="number" class="form-control" id="inputName" placeholder="주유한 양을 입력하세요. (리터)" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -370,7 +373,7 @@
 				      cost = (Number($('#num_liter').val()) * Number($('#num_literCost').val())).toFixed(0);    
                    liter = $('#num_liter').val();
                 }  else {
-                  swal("주유량 또는 리터 선택후 기록하세요!");
+                  swal("주유량 또는 리터 선택 후 기록하세요!");
                 }
                 
                 if ($('#num_userMile').val() != '') {
@@ -386,6 +389,8 @@
                     type: "error",   
                     confirmButtonText: "확인" });
                   return false;
+                } else if ($('#date_refuelDate').val() != null) {
+                  
                 }
                 
               $.post('addRefuel.do', {
@@ -414,21 +419,66 @@
 
               <script type="text/javascript">
               <!-- 주유기록 업데이트 -->
+              var today = moment().format('YYYY-MM-DD');
+              var reLiter = null;
+              var reCost = null;
+              var reMile = null;
+              var reDate = null;
               $('#btn_updateRefuel').click(function(event) {
+                if ($('input:radio[name=LC]')[0].checked) {
+                    reLiter = (Number($('#num_costUP').val()) / Number($('#num_literCostUP').val())).toFixed(2);
+                    reCost = $('#num_costUP').val();
+                 } else if ($('input:radio[name=LC]')[1].checked) {
+    			    reCost = (Number($('#num_literUP').val()) * Number($('#num_literCostUP').val())).toFixed(0);    
+                    reLiter = $('#num_literUP').val();
+                 }  else {
+                   swal("주유량 또는 리터 선택 후 수정하세요!");
+                 }
+                
+                if ($('#date_refuelDateUP').val() > today) {
+                  swal({   
+                    title: "Error!",   
+                    text: "오늘 이전의 날짜를 입력하세요!",   
+                    type: "error",   
+                    confirmButtonText: "확인" });
+                  return false;
+                }
+                
+                if ($('#date_userDateUP').val() == '') {
+                  reDate = $('#date_refuelDateUP').val();
+                } else {
+                  reDate = $('#date_userDateUP').val();
+                }
+                
+                if ($('#num_userMileUP').val() != '') {
+                  reMile = $('#num_userMile').val();
+                } else {
+                  reMile = $('#num_driveMileUP').val();
+                }
+                
                 $.post('updateRefuel.do', {
-                  no: $('#fno').val(),
-                  title: $('#ftitle').val(),
-                  content: $('#fcontent').val(),
-                  password: $('#fpassword').val()
-                  
+                  date : $('#date_refuelDateUP').val(),
+                  myCarNo: sessionStorage.getItem('selectCarNo'),
+                  refuelDate: reDate,
+                  mile: reMile,
+                  cost: reCost,
+                  liter: reLiter,
+                  literCost: $('#num_literCostUP').val()
                 }, function(resultObj) {
                   var ajaxResult = resultObj.ajaxResult;
-                  if (ajaxResult.status == "success") {
-                    location.href = "index.html";
-                  } else {
-                  	  alert("게시물 변경에 실패했습니다.");
-                  }
+                  if (ajaxResult.status == "success") { 
+                    swal({   
+                      title: "주유 내역을 수정하였습니다!",   
+                      text: "즐거운 이용 되세요.",   
+                      type: "success",
+                      confirmButtonText: "확인 : )" }, function() {
+                        location.href = "refuel.html";
+                      });
+                   } else {
+                     swal("주행거리는 조작할 수 없습니다 ; ( ", "등록되어 있는 주행거리 보다 낮은 기록을 입력하세요.");
+                   }
                 }, 'json');
+
               });
               </script>
             

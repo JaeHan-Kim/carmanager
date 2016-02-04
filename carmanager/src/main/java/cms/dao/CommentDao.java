@@ -8,4 +8,6 @@ public interface CommentDao {
   List<Comment> selectList(int no);
   
   int insert(Comment comment);
+  
+  int delete(int no);
 }

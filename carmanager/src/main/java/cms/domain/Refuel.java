@@ -6,6 +6,7 @@ public class Refuel {
   protected int refuelNo;
   protected int myCarNo;
   protected Date refuelDate;
+  protected Date date;
   protected int mile;
   protected int cost;
   protected float liter;
