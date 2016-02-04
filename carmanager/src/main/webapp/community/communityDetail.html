@@ -247,19 +247,22 @@
   $.getJSON('../comment/ajax/list.do?no=' + no, function(resultObj) {
 	  var commentBody = $('#commentBody');
 	  for (var comment of resultObj.data) {
+	    $("<span>").html(
+	        "<span style='font-weight:bold;'>" + comment.nickname + "</span>" +
+	        "&nbsp;&nbsp;<span>("+ comment.createdDate +")</span>"
+	     ).appendTo(commentBody);
 	    if (sessionStorage.getItem('loginUserNickname') == comment.nickname) {
 	    	$("<span>").html(
-	    			"<button class='deleteBtn btn btn-default' type='button' commentNo='" + comment.commentNo + "'>삭제</button>"
-	    			).appendTo(commentBody);
+	    			"<a href='#' class='deleteLink' commentNo='" + comment.commentNo + "'>" +
+	    			  "&nbsp;<img id='deleteImg' src='../img/community/delete.png'>" +
+	    			"</a>"
+    			).appendTo(commentBody);
 	    }
 	    $("<div>").html(
-	        "<span style='font-weight:bold;'>" + comment.nickname + "</span>" +
-	        "&nbsp;&nbsp;<span>("+ comment.createdDate +")</span>").appendTo(commentBody);
-	    $("<div>").html(
-	            "<div class='panel-footer' style='border:1px solid lightgray'>" + comment.content + "</div><br>"
+	      "<div class='panel-footer' style='border:1px solid lightgray'>" + comment.content + "</div><br>"
 	    ).appendTo(commentBody);
 	  }
-	  $(".deleteBtn").click(clickDelete);
+	  $(".deleteLink").click(clickDelete);
   });
   
   $('#listBtn').click(function(event) {
@@ -305,8 +308,9 @@
   });
 	  
   function clickDelete(event) {
-    event.preventDefault();
-    
+	  $.getJSON('../comment/ajax/delete.do?no=' + $(this).attr("commentNo"), function(resultObj) {
+		  location.href = "communityDetail.html?no=" + no;
+	  });
   }
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>

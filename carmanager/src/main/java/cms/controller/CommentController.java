@@ -21,6 +21,10 @@ public class CommentController {
   @RequestMapping("list")
   public Object list(int no) throws Exception {
     List<Comment> comments = commentDao.selectList(no);
+
+    for (Comment comment : comments) {
+      System.out.println(comment.getCreatedDate());
+    }
     
     HashMap<String,Object> resultMap = new HashMap<>();
     resultMap.put("status", "success");
@@ -34,6 +38,16 @@ public class CommentController {
     commentDao.insert(comment);
     
     return new AjaxResult("success", comment);
+  }
+  
+  @RequestMapping("delete")
+  public String delete(int no) throws Exception {
+
+    if (commentDao.delete(no) <= 0) {
+      return "failure";
+    } 
+
+    return "success";
   }
   
 }
