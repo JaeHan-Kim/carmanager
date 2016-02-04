@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import cms.dao.BoardDao;
 import cms.domain.AjaxResult;
 import cms.domain.Board;
+import cms.domain.Garage;
 import cms.domain.Member;
 import cms.util.MultipartHelper;
 import net.coobird.thumbnailator.Thumbnails;
@@ -132,26 +133,28 @@ public class BoardController {
   @RequestMapping(value="imageUpload", method=RequestMethod.POST)
   @ResponseBody
   public Object imageUpload(MultipartHttpServletRequest request) throws Exception {
+  	int cnt = Integer.parseInt(request.getParameter("imageCnt"));
+  	int find = 0;
   	String newFileName = null;
   	String reFileName = "../img/community/";
-  	log.debug("sdfsdf");
-
+  	
     if (request.getFileMap().size() != 0) { 
     
       Iterator<String> itr =  request.getFileNames();
       MultipartFile mpf = request.getFile(itr.next());
       
-      log.debug(mpf.getSize());
-      log.debug(mpf.getName());
       if (mpf.getSize() > 0) {
         newFileName = MultipartHelper.generateFilename(mpf.getOriginalFilename());  
         File attachfile = new File(servletContext.getRealPath(SAVED_DIR) 
                                     + "/" + newFileName);
+        find = newFileName.lastIndexOf('.');
         mpf.transferTo(attachfile);
-       
-//        makeThumbnailImage(
-//            servletContext.getRealPath(SAVED_DIR) + "/" + newFileName, 
-//            servletContext.getRealPath(SAVED_DIR) + "/m-" + newFileName + ".png");
+        if(cnt < 1) {
+        	log.debug("첫사진");
+        	makeThumbnailImage(
+          servletContext.getRealPath(SAVED_DIR) + "/" + newFileName, 
+          servletContext.getRealPath(SAVED_DIR) + "/c-" + newFileName.substring(0, find) + ".png");
+        }
         reFileName += attachfile.getName();
         log.debug(reFileName);
       }    
@@ -160,12 +163,27 @@ public class BoardController {
     return url;
   	
   }
-//  private void makeThumbnailImage(String originPath, String thumbPath) 
-//      throws IOException {
-//    Thumbnails.of(new File(originPath))
-//    .size(60,44)
-//    .outputFormat("png")
-//    .outputQuality(1.0)
-//    .toFile(new File(thumbPath));
-//  }
+  
+  @RequestMapping(value="addText", method=RequestMethod.POST)
+  public AjaxResult addText(int userNo, String title, String content, String category, String imageFile) {
+  	log.debug(userNo + " " + title + " " + content + " " + category + " " + imageFile);
+  	HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("userNo", userNo);
+    paramMap.put("title", title);
+    paramMap.put("content", content);
+    paramMap.put("category", category);
+    paramMap.put("imageFile", imageFile);
+    boardDao.insertText(paramMap);
+    
+  	return new AjaxResult("success", null);
+  }
+  
+  private void makeThumbnailImage(String originPath, String thumbPath) 
+      throws IOException {
+    Thumbnails.of(new File(originPath))
+    .size(260,173)
+    .outputFormat("png")
+    .outputQuality(1.0)
+    .toFile(new File(thumbPath));
+  }
 }

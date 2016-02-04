@@ -21,7 +21,7 @@ public interface BoardDao {
   
   int likesUp(int no);
   
-  // public int insertText(Board board);
+  public int insertText(Map<String,Object> paramMap);
 }
 
 
