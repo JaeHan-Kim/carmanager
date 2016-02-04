@@ -21,8 +21,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import cms.dao.BoardDao;
 import cms.domain.AjaxResult;
 import cms.domain.Board;
-import cms.domain.Garage;
-import cms.domain.Member;
 import cms.util.MultipartHelper;
 import net.coobird.thumbnailator.Thumbnails;
 

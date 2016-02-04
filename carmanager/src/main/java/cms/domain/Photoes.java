@@ -11,10 +11,14 @@ public class Photoes implements Serializable {
 
   public Photoes() {}
 
+  
+  
 	@Override
 	public String toString() {
-		return "photoes [photoNo=" + photoNo + ", boardNo=" + boardNo + ", photoPath=" + photoPath + "]";
+		return "Photoes [photoNo=" + photoNo + ", boardNo=" + boardNo + ", photoPath=" + photoPath + "]";
 	}
+
+
 
 	public int getPhotoNo() {
 		return photoNo;
@@ -39,5 +43,7 @@ public class Photoes implements Serializable {
 	public void setPhotoPath(String photoPath) {
 		this.photoPath = photoPath;
 	}
+  
+  
   
 }
