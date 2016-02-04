@@ -58,27 +58,8 @@
       },
       lang: 'ko-KR'
       }
+   
   });
-    function sendFile(file,editor,welEditable) {
-      /*  alert(file.size);
-       alert(file.name); */
-         data = new FormData();
-         data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
-         data.append("imageCnt", imageCount.length);
-         $.ajax({
-             data: data,
-             type: "POST",
-             url: 'ajax/imageUpload.do',
-             cache: false,
-             contentType: false,
-             processData: false,
-             success: function(url) {
-              console.log(url);
-              imageCount.push(url);
-              $('#summernote').summernote('insertImage', url);
-             }
-         });
-     }
   });  
   
 	</script>
@@ -199,10 +180,8 @@
 	  				</div>
 	 	 				<div class="panel-body" id="summernote"></div>
     				<div class="panel-heading">
-							<button id='addBtn' type='button' 
-	  					class="newForm btn btn-default">글쓰기</button>
-	  					<button id='updateBtn' type='button' 
-	  					class="detailForm btn btn-default">목록</button>
+							<button id='addBtn' type='button' class="btn btn-default">글쓰기</button>
+	  					<button id='listBtn' type='button' class="btn btn-default">목록</button>
 	 			 		</div>
     			</div>
     		</form>
@@ -237,21 +216,18 @@
     }
   }
   /* 원래 있는거 */
-  
-/*   $.getJSON('../community/ajax/detail.do?no=' + no, function(resultObj) {
-    var ajaxResult = resultObj.ajaxResult;
-    if (ajaxResult.status == "success") {
-      var board = ajaxResult.data;
-      $("#btitle").html(board.title);
-      $("#bcategory").html("[" + board.category + "]");
-      $("#bnickname").html(board.nickname);
-      $("#bcontent").val(board.content);
-      $("#bviews").text(board.views);
-      $("#blikes").text(board.likes);
-      $("#bcreatedDate").text(board.createdDate);
-    }
-  });   */
-  
+  var no = location.href.split('?')[1].split('=')[1];
+/*   alert(no); */
+  if (no == -1) {
+    $.getJSON('../community/ajax/update.do?no=' + no, function(resultObj) {
+      var ajaxResult = resultObj.ajaxResult;
+      if (ajaxResult.status == "success") {
+        var board = ajaxResult.data;
+        alert("나온다!!!!");
+        
+      }
+    });
+  } 
   $('#addBtn').click(function(event) {
     var content = $('#summernote').summernote('code');
     if ($('#category').val() == "") {
@@ -303,7 +279,26 @@
         location.href = "community.html";
     }, 'json');
   });
-  
+  function sendFile(file,editor,welEditable) {
+    /*  alert(file.size);
+     alert(file.name); */
+       data = new FormData();
+       data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
+       data.append("imageCnt", imageCount.length);
+       $.ajax({
+           data: data,
+           type: "POST",
+           url: 'ajax/imageUpload.do',
+           cache: false,
+           contentType: false,
+           processData: false,
+           success: function(url) {
+            console.log(url);
+            imageCount.push(url);
+            $('#summernote').summernote('insertImage', url);
+           }
+       });
+   }
   $('#updateBtn').click(function(event) {
 	  location.href = "community.html";
   });
