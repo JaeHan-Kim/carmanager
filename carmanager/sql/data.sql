@@ -189,3 +189,10 @@ insert into goods(gname, l_mile) values('엔진 오일', 10000);
 insert into goods(gname, l_mile) values('미션 오일', 50000);
 insert into goods(gname, l_mile) values('타이어', 60000);
 insert into goods(gname, l_mile) values('배터리', 60000);
+
+-- 댓글 테스트용
+insert into comments(bno, mno, content, cre_dt) values('100', '5', '하하하하하1', now());
+insert into comments(bno, mno, content, cre_dt) values('100', '4', '하하하하하2', now());
+insert into comments(bno, mno, content, cre_dt) values('100', '3', '하하하하하3', now());
+insert into comments(bno, mno, content, cre_dt) values('100', '2', '하하하하하4', now());
+insert into comments(bno, mno, content, cre_dt) values('100', '1', '하하하하하5', now());

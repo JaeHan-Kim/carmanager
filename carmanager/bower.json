@@ -20,7 +20,8 @@
     "jquery": "1.11.3",
     "sweetalert": "~1.1.3",
     "bootstrap": "~3.3.6",
-    "Chart.js": "~1.0.2"
+    "Chart.js": "~1.0.2",
+    "summernote": "~0.7.3"
   },
   "install" : {
       "path" : "src/main/webapp/lib",
