@@ -102,7 +102,7 @@
             <li><a href="../main/main.html" class=""><i class="  nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
             <li><a href="../mypage/mypage.html" class=""><i class="  nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
             <li><a href="../garage/garage.html" class=""><i class="  nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
-            <li><a href="../refuel/refuel.html" class=""><i class="  nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
+            <li><a href="../refuel/refuelManager.html" class=""><i class="  nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
             <li><a href="../center/center.html" class=""><i class="  nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
             <li><a href="../goods/goods.html" class=""><i class="  nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
             <li><a href="../community/community.html" class=""><i class="  nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
@@ -289,14 +289,9 @@
     	} 
     	imageFile = imageFile.substring(0,imageFile.lastIndexOf('/'));
     }
-     alert(sessionStorage.getItem("loginUser"));
-    alert($("#category").val());
-    alert($("#txt_title").val());
-    alert(content);
     if (imageFile == "") {
       imageFile = "../img/community/defaultImage.png"
     }
-    alert(imageFile); 
     $.post('ajax/addText.do', {
       userNo: sessionStorage.getItem("loginUser"),
       title: $("#txt_title").val(),
@@ -304,14 +299,13 @@
       category: $("#category").val(),
       imageFile: imageFile
     }, function(resultObj) {
-      alert("!!!");
-      if (resultObj.status == "success") {
-      }
+     
+        location.href = "community.html";
     }, 'json');
   });
   
   $('#updateBtn').click(function(event) {
-	  //location.href = "community.html";
+	  location.href = "community.html";
   });
   
   </script>

@@ -2075,7 +2075,7 @@ h4.modal-title {
     border-bottom: 1px solid #DCDCDC;
     color: #ddd;
     font-size: 1.0em;
-    background-color: rgb(65, 65, 65);
+    background-color: #7A6161;
 }
 .compose-left ul li a {
     display: block;
@@ -2134,7 +2134,7 @@ h4.modal-title {
 .compose-right .panel-heading {
     padding: 0.8em 2em;
     color: #ddd;
-    background-color: rgb(65, 65, 65);
+    background-color: #627A71;
 }
 .compose-right .panel-body {
     padding: 2em;
@@ -2514,18 +2514,19 @@ i.fa.fa-facebook.profile-icon {
     margin-right: 2%;
 }
 .tile-progress{
-	padding: 2em 3em;
+	padding: 1em 2em;
 	text-align:center;
+  border-radius: 20px;
 }
 .widget_1_box .bg-info {
     background-color: #6164C1;
 }
 .widget_1_box .bg-success {
     /*background-color: #F2B33F;*/
-    background-color: rgba(101, 124, 153, 0.93);
+    background-color: #7A6161;
 }
 .widget_1_box  .bg-danger {
-    background-color: #6A6A6A;
+    background-color: #627A71;
 }
 .tile-progress h4 {
     color: #fff;
@@ -2663,7 +2664,7 @@ i.fa.fa-facebook.profile-icon {
     width: 75%;
 }
 .tile-progress {
-    padding: 2em 2em;
+    padding: 1em 1em;
 }
 .login-page {
     width: 52%;
@@ -3253,7 +3254,7 @@ h4.title {
     margin: 3% 0;
 }
 .tile-progress {
-    padding: 1.5em 2em;
+    padding: 0.5em 1em;
 }
 .inbox-page.row {
     margin-top: 1.5em;
@@ -4050,9 +4051,49 @@ h4.title3 {
   float: left;
   width: 20px;
 }
-
 #selectedMyCar {
   font-weight: bolder;
   font-size: 1.5em;
   color: rgb(59, 68, 88);
+}
+.position {
+  margin-top: 60px;
+}
+
+#refuelM {
+  border-radius: 50%;
+}
+#refuelMTitle {
+  background-color: #7A6161;
+}
+#refuelMTitleUP {
+  background-color: #7A6161;
+}
+#refuelMTitle2 {
+  background-color: #627A71;
+}
+
+#btn_delete2 {
+  background-color: #7A6161;
+   color: #ddd;
+}
+
+#btn_reg,#btn_reset {
+  background-color: #627A71;
+  color: whitesmoke; 
+}
+#btn_delete2:hover {
+  background-color: #627A71;
+}
+
+#btn_reg:hover,#btn_reset:hover {
+  background-color: #7A6161;
+}
+
+#btn_addRefuel,#btn_updateRefuel {
+  background-color: #7A6161;
+  color: whitesmoke; 
+}
+#btn_addRefuel:hover,#btn_updateRefuel:hover {
+  background-color: #627A71;
 }

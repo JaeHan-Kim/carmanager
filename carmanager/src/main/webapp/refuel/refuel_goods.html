@@ -88,7 +88,7 @@
             <li><a href="../main/main.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
             <li><a href="../mypage/mypage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
             <li><a href="../garage/garage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
-            <li><a href="../refuel/refuel.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
+            <li><a href="../refuel/refuelManager.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
             <li><a href="../center/center.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
             <li><a href="../goods/goods.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
             <li><a href="../community/community.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
@@ -272,7 +272,7 @@
     <!-- main content start-->
     <div id="page-wrapper">
       <div class="main-page">
-        <h3 class="title1">차량 관리를 시작하세요 :</h3>
+        <h3 class="title1">소모품 관리를 시작하세요 :</h3>
         <h4><span id="selectedMyCar"></span>가 선택되었습니다.</h4>
 	    
       <!-- 주유기록 & 소모품 관리 -->
@@ -280,28 +280,27 @@
 
 	        <div class="widget_1 row elements">
 
-            <div class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
+            <div id="refuelM" class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
               <a href="refuel.html">
                 <div class="tile-progress bg-success">
                   <div class="content">
                     <h4>
                       <i class="fa fa-dashboard icon-sm"></i> 주유 기록 등록하기
                     </h4>
-                    <span>:&nbsp;&nbsp;자세한 분석을 원하시면 주행거리, 단가를 입력하세요.</span>
+                    <!--<span>:&nbsp;&nbsp;자세한 분석을 원하시면 주행거리, 단가를 입력하세요.</span>-->
                   </div>
                 </div>
               </a>
             </div>
 
-            <div
-              class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
+            <div id="refuelM" class="col-sm-4 widget_1_box widget-mdl-grid widget-shadow">
               <a href="refuel_goods.html">
                 <div class="tile-progress bg-danger">
                   <div class="content">
                     <h4>
                       <i class="fa fa-dashboard icon-sm"></i> 소모품 관리하기
                     </h4>
-                    <span>:&nbsp;&nbsp;거리 대비 소모품 교체 시기를 보여 드립니다. 교체하셨다면 교체 확인을 하세요.</span>
+                    <!--<span>:&nbsp;&nbsp;거리 대비 소모품 교체 시기를 보여 드립니다. 교체하셨다면 교체 확인을 하세요.</span>-->
                   </div>
                 </div>
               </a>
@@ -313,7 +312,7 @@
      <!--소모품 프로그래스바 시작 -->
         <div class=" form-grids row">
 						<div class="widget-shadow " data-example-id="basic-forms"> 
-							<div class="form-title2">
+							<div id="refuelMTitle2" class="form-title2">
 								<h4>: 소모품 상태를 확인하세요.</h4>
 							</div>
 							<div class="form-body">
@@ -332,7 +331,7 @@
 											    <label class="percent"></label>
 										    </div>
 										    
-										    <input type="button" value="교체" class="btn_color btn btn-default btn_reset">
+										    <input type="button" value="교체" class="btn btn_reset">
 									      <label class="lbl_txt14px">다음 정비까지 <span><label class="lbl_restmile">0</label></span> km 남았습니다.</label>
 									      <label class="lbl_sign" hidden="true">점검이 필요한 소모품입니다.</label>
 								      </li>
