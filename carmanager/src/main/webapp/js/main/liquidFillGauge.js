@@ -30,7 +30,7 @@ function liquidFillGaugeDefaultSettings(){
     };
 }
 
-function loadLiquidFillGauge(elementId, value, config) {
+function loadLiquidFillGauge(elementId, value, config, realvalue) {
     if(config == null) config = liquidFillGaugeDefaultSettings();
 
     var gauge = d3.select("#" + elementId);
@@ -51,7 +51,14 @@ function loadLiquidFillGauge(elementId, value, config) {
     }
 
     var textPixels = (config.textSize*radius/2);
-    var textFinalValue = parseFloat(value).toFixed(2);
+    
+    var textFinalValue;
+    if (realvalue  < 0) {
+      var textFinalValue = parseFloat(realvalue).toFixed(2);
+    } else {
+      var textFinalValue = parseFloat(value).toFixed(2);	
+    }
+    
     var textStartValue = config.valueCountUp?config.minValue:textFinalValue;
     var percentText = config.displayPercent?"%":"";
     var circleThickness = config.circleThickness * radius;

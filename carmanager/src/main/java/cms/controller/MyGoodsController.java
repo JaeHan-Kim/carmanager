@@ -45,6 +45,7 @@ public class MyGoodsController {
 	  List<Goods> goods = goodsService.getGoodsList();		  
     
 	  HashMap<Integer, Integer> restmiles = new HashMap<>();
+	  HashMap<Integer, Integer> changemiles = new HashMap<>();
 	  for(Goods good : goods) {
 	    int restmile = good.getLifeMile() - garage.getMile();
         restmiles.put(good.getGoodsNo(), restmile); 
@@ -53,6 +54,7 @@ public class MyGoodsController {
 	  HashMap<String,Object> resultMap = new HashMap<>();
       resultMap.put("status", "success");
       resultMap.put("data", restmiles);
+      resultMap.put("datamile", changemiles);
 	  return resultMap;
     }
 	
