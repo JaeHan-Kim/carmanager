@@ -24,8 +24,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
   var locPosition = new daum.maps.LatLng(latitude, longitude);
 	  
   //마커 이미지를 생성 관    
-  var imageSrc = "http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-  var imageSize = new daum.maps.Size(24, 35);
+  //var imageSrc = "http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+  var imageSrc = "../img/center/center2.ico"; 
+  var imageSize = new daum.maps.Size(43, 37);
   var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
   var marker = new daum.maps.Marker({
     map: map, // 마커를 표시할 지도
@@ -76,10 +77,15 @@ function placesSearchCB(status, result) {
 }
 
 function displayMarker(place) {
+  var imageSrc = "../img/center/center1.ico"; 
+  var imageSize = new daum.maps.Size(43, 37);
+  var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+	
   var marker = new daum.maps.Marker({
     map: map,
     clickable: true,
-    position: new daum.maps.LatLng(place.latitude, place.longitude)
+    position: new daum.maps.LatLng(place.latitude, place.longitude),
+    image: markerImage
   });
     
   markers.push(marker);
