@@ -42,10 +42,11 @@
 
 	<script>
   new WOW().init();
+  var imageCount = new Array();
   $(document).ready(function(){ 
 	  sessionStorage.removeItem('searchCategory');
     var userNickname = sessionStorage.getItem('loginUserNickname')+ "님";
-    var userCarNo = sessionStorage.getItem('loginUsercarNo');
+    var userCarNo = sessionStorage.getItem("selectCarNo");
     var userPhoto = sessionStorage.getItem('loginUserPhoto');
     $("#userNickname").html(userNickname);
     $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
@@ -54,12 +55,32 @@
       callbacks: {
       onImageUpload: function(files, editor, welEditable) {
           sendFile(files[0], editor, welEditable);
-      }
+      },
+      lang: 'ko-KR'
       }
   });
-  
+    function sendFile(file,editor,welEditable) {
+      /*  alert(file.size);
+       alert(file.name); */
+         data = new FormData();
+         data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
+         data.append("imageCnt", imageCount.length);
+         $.ajax({
+             data: data,
+             type: "POST",
+             url: 'ajax/imageUpload.do',
+             cache: false,
+             contentType: false,
+             processData: false,
+             success: function(url) {
+              console.log(url);
+              imageCount.push(url);
+              $('#summernote').summernote('insertImage', url);
+             }
+         });
+     }
   });  
-	
+  
 	</script>
 	
 	<script type="application/x-javascript">
@@ -232,8 +253,7 @@
   });   */
   
   $('#addBtn').click(function(event) {
-    var html = $('#summernote').summernote('code');
-    
+    var content = $('#summernote').summernote('code');
     if ($('#category').val() == "") {
       swal({   
         title: "Error!",   
@@ -250,7 +270,7 @@
         confirmButtonText: "확인" });
       return false;
     }
-    if (html.length ==  11 || html.length  < 0) {
+    if (content.length ==  11 || content.length  < 0) {
       swal({   
         title: "Error!",   
         text: "내용을 입력해주세요!",   
@@ -258,45 +278,42 @@
         confirmButtonText: "확인" });
       return false;
     }
-    
+   
+    /* alert(content.length); */
+    var imageFile = "";
+    if(typeof imageCount[0] != "undefined") {
+   	var str = imageCount[0].split('/');
+    	str[3] = "c-" + str[3].substring(0,str[3].lastIndexOf('.')) + ".png";
+  	  for (var i = 0; i < str.length; i++) {
+   		imageFile = imageFile + str[i] + "/";
+    	} 
+    	imageFile = imageFile.substring(0,imageFile.lastIndexOf('/'));
+    }
+     alert(sessionStorage.getItem("loginUser"));
+    alert($("#category").val());
+    alert($("#txt_title").val());
+    alert(content);
+    if (imageFile == "") {
+      imageFile = "../img/community/defaultImage.png"
+    }
+    alert(imageFile); 
+    $.post('ajax/addText.do', {
+      userNo: sessionStorage.getItem("loginUser"),
+      title: $("#txt_title").val(),
+      content: content,
+      category: $("#category").val(),
+      imageFile: imageFile
+    }, function(resultObj) {
+      alert("!!!");
+      if (resultObj.status == "success") {
+      }
+    }, 'json');
   });
+  
   $('#updateBtn').click(function(event) {
-	  location.href = "community.html";
+	  //location.href = "community.html";
   });
-  function sendFile(file,editor,welEditable) {
-    /*  alert(file.size);
-     alert(file.name); */
-       data = new FormData();
-       data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
-       $.ajax({
-           data: data,
-           type: "POST",
-           url: 'ajax/imageUpload.do',
-           cache: false,
-           contentType: false,
-           processData: false,
-           success: function(url) {
-            alert(url);
-            $('#summernote').summernote('insertImage', url);
-           }
-       });
-   }
-   /* function sendFile(file,editor,welEditable) {
-        data = new FormData();
-        data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
-        $.ajax({
-            data: data,
-            type: "POST",
-            url: 'ajax/imageUpload.do',
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(url) {
-             alert(url);
-             $('#summernote').summernote('insertImage', url);
-            }
-        });
-    } */
+  
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>

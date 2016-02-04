@@ -89,5 +89,10 @@
     update boards set likes=likes + 1  
     where bno=#{boardNo};
   </update>
+  
+  <insert id="insertText"  parameterType="map">
+    insert into boards(mno, title, content, cre_dt, cate)
+     values(#{userNo}, #{title},  #{content}, now(), #{category});
+  </insert>
  
 </mapper>
