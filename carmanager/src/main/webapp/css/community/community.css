@@ -95,3 +95,34 @@ h3.title {
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
 }
+
+h2.title {
+	white-space: nowrap;
+	overflow:hidden;
+  text-overflow: ellipsis;
+}
+
+#list_block {
+	padding-bottom: 10px;
+	font-weight: bold;
+}
+
+#list_nick {
+	margin: 5px 0px !important;
+}
+
+.viewnlike {
+	text-align: right;
+	margin: 0 !important;
+}
+
+.viewnlike span {
+	position: relative;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.viewnlike span img {
+	position: relative;
+  display: inline-block;
+}
