@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
-  <link type='text/css' rel="stylesheet" href="../css/community/communityDetail.css">
+  <link type='text/css' rel="stylesheet" href="../css/community/communityForm.css">
   <link type='text/css' rel="stylesheet" href="../css/community/cstyle.css">
   <link type='text/css' rel="stylesheet" href="../css/community/default.css">
   <link type='text/css' rel='stylesheet' href="../lib/bootstrap/css/bootstrap.css" />
@@ -155,7 +155,7 @@
 		</script>
 
 		<div id="page-wrapper">
-    	<div class="main-page compose">
+    	<div class="main-page">
 	  		<div>
 	  			<h3 class="title">여기는 게시판 입니다!</h3>
 	 				<h4>마음대로 떠들어보아요.</h4>
@@ -180,6 +180,7 @@
 	  				</div>
 	 	 				<div class="panel-body" id="summernote"></div>
     				<div class="panel-heading">
+    				&nbsp;&nbsp;
 							<button id='addBtn' type='button' class="btn btn-default">글쓰기</button>
 	  					<button id='listBtn' type='button' class="btn btn-default">목록</button>
 	 			 		</div>
@@ -216,18 +217,20 @@
     }
   }
   /* 원래 있는거 */
-  var no = location.href.split('?')[1].split('=')[1];
+    var no = location.href.split('?')[1].split('=')[1];
 /*   alert(no); */
-  if (no == -1) {
+  if (no > -1) {
     $.getJSON('../community/ajax/update.do?no=' + no, function(resultObj) {
       var ajaxResult = resultObj.ajaxResult;
       if (ajaxResult.status == "success") {
         var board = ajaxResult.data;
-        alert("나온다!!!!");
-        
+        $("#txt_title").val(board.title);
+        $("#category").val(board.category);
+        $('#summernote').summernote('code', board.content);
       }
     });
   } 
+  
   $('#addBtn').click(function(event) {
     var content = $('#summernote').summernote('code');
     if ($('#category').val() == "") {
@@ -299,10 +302,9 @@
            }
        });
    }
-  $('#updateBtn').click(function(event) {
+  $('#listBtn').click(function(event) {
 	  location.href = "community.html";
   });
-  
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>
