@@ -172,7 +172,7 @@
 	            </div>
 	              
 	            </div>
-	            <div class="panel-heading">
+	            <div id="list_footer" class="panel-heading">
 		            <button id='addBtn' type='button' 
 	              class="newForm btn btn-default">글쓰기</button>
 	              <button id='updateBtn' type='button' 
@@ -262,7 +262,7 @@
     			).appendTo(commentBody);
 	    }
 	    $("<div>").html(
-	      "<div class='panel-footer' style='border:1px solid lightgray'>" + comment.content + "</div><br>"
+	      "<div id='comment_content' class='panel-footer' style='border:1px solid lightgray'>" + comment.content + "</div><br>"
 	    ).appendTo(commentBody);
 	  }
 	  $(".deleteLink").click(clickDelete);
@@ -281,7 +281,7 @@
 	    	var ajaxResult = resultObj.ajaxResult;
 	        if (ajaxResult.status == "success") {
 	        	swal({    
-              title: "추천 성공!",   
+              title: "글을 추천했습니다!",   
               type: "success",
               confirmButtonText: "확인"
             }, function() {location.href = "communityDetail.html?no=" + no;});

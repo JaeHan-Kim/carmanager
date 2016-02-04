@@ -56,10 +56,22 @@ h3.title {
 	position: relative;
 }
 
+#likeLink {
+	font-weight: bold;
+}
+
+#list_footer {
+	border-radius: 0 0 3px 3px;
+}
+
+#list_footer button, #commentBtn {
+	padding: 3px 3px 3px 3px !important;
+	font-weight: bold;
+}
+
 #addBtn, #updateBtn,
 #deleteBtn, #listBtn,
-#commentBtn,
-.deleteBtn {
+#commentBtn, .deleteBtn {
 	background-color: #eaeaea !important;
 }
 
@@ -98,6 +110,11 @@ h3.title {
 	wrap: hard;
 	width: 100%;
 	margin-bottom: 10px;
+	border-color: lightgray;
+}
+
+#comment_content {
+	border-radius: 0;
 }
 
 #deleteImg {

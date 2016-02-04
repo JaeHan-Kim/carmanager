@@ -71,13 +71,13 @@
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left"
           id="cbp-spmenu-s1">
           <ul class="nav" id="side-menu">
-            <li><a href="../main/main.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
-            <li><a href="../mypage/mypage.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
-            <li><a href="../garage/garage.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
-            <li><a href="../refuel/refuelManager.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
-            <li><a href="../center/center.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
-            <li><a href="../goods/goods.html" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
-            <li><a href="../community/community.html" id="menu_active" class=""><i class="fa fa-home nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
+            <li><a href="../main/main.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/dash.png">Dashboard</a></li>
+            <li><a href="../mypage/mypage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/mypage.png">My page</a></li>
+            <li><a href="../garage/garage.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/garage.png">차량 등록</a></li>
+            <li><a href="../refuel/refuelManager.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/refuel.png">차량 관리</a></li>
+            <li><a href="../center/center.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/center.png">정 비 소</a></li>
+            <li><a href="../goods/goods.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/goods.png">맞춤 서비스</a></li>
+            <li><a href="../community/community.html" class=""><i class="nav_icon"></i><img class="img_menu" src="../img/main/community.png">커뮤니티</a></li>
           </ul>
         </nav>
       </div>
@@ -262,21 +262,21 @@
     }
     
     for (var board of resultObj.data) {
-      $("<div class='item block'>")
-        .html("<div class='thumbs-wrapper'>" +
-	              "<div class='thumbs'>" +
-	                "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
-	                  "<img src='../img/community/1.jpg'/>" +
-	                "</a>" +
-	              "</div>" +
-	            "</div>" +
-	            "<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
-	              "<h2 class='title'>"+ board.title + "</h2>" +
-	            "</a>" +
-	            "<p class='subline'>" + board.boardNo + "<span class='fancy'>&amp;</span>" + 
-	            board.category + "<span class='fancy'>&amp;</span>" + board.nickname + "</p>"
-        )
-      .appendTo(container);
+    	$("<div id='list_block' class='item block'>")
+        .html("<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
+                "<div class='thumbs-wrapper'>" +
+                  "<div class='thumbs'>" +
+                    "<img src='../img/community/1.jpg'/>" +
+                  "</div>" +
+                "</div>" +
+                "<h2 class='title'>[" + board.category + "] " + board.title + "</h2>" +
+              "</a>" +
+              "<p id='list_nick' class='subline'>작성자|" + board.nickname + "</p>" +
+              "<p class='subline viewnlike'>" +
+                "<span><img src='../img/community/views.png'> :" + board.views + "</span>" +
+                "<span><img src='../img/community/likes.png'> :" + board.likes + "</span>" +
+              "</p>"
+            ).appendTo(container);
     }
  	  
  	  // 제목 링크에 클릭 이벤트 리스너를 등록한다.
