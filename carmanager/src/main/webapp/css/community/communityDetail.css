@@ -26,8 +26,13 @@ h3.title {
 	margin-bottom: 0.8em;
 }
 
+#nickncredt {
+	margin-top: 5px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
 #bnickname {
-	float: right;
 	font-size: 20px;
 }
 

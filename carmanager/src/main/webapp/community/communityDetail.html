@@ -155,9 +155,11 @@
 	          <div class="panel-heading">
 	            <span id="bcategory"></span>
 	            <h3 id="btitle"></h3>
-	            <span id="bcreatedDate"></span>
-	            <span id="bnickname"></span>
 	          </div>
+              <div id="nickncredt">
+		            <span id="bnickname"></span>
+		            <span id="bcreatedDate"></span>
+	            </div>
 	          <div class="panel-body">
 	            <div class="container" id="container">
 	              <div id="bcontent"></div>
@@ -174,13 +176,13 @@
 	            </div>
 	            <div id="list_footer" class="panel-heading">
 		            <button id='addBtn' type='button' 
-	              class="newForm btn btn-default">글쓰기</button>
+	                      class="btn btn-default">글쓰기</button>
 	              <button id='updateBtn' type='button' 
-	              class="detailForm btn btn-default">수정</button>
+	                      class="btn btn-default">수정</button>
 	              <button id='deleteBtn' type='button' 
-	              class="detailForm btn btn-default">삭제</button>
+	                      class="btn btn-default">삭제</button>
 	              <button id='listBtn' type='button' 
-	              class="detailForm btn btn-default">목록</button>
+	                      class="btn btn-default">목록</button>
 	            </div>
 	          </div>
 	        </div>
@@ -194,7 +196,7 @@
 	                  <button id="commentBtn" class="btn btn-default btn-xs" type="button">등록</button>
 	                </span>
 	 		            <div id="comment_text_div">
-			              <textarea id="comment_text" rows="4" cols="100"></textarea>
+			              <textarea id="comment_text" rows="4" cols="100" placeholder="내용을 입력해주세요"></textarea>
 			            </div>
 		            </div>
 		          </div>
@@ -238,11 +240,11 @@
       var credate = Date.create(board.createdDate);
       $("#btitle").text(board.title);
       $("#bcategory").html("[" + board.category + "]&nbsp;&nbsp;");
-      $("#bnickname").html(board.nickname + "&nbsp;&nbsp;");
+      $("#bnickname").html("작성자 | " + board.nickname + "&nbsp;&nbsp;");
       $("#bcontent").html(board.content);
       $("#bviews").html(board.views + "&nbsp;&nbsp;");
       $("#blikes").text(board.likes);
-      $("#bcreatedDate").text(credate.format('{yyyy}-{MM}-{dd} {HH}:{mm}:{ss}'));
+      $("#bcreatedDate").text("작성일 | " + credate.format('{yyyy}-{MM}-{dd} {HH}:{mm}:{ss}'));
     }
   });
   
@@ -276,6 +278,10 @@
 	    location.href = "communityForm.html";
   });
   
+  $('#updateBtn').click(function(event){
+      location.href = "communityForm.html?no=" + no;
+  });
+  
   $('#likeLink').click(function(event) {
 	    $.getJSON('../community/ajax/likesUp.do?no=' + no, function(resultObj) {
 	    	var ajaxResult = resultObj.ajaxResult;
@@ -289,6 +295,8 @@
 	        }
 	    });  	
   });
+  
+  
   
   $('#commentBtn').click(function(event){
 	  $.post('../comment/ajax/add.do', {
