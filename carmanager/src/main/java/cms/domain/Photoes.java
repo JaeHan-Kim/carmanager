@@ -6,6 +6,13 @@ public class Photoes {
 	protected int     boardNo;
 	protected String  photoPath;
 	
+	public Photoes() {}
+	
+	public Photoes(int boardNo, String photoPath) {
+		this.boardNo = boardNo;
+		this.photoPath = photoPath;
+	}
+	
 	@Override
 	public String toString() {
 		return "Photoes [photoNo=" + photoNo + ", boardNo=" + boardNo + ", photoPath=" + photoPath + "]";

@@ -11,5 +11,9 @@
     <result column="bno" property="boardNo"/>
   </resultMap>
   
- 
+	<insert id="insertPhoto" parameterType="photoes">
+    insert into photoes(bno, photo)
+    values(#{boardNo}, #{photoPath});
+  </insert>
+
 </mapper>
