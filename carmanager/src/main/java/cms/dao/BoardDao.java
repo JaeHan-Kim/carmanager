@@ -22,6 +22,8 @@ public interface BoardDao {
   
   public int insertText(Map<String,Object> paramMap);
   
+  int delete(int no);
+  
   public Board selectBoradNo();
 }
 

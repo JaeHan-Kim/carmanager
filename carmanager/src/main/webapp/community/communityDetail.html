@@ -288,6 +288,19 @@
       location.href = "communityForm.html?no=" + no;
   });
   
+  $('#deleteBtn').click(function(event){
+	  $.getJSON('../community/ajax/delete.do?no=' + no, function(resultObj) {
+		  var ajaxResult = resultObj.ajaxResult;
+		    if (ajaxResult.status == "success") {
+		    	swal({    
+            title: "글을 삭제했습니다!",   
+            type: "success",
+            confirmButtonText: "확인"
+          }, function() {location.href = "community.html";});
+		    }
+	  });
+  });
+  
   $('#likeLink').click(function(event) {
 	    $.getJSON('../community/ajax/likesUp.do?no=' + no, function(resultObj) {
 	    	var ajaxResult = resultObj.ajaxResult;

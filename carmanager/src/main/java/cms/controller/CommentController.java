@@ -39,7 +39,7 @@ public class CommentController {
   @RequestMapping("delete")
   public String delete(int no) throws Exception {
 
-    if (commentDao.delete(no) <= 0) {
+    if (commentDao.deleteOne(no) <= 0) {
       return "failure";
     } 
 

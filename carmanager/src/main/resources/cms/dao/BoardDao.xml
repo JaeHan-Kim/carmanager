@@ -82,21 +82,27 @@
   
   <update id="viewsUp" parameterType="int">
     update boards set views=views + 1  
-    where bno=#{boardNo};
+    where bno=#{boardNo}
   </update>
   
   <update id="likesUp" parameterType="int">
     update boards set likes=likes + 1  
-    where bno=#{boardNo};
+    where bno=#{boardNo}
   </update>
   
   <insert id="insertText"  parameterType="map">
     insert into boards(mno, title, content, cre_dt, cate)
-     values(#{userNo}, #{title},  #{content}, now(), #{category});
+     values(#{userNo}, #{title},  #{content}, now(), #{category})
   </insert>
  
  	<select id="selectBoradNo" resultMap="boardMap">
     select * 
-    	from boards order by bno desc limit 1;
+    	from boards order by bno desc limit 1
   </select> 
+  
+  <delete id="delete" parameterType="int">
+    delete from boards 
+    where bno=#{no}
+  </delete>
+  
 </mapper>
