@@ -91,7 +91,7 @@
 }
 
 .btn_color:hover {
-  background-color:rgb(163, 163, 220) !important;
+  background-color: #627A71 !important;
   color:rgb(255,255,255) !important;
   outline:none !important; 
 }

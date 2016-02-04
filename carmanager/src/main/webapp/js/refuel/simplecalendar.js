@@ -229,8 +229,8 @@ var calendar = {
         //alert(eventDay);
         //alert(refuelValue);
         
-        $('#addForm').css('display', 'none')
-        $('#updateForm').css('display', '')
+        // $('#addForm').css('display', 'none')
+        // $('#updateForm').css('display', '')
         
         $('#moneyUP').css('display', 'none')
         $('#literUP').css('display', 'none')
@@ -243,23 +243,29 @@ var calendar = {
           $('#moneyUP').css('display', 'none')
           $('#literUP').css('display', '')
         });
-       
+        
+        
         $.getJSON('refuelOne.do?date=' + refuelValue + '&selectCar=' + sessionStorage.getItem('selectCarNo'), function(resultObj) {
           var ajaxResult = resultObj.ajaxResult;
           var refuelOne = ajaxResult.data;
           if (ajaxResult.status == "success") {
+            $('#addForm').css('display', 'none');
+            $('#updateForm').css('display', '');
             $("#date_refuelDateUP").val(refuelOne.refuelDate);
             $("#num_driveMileUP").val(refuelOne.mile);
             $("#num_literCostUP").val(refuelOne.literCost);
             $("#num_costUP").val(refuelOne.cost);
             $("#num_literUP").val(refuelOne.liter);
           } else if (ajaxResult.status == "failure") {
+            $('#addForm').css('display', '');
+            $('#updateForm').css('display', 'none');
             swal("해당 날짜의 주유기록이 없습니다 ; (", "주유기록이 있는 날짜를 클릭하세요.")
             return false;
           }
           
         });
-        
+       
+         
         
       });
     };

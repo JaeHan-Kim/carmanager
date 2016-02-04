@@ -50,16 +50,18 @@
 
 /* 버튼 관련 css */
 .btn_reset{
-    background: #6164C1 !important;
+    background: #627A71 !important;
     color: #FFF;
     border: none;
-    font-size: 0.9em;
+    font-size: 0.7em;
     float: right;
     display: block;
+    padding: 3px 5px;
 }
 
 .btn_reset:hover{
-	 background: rgba(79, 82, 186, 0.81) !important;
+	 background: #7A6161 !important;
+   color: #FFF;
 }
 
 
