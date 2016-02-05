@@ -166,7 +166,6 @@ public class BoardController {
   
   @RequestMapping(value="addText", method=RequestMethod.POST)
   public AjaxResult addText(int userNo, String title, String content, String category, String imageFile) {
-  	Board board;
   	//  log.debug(userNo + " " + title + " " + content + " " + category + " " + imageFile);
   	HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("userNo", userNo);
@@ -175,10 +174,10 @@ public class BoardController {
     paramMap.put("category", category);
     paramMap.put("photo", imageFile);
     boardDao.insertText(paramMap);
-    board = boardDao.selectBoradNo();
     
   	return new AjaxResult("success", null);
   }
+  
   @RequestMapping("update")
   public Object update(int no) throws Exception {
     Board board = boardDao.selectOne(no);

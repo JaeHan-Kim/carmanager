@@ -99,6 +99,15 @@
     -o-box-sizing: border-box;
 }
 
+.thumbs {
+  overflow: hidden;
+}
+
+#boardImg {
+	width: 100%;
+  height: auto;
+}
+
 h2.title {
 	white-space: nowrap;
 	overflow:hidden;
