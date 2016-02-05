@@ -101,6 +101,9 @@
 
 .thumbs {
   overflow: hidden;
+  width: 218px;
+  height: 137px;
+  
 }
 
 #boardImg {

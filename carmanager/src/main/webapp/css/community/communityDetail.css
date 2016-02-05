@@ -49,6 +49,10 @@ h3.title {
 	word-break: break-all;
 }
 
+#bcontent img {
+	max-width: 100%;
+}
+
 #bodyfooter {
 	position: relative;
   display: inline;

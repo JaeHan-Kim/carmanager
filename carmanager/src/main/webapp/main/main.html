@@ -464,10 +464,28 @@ window.scrollTo(0,1); }
     month.push((moment().subtract(60, 'days').months() + 1) + "월");
     month.push((moment().subtract(30, 'days').months() + 1) + "월");
     month.push(moment().format('MM')  + "월");
-   
- 	for (var i = resultObj.memCostAvg.length-1; i >= 0; i-- ) {
- 		memCostAvg.push((resultObj.memCostAvg[i].cost/=1000).toFixed(2));
-  } 
+   	if (resultObj.memCostAvg.length == 3) {
+   		for (var i = resultObj.memCostAvg.length-1; i >= 0; i-- ) {
+    		memCostAvg.push((resultObj.memCostAvg[i].cost/=1000).toFixed(2));
+   	  } 
+    } else if (resultObj.myCostAvg.length == 2) {
+
+   		for (var i = resultObj.memCostAvg.length-1; i >= 0; i-- ) {
+    		memCostAvg.push((resultObj.memCostAvg[i].cost/=1000).toFixed(2));
+   	  } 
+   		memCostAvg.push(0);
+    } else if (resultObj.myCostAvg.length == 1) {
+      memCostAvg.push(0);
+      memCostAvg.push(0);
+   		for (var i = resultObj.memCostAvg.length-1; i >= 0; i-- ) {
+    		memCostAvg.push((resultObj.memCostAvg[i].cost/=1000).toFixed(2));
+   	  } 
+    } else {
+      memCostAvg.push(0);
+      memCostAvg.push(0);
+      memCostAvg.push(0);
+    }
+  /*-------------------------------------------*/
  	if (resultObj.myCostAvg.length == 3) {
  	 for (var i = resultObj.myCostAvg.length-1; i >= 0; i-- ) {
 	    myCostAvg.push((resultObj.myCostAvg[i].cost/=1000).toFixed(2));
@@ -536,7 +554,7 @@ window.scrollTo(0,1); }
       var effic = new Array();
       
       if (resultObj.refuelList != ""  && resultObj.refuelList.length > 2) {
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 2; i++) {
           effic[i] = ((resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter).toFixed(2);
         }
 

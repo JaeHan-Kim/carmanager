@@ -50,7 +50,6 @@ public class MyGoodsController {
 	    int restmile = good.getLifeMile() - garage.getMile();
         restmiles.put(good.getGoodsNo(), restmile); 
 	  }
-	  
 	  HashMap<String,Object> resultMap = new HashMap<>();
       resultMap.put("status", "success");
       resultMap.put("data", restmiles);
