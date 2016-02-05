@@ -2144,9 +2144,9 @@ h4.modal-title {
     line-height: 1.4em;
 }
 .compose-right .panel-heading {
-    padding: 0.8em 2em;
+    padding: 0.5em 1em;
     color: #ddd;
-    background-color: #627A71;
+    background-color: #4A5279 ;
 }
 .compose-right .panel-body {
     padding: 2em;
@@ -2155,9 +2155,9 @@ h4.modal-title {
     padding: 10px 20px;
     font-size: 0.9em;
     color: #6164C1;
-	background-color: rgba(212, 213, 243, 0.98);
+	  background-color: rgba(212, 213, 243, 0.98);
     border-color: rgba(151, 153, 230, 0.41);
-	border-radius: inherit;
+	  border-radius: inherit;
 }
 .compose-right .form-group {
     margin: .5em 0;

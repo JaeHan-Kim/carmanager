@@ -19,17 +19,25 @@
 
 #category {
   width: 100px;
-  height: 36.5px;
+  height: 30px;
   webkit-box-sizing: border-box;
   box-sizing:border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
-  margin-left: 2.1%;
+  /*margin-left: 2.1%;*/
 }
 
 #writebtn {
   float: right;
-  margin-right: 3.3%;
+  background-color: whitesmoke !important;
+  color: #4A5279 !important;
+  height: 30px;
+  text-align: center;
+  /*margin-right: 3.3%;*/
+}
+#writebtn:hover {
+  background-color: #9099C7 !important;
+  color:  whitesmoke !important;
 }
 
 h3.title {
@@ -55,14 +63,14 @@ h3.title {
 	/*height: 50px;*/
 	/*position: absolute;*/
 	/*float: right;*/
-	display: inline;
-	padding: 10px 0px !important;
+	/*display: inline;*/
+	padding: 11px 0px !important;
 	/*margin-right: 3.2%;*/
 	/*margin-left: 200px;*/
 }
 
 #search_btn {
-  background-color: rgb(255,255,255) !important;
+  background-color: whitesmoke !important;
   color: #4A5279 !important;
   /*float: right;*/
   position: relative;
@@ -72,6 +80,11 @@ h3.title {
   box-sizing:border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
+}
+
+#search_btn:hover {
+  background-color: #9099C7  !important;
+  color:  whitesmoke !important;
 }
 
 #searchOption {
