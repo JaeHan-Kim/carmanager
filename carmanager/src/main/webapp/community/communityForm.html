@@ -241,97 +241,98 @@
         classie.toggle(menuLeft, 'cbp-spmenu-open');
         disableOther('showLeftPush');
       };
-
-      function disableOther(button) {
-        if (button !== 'showLeftPush') {
-          classie.toggle(showLeftPush, 'disabled');
-        }
+      
+  function disableOther(button) {
+    if (button !== 'showLeftPush') {
+      classie.toggle(showLeftPush, 'disabled');
+    }
+  }
+  /* 원래 있는거 */
+    var no = location.href.split('?')[1].split('=')[1];
+  
+  /* alert(no); */
+  if (no > -1) {
+    $('.updateForm').css('display', '');
+  	$('.newForm').css('display', 'none');
+    $.getJSON('../community/ajax/update.do?no=' + no, function(resultObj) {
+      var ajaxResult = resultObj.ajaxResult;
+      if (ajaxResult.status == "success") {
+        var board = ajaxResult.data;
+        $("#txt_title").val(board.title);
+        $("#category").val(board.category);
+        $('#summernote').summernote('code', board.content);
       }
-      /* 원래 있는거 */
-      var no = location.href.split('?')[1].split('=')[1];
-      /*   alert(no); */
-      if (no > -1) {
-        $.getJSON('../community/ajax/update.do?no=' + no, function(resultObj) {
-          var ajaxResult = resultObj.ajaxResult;
-          if (ajaxResult.status == "success") {
-            var board = ajaxResult.data;
-            $("#txt_title").val(board.title);
-            $("#category").val(board.category);
-            $('#summernote').summernote('code', board.content);
-          }
-        });
-      }
-
-      $('#addBtn').click(
-          function(event) {
-            var content = $('#summernote').summernote('code');
-            if ($('#category').val() == "") {
-              swal({
-                title : "Error!",
-                text : "카테고리를 선택해주세요!",
-                type : "error",
-                confirmButtonText : "확인"
-              });
-              return false;
-            }
-            if ($('#txt_title').val().length < 1) {
-              swal({
-                title : "Error!",
-                text : "제목을 입력해주세요!",
-                type : "error",
-                confirmButtonText : "확인"
-              });
-              return false;
-            }
-            if (content.length == 11 || content.length < 0) {
-              swal({
-                title : "Error!",
-                text : "내용을 입력해주세요!",
-                type : "error",
-                confirmButtonText : "확인"
-              });
-              return false;
-            }
-
-            /* alert(content.length); */
-            var imageFile = "";
-            if (typeof imageCount[0] != "undefined") {
-              var str = imageCount[0].split('/');
-              str[3] = "c-" + str[3].substring(0, str[3].lastIndexOf('.'))
-                  + ".png";
-              for (var i = 0; i < str.length; i++) {
-                imageFile = imageFile + str[i] + "/";
-              }
-              imageFile = imageFile.substring(0, imageFile.lastIndexOf('/'));
-            }
-            if (imageFile == "") {
-              imageFile = "../img/community/defaultImage.png"
-            }
-            $.post('ajax/addText.do', {
-              userNo : sessionStorage.getItem("loginUser"),
-              title : $("#txt_title").val(),
-              content : content,
-              category : $("#category").val(),
-              imageFile : imageFile
-            }, function(resultObj) {
-
-              location.href = "community.html";
-            }, 'json');
-          });
-      function sendFile(file, editor, welEditable) {
-        /*  alert(file.size);
-         alert(file.name); */
-        data = new FormData();
-        data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
-        data.append("imageCnt", imageCount.length);
-        $.ajax({
-          data : data,
-          type : "POST",
-          url : 'ajax/imageUpload.do',
-          cache : false,
-          contentType : false,
-          processData : false,
-          success : function(url) {
+    });
+  } else {
+    $('.updateForm').css('display', 'none');
+  	$('.newForm').css('display', '');
+  }
+  
+  $('#addBtn').click(function(event) {
+    var content = $('#summernote').summernote('code');
+    if ($('#category').val() == "") {
+      swal({   
+        title: "Error!",   
+        text: "카테고리를 선택해주세요!",   
+        type: "error",   
+        confirmButtonText: "확인" });
+      return false;
+    }
+    if ($('#txt_title').val().length < 1) {
+      swal({   
+        title: "Error!",   
+        text: "제목을 입력해주세요!",   
+        type: "error",   
+        confirmButtonText: "확인" });
+      return false;
+    }
+    if (content.length ==  11 || content.length  < 0) {
+      swal({   
+        title: "Error!",   
+        text: "내용을 입력해주세요!",   
+        type: "error",   
+        confirmButtonText: "확인" });
+      return false;
+    }
+   
+    /* alert(content.length); */
+    var imageFile = "";
+    if(typeof imageCount[0] != "undefined") {
+   	var str = imageCount[0].split('/');
+    	str[3] = "c-" + str[3].substring(0,str[3].lastIndexOf('.')) + ".png";
+  	  for (var i = 0; i < str.length; i++) {
+   		imageFile = imageFile + str[i] + "/";
+    	} 
+    	imageFile = imageFile.substring(0,imageFile.lastIndexOf('/'));
+    }
+    if (imageFile == "") {
+      imageFile = "../img/community/defaultImage.png"
+    }
+    $.post('ajax/addText.do', {
+      userNo: sessionStorage.getItem("loginUser"),
+      title: $("#txt_title").val(),
+      content: content,
+      category: $("#category").val(),
+      imageFile: imageFile
+    }, function(resultObj) {
+     
+        location.href = "community.html";
+    }, 'json');
+  });
+  function sendFile(file,editor,welEditable) {
+    /*  alert(file.size);
+     alert(file.name); */
+       data = new FormData();
+       data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
+       data.append("imageCnt", imageCount.length);
+       $.ajax({
+           data: data,
+           type: "POST",
+           url: 'ajax/imageUpload.do',
+           cache: false,
+           contentType: false,
+           processData: false,
+           success: function(url) {
             console.log(url);
             imageCount.push(url);
             $('#summernote').summernote('insertImage', url);

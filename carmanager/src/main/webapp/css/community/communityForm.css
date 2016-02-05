@@ -1,0 +1,145 @@
+@CHARSET "UTF-8";
+
+.pagination {
+	margin: 5px 0px 5px 26px !important;
+}
+
+#board-header {
+	margin-bottom: -32px;
+	background-color: RGB(220, 220, 220);
+  box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
+  -webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
+  -moz-box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
+}
+
+#bcategory,
+#btitle,
+#bnickname,
+#bcreatedDate {
+	display: inline;
+	position: relative;
+}
+
+h3.title {
+	font-size: 1.8em;
+	color: dimgray;
+	margin-bottom: 0.8em;
+}
+
+#nickncredt {
+	margin-top: 5px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#bnickname {
+	font-size: 20px;
+}
+
+#bcreatedDate {
+  float: right;
+  font-size: 20px;
+}
+
+#bcontent {
+	width: 70%;
+	height: 100%;
+	display: block;
+	margin-bottom: 30px;
+	word-break: break-all;
+}
+
+#bodyfooter {
+	position: relative;
+  display: inline;
+}
+
+#viewnlike {
+	float: right;
+	text-align: right;
+	position: relative;
+}
+
+#likeLink {
+	font-weight: bold;
+}
+
+#list_footer {
+	border-radius: 0 0 3px 3px;
+	display: inherit;
+	width: 100%;
+}
+
+#list_footer button, #commentBtn {
+	padding: 3px 3px 3px 3px !important;
+	font-weight: bold;
+}
+
+#nullspan {
+	font-size: 5px;
+}
+
+#addBtn, #updateBtn,
+#deleteBtn, #listBtn,
+#commentBtn {
+	background-color: #eaeaea !important;
+}
+
+#addBtn:hover, #updateBtn:hover,
+#deleteBtn:hover, #listBtn:hover,
+#commentBtn:hover {
+	background-color: white !important;
+}
+
+#addBtn, #listBtn, #updateBtn {
+	float: right;
+  text-align: right;
+}
+
+#listBtn {
+	margin-right: 5px;
+}
+
+.commentWrap {
+	margin-top: 10px;
+	word-break: break-all;
+}
+
+#comment_writer {
+	font-weight: bold;
+}
+
+#commentBtn {
+	margin-bottom: 5px;
+	float: right;
+	font-size: 15px;
+}
+
+#comment_text {
+	resize: none; 
+	wrap: hard;
+	width: 100%;
+	margin-bottom: 10px;
+	border-color: lightgray;
+}
+
+#comment_content {
+	border-radius: 0;
+}
+
+#deleteImg {
+	width: 15px;
+}
+.btn_set {
+	margin-bottom: 10px;
+}
+
+#category {
+	margin-left: -30px;
+	width: 100px;
+	height: 30px;
+}
+#txt_title{
+	margin-left: -30px;
+	height: 30px;
+}
