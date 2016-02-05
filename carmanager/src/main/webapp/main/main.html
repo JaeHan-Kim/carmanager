@@ -311,7 +311,7 @@ window.scrollTo(0,1); }
           <h4 class="title">교체 시기가 다가오는 소모품을 확인하세요.</h4>
           <div class="cal1">
 						<div id="myDiagramDiv" class="well" style="width: auto; height: 300px;"></div>
-        	  <span id="diagramEventsMsg" style="color: red">(message)</span>
+        	  <span id="diagramEventsMsg"></span>
           	<div class="clearfix"></div>
           </div>
         </div>
@@ -329,7 +329,6 @@ window.scrollTo(0,1); }
     $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
       for (var garage of resultObj.data) {
         if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
-          /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
         $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='nav_icon'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
@@ -371,8 +370,6 @@ window.scrollTo(0,1); }
     }
     
     function changeMyCar(selectCarNo){
-      /* alert(sessionStorage.getItem('selectCarNo'));
-      alert(selectCarNo); */
       $("#line").remove();
       $("#bar").remove();
       $("#efficgauge").remove();
@@ -394,7 +391,7 @@ window.scrollTo(0,1); }
 	      var userRatio = new Array();
 	      if (resultObj.status == "success") {
 	        $("<div id='myDiagramDiv' class='well' style='width: auto; height: 400px;'></div>").appendTo(".cal1");
-          $("<span id='diagramEventsMsg' style='color: red'>(message)</span>").appendTo(".cal1");
+          $("<span id='diagramEventsMsg'></span>").appendTo(".cal1");
 	    	  for (var i=1; i <= 9; i++) {
 	    	    userRatio.push(parseInt(((lifeTime[i]-resultObj.data[i])/lifeTime[i]) * 100));
 	    	  }
@@ -461,8 +458,6 @@ window.scrollTo(0,1); }
     }
   
   function barChart(resultObj) {
-		/* alert("memCostAvg : " + resultObj.memCostAvg.length);
-    alert("myCostAvg : " + resultObj.myCostAvg.length); */
     var month = new Array();
     var memCostAvg = new Array();
     var myCostAvg = new Array();
@@ -626,6 +621,7 @@ window.scrollTo(0,1); }
   	 	var temp, indexMin; 
     	var repalecePart = 0;
     	var ct = 0;
+    	var message = "교체 필요 부품 : ";
     	var partName = ['와이퍼', '에어컨 필터', '브레이크 패드', '브레이크 오일', '부동액', '엔진오일', '미션오일', '타이어', '베터리'];
     	var partImage = ['../img/refuel/refuel_goods/wiper.png', 
     	                 '../img/refuel/refuel_goods/filter.png', 
@@ -636,12 +632,8 @@ window.scrollTo(0,1); }
     	                 '../img/refuel/refuel_goods/missionoil.png', 
     	                 '../img/refuel/refuel_goods/tire.png', 
     	                 '../img/refuel/refuel_goods/battery.png'];
-			
       for (var i = 0; i < userRatio.length - 1; i++) {
         indexMin = i;
-        if (userRatio[i] >= 80) {
-    		  repalecePart++;
-        }
         for (var j = i + 1; j < userRatio.length; j++) {
             if (userRatio[j] > userRatio[indexMin]) {
                 indexMin = j;
@@ -659,16 +651,12 @@ window.scrollTo(0,1); }
         partImage[indexMin] = partImage[i];
         partImage[i] = temp;
     }
-      
-     /*  for (var i = 0; i < userRatio.length; i++) {
-      	alert(userRatio[i]);
-      } */
     	  var $ = go.GraphObject.make;
     	  
     	  var diagram = $(go.Diagram, "myDiagramDiv",
     	    {
     	    	autoScale: go.Diagram.Uniform,
-    	    	allowSelect: true,
+    	    	allowSelect: false,
     	    	allowCopy: false,
     	    	allowDelete: false,
     	    	allowMove: false,
@@ -678,15 +666,14 @@ window.scrollTo(0,1); }
     	  function showMessage(s) {
     	    document.getElementById("diagramEventsMsg").textContent = s;
     	  }
-    	  diagram.addDiagramListener("ObjectSingleClicked",
+    	  /* diagram.addDiagramListener("ObjectSingleClicked",
     	      function(e) {
-    	    /* 	location.href = "../refuel/refuel_goods.html" */
     	        var part = e.subject.part;
     	        if (!(part instanceof go.Link)) showMessage("Clicked on " + part.data.key);
     	      });
     	  diagram.addDiagramListener("BackgroundDoubleClicked",
     	      function(e) { showMessage("Double-clicked at " + e.diagram.lastInput.documentPoint); });
-        
+         */
         diagram.nodeTemplate =
     	    $(go.Node, "Spot",
     	      new go.Binding("location", "loc"),
@@ -717,6 +704,11 @@ window.scrollTo(0,1); }
     
          var nodeDataArray = new Array();
          var linkDataArray = new Array();
+    for (var i = 0; i < userRatio.length; i++) {
+      if (userRatio[i] >= 80) {
+        message += partName[i] + " , ";
+      }
+    }
   	for (var j = 0; j < userRatio.length; j++){
   	  if (ct == 6) {
   	    break;
@@ -726,12 +718,9 @@ window.scrollTo(0,1); }
   			nodeDataArray.push({ "key": partName[j], "img": partImage[j], "loc": new go.Point(posX[j], posY[j])});
   			linkDataArray.push({ from: 'car', to: partName[j], dash: [11, 10], color: 'crimson', width: 2});
   		} 
-  	    	  /* alert(partName[j] + " : " + userRatio[j]); */
   	}
   	var carStatus;
   	var size = 700;
-  	/* alert(ct);
-  	alert(repalecePart); */
     if (ct < 2) {
       carStatus = "carG.png";
     } else if (ct < 4) {
@@ -739,6 +728,7 @@ window.scrollTo(0,1); }
     } else {
       carStatus = "carR.png";
     }
+    showMessage(message.substring(0,message.lastIndexOf(',')));
     nodeDataArray.push({ "maxSize": new go.Size(400, 500), "key": "car", "img": carStatus, "loc": new go.Point(-150, -100) });
   	diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
 

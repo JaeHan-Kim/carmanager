@@ -98,7 +98,8 @@ h2.title {
 }
 
 #list_nick {
-	margin: 5px 0px !important;
+	margin: 5px 0px 0px 0px !important;
+	padding-bottom: 0px;
 }
 
 .viewnlike {

@@ -26,8 +26,13 @@ h3.title {
 	margin-bottom: 0.8em;
 }
 
+#nickncredt {
+	margin-top: 5px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
 #bnickname {
-	float: right;
 	font-size: 20px;
 }
 
@@ -35,7 +40,6 @@ h3.title {
   float: right;
   font-size: 20px;
 }
-
 
 #bcontent {
 	width: 70%;
@@ -62,6 +66,8 @@ h3.title {
 
 #list_footer {
 	border-radius: 0 0 3px 3px;
+	display: inherit;
+	width: 100%;
 }
 
 #list_footer button, #commentBtn {
@@ -69,15 +75,19 @@ h3.title {
 	font-weight: bold;
 }
 
+#nullspan {
+	font-size: 5px;
+}
+
 #addBtn, #updateBtn,
 #deleteBtn, #listBtn,
-#commentBtn, .deleteBtn {
+#commentBtn {
 	background-color: #eaeaea !important;
 }
 
 #addBtn:hover, #updateBtn:hover,
 #deleteBtn:hover, #listBtn:hover,
-#commentBtn:hover, .deleteBtn:hover {
+#commentBtn:hover {
 	background-color: white !important;
 }
 

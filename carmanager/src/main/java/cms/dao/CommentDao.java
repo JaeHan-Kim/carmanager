@@ -9,5 +9,7 @@ public interface CommentDao {
   
   int insert(Comment comment);
   
-  int delete(int no);
+  int deleteOne(int no);
+  
+  int deleteAll(int no);
 }

@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
-  <link type='text/css' rel="stylesheet" href="../css/community/communityDetail.css">
+  <link type='text/css' rel="stylesheet" href="../css/community/communityForm.css">
   <link type='text/css' rel="stylesheet" href="../css/community/cstyle.css">
   <link type='text/css' rel="stylesheet" href="../css/community/default.css">
   <link type='text/css' rel='stylesheet' href="../lib/bootstrap/css/bootstrap.css" />
@@ -58,27 +58,8 @@
       },
       lang: 'ko-KR'
       }
+   
   });
-    function sendFile(file,editor,welEditable) {
-      /*  alert(file.size);
-       alert(file.name); */
-         data = new FormData();
-         data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
-         data.append("imageCnt", imageCount.length);
-         $.ajax({
-             data: data,
-             type: "POST",
-             url: 'ajax/imageUpload.do',
-             cache: false,
-             contentType: false,
-             processData: false,
-             success: function(url) {
-              console.log(url);
-              imageCount.push(url);
-              $('#summernote').summernote('insertImage', url);
-             }
-         });
-     }
   });  
   
 	</script>
@@ -174,7 +155,7 @@
 		</script>
 
 		<div id="page-wrapper">
-    	<div class="main-page compose">
+    	<div class="main-page">
 	  		<div>
 	  			<h3 class="title">여기는 게시판 입니다!</h3>
 	 				<h4>마음대로 떠들어보아요.</h4>
@@ -199,10 +180,15 @@
 	  				</div>
 	 	 				<div class="panel-body" id="summernote"></div>
     				<div class="panel-heading">
-							<button id='addBtn' type='button' 
-	  					class="newForm btn btn-default">글쓰기</button>
-	  					<button id='updateBtn' type='button' 
-	  					class="detailForm btn btn-default">목록</button>
+    					<div class="btn_set">
+							 <button id='addBtn' type='button' 
+	                      class="newForm btn btn-default">글쓰기</button>
+	             <button id='updateBtn' type='button' 
+	             					class="updateForm btn btn-default">수정</button>
+	             &nbsp;
+	              <button id='listBtn' type='button' 
+	                      class="newForm btn btn-default">목록</button>
+	          	</div>
 	 			 		</div>
     			</div>
     		</form>
@@ -237,20 +223,19 @@
     }
   }
   /* 원래 있는거 */
-  
-/*   $.getJSON('../community/ajax/detail.do?no=' + no, function(resultObj) {
-    var ajaxResult = resultObj.ajaxResult;
-    if (ajaxResult.status == "success") {
-      var board = ajaxResult.data;
-      $("#btitle").html(board.title);
-      $("#bcategory").html("[" + board.category + "]");
-      $("#bnickname").html(board.nickname);
-      $("#bcontent").val(board.content);
-      $("#bviews").text(board.views);
-      $("#blikes").text(board.likes);
-      $("#bcreatedDate").text(board.createdDate);
-    }
-  });   */
+    var no = location.href.split('?')[1].split('=')[1];
+/*   alert(no); */
+  if (no > -1) {
+    $.getJSON('../community/ajax/update.do?no=' + no, function(resultObj) {
+      var ajaxResult = resultObj.ajaxResult;
+      if (ajaxResult.status == "success") {
+        var board = ajaxResult.data;
+        $("#txt_title").val(board.title);
+        $("#category").val(board.category);
+        $('#summernote').summernote('code', board.content);
+      }
+    });
+  } 
   
   $('#addBtn').click(function(event) {
     var content = $('#summernote').summernote('code');
@@ -303,11 +288,29 @@
         location.href = "community.html";
     }, 'json');
   });
-  
-  $('#updateBtn').click(function(event) {
+  function sendFile(file,editor,welEditable) {
+    /*  alert(file.size);
+     alert(file.name); */
+       data = new FormData();
+       data.append("file", file);//You can append as many data as you want. Check mozilla docs for this
+       data.append("imageCnt", imageCount.length);
+       $.ajax({
+           data: data,
+           type: "POST",
+           url: 'ajax/imageUpload.do',
+           cache: false,
+           contentType: false,
+           processData: false,
+           success: function(url) {
+            console.log(url);
+            imageCount.push(url);
+            $('#summernote').summernote('insertImage', url);
+           }
+       });
+   }
+  $('#listBtn').click(function(event) {
 	  location.href = "community.html";
   });
-  
   </script>
   <script src="../js/main/jquery.nicescroll.js"></script>
   <script src="../js/main/scripts.js"></script>

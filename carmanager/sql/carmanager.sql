@@ -19,9 +19,6 @@ DROP TABLE IF EXISTS garage RESTRICT;
 -- 차량별소모품
 DROP TABLE IF EXISTS mygoods RESTRICT;
 
--- 사진
-DROP TABLE IF EXISTS photoes RESTRICT;
-
 -- 댓글
 DROP TABLE IF EXISTS comments RESTRICT;
 
@@ -136,7 +133,8 @@ CREATE TABLE boards (
 	cre_dt  DATETIME     NOT NULL COMMENT '작성일시', -- 작성일시
 	cate    VARCHAR(255) NOT NULL COMMENT '카테고리', -- 카테고리
 	likes   INTEGER      NOT NULL DEFAULT 0 COMMENT '추천수', -- 추천수
-	views   INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수' -- 조회수
+	views   INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+	photo   VARCHAR(255) NULL     DEFAULT '../img/community/defaultImage.png' COMMENT '사진' -- 사진
 )
 COMMENT '게시물';
 
@@ -209,24 +207,6 @@ ALTER TABLE mygoods
 
 ALTER TABLE mygoods
 	MODIFY COLUMN mgno INTEGER NOT NULL AUTO_INCREMENT COMMENT '소모품교체번호';
-
--- 사진
-CREATE TABLE photoes (
-	pno   INTEGER      NOT NULL COMMENT '사진번호', -- 사진번호
-	photo VARCHAR(255) NULL     COMMENT '사진', -- 사진
-	bno   INTEGER      NOT NULL COMMENT '게시물번호' -- 게시물번호
-)
-COMMENT '사진';
-
--- 사진
-ALTER TABLE photoes
-	ADD CONSTRAINT PK_photoes -- 사진 기본키
-		PRIMARY KEY (
-			pno -- 사진번호
-		);
-
-ALTER TABLE photoes
-	MODIFY COLUMN pno INTEGER NOT NULL AUTO_INCREMENT COMMENT '사진번호';
 
 -- 댓글
 CREATE TABLE comments (
@@ -355,16 +335,6 @@ ALTER TABLE mygoods
 		)
 		REFERENCES garage ( -- 내차
 			grno -- 내차번호
-		);
-
--- 사진
-ALTER TABLE photoes
-	ADD CONSTRAINT FK_boards_TO_photoes -- 게시물 -> 사진
-		FOREIGN KEY (
-			bno -- 게시물번호
-		)
-		REFERENCES boards ( -- 게시물
-			bno -- 게시물번호
 		);
 
 -- 댓글

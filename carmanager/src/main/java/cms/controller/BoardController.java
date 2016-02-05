@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cms.dao.BoardDao;
+import cms.dao.CommentDao;
 import cms.dao.PhotoesDao;
 import cms.domain.AjaxResult;
 import cms.domain.Board;
@@ -35,6 +36,7 @@ public class BoardController {
 	
 	public static final String SAVED_DIR = "/img/community";
   @Autowired BoardDao boardDao;
+  @Autowired CommentDao commentDao;
   @Autowired PhotoesDao photoesDao;
   @Autowired ServletContext servletContext;
   
@@ -182,6 +184,25 @@ public class BoardController {
     photoesDao.insertPhoto(photo);
     
   	return new AjaxResult("success", null);
+  }
+  @RequestMapping("update")
+  public Object update(int no) throws Exception {
+    Board board = boardDao.selectOne(no);
+    return new AjaxResult("success", board);
+  }
+  
+  @RequestMapping("delete")
+  public AjaxResult delete(int no) throws Exception {
+
+    if (commentDao.deleteAll(no) <= 0) {
+      return new AjaxResult("failure", null);
+    } 
+    
+    if (boardDao.delete(no) <= 0) {
+      return new AjaxResult("failure", null);
+    }
+    
+    return new AjaxResult("success", null);
   }
   
   private void makeThumbnailImage(String originPath, String thumbPath) 

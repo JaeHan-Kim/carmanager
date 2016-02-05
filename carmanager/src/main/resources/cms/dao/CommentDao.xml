@@ -27,8 +27,13 @@
     values(#{boardNo}, #{memberNo}, #{content}, now())
   </insert>
   
-  <delete id="delete" parameterType="int">
+  <delete id="deleteOne" parameterType="int">
     delete from comments 
     where cmno=#{no}
+  </delete>
+  
+  <delete id="deleteAll" parameterType="int">
+    delete from comments 
+    where bno=#{no}
   </delete>
 </mapper>
