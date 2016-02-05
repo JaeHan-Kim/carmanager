@@ -160,7 +160,6 @@ window.scrollTo(0,1); }
     $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
       for (var garage of resultObj.data) {
         if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
-          /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
         $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='nav_icon'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
@@ -170,7 +169,6 @@ window.scrollTo(0,1); }
    	});
     function clickLink(event) {
       event.preventDefault();
-      /* alert($(event.target).attr("carName")); */
       if ($(event.target).attr("carNo") == 'Logout') {
           sessionStorage.removeItem('loginUserNickname');
       /*  sessionStorage.removeItem('loginUsercarNo'); */
@@ -178,9 +176,7 @@ window.scrollTo(0,1); }
           sessionStorage.removeItem('selectCarNo');
           location.href = "../auth/login.html";
       } else {
-        /* alert($(event.target).attr("carNo")); */
         $('#selectedMyCar').html($(event.target).attr("carName"));
-        //alert($(event.target).attr("carNo"));
         sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
       }
         
@@ -354,7 +350,6 @@ window.scrollTo(0,1); }
           </div>
         </div>
         <script type="text/javascript">
-        //alert(sessionStorage.getItem("loginUser"));
         var makerList = $("#sel_list");
         var carList = $("#sel_modellist");
         
@@ -486,7 +481,6 @@ window.scrollTo(0,1); }
               type: "success",   
               confirmButtonText: "확인 :)" }, function() {   
                 if(sessionStorage.getItem("selectCarNo") == 0) {
-                  /* alert(ajaxResult.data.myCarNo); */
                   sessionStorage.setItem('selectCarNo', ajaxResult.data.myCarNo);
                 }
                 location.href = "garage.html";

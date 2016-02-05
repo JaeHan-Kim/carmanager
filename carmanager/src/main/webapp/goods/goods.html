@@ -164,7 +164,6 @@
     $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
       for (var garage of resultObj.data) {
         if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
-          /* alert(garage.nickName); */
           $('#selectedMyCar').html(garage.nickName);
         }
         $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='nav_icon'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
@@ -174,7 +173,6 @@
    	});
     function clickLink(event) {
       event.preventDefault();
-      /* alert($(event.target).attr("carName")); */
       if ($(event.target).attr("carNo") == 'Logout') {
           sessionStorage.removeItem('loginUserNickname');
       /*  sessionStorage.removeItem('loginUsercarNo'); */
@@ -182,9 +180,7 @@
           sessionStorage.removeItem('selectCarNo');
           location.href = "../auth/login.html";
       } else {
-        /* alert($(event.target).attr("carNo")); */
         $('#selectedMyCar').html($(event.target).attr("carName"));
-        //alert($(event.target).attr("carNo"));
         sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
         displayItem(0);
       }
