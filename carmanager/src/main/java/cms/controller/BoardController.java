@@ -185,6 +185,7 @@ public class BoardController {
     
   	return new AjaxResult("success", null);
   }
+  
   @RequestMapping("update")
   public Object update(int no) throws Exception {
     Board board = boardDao.selectOne(no);
