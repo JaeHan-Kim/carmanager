@@ -147,9 +147,10 @@
     </script>
 
     <div id="page-wrapper">
+     <div class="main-page">
       <div>
-        <h3 class="title">여기는 게시판 입니다!</h3>
-        <h4>마음대로 떠들어보아요.</h4>
+        <h3 class="title1">커뮤니티에 들어오셨습니다&nbsp;:</h3>
+        <h4>근거 없는 비방, 홍보, 관련되지 않은 게시물은 관리자에 의해 삭제 될 수 있습니다.</h4>
         <p>&nbsp;</p>
       </div>
       <div class="form-title" id="board-header">
@@ -165,44 +166,48 @@
         </span>
       </div>
       <div class="form-three widget-shadow">
-	      <div class="panel-default">
-		      <div class="main-page">
-			      <div class="container" id="container">
-			      </div>
-		      </div>
-	      </div>
+	    <div class="panel-default">
+		    <div class="container" id="container">
+		    </div>
+	    </div>
       </div>
-      <div class="form-title" id="board-footer">
-        <ul class="pagination pagination-sm" id="document_navi3">
-				  <li class="prev"><a href="#">&laquo;</a></li>
-				  <li class="disabled prevx"><a href="#">&laquo;</a></li>
-				  <span class="pageaction"></span>
-				  <li class="num"><a href="#">{page}</a></li>
-				  <li class="active now"><a href="#">{page} <span class="sr-only">(current)</span></a></li>
-				  <li class="next"><a href="#">&raquo;</a></li>
-				  <li class="disabled nextx"><a href="#">&raquo;</a></li>
-				</ul>
-				<div class="search_tool">
-          <form class="input">
-					  <button type="button" id="search_btn" class="btn btn-primary">검색</button>
-						<div class="search-box">
-	            <input class="sb-search-input input__field--madoka" placeholder="검색어를 입력해주세요." type="text" id="input-31" />
-	            <label class="input__label" for="input-31">
-	              <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
-	                <path d="m0,0l404,0l0,77l-404,0l0,-77z"/>
-	              </svg>
-	            </label>
-	            
-		        </div>
-          </form>
-          <div>
+        <div class="form-title" id="board-footer">
+          <div class="search_tool">
             <select id="searchOption" class="form-control">
               <option value="title">제목</option>
               <option value="nickname">작성자</option>
             </select>
+            <div class="search-box">
+              <form class="input">
+                <input class="sb-search-input input__field--madoka"
+                  placeholder="검색어를 입력해주세요." type="search" id="input-31" />
+                <label class="input__label" for="input-31"> <svg
+                    class="graphic" width="100%" height="100%"
+                    viewBox="0 0 404 77" preserveAspectRatio="none">
+                  <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
+                </svg>
+                </label>
+              </form>
+            </div>
+            <button type="button" id="search_btn" class="btn">검색</button>
+
+            <nav id="multiPage">
+              <ul class="pagination pagination-sm" id="document_navi3">
+                <li class="prev"><a href="#">&laquo;</a></li>
+                <li class="disabled prevx"><a href="#">&laquo;</a></li>
+                <span class="pageaction"></span>
+                <li class="num"><a href="#">{page}</a></li>
+                <li class="active now"><a href="#">{page} <span
+                    class="sr-only">(current)</span></a></li>
+                <li class="next"><a href="#">&raquo;</a></li>
+                <li class="disabled nextx"><a href="#">&raquo;</a></li>
+              </ul>
+            </nav>
+
           </div>
-	      </div>
-        <div class="clearfix"> </div>
+          <div class="clearfix"></div>
+        </div>
+
       </div>
     </div>
     
