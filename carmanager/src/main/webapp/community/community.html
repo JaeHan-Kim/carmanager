@@ -154,6 +154,7 @@
         <span>
           <select id="category" class="form-control" onchange="search_cate()"> 
             <option value="">전체</option> 
+            <option value="자유">자유</option>
             <option value="소모품">소모품</option>
             <option value="정비소">정비소</option>
           </select>
@@ -242,6 +243,7 @@
     		            "<img id='boardImg' src='" + board.photo +"'/>" +
  	    	          "</div>" +
  	    	        "</div>" +
+ 	    	        "<p>&nbsp;</p>" +
  	    	        "<h2 class='title'>[" + board.category + "] " + board.title + "</h2>" +
  	    	      "</a>" +
  	    	      "<p id='list_nick' class='subline'>작성자|" + board.nickname + "</p>" +

@@ -156,7 +156,8 @@
       <div class="form-title" id="board-header">
         <span>
           <select id="category" class="form-control" onchange="search_cate()"> 
-            <option value="">전체</option> 
+            <option value="">전체</option>
+            <option value="자유">자유</option> 
             <option value="소모품">소모품</option>
             <option value="정비소">정비소</option>
           </select>
@@ -271,7 +272,7 @@
         .html("<a class='detailLnk' href='#' boardNo='" + board.boardNo + "'>" +
                 "<div class='thumbs-wrapper'>" +
                   "<div class='thumbs'>" +
-                    "<img src='../img/community/1.jpg'/>" +
+                    "<img id='boardImg' src='" + board.photo +"'/>" +
                   "</div>" +
                 "</div>" +
                 "<h2 class='title'>[" + board.category + "] " + board.title + "</h2>" +
