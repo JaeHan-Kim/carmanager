@@ -20,10 +20,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cms.dao.BoardDao;
 import cms.dao.CommentDao;
-import cms.dao.PhotoesDao;
 import cms.domain.AjaxResult;
 import cms.domain.Board;
-import cms.domain.Photoes;
 import cms.util.MultipartHelper;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -37,7 +35,6 @@ public class BoardController {
 	public static final String SAVED_DIR = "/img/community";
   @Autowired BoardDao boardDao;
   @Autowired CommentDao commentDao;
-  @Autowired PhotoesDao photoesDao;
   @Autowired ServletContext servletContext;
   
   @RequestMapping("list")
@@ -176,12 +173,9 @@ public class BoardController {
     paramMap.put("title", title);
     paramMap.put("content", content);
     paramMap.put("category", category);
-    paramMap.put("imageFile", imageFile);
+    paramMap.put("photo", imageFile);
     boardDao.insertText(paramMap);
     board = boardDao.selectBoradNo();
-    
-    Photoes photo = new Photoes(board.getBoardNo(),imageFile);
-    photoesDao.insertPhoto(photo);
     
   	return new AjaxResult("success", null);
   }

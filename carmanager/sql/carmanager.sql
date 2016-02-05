@@ -134,7 +134,7 @@ CREATE TABLE boards (
 	cate    VARCHAR(255) NOT NULL COMMENT '카테고리', -- 카테고리
 	likes   INTEGER      NOT NULL DEFAULT 0 COMMENT '추천수', -- 추천수
 	views   INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-	photo   VARCHAR(255) NULL     DEFAULT '../img/community/defaultImage.png' COMMENT '사진' -- 사진
+	photo   VARCHAR(255) NOT NULL COMMENT '사진' -- 사진
 )
 COMMENT '게시물';
 
