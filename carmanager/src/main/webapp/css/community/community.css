@@ -40,11 +40,11 @@
   color:  whitesmoke !important;
 }
 
-h3.title {
+/* h3.title {
 	font-size: 1.8em;
 	color: dimgray;
 	margin-bottom: 0.8em;
-}
+} */
 
 #board-footer {
 	box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
@@ -63,7 +63,7 @@ h3.title {
 	/*height: 50px;*/
 	/*position: absolute;*/
 	/*float: right;*/
-	/*display: inline;*/
+	display: inline;
 	padding: 11px 0px !important;
 	/*margin-right: 3.2%;*/
 	/*margin-left: 200px;*/
