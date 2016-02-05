@@ -174,7 +174,7 @@
           location.href = "../auth/login.html";
       } else {
         /* alert($(event.target).attr("carNo")); */
-        $('#selectedMyCar').html($(event.target).attr("carName"));
+        $('#selectedMyCar').html($(this).attr("carName"));
         //alert($(event.target).attr("carNo"));
         sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
         //settingRecord();
@@ -388,7 +388,7 @@
                     type: "error",   
                     confirmButtonText: "확인" });
                   return false;
-                } else if ($('#date_refuelDate').val() != null) {
+                } else if ($('#date_refuelDate').val() < today) {
                   
                 }
                 

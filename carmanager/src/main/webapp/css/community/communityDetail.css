@@ -33,12 +33,12 @@ h3.title {
 }
 
 #bnickname {
-	font-size: 20px;
+	font-size: 15px;
 }
 
 #bcreatedDate {
   float: right;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 #bcontent {
@@ -83,12 +83,13 @@ h3.title {
 #deleteBtn, #listBtn,
 #commentBtn {
 	background-color: #eaeaea !important;
+  color: #4A5279 !important;
 }
 
 #addBtn:hover, #updateBtn:hover,
 #deleteBtn:hover, #listBtn:hover,
 #commentBtn:hover {
-	background-color: white !important;
+	background-color: #9099C7 !important;
 }
 
 #addBtn, #listBtn {

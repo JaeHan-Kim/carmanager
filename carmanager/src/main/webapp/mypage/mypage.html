@@ -13,7 +13,7 @@
   <link type="text/css" rel="stylesheet" href="../css/main/custom.css" />
   <link type='text/css' rel='stylesheet' href="../css/mypage/mypage.css" />
   <link type='text/css' rel='stylesheet' href="../css/main/style.css" />
-	<link type='text/css' rel="stylesheet" href="../css/main/default.css">
+  <link type='text/css' rel="stylesheet" href="../css/main/default.css">
   <link type='text/css' rel='stylesheet'
         href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic' />
   
@@ -146,7 +146,7 @@
           location.href = "../auth/login.html";
       } else {
         /* alert($(event.target).attr("carNo")); */
-        $('#selectedMyCar').html($(event.target).attr("carName"));
+        $('#selectedMyCar').html($(this).attr("carName"));
         //alert($(event.target).attr("carNo"));
         sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
       }

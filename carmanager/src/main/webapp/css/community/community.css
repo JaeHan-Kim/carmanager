@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 
-.pagination {
+/*.pagination {
 	margin: 5px 0px 5px 26px !important;
-}
+}*/
 
 #board-header {
 	position: relative;
@@ -12,25 +12,32 @@
   -moz-box-shadow: 0 -1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
 }
 
-#category,
-#writebtn {
+#category, #writebtn {
 	display: inline;
 	position: relative;
 }
 
 #category {
   width: 100px;
-  height: 36.5px;
+  height: 30px;
   webkit-box-sizing: border-box;
   box-sizing:border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
-  margin-left: 2.1%;
+  /*margin-left: 2.1%;*/
 }
 
 #writebtn {
   float: right;
-  margin-right: 3.3%;
+  background-color: whitesmoke !important;
+  color: #4A5279 !important;
+  height: 30px;
+  text-align: center;
+  /*margin-right: 3.3%;*/
+}
+#writebtn:hover {
+  background-color: #9099C7 !important;
+  color:  whitesmoke !important;
 }
 
 h3.title {
@@ -52,51 +59,44 @@ h3.title {
 
 
 .search_tool {
-	width: 50%;
-	height: 50px;
-	position: relative;
-	float: right;
-	display: inline;
-	margin-top: 15px;
-	margin-right: 3.2%;
+	/*width: 50%;*/
+	/*height: 50px;*/
+	/*position: absolute;*/
+	/*float: right;*/
+	/*display: inline;*/
+	padding: 11px 0px !important;
+	/*margin-right: 3.2%;*/
+	/*margin-left: 200px;*/
 }
 
 #search_btn {
-	float: right;
+  background-color: whitesmoke !important;
+  color: #4A5279 !important;
+  /*float: right;*/
   position: relative;
-  display: inline;
-  height: 36.3px;
+  /*display: inline;*/
+  height: 30px;
   webkit-box-sizing: border-box;
   box-sizing:border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
 }
 
-.search-box {
-  float: right !important;
-  width: 200px !important;
-  margin: 0 1px 0 1px !important;
-  position: relative !important;
-  z-index: 1;
-  display: inline !important;
-  background-color: white;
-  position: relative !important;
-  webkit-box-sizing: border-box;
-  box-sizing:border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
+#search_btn:hover {
+  background-color: #9099C7  !important;
+  color:  whitesmoke !important;
 }
 
 #searchOption {
-	width: 100px;
-	height: 36.5px;
+	width: 80px !important;
+	height: 30px;
 	position: relative;
-	float: right;
+	float: left;
 	display: inline;
 	webkit-box-sizing: border-box;
-  box-sizing:border-box;
-  -moz-box-sizing: border-box;
-  -o-box-sizing: border-box;
+    box-sizing:border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
 }
 
 h2.title {
@@ -133,4 +133,10 @@ h2.title {
 
 #board-footer {
 	white-space: nowrap;
+}
+
+#multiPage {
+  position: relative;
+  float: right;
+  margin: -13px;
 }

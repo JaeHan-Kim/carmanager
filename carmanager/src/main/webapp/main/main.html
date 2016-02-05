@@ -362,7 +362,7 @@ window.scrollTo(0,1); }
           sessionStorage.removeItem('selectCarNo');
           location.href = "../auth/login.html";
       } else {
-        $('#selectedMyCar').html($(event.target).attr("carName"));
+        $('#selectedMyCar').html($(this).attr("carName"));
         sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
         changeMyCar(sessionStorage.getItem("selectCarNo"));
       }

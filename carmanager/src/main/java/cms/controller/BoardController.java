@@ -188,9 +188,7 @@ public class BoardController {
   @RequestMapping("delete")
   public AjaxResult delete(int no) throws Exception {
 
-    if (commentDao.deleteAll(no) <= 0) {
-      return new AjaxResult("failure", null);
-    } 
+    commentDao.deleteAll(no);
     
     if (boardDao.delete(no) <= 0) {
       return new AjaxResult("failure", null);
