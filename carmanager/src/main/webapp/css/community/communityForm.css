@@ -82,13 +82,16 @@ h3.title {
 #addBtn, #updateBtn,
 #deleteBtn, #listBtn,
 #commentBtn {
-	background-color: #eaeaea !important;
+	background-color: whitesmoke !important;
+  color: #4A5279 !important;
+  padding: 5px 10px !important;
 }
 
 #addBtn:hover, #updateBtn:hover,
 #deleteBtn:hover, #listBtn:hover,
 #commentBtn:hover {
-	background-color: white !important;
+	background-color: #9099C7  !important;
+  color:  whitesmoke !important;
 }
 
 #addBtn, #listBtn, #updateBtn {
