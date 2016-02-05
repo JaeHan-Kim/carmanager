@@ -554,7 +554,7 @@ window.scrollTo(0,1); }
       var effic = new Array();
       
       if (resultObj.refuelList != ""  && resultObj.refuelList.length > 2) {
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 2; i++) {
           effic[i] = ((resultObj.refuelList[i].mile-resultObj.refuelList[i+1].mile)/resultObj.refuelList[i+1].liter).toFixed(2);
         }
 
