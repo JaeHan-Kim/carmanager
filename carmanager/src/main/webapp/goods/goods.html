@@ -183,7 +183,7 @@
           location.href = "../auth/login.html";
       } else {
         /* alert($(event.target).attr("carNo")); */
-        $('#selectedMyCar').html($(event.target).attr("carName"));
+        $('#selectedMyCar').html($(this).attr("carName"));
         //alert($(event.target).attr("carNo"));
         sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
         displayItem(0);
