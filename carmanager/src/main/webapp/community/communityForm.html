@@ -169,6 +169,7 @@
 	  					<div class="col-md-3">
 								<select id="category" class="form-control"> 
       						<option value="">카테고리</option> 	
+      						<option value="자유">자유</option>
 									<option value="소모품">소모품</option>
    								<option value="정비소">정비소</option>
      						</select>
@@ -183,11 +184,12 @@
     					<div class="btn_set">
 							 <button id='addBtn' type='button' 
 	                      class="newForm btn btn-default">글쓰기</button>
+	             &nbsp;
 	             <button id='updateBtn' type='button' 
 	             					class="updateForm btn btn-default">수정</button>
 	             &nbsp;
 	              <button id='listBtn' type='button' 
-	                      class="newForm btn btn-default">목록</button>
+	                      class="btn btn-default">목록</button>
 	          	</div>
 	 			 		</div>
     			</div>
@@ -224,8 +226,11 @@
   }
   /* 원래 있는거 */
     var no = location.href.split('?')[1].split('=')[1];
-/*   alert(no); */
+  
+  /* alert(no); */
   if (no > -1) {
+    $('.updateForm').css('display', '');
+  	$('.newForm').css('display', 'none');
     $.getJSON('../community/ajax/update.do?no=' + no, function(resultObj) {
       var ajaxResult = resultObj.ajaxResult;
       if (ajaxResult.status == "success") {
@@ -235,7 +240,10 @@
         $('#summernote').summernote('code', board.content);
       }
     });
-  } 
+  } else {
+    $('.updateForm').css('display', 'none');
+  	$('.newForm').css('display', '');
+  }
   
   $('#addBtn').click(function(event) {
     var content = $('#summernote').summernote('code');

@@ -15,85 +15,95 @@ public class Board implements Serializable {
   protected String       category;
   protected int          likes;
   protected int          views;
+  protected String			 photo;
   
   public Board() {}
 
-  @Override
-  public String toString() {
-    return "Board [boardNo=" + boardNo + ", memberNo=" + memberNo + ", nickname=" + nickname + ", title=" + title
-        + ", content=" + content + ", createdDate=" + createdDate + ", category=" + category + ", likes=" + likes
-        + ", views=" + views + "]";
-  }
+	@Override
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", memberNo=" + memberNo + ", nickname=" + nickname + ", title=" + title
+		    + ", content=" + content + ", createdDate=" + createdDate + ", category=" + category + ", likes=" + likes
+		    + ", views=" + views + ", photo=" + photo + "]";
+	}
 
-  public String getNickname() {
-    return nickname;
-  }
+	public int getBoardNo() {
+		return boardNo;
+	}
 
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
-  }
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
 
-  public int getBoardNo() {
-    return boardNo;
-  }
+	public int getMemberNo() {
+		return memberNo;
+	}
 
-  public void setBoardNo(int boardNo) {
-    this.boardNo = boardNo;
-  }
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 
-  public int getMemberNo() {
-    return memberNo;
-  }
+	public String getNickname() {
+		return nickname;
+	}
 
-  public void setMemberNo(int memberNo) {
-    this.memberNo = memberNo;
-  }
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
-  public String getTitle() {
-    return title;
-  }
+	public String getTitle() {
+		return title;
+	}
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-  public String getContent() {
-    return content;
-  }
+	public String getContent() {
+		return content;
+	}
 
-  public void setContent(String content) {
-    this.content = content;
-  }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-  public Timestamp getCreatedDate() {
-    return createdDate;
-  }
+	public Timestamp getCreatedDate() {
+		return createdDate;
+	}
 
-  public void setCreatedDate(Timestamp createdDate) {
-    this.createdDate = createdDate;
-  }
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate;
+	}
 
-  public String getCategory() {
-    return category;
-  }
+	public String getCategory() {
+		return category;
+	}
 
-  public void setCategory(String category) {
-    this.category = category;
-  }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-  public int getLikes() {
-    return likes;
-  }
+	public int getLikes() {
+		return likes;
+	}
 
-  public void setLikes(int likes) {
-    this.likes = likes;
-  }
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 
-  public int getViews() {
-    return views;
-  }
+	public int getViews() {
+		return views;
+	}
 
-  public void setViews(int views) {
-    this.views = views;
-  }
+	public void setViews(int views) {
+		this.views = views;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+  
 }
