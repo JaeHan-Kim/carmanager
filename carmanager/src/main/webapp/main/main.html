@@ -746,7 +746,11 @@ window.scrollTo(0,1); }
     } else {
       carStatus = "carR.png";
     }
-    showMessage(message.substring(0,message.lastIndexOf(',')));
+    if (message.length > 11) {
+    	showMessage(message.substring(0,message.lastIndexOf(',')));
+    } else {
+      showMessage("교체할 부품이 없습니다.");
+    }
     nodeDataArray.push({ "maxSize": new go.Size(400, 500), "key": "car", "img": carStatus, "loc": new go.Point(-150, -100) });
   	diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
 

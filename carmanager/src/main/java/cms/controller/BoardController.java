@@ -178,8 +178,8 @@ public class BoardController {
   	return new AjaxResult("success", null);
   }
   
-  @RequestMapping("update")
-  public Object update(int no) throws Exception {
+  @RequestMapping("alterText")
+  public Object alterText(int no) throws Exception {
     Board board = boardDao.selectOne(no);
     return new AjaxResult("success", board);
   }
@@ -194,6 +194,19 @@ public class BoardController {
     }
     
     return new AjaxResult("success", null);
+  }
+  
+  @RequestMapping(value="updateText", method=RequestMethod.POST)
+  public AjaxResult updateText(int boardNo, String content, String category, String imageFile, String title) {
+  	log.debug(boardNo + " " + title + " " + content + " " + category + " " + imageFile);
+  	HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("boardNo", boardNo);
+    paramMap.put("title", title);
+    paramMap.put("content", content);
+    paramMap.put("category", category);
+    paramMap.put("photo", imageFile);
+    boardDao.updateText(paramMap);
+  	return new AjaxResult("success", null);
   }
   
   private void makeThumbnailImage(String originPath, String thumbPath) 

@@ -74,7 +74,7 @@
  
   <select id="selectOne" resultMap="boardMap" parameterType="int">
     select 
-      b.bno, b.title, b.content, b.cate, b.views, b.likes, b.cre_dt, m.nick
+      b.bno, b.title, b.content, b.cate, b.views, b.likes, b.cre_dt, b.photo,m.nick
     from boards b left outer join members m 
     on m.mno = b.mno
     where b.bno=#{boardNo}
@@ -100,4 +100,13 @@
     where bno=#{no}
   </delete>
   
+  <update id="updateText" parameterType="map">
+    update boards set 
+      title=#{title},
+      content=#{content},
+      cre_dt=now(),
+      cate=#{category},
+      photo=#{photo}
+    where bno=#{boardNo}
+  </update>
 </mapper>

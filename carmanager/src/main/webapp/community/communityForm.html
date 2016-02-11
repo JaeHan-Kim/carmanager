@@ -60,12 +60,15 @@
     $("#userNickname").html(userNickname);
     $("#thumbnail").attr("src", "../img/member/m-" + userPhoto + ".png");
     $('#summernote').summernote({
-      height : 200,
+      lang : 'ko-KR',
+      height : 300,
+      minHeight: 300,
+      maxHeight: 300,
+      focus: true,    
       callbacks : {
         onImageUpload : function(files, editor, welEditable) {
           sendFile(files[0], editor, welEditable);
-        },
-        lang : 'ko-KR'
+        }
       }
 
     });
@@ -249,19 +252,20 @@
     }
   }
   /* 원래 있는거 */
-    var no = location.href.split('?')[1].split('=')[1];
-  
+  var no = location.href.split('?')[1].split('=')[1];
+  var savedPhoto;
   /* alert(no); */
   if (no > -1) {
     $('.updateForm').css('display', '');
   	$('.newForm').css('display', 'none');
-    $.getJSON('../community/ajax/update.do?no=' + no, function(resultObj) {
+    $.getJSON('../community/ajax/alterText.do?no=' + no, function(resultObj) {
       var ajaxResult = resultObj.ajaxResult;
       if (ajaxResult.status == "success") {
         var board = ajaxResult.data;
         $("#txt_title").val(board.title);
         $("#category").val(board.category);
         $('#summernote').summernote('code', board.content);
+        savedPhoto = board.photo
       }
     });
   } else {
@@ -340,6 +344,47 @@
           }
         });
       }
+  $('#updateBtn').click(function(event) {
+    var content = $('#summernote').summernote('code');
+    var imageFile = "";
+		var alterImageFile;
+		var parsedcon = content.split("<");
+		/* 	alert(parsedcon.length); */
+		for (var i = 0; i < parsedcon.length; i++) {
+	 	  if(parsedcon[i].substring(0,3) == 'img') {
+	 	   alterImageFile = parsedcon[i];
+		  	break;
+		  }
+		}
+		if(typeof alterImageFile != "undefined") {
+			parsedcon = alterImageFile.split(" ");
+			alterImageFile = parsedcon[1].substring(parsedcon[1].indexOf('"')+1,parsedcon[1].lastIndexOf('"'));
+			var alterStr = alterImageFile.split('/');
+			var originStr = savedPhoto.split('/');
+			alterStr[3] = "c-" + alterStr[3].substring(0,alterStr[3].lastIndexOf('.')) + ".png";
+			if (alterStr[3] == originStr[3]) {
+			  imageFile = savedPhoto;
+			} else {
+			  for (var i = 0; i < alterStr.length; i++) {
+	     		imageFile = imageFile + alterStr[i] + "/";
+	      } 
+	      imageFile = imageFile.substring(0,imageFile.lastIndexOf('/'));
+			}
+		} else {
+		  imageFile = "../img/community/defaultImage.png";
+		}
+		
+		alert(imageFile);
+    $.post('ajax/updateText.do', {
+      boardNo: no,
+      content: content,
+      category: $("#category").val(),
+      imageFile: imageFile,
+      title: $("#txt_title").val()
+    }, function(resultObj) {
+       location.href = "community.html";
+    }, 'json');
+  });
       $('#listBtn').click(function(event) {
         location.href = "community.html";
       });

@@ -23,6 +23,8 @@ public interface BoardDao {
   public int insertText(Map<String,Object> paramMap);
   
   int delete(int no);
+  
+  int updateText(Map<String,Object> paramMap);
 }
 
 
