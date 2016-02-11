@@ -428,7 +428,7 @@
                     reLiter = (Number($('#num_costUP').val()) / Number($('#num_literCostUP').val())).toFixed(2);
                     reCost = $('#num_costUP').val();
                  } else if ($('input:radio[name=LC]')[1].checked) {
-    			    reCost = (Number($('#num_literUP').val()) * Number($('#num_literCostUP').val())).toFixed(0);    
+    			          reCost = (Number($('#num_literUP').val()) * Number($('#num_literCostUP').val())).toFixed(0);    
                     reLiter = $('#num_literUP').val();
                  }  else {
                    swal("주유량 또는 리터 선택 후 수정하세요!");
@@ -443,14 +443,14 @@
                   return false;
                 }
                 
-                if ($('#date_userDateUP').val() == '') {
-                  reDate = $('#date_refuelDateUP').val();
-                } else {
+                if ($('#date_userDateUP').val().length > 1) {
                   reDate = $('#date_userDateUP').val();
+                } else {
+                  reDate = $('#date_refuelDateUP').val();
                 }
                 
-                if ($('#num_userMileUP').val() != '') {
-                  reMile = $('#num_userMile').val();
+                if ($('#num_userMileUP').val().length > 1) {
+                  reMile = $('#num_userMileUP').val();
                 } else {
                   reMile = $('#num_driveMileUP').val();
                 }
@@ -477,7 +477,6 @@
                      swal("주행거리는 조작할 수 없습니다 ; ( ", "등록되어 있는 주행거리 보다 낮은 기록을 입력하세요.");
                    }
                 }, 'json');
-
               });
               </script>
             
