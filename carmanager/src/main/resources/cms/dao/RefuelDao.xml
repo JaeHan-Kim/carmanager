@@ -23,7 +23,7 @@
    order by ref_dt desc
    limit 8
   </select>
-   
+    
   <select id="selectCostAvg" resultMap="refuelMap">
   	select
       DATE_FORMAT(ref_dt, '%Y-%m') as group_date, avg(cost) as cost
