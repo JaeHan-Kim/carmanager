@@ -1,15 +1,34 @@
 -- 회원정보 등록
 insert into members(email, nick, pwd)
-values('test@test.com', '테스터', '1111');
+values('kjh8877@naver.com', 'JaeHan', '1111');
 insert into members(email, nick, pwd)
 values('inpotin@naver.com', 'woong', '1111');
 insert into members(email, nick, pwd)
-values('hgal8877@naver.com', 'kijaha', '1111');
+values('hgal8877@hanmail.com', 'kijaha', '1111');
 insert into members(email, nick, pwd)
 values('ho4319@naver.com', 'hoho', '1111');
 insert into members(email, nick, pwd)
 values('dain@test.com', 'dain', '1111');
-
+insert into members(email, nick, pwd)
+values('flav5123@naver.com', '바른생활열이', '1111');
+insert into members(email, nick, pwd)
+values('ho4319@hanmail.com', '체리앤트리', '1111');
+insert into members(email, nick, pwd)
+values('eye2338@gmail.com', 'eye2338', '1111');
+insert into members(email, nick, pwd)
+values('rlawnsg@naver.com', 'rlawnsg', '1111');
+insert into members(email, nick, pwd)
+values('babozzzz@nate.com', 'babozzzz', '1111');
+insert into members(email, nick, pwd)
+values('krtitan@naver.com', 'krtitan', '1111');
+insert into members(email, nick, pwd)
+values('zzher@naver.com', '애밀안고효도르', '1111');
+insert into members(email, nick, pwd)
+values('doctac15@hanmail.net', 'TheDoct', '1111');
+insert into members(email, nick, pwd)
+values('tPro@gmail.com', '티프로', '1111');
+insert into members(email, nick, pwd)
+values('hooh4927@naver.com', 'BAUMERCE', '1111');
 -- 회원 패스워드 암호화
 update members set pwd=sha1(1111);
 
