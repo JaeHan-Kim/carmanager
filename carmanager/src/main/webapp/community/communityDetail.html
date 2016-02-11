@@ -97,50 +97,62 @@
       </div>
 
       <div class="header-right">
-        <!-- 로그인 유저 정보 -->
+                <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
-	          <li class="dropdown profile_details_drop">
-	            <a href="#" class="dropdown-toggle" 
-	               data-toggle="dropdown" aria-expanded="false">
-	              <div class="profile_img">
-	                <span class="prfil-img">
-	                  <img id="thumbnail" class="img-rounded" src="" alt=""> 
-	                </span>
-	                <div class="user-name">
-	                  <p id="userNickname"></p>
-	                  <span>안녕하세요.</span>
-	                </div>
-	                <!-- 빈칸 유지를 위한 아이콘 자리 -->
-	                <i class="fa fa-angle-down lnr"></i> 
-	                <i class="fa fa-angle-up lnr"></i>
-	                <div class="clearfix"></div>
-	              </div>
-	            </a>
-	            <ul class="dropdown-menu drp-mnu">
-	              <li><a id="Mypage" href="#"><i class="fa fa-cog"></i>Mypage</a></li>
-	              <li><a id="Logout" href="#"><i class="fa fa-sign-out"></i>Logout</a></li>
-	            </ul>
-	          </li>
+            <li class="dropdown profile_details_drop">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <div class="profile_img">
+                  <span class="prfil-img">
+                  <img id="thumbnail" class="img-rounded" src="" alt=""> </span>
+                  <div class="user-name">
+                    <p id="userNickname"></p>
+                    <span>반갑습니다 : )</span>
+                  </div>
+                  <!-- 빈칸 유지를 위한 아이콘 자리 -->
+                  <i class="fa fa-angle-down lnr"></i>
+                  <i class="fa fa-angle-up lnr"></i>
+                  <div class="clearfix"></div>
+                </div>
+            </a>
+            <!-- 유저별 차량 리스트 -->
+              <ul id="myCarList" class="dropdown-menu drp-mnu">
+              </ul>
+            <!-- 유저별 차량 리스트 end -->
+            </li>
           </ul>
         </div>
+        <!-- 로그인 유저 정보 end -->
         <div class="clearfix"></div>
       </div>
       <div class="clearfix"></div>
     </div>
     <!-- //header-ends -->
     <script>
-    $('#Mypage').click(function(event){
-        location.href = "../mypage/mypage.html";
-    });
-    
-    $('#Logout').click(function(event){
-        event.preventDefault();
-        sessionStorage.removeItem('loginUserNickname');
-        sessionStorage.removeItem('loginUsercarNo');
-        sessionStorage.removeItem('loginUserPhoto');
-        location.href = "../auth/login.html";
-      });
+    $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+      for (var garage of resultObj.data) {
+        if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
+          $('#selectedMyCar').html(garage.nickName);
+        }
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='nav_icon'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+     	} 
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='nav_icon'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
+      $("a.link").click(clickLink);
+   	});
+    function clickLink(event) {
+      event.preventDefault();
+      if ($(event.target).attr("carNo") == 'Logout') {
+          sessionStorage.removeItem('loginUserNickname');
+      /*  sessionStorage.removeItem('loginUsercarNo'); */
+          sessionStorage.removeItem('loginUserPhoto');
+          sessionStorage.removeItem('selectCarNo');
+          location.href = "../auth/login.html";
+      } else {
+        $('#selectedMyCar').html($(event.target).attr("carName"));
+        sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
+      }
+        
+    }
     </script>
 
     <div id="page-wrapper">

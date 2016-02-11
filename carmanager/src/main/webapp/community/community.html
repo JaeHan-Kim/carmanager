@@ -97,8 +97,7 @@
       </div>
 
       <div class="header-right">
-        <!-- 로그인 유저 정보 -->
-        <!-- 로그인 유저 정보 -->
+                <!-- 로그인 유저 정보 -->
         <div class="profile_details">
           <ul>
             <li class="dropdown profile_details_drop">
@@ -130,17 +129,30 @@
     </div>
     <!-- //header-ends -->
     <script>
-    $('#Mypage').click(function(event){
-        location.href = "../mypage/mypage.html";
-    });
-    
-    $('#Logout').click(function(event){
-        event.preventDefault();
-        sessionStorage.removeItem('loginUserNickname');
-        sessionStorage.removeItem('loginUsercarNo');
-        sessionStorage.removeItem('loginUserPhoto');
-        location.href = "../auth/login.html";
-      });
+    $.getJSON('../main/list.do?no=' + sessionStorage.getItem("loginUser") + '&carNo='+sessionStorage.getItem("selectCarNo"), function(resultObj) {
+      for (var garage of resultObj.data) {
+        if (sessionStorage.getItem("selectCarNo") == garage.myCarNo) {
+          $('#selectedMyCar').html(garage.nickName);
+        }
+        $("<li><a class='link' href='#' carNo = '"+ garage.myCarNo +"' carName = '"+ garage.nickName +"'><i class='nav_icon'></i><img class='img_mycar' src='../img/main/mycar.png'>"+ garage.nickName +"</a></li>").appendTo('#myCarList');
+     	} 
+      $("<li><a class='link' carNo = 'Logout' href='#'><i class='nav_icon'></i><img class='img_logout' src='../img/main/logout.png'>Logout</a></li>").appendTo('#myCarList');
+      $("a.link").click(clickLink);
+   	});
+    function clickLink(event) {
+      event.preventDefault();
+      if ($(event.target).attr("carNo") == 'Logout') {
+          sessionStorage.removeItem('loginUserNickname');
+      /*  sessionStorage.removeItem('loginUsercarNo'); */
+          sessionStorage.removeItem('loginUserPhoto');
+          sessionStorage.removeItem('selectCarNo');
+          location.href = "../auth/login.html";
+      } else {
+        $('#selectedMyCar').html($(event.target).attr("carName"));
+        sessionStorage.setItem('selectCarNo', $(this).attr("carNo"));
+      }
+        
+    }
     </script>
 
     <div id="page-wrapper">
