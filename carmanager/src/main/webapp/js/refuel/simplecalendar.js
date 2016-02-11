@@ -249,6 +249,7 @@ var calendar = {
           var ajaxResult = resultObj.ajaxResult;
           var refuelOne = ajaxResult.data;
           if (ajaxResult.status == "success") {
+            swal("수정 페이지로 이동합니다 : )")
             $('#addForm').css('display', 'none');
             $('#updateForm').css('display', '');
             $("#date_refuelDateUP").val(refuelOne.refuelDate);
