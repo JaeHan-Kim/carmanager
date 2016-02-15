@@ -560,11 +560,11 @@ window.scrollTo(0,1); }
 
           var efficper = Math.round(((effic[0]-effic[1])/effic[1])*100); 
           
-					if (efficper > 50) {
-						efficper = 50;
-					} else if (efficper < -50) {
-						efficper = -50;
-					}         
+			if (efficper > 50) {
+				efficper = 50;
+			} else if (efficper < -50) {
+				efficper = -50;
+			}         
           
         	if (efficper < 0) {
         		var config = liquidFillGaugeDefaultSettings();
@@ -669,29 +669,22 @@ window.scrollTo(0,1); }
         partImage[indexMin] = partImage[i];
         partImage[i] = temp;
     }
-    	  var $ = go.GraphObject.make;
-    	  
-    	  var diagram = $(go.Diagram, "myDiagramDiv",
-    	    {
-    	    	autoScale: go.Diagram.Uniform,
-    	    	allowSelect: false,
-    	    	allowCopy: false,
-    	    	allowDelete: false,
-    	    	allowMove: false,
-    	    	contentAlignment: go.Spot.Center,
-    	    	allowVerticalScroll: false
-    	  	});
-    	  function showMessage(s) {
-    	    document.getElementById("diagramEventsMsg").textContent = s;
-    	  }
-    	  /* diagram.addDiagramListener("ObjectSingleClicked",
-    	      function(e) {
-    	        var part = e.subject.part;
-    	        if (!(part instanceof go.Link)) showMessage("Clicked on " + part.data.key);
-    	      });
-    	  diagram.addDiagramListener("BackgroundDoubleClicked",
-    	      function(e) { showMessage("Double-clicked at " + e.diagram.lastInput.documentPoint); });
-         */
+  	    var $ = go.GraphObject.make;
+  	  
+  	    var diagram = $(go.Diagram, "myDiagramDiv",
+  	      {
+  	    	autoScale: go.Diagram.Uniform,
+  	    	allowSelect: false,
+  	    	allowCopy: false,
+  	    	allowDelete: false,
+  	    	allowMove: false,
+  	    	contentAlignment: go.Spot.Center,
+  	    	allowVerticalScroll: false
+  	  	  });
+  	    function showMessage(s) {
+  	      document.getElementById("diagramEventsMsg").textContent = s;
+  	    }
+    	 
         diagram.nodeTemplate =
     	    $(go.Node, "Spot",
     	      new go.Binding("location", "loc"),
@@ -751,7 +744,8 @@ window.scrollTo(0,1); }
     } else {
       showMessage("교체할 부품이 없습니다.");
     }
-    nodeDataArray.push({ "maxSize": new go.Size(400, 500), "key": "car", "img": carStatus, "loc": new go.Point(-150, -100) });
+    nodeDataArray.push({ "maxSize": new go.Size(400, 500), 
+      "key": "car", "img": carStatus, "loc": new go.Point(-150, -100) });
   	diagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
 
   	} 
