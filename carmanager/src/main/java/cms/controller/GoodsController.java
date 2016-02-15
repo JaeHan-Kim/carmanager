@@ -26,9 +26,6 @@ public class GoodsController {
   
   	Garage garage = garageService.carDetail(no);
   	
-  	log.debug(garage.toString());
-
-  
   	return new AjaxResult("success", garage);
   }
 }

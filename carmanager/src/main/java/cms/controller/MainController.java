@@ -30,21 +30,10 @@ public class MainController {
   public Object carList(
       HttpSession session, int no, int carNo) throws Exception {
     
-  	//log.debug("현재 접속자 : "+no);
-  	log.debug("mno" + no);
-    log.debug(carNo);
   	List<Garage> garages = garageService.listAll(no);
     List<Refuel> refuels = refuelService.listAll(carNo);
     List<Refuel> costAvg = refuelService.costAvg();
     List<Refuel> myCostAvg = refuelService.myCostAvg(carNo);
-    log.debug("-------------------");
-    log.debug("회원번호" + no);
-    log.debug("차량번호" + carNo);
-    for(Refuel refuel : refuels) {
-    	log.debug(refuel.toString());
-    }
-    log.debug("-------------------");
-    
     
     HashMap<String, Object> resultMap = new HashMap<>();
     resultMap.put("status", "success");
@@ -59,7 +48,6 @@ public class MainController {
   @RequestMapping(value="select", method=RequestMethod.GET)
   public Object selList(int no,
       HttpSession session) throws Exception {
-    log.debug("현재 차량은 " + no + "입니다.");
     
     List<Garage> garages = garageService.listAll(no);
     List<Refuel> refuels = refuelService.listAll(no);
