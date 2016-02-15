@@ -1,36 +1,36 @@
 -- 회원정보 등록
 insert into members(email, nick, pwd)
-values('kjh8877@naver.com', 'JaeHan', '1111');
+values('kjh8877@naver.com', 'JaeHan', 'a11111');
 insert into members(email, nick, pwd)
-values('inpotin@naver.com', 'woong', '1111');
+values('inpotin@naver.com', 'woong', 'a11111');
 insert into members(email, nick, pwd)
-values('hgal8877@hanmail.com', 'kijaha', '1111');
+values('hgal8877@hanmail.com', 'kijaha', 'a11111');
 insert into members(email, nick, pwd)
-values('ho4319@naver.com', 'hoho', '1111');
+values('ho4319@naver.com', 'hoho', 'a11111');
 insert into members(email, nick, pwd)
-values('dain@test.com', 'dain', '1111');
+values('dain@test.com', 'dain', 'a11111');
 insert into members(email, nick, pwd)
-values('flav5123@naver.com', '바른생활열이', '1111');
+values('flav5123@naver.com', '바른생활열이', 'a11111');
 insert into members(email, nick, pwd)
-values('ho4319@hanmail.com', '체리앤트리', '1111');
+values('ho4319@hanmail.com', '체리앤트리', 'a11111');
 insert into members(email, nick, pwd)
-values('eye2338@gmail.com', 'eye2338', '1111');
+values('eye2338@gmail.com', 'eye2338', 'a11111');
 insert into members(email, nick, pwd)
-values('rlawnsg@naver.com', 'rlawnsg', '1111');
+values('rlawnsg@naver.com', 'rlawnsg', 'a11111');
 insert into members(email, nick, pwd)
-values('babozzzz@nate.com', 'babozzzz', '1111');
+values('babozzzz@nate.com', 'babozzzz', 'a11111');
 insert into members(email, nick, pwd)
-values('krtitan@naver.com', 'krtitan', '1111');
+values('krtitan@naver.com', 'krtitan', 'a11111');
 insert into members(email, nick, pwd)
-values('zzher@naver.com', '애밀안고효도르', '1111');
+values('zzher@naver.com', '애밀안고효도르', 'a11111');
 insert into members(email, nick, pwd)
-values('doctac15@hanmail.net', 'TheDoct', '1111');
+values('doctac15@hanmail.net', 'TheDoct', 'a11111');
 insert into members(email, nick, pwd)
-values('tPro@gmail.com', '티프로', '1111');
+values('tPro@gmail.com', '티프로', 'a11111');
 insert into members(email, nick, pwd)
-values('hooh4927@naver.com', 'BAUMERCE', '1111');
+values('hooh4927@naver.com', 'BAUMERCE', 'a11111');
 -- 회원 패스워드 암호화
-update members set pwd=sha1(1111);
+update members set pwd=sha1('a11111');
 
 
 
